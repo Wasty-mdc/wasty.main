@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "wasty": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
