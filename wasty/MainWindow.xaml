@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wasty"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Wasty - Gestión de Residuos" Height="960" Width="540" WindowStartupLocation="CenterScreen" 
+		WindowStyle="None" ResizeMode="NoResize" 
+>
     <Grid>
 
     </Grid>
