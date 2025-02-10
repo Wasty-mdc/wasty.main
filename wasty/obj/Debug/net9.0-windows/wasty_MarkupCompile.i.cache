@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Usuario\source\repos\wasty\obj\Debug\net9.0-windows\
+C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\
 wasty
 none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
-C:\Users\Usuario\source\repos\wasty\App.xaml
-11407045341
+C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\App.xaml
+4-1930053597
 
-61040365434
-200161758370
-MainWindow.xaml;
+211021961575
+208-183915186
+MainWindow.xaml;Styles.xaml;Views\LoginView.xaml;Views\MainView.xaml;
 
-False
+True
 

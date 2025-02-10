@@ -1,10 +1,9 @@
-<Window x:Class="Wasty.Views.MainView"
+<Window x:Class="wasty.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Wasty - Sistema de Gestión" Height="600" Width="800">
-    
-    <Grid>
-        <TextBlock Text="Bienvenido a Wasty" FontSize="24" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+        Title="Wasty - Sistema de GestiÃ³n" Height="500" Width="800">
+
+	<Grid>
+
+	</Grid>
 </Window>

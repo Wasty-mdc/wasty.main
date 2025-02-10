@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\source\\repos\\wasty\\wasty.csproj": {}
+    "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\wasty.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\source\\repos\\wasty\\wasty.csproj": {
+    "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\wasty.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\wasty\\wasty.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\wasty.csproj",
         "projectName": "wasty",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\wasty\\wasty.csproj",
+        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\wasty.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\wasty\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,20 @@
       "frameworks": {
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
+          "dependencies": {
+            "MaterialDesignThemes": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            },
+            "Prism.Core": {
+              "target": "Package",
+              "version": "[9.0.537, )"
+            },
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[9.0.537, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -19,6 +19,7 @@ namespace wasty
         public MainWindow()
         {
             InitializeComponent();
+            Title = "Wasty";
         }
     }
 }

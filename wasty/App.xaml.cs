@@ -10,5 +10,4 @@ namespace wasty
     public partial class App : Application
     {
     }
-
 }

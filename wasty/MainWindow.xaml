@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wasty"
         mc:Ignorable="d"
-        Title="Wasty - Gestión de Residuos" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" 
-		WindowStyle="None" ResizeMode="NoResize" 
->
-    <Grid IsEnabled="False">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Bienvenido a Wasty" FontSize="24" Margin="10"/>
-            <Button Content="Aceptar" Width="150" Height="40"/>
-        </StackPanel>
-    </Grid>
+        Title="Wasty"
+        Height="900" Width="1800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+	<Grid>
+
+	</Grid>
 </Window>
