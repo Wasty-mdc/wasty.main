@@ -1,0 +1,54 @@
+<!-- Vista de registro de usuario para Wasty, definida en XAML.
+     Contiene campos de entrada para nombre, usuario, correo y contraseñas, con botones para crear una cuenta o volver al inicio de sesión.
+     Usa estilos reutilizables para una interfaz consistente. 
+  -->
+
+<Window    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+    x:Class="wasty.Views.SignupView"
+    mc:Ignorable="d"
+    Height="600" Width="1200"
+>
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="506" Width="600">
+            <!-- Titulo -->
+            <TextBlock Text="Wasty" FontSize="36" HorizontalAlignment="Center" Height="50" FontFamily="Poppins"/>
+            <TextBlock Text="Registrate" FontSize="20" HorizontalAlignment="Center" Height="32"/>
+
+            <Label Content="Nombre" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <!-- RegisterTextBox para el nombre -->
+            <TextBox Style="{StaticResource RegisterTextBox}"  />
+
+            <!-- RegisterTextBox para el usuario -->
+            <Label Content="Usuario" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <TextBox Style="{StaticResource RegisterTextBox}"  />
+
+            <!-- RegisterTextBox para el correo electronico -->
+            <Label Content="Correo Electronico" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <TextBox Style="{StaticResource RegisterTextBox}"  />
+
+            <!-- RegisterPasswordBox para la contrasena -->
+            <Label Content="Contrasena" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <PasswordBox Style="{StaticResource RegisterPasswordBox}" Margin="0,10,0,0" Password=""/>
+
+            
+            <!-- RegisterPasswordBox para confirmar la contrasena -->
+            <Label Content="Confirma tu contrasena" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <PasswordBox Style="{StaticResource RegisterPasswordBox}" Margin="0,10,0,0" Password=""/>
+
+            <!-- RegisterButton para iniciar sesion -->
+            <Button Content="Crear Usuario" Style="{StaticResource RegisterButton}"/>
+
+            <!-- RegisterButton para volver atras -->
+            <Button Content="Volver a iniciar sesion" Style="{StaticResource RegisterButton}" Margin="0,10,20,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="14"/>
+
+
+        </StackPanel>
+
+    </Grid>
+</Window>

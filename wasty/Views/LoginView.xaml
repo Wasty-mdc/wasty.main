@@ -1,3 +1,8 @@
+<!-- Vista de inicio de sesión para Wasty, definida en XAML. 
+     Contiene campos para usuario y contraseña, con enlaces a propiedades en el ViewModel y estilos reutilizables.
+     Incluye soporte para validación de entrada y mensajes de error (actualmente comentados). 
+ -->
+
 <Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,20 +15,50 @@
 >
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="240" Width="240">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Width="300">
             <!-- Título -->
             <TextBlock Text="Wasty" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBlock Text="Inicio de Sesión" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBlock Text="Inicio de Sesión" FontSize="20" HorizontalAlignment="Center" Margin="0,5,0,5"/>
 
-            <!-- LoginTextBox para el usuario -->
-            <TextBox Style="{StaticResource LoginTextBox}" />
+            <!-- RegisterTextBox para el usuario -->
+            <Label Content="Usuario" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <TextBox Style="{StaticResource RegisterTextBox}">
+                <TextBox.Text>
+                    <Binding Path="Username" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <!-- <local:NotEmptyValidationRule/ >-->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
-            <!-- LoginPasswordBox para la contraseña -->
-            <PasswordBox Style="{StaticResource LoginPasswordBox}" Margin="0,10,0,0"/>
+            <!-- RegisterPasswordBox para la contraseña -->
+            <Label Content="Contrasena" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
+            <PasswordBox Style="{StaticResource RegisterPasswordBox}">
+                <!-- 
+                <Binding Path="Password" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                <PasswordBox.Password>
+                        <Binding.ValidationRules>
+                             <local:PasswordValidationRule/> 
+                        </Binding.ValidationRules>
+                    </Binding>
+                </PasswordBox.Password>
+                -->
+            </PasswordBox>
 
-            <!-- LoginButton para iniciar sesión -->
-            <Button Content="Iniciar Sesión" Style="{StaticResource LoginButton}" HorizontalAlignment="Center"/>
+            <!-- RegisterButton para iniciar sesión -->
+            <Button Content="Iniciar Sesión" Style="{StaticResource RegisterButton}" HorizontalAlignment="Center"/>
         </StackPanel>
+
+        <!-- Mensajes de Error 
+        <TextBlock Foreground="#e24a4d" FontSize="12">
+            <TextBlock.Text>
+                <Binding Path="(Validation.Errors)[0].ErrorContent"
+                 RelativeSource="{RelativeSource PreviousData}">
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock> 
+        -->
 
     </Grid>
 </Window>

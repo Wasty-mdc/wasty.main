@@ -1,58 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|c:\\users\\usuario\\source\\repos\\wasty-mdc\\wasty.main\\wasty\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|c:\\users\\usuario\\source\\repos\\wasty-mdc\\wasty.main\\wasty\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|c:\\users\\usuario\\source\\repos\\wasty-mdc\\wasty.main\\wasty\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|c:\\users\\usuario\\source\\repos\\wasty-mdc\\wasty.main\\wasty\\views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|solutionrelative:views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Styles.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Styles.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|c:\\users\\usuario\\source\\repos\\wasty-mdc\\wasty.main\\wasty\\views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|solutionrelative:views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|c:\\users\\usuario\\source\\repos\\wasty-mdc\\wasty.main\\wasty\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5EE4058D-B149-48D9-BD39-2753C7B73E21}|wasty.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "DockedHeight": 200,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T13:57:06.314Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -60,81 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T12:52:25.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginView.xaml",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Views\\LoginView.xaml",
-              "RelativeDocumentMoniker": "Views\\LoginView.xaml",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Views\\LoginView.xaml",
-              "RelativeToolTip": "Views\\LoginView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T11:44:12.852Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LoginView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Views\\LoginView.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\LoginView.xaml.cs",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Views\\LoginView.xaml.cs",
-              "RelativeToolTip": "Views\\LoginView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T11:54:55.953Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Styles.xaml",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Styles.xaml",
-              "RelativeDocumentMoniker": "Styles.xaml",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\Styles.xaml",
-              "RelativeToolTip": "Styles.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T11:52:55.304Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\App.xaml.cs",
-              "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T13:06:14.884Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\Wasty-mdc\\wasty.main\\wasty\\App.xaml",
-              "RelativeToolTip": "App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-07T13:06:00.11Z",
-              "EditorCaption": ""
             }
           ]
         }

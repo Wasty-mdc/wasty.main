@@ -1,8 +1,14 @@
-﻿<Window x:Class="wasty.MainWindow"
+﻿<!-- Vista principal de Wasty, definida en XAML. 
+     Establece el tamaño y la ubicación de la ventana, con la propiedad ResizeMode configurada para no permitir redimensionar la ventana. 
+     Actualmente, la interfaz está vacía.
+  -->
+
+<Window x:Class="wasty.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:wasty"
         mc:Ignorable="d"
         Title="Wasty"

@@ -30,7 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Styles.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+    <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
     <PackageReference Include="Prism.Core" Version="9.0.537" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />
   </ItemGroup>
@@ -54,6 +61,9 @@
     <Resource Include="Resources\Poppins\Poppins-SemiBoldItalic.ttf" />
     <Resource Include="Resources\Poppins\Poppins-Thin.ttf" />
     <Resource Include="Resources\Poppins\Poppins-ThinItalic.ttf" />
+    <Resource Include="Styles.xaml">
+      <Generator></Generator>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\App.xaml
-4-1930053597
+4-660423918
 
-19987469036
+21222385013
 208-183915186
-MainWindow.xaml;Styles.xaml;Views\LoginView.xaml;Views\MainView.xaml;
+MainWindow.xaml;Views\LoginView.xaml;Views\MainView.xaml;Views\SignupView.xaml;
 
 False
 

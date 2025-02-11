@@ -1,6 +1,11 @@
+<!-- Diccionario de recursos de estilos para la aplicación Wasty.
+     Define estilos globales para texto, botones, campos de texto y contraseñas, con fuentes personalizadas y efectos de interacción, como el cambio de color al pasar el mouse sobre los botones.
+	 Utiliza MaterialDesignInXAML para integrar iconos. 
+-->
+
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:md="http://materialdesigninxaml.net/winfx/xaml"
 >
 
@@ -33,8 +38,25 @@
         <Setter Property="Foreground" Value="#000"/>
     </Style>
 
-    <!-- Estilo para el LoginButton -->
-    <Style x:Key="LoginButton" TargetType="Button">
+    <!-- Estilo para los iconos -->
+    <Style x:Key="IconButton" TargetType="Button">
+        <!--<Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>-->
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}"/>
+		<Setter Property="Width" Value="40"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Margin" Value="1,1,1,1"/>
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+              </Setter>
+    </Style>
+
+    <!-- Estilo para el RegisterButton -->
+    <Style x:Key="RegisterButton" TargetType="Button">
         <Setter Property="Width" Value="150"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Margin" Value="0,30,0,0"/>
@@ -44,14 +66,15 @@
         <Setter Property="BorderBrush" Value="#FAF3DD"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="10"/>
-        <Setter Property="Template">
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <!-- Aqui es donde aplicamos CornerRadius al Border -->
                     <Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="2"
-                        CornerRadius="20">
+                        CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -67,8 +90,8 @@
     </Style>
 
 
-    <!-- Estilo para el LoginTextBox -->
-    <Style x:Key="LoginTextBox" TargetType="TextBox">
+    <!-- Estilo para el RegisterTextBox -->
+    <Style x:Key="RegisterTextBox" TargetType="TextBox">
         <Setter Property="Width" Value="200"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Margin" Value="0,10,0,0"/>
@@ -96,8 +119,8 @@
 
 
 
-    <!-- Estilo para el LoginPasswordBox -->
-    <Style x:Key="LoginPasswordBox" TargetType="PasswordBox">
+    <!-- Estilo para el RegisterPasswordBox -->
+    <Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
         <Setter Property="Width" Value="200"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Margin" Value="0,10,0,0"/>

@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿// Lógica de interacción para la ventana principal de Wasty.
+// Inicializa la ventana y establece el título de la aplicación como "Wasty".
+// Actualmente no contiene implementación adicional más allá de la inicialización básica.
+
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;

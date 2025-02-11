@@ -1,9 +1,60 @@
-<Window x:Class="wasty.Views.MainView"
+<!-- Vista principal de Wasty, definida en XAML.
+     Contiene un menú lateral con accesos directos y una sección de contenido principal con botones de navegación para distintas funciones del sistema.
+     Utiliza MaterialDesignInXAML para iconos y estilos personalizados. 
+  -->
+
+<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Wasty - Sistema de Gestión" Height="500" Width="800">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="av" x:Class="wasty.Views.MainView" 
+        Title="Wasty - Sistema de Gestión"  Height="600" Width="1200">
 
-	<Grid>
+    <Grid>
+        <!-- Definir columnas para el menú lateral y el contenido principal -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- Menú lateral -->
+            <ColumnDefinition Width="*"/>
+            <!-- Contenido principal -->
+        </Grid.ColumnDefinitions>
 
-	</Grid>
+        <!-- Menú lateral -->
+        <Menu Background="#A0C26C" Width="60" Grid.Row="1" >
+            <Button Style="{StaticResource IconButton}" Content="Home" ToolTip="Inicio" />
+            <Button Style="{StaticResource IconButton}" Content="History" ToolTip="Historial" />
+            <Button Style="{StaticResource IconButton}" Content="Star" ToolTip="Favoritos"  />
+            <Button Style="{StaticResource IconButton}" Content="Settings" ToolTip="Configuración"/>
+            <Button Style="{StaticResource IconButton}" Content="Account" ToolTip="Perfil" />
+        </Menu>
+
+        <!-- Contenido principal -->
+        <Grid Grid.Column="1" Cursor="Hand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="69*"/>
+                <RowDefinition Height="223*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                <!-- Botón de Ficheros -->
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10,0,10,0">
+					<materialDesign:PackIcon Kind="Home" />
+					<Button Style="{StaticResource RegisterButton}" Content="Ficheros"/>
+                </StackPanel>
+
+                <!-- Botón de Gestión -->
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10,0,10,0">
+					<materialDesign:PackIcon Kind="Home" />
+					<Button Style="{StaticResource RegisterButton}" Content="Gestión"/>
+                </StackPanel>
+
+                <!-- Botón de Facturación -->
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10,0,10,0">
+                    <materialDesign:PackIcon Kind="Home" />
+                    <Button Style="{StaticResource RegisterButton}" Content="Facturación"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
 </Window>
