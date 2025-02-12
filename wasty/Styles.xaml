@@ -14,6 +14,10 @@
 	<FontFamily x:Key="SubtitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
 	<FontFamily x:Key="GeneralFontFamily">Segoe UI</FontFamily>
 
+	<!-- Color de fondo principal -->
+	<SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5"/>
+	<SolidColorBrush x:Key="PrimaryText" Color="#37474F"/>
+
 	<!-- Estilo global para Titulos -->
 	<Style x:Key="TitleTextStyle" TargetType="TextBlock">
 		<Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}"/>
@@ -182,5 +186,6 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
 
 </ResourceDictionary>
