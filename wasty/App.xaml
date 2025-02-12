@@ -1,4 +1,5 @@
-﻿<!-- Archivo de configuración principal de la aplicación Wasty en XAML. 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Archivo de configuración principal de la aplicación Wasty en XAML. 
      Define la vista de inicio predeterminada (La que sea) y carga recursos de estilo, incluyendo MaterialDesignThemes y una hoja de estilos personalizada (Styles.xaml).
   -->
 
@@ -7,7 +8,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:wasty"
-             StartupUri="Views/LoginView.xaml"
+             StartupUri="MainWindow.xaml"
 
              >
     <Application.Resources>

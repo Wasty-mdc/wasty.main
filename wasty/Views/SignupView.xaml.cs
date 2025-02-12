@@ -1,6 +1,6 @@
-// Definición de la ventana de registro de usuario para Wasty.
+// Definicion de la ventana de registro de usuario para Wasty.
 // Hereda de Window e inicializa los componentes de la interfaz en el constructor.
-// Contiene manejadores de eventos vacíos para interacciones con botones y cambios en los campos de texto.
+// Contiene manejadores de eventos vacios para interacciones con botones y cambios en los campos de texto.
 
 using System.Windows;
 

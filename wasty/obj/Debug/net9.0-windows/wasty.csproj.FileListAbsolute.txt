@@ -32,6 +32,7 @@ C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\bin\Debug\net9.0-window
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\bin\Debug\net9.0-windows\Prism.Events.dll
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\bin\Debug\net9.0-windows\Prism.Wpf.dll
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\wasty.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\MainWindow.baml
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\Views\LoginView.baml
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\Views\MainView.baml
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\Views\SignupView.baml
@@ -43,7 +44,6 @@ C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-window
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\wasty_MarkupCompile.cache
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\wasty_MarkupCompile.lref
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\App.baml
-C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\MainWindow.baml
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\wasty.g.resources
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\wasty.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Usuario\source\repos\Wasty-mdc\wasty.main\wasty\obj\Debug\net9.0-windows\wasty.AssemblyInfoInputs.cache

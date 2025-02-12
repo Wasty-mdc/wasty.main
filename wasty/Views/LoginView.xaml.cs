@@ -1,5 +1,5 @@
-// Definición de la ventana de inicio de sesión para Wasty. Hereda de Window e inicializa los componentes de la interfaz en el constructor.
-// Contiene un manejador de eventos vacío para el clic del botón.
+ï»¿// Definiciï¿½n de la ventana de inicio de sesiï¿½n para Wasty. Hereda de Window e inicializa los componentes de la interfaz en el constructor.
+// Contiene un manejador de eventos vacï¿½o para el clic del botï¿½n.
 
 using System.Windows;
 

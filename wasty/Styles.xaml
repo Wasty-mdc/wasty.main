@@ -9,141 +9,178 @@
                     xmlns:md="http://materialdesigninxaml.net/winfx/xaml"
 >
 
-    <!-- Fuentes globales -->
-    <FontFamily x:Key="TitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
-    <FontFamily x:Key="SubtitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
-    <FontFamily x:Key="GeneralFontFamily">Segoe UI</FontFamily>
+	<!-- Fuentes globales -->
+	<FontFamily x:Key="TitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
+	<FontFamily x:Key="SubtitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
+	<FontFamily x:Key="GeneralFontFamily">Segoe UI</FontFamily>
 
-    <!-- Estilo global para Titulos -->
-    <Style x:Key="TitleTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}"/>
-        <Setter Property="FontSize" Value="28"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="#333"/>
-    </Style>
+	<!-- Estilo global para Titulos -->
+	<Style x:Key="TitleTextStyle" TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}"/>
+		<Setter Property="FontSize" Value="28"/>
+		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="Foreground" Value="#333"/>
+	</Style>
 
-    <!-- Estilo global para Subtitulos -->
-    <Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#666"/>
-    </Style>
-
-    <!-- Estilo global para Texto general -->
-    <Style x:Key="GeneralTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="Foreground" Value="#000"/>
-    </Style>
-
-    <!-- Estilo para los iconos -->
-    <Style x:Key="IconButton" TargetType="Button">
-        <!--<Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>-->
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FontSize" Value="24"/>
-        <Setter Property="Foreground" Value="Black"/>
+	<!-- Estilo global para Subtitulos -->
+	<Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
 		<Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}"/>
-		<Setter Property="Width" Value="40"/>
-		<Setter Property="Height" Value="40"/>
-		<Setter Property="Margin" Value="1,1,1,1"/>
-		<Setter Property="Cursor" Value="Hand" />
-		<Setter Property="Template">
-              </Setter>
-    </Style>
+		<Setter Property="FontSize" Value="20"/>
+		<Setter Property="FontWeight" Value="SemiBold"/>
+		<Setter Property="Foreground" Value="#666"/>
+	</Style>
 
-    <!-- Estilo para el RegisterButton -->
-    <Style x:Key="RegisterButton" TargetType="Button">
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Margin" Value="0,30,0,0"/>
-        <Setter Property="Background" Value="#FAF3DD"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="BorderBrush" Value="#FAF3DD"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Padding" Value="10"/>
+	<!-- Estilo global para Texto general -->
+	<Style x:Key="GeneralTextStyle" TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}"/>
+		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="FontWeight" Value="Normal"/>
+		<Setter Property="Foreground" Value="#000"/>
+	</Style>
+
+	<!-- Estilo para los iconos de Navegación -->
+	<Style x:Key="NavButton" TargetType="Button">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Width" Value="50"/>
+		<Setter Property="Height" Value="50"/>
+		<Setter Property="Margin" Value="10"/>
+		<Setter Property="Padding" Value="5"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}" CornerRadius="5">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="#7C6A58"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Background" Value="#5A4A3A"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Estilos para los botones centrales -->
+	<Style x:Key="CentralButton" TargetType="Button">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="10"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}" CornerRadius="10">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="#E0E0E0"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Background" Value="#CCCCCC"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Estilo para el RegisterButton -->
+	<Style x:Key="RegisterButton" TargetType="Button">
+		<Setter Property="Width" Value="150"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Margin" Value="0,30,0,0"/>
+		<Setter Property="Background" Value="#FAF3DD"/>
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="BorderBrush" Value="#FAF3DD"/>
+		<Setter Property="BorderThickness" Value="2"/>
+		<Setter Property="Padding" Value="10"/>
 		<Setter Property="Cursor" Value="Hand" />
 		<Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <!-- Aqui es donde aplicamos CornerRadius al Border -->
-                    <Border Background="{TemplateBinding Background}"
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<!-- Aqui es donde aplicamos CornerRadius al Border -->
+					<Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="2"
                         CornerRadius="10">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <!-- Efecto hover -->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#45A049"/>
-                <Setter Property="BorderBrush" Value="#45A049"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<!-- Efecto hover -->
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="#45A049"/>
+				<Setter Property="BorderBrush" Value="#45A049"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
 
 
-    <!-- Estilo para el RegisterTextBox -->
-    <Style x:Key="RegisterTextBox" TargetType="TextBox">
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Margin" Value="0,10,0,0"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="Background" Value="#F3F9E3"/>
-        <Setter Property="BorderBrush" Value="#D3D3D3"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border Background="{TemplateBinding Background}"
+	<!-- Estilo para el RegisterTextBox -->
+	<Style x:Key="RegisterTextBox" TargetType="TextBox">
+		<Setter Property="Width" Value="200"/>
+		<Setter Property="Height" Value="30"/>
+		<Setter Property="Margin" Value="0,10,0,0"/>
+		<Setter Property="Padding" Value="10"/>
+		<Setter Property="Background" Value="#F3F9E3"/>
+		<Setter Property="BorderBrush" Value="#D3D3D3"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="15">
-                        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
-                            <Grid>
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
+							<Grid>
+								<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							</Grid>
+						</ScrollViewer>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-
-
-    <!-- Estilo para el RegisterPasswordBox -->
-    <Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Margin" Value="0,10,0,0"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="Background" Value="#F3F9E3"/>
-        <Setter Property="BorderBrush" Value="#D3D3D3"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="PasswordBox">
-                    <Border Background="{TemplateBinding Background}"
+	<!-- Estilo para el RegisterPasswordBox -->
+	<Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
+		<Setter Property="Width" Value="200"/>
+		<Setter Property="Height" Value="30"/>
+		<Setter Property="Margin" Value="20"/>
+		<Setter Property="Padding" Value="20"/>
+		<Setter Property="Background" Value="#F3F9E3"/>
+		<Setter Property="BorderBrush" Value="#D3D3D3"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="PasswordBox">
+					<Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="15">
-                        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
-                            <Grid>
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
+							<Grid>
+								<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							</Grid>
+						</ScrollViewer>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 </ResourceDictionary>
