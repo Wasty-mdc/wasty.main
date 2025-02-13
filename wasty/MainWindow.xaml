@@ -4,15 +4,11 @@
         xmlns:vm="clr-namespace:wasty.ViewModels"
         xmlns:views="clr-namespace:wasty.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Wasty"
+        Title="Wasty - Software de Gestión de Residuos"
         Width="1200"
         Height="800"
         WindowStyle="None"
         ResizeMode="CanResize">
-
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
 
     <!-- Ajustar la estructura de la ventana con WindowChrome -->
     <WindowChrome.WindowChrome>
@@ -114,17 +110,9 @@
                 <Button Content="Main" Command="{Binding ShowMainViewCommand}" Width="100" Height="40" Cursor="Hand"/>
             </StackPanel>
 
-            <!-- Contenido Principal -->
-            <Grid Grid.Row="2" Background="#F5F5F5">
-                <Image Source="pack://application:,,,/Assets/Images/mainbackground.png" 
-               Stretch="Fill"
-               Panel.ZIndex="-1"/>
-                <ContentControl Content="{Binding CurrentView}" Opacity="0.995" >
-                    <ContentControl.Background>
-                        <ImageBrush ImageSource="/mainBackground.png" Opacity="1"/>
-                    </ContentControl.Background>
-                </ContentControl>
-            </Grid>
+            <!-- Contenido Principal Dinamico -->
+            <ContentControl Grid.Row="2" Content="{Binding CurrentView}" Background="Transparent"/>
+
         </Grid>
     </Border>
 </Window>

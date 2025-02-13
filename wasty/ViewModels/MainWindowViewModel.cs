@@ -7,9 +7,9 @@ namespace wasty.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        private readonly NavigationService _navigationService;
         private object _currentView;
+
         public object CurrentView
         {
             get => _currentView;
@@ -20,23 +20,24 @@ namespace wasty.ViewModels
             }
         }
 
-        // Comandos para cambiar de vista
         public ICommand ShowLoginViewCommand { get; }
         public ICommand ShowSignupViewCommand { get; }
         public ICommand ShowMainViewCommand { get; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(NavigationService navigationService)
         {
-            ShowLoginViewCommand = new RelayCommand(_ => CurrentView = new LoginView());
-            ShowSignupViewCommand = new RelayCommand(_ => CurrentView = new SignupView());
-            ShowMainViewCommand = new RelayCommand(_ => CurrentView = new MainView());
+            _navigationService = navigationService;
 
-            CurrentView = new LoginView(); // Vista inicial
+            ShowLoginViewCommand = new RelayCommand(_ => _navigationService.NavigateTo<LoginView>());
+            ShowSignupViewCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
+            ShowMainViewCommand = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
+
+            CurrentView = _navigationService.NavigateTo<LoginView>();
         }
 
-        protected void OnPropertyChanged(string propertyName)
-        {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
+
 }
