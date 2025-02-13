@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security;
 using System.Windows.Input;
 using wasty.Services;
 
@@ -12,8 +13,8 @@ namespace wasty.ViewModels
         private string _nombre;
         private string _usuario;
         private string _email;
-        private string _contrasenia;
-        private string _confirmarContrasenia;
+        public string Contrasenia { private get; set; }
+        public string ConfirmarContrasenia { private get; set; }
 
         public SignupViewModel(ApiService apiService)
         {
@@ -48,26 +49,6 @@ namespace wasty.ViewModels
             set
             {
                 _email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Contrasenia
-        {
-            get => _contrasenia;
-            set
-            {
-                _contrasenia = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string ConfirmarContrasenia
-        {
-            get => _confirmarContrasenia;
-            set
-            {
-                _confirmarContrasenia = value;
                 OnPropertyChanged();
             }
         }

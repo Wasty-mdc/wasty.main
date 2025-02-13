@@ -11,7 +11,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
     xmlns:vm="clr-namespace:wasty.ViewModels"
-    xmlns:helpers="clr-namespace:wasty.Helpers"
     x:Class="wasty.Views.SignupView"
     mc:Ignorable="d"
     Height="Auto"
@@ -69,7 +68,7 @@
                                  Margin="5,0" VerticalAlignment="Center"/>
                         <PasswordBox x:Name="SignupPasswordBox" Style="{StaticResource RegisterPasswordBox}"
                                  md:HintAssist.Hint="Contrasena"
-                                     helpers:PasswordBoxHelper.BindPassword="True" helpers:PasswordBoxHelper.BoundPassword="{Binding Contrasenia, UpdateSourceTrigger=PropertyChanged}"/>
+                                 PasswordChanged="PasswordBox_PasswordChanged"/>
                     </DockPanel>
                 </Border>
 
@@ -81,7 +80,7 @@
                                  Margin="5,0" VerticalAlignment="Center"/>
                         <PasswordBox x:Name="SignupConfirmPasswordBox" Style="{StaticResource RegisterPasswordBox}"
                                  md:HintAssist.Hint="Confirmar Contrasena"
-                                     helpers:PasswordBoxHelper.BindPassword="True" helpers:PasswordBoxHelper.BoundPassword="{Binding ConfirmarContrasenia, UpdateSourceTrigger=PropertyChanged}"/>
+                                 PasswordChanged="PasswordBox_ConfirmPasswordChanged"/>
                     </DockPanel>
                 </Border>
 

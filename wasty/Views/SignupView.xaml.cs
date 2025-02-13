@@ -31,5 +31,17 @@ namespace wasty.Views
         {
 
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((SignupViewModel)this.DataContext).Contrasenia = ((PasswordBox)sender).Password; }
+        }
+
+        private void PasswordBox_ConfirmPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((SignupViewModel)this.DataContext).ConfirmarContrasenia = ((PasswordBox)sender).Password; }
+        }
     }
 }
