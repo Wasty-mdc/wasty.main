@@ -10,6 +10,7 @@ namespace wasty.Views
         public MainView()
         {
             InitializeComponent();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(MainViewModel));
         }
 
         // Evento de clic para el botón Ficheros
