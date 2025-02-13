@@ -10,18 +10,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
+    xmlns:vm="clr-namespace:wasty.ViewModels"
+    xmlns:helpers="clr-namespace:wasty.Helpers"
     x:Class="wasty.Views.SignupView"
     mc:Ignorable="d"
     Height="Auto"
     Width="Auto"
-    Background="Transparent"
-    >
-
+    Background="Transparent">
 
     <Grid>
         <Border CornerRadius="15" Background="Transparent" Padding="20" Width="460" Height="680"
-            HorizontalAlignment="Center" VerticalAlignment="Center" 
-        >
+            HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center">
                 <!-- Titulo -->
@@ -36,10 +35,9 @@
                                  Foreground="{StaticResource PrimaryText}" 
                                  Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBox x:Name="SignupNameTextBox" Style="{StaticResource RegisterTextBox}"
-                             md:HintAssist.Hint="Nombre" TextChanged="SignupNameTextBox_TextChanged"/>
+                             md:HintAssist.Hint="Nombre" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </Border>
-
 
                 <!-- Campo Usuario con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
@@ -48,7 +46,7 @@
                                  Foreground="{StaticResource PrimaryText}" 
                                  Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBox x:Name="SignupUSerTextBox" Style="{StaticResource RegisterTextBox}"
-                             md:HintAssist.Hint="Usuario"/>
+                             md:HintAssist.Hint="Usuario" Text="{Binding Usuario, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </Border>
 
@@ -59,7 +57,7 @@
                                  Foreground="{StaticResource PrimaryText}" 
                                  Margin="5,0" VerticalAlignment="Center"/>
                         <TextBox x:Name="SignupEmailTextBox" Style="{StaticResource RegisterTextBox}"
-                                 md:HintAssist.Hint="Correo Electronico"/>
+                                 md:HintAssist.Hint="Correo Electronico" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </Border>
 
@@ -70,7 +68,8 @@
                                  Foreground="{StaticResource PrimaryText}" 
                                  Margin="5,0" VerticalAlignment="Center"/>
                         <PasswordBox x:Name="SignupPasswordBox" Style="{StaticResource RegisterPasswordBox}"
-                                 md:HintAssist.Hint="Contrasena"/>
+                                 md:HintAssist.Hint="Contrasena"
+                                     helpers:PasswordBoxHelper.BindPassword="True" helpers:PasswordBoxHelper.BoundPassword="{Binding Contrasenia, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </Border>
 
@@ -81,21 +80,22 @@
                                  Foreground="{StaticResource PrimaryText}" 
                                  Margin="5,0" VerticalAlignment="Center"/>
                         <PasswordBox x:Name="SignupConfirmPasswordBox" Style="{StaticResource RegisterPasswordBox}"
-                                 md:HintAssist.Hint="Confirmar Contrasena"/>
+                                 md:HintAssist.Hint="Confirmar Contrasena"
+                                     helpers:PasswordBoxHelper.BindPassword="True" helpers:PasswordBoxHelper.BoundPassword="{Binding ConfirmarContrasenia, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </Border>
 
                 <!-- Boton Registrarse -->
                 <Button x:Name="SignupButton" Content="Registrarse"
                         Style="{StaticResource RegisterButton}" 
-                        Command="{Binding SignupCommand}" />
+                        Command="{Binding CrearUsuarioCommand}" />
 
                 <!-- Boton Volver a Iniciar Sesion -->
                 <Button x:Name="BackToLoginButton" Content="Volver a Iniciar Sesion"
                         Style="{StaticResource RegisterButton}" 
-                        Height="30" Width="150" HorizontalAlignment="Right" FontSize="14" Cursor="Hand"/>
+                        Height="30" Width="150" HorizontalAlignment="Right" FontSize="14" Cursor="Hand"
+                        Command="{Binding VolverInicioSesionCommand}" />
             </StackPanel>
         </Border>
     </Grid>
-
 </UserControl>
