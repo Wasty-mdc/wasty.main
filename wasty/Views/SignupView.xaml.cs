@@ -3,10 +3,11 @@
 // Contiene manejadores de eventos vacios para interacciones con botones y cambios en los campos de texto.
 
 using System.Windows;
+using System.Windows.Controls;
 
 namespace wasty.Views
 {
-    public partial class SignupView : Window
+    public partial class SignupView : UserControl
     {
         public SignupView()
         {
@@ -19,6 +20,11 @@ namespace wasty.Views
         }
 
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SignupNameTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }

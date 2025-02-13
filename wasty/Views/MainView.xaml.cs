@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace wasty.Views
 {
-    public partial class MainView : Window
+    public partial class MainView : UserControl
     {
         public MainView()
         {

@@ -3,7 +3,7 @@
      Incluye soporte para validación de entrada y mensajes de error (actualmente comentados). 
  -->
 
-<Window
+<UserControl
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,56 +11,54 @@
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
     x:Class="wasty.Views.LoginView"
     mc:Ignorable="d"
-    Title="Wasty"
-    Height="800" 
-    Width="1200"
+    Height="Auto"
+    Width="Auto"
+    Background="Transparent"
 >
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Width="300">
-            <!-- Título -->
-            <TextBlock Text="Wasty" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBlock Text="Inicio de Sesión" FontSize="20" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+        <Border CornerRadius="15" Background="White" Padding="50,0,30,0" Width="420" Height="500"
+            HorizontalAlignment="Center" VerticalAlignment="Center" 
+            >
 
-            <!-- RegisterTextBox para el usuario -->
-            <Label Content="Usuario" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
-            <TextBox Style="{StaticResource RegisterTextBox}">
-                <TextBox.Text>
-                    <Binding Path="Username" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                        <Binding.ValidationRules>
-                            <!-- <local:NotEmptyValidationRule/ >-->
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+            <StackPanel VerticalAlignment="Center">
+                <!-- Título -->
+                <TextBlock Text="Iniciar Sesión" FontSize="22" FontWeight="Bold" 
+                       Foreground="{StaticResource PrimaryText}"
+                       HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-            <!-- RegisterPasswordBox para la contraseña -->
-            <Label Content="Contraseña" FontSize="14" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,-5,0,-5"/>
-            <PasswordBox Style="{StaticResource RegisterPasswordBox}">
-                <!-- 
-                <Binding Path="Password" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                <PasswordBox.Password>
-                        <Binding.ValidationRules>
-                             <local:PasswordValidationRule/> 
-                        </Binding.ValidationRules>
-                    </Binding>
-                </PasswordBox.Password>
-                -->
-            </PasswordBox>
+                <!-- Campo Usuario con Icono -->
+                <Border Style="{StaticResource RegisterTextBoxBorder}">
+                    <DockPanel>
+                        <md:PackIcon Kind="AccountCircle" Width="40" Height="40" 
+                                 Foreground="{DynamicResource PrimaryText}" 
+                                 Margin="-50,0,5,0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="RegisterTextBox" Style="{StaticResource RegisterTextBox}"
+                             md:HintAssist.Hint="Usuario" TextChanged="RegisterTextBox_TextChanged"/>
+                    </DockPanel>
+                </Border>
 
-            <!-- RegisterButton para iniciar sesión -->
-            <Button Content="Iniciar Sesión" Style="{StaticResource RegisterButton}" HorizontalAlignment="Center"/>
-        </StackPanel>
+                <!-- Campo Contraseña con Icono -->
+                <Border Style="{StaticResource RegisterPasswordBoxBorder}">
+                    <DockPanel>
+                        <PasswordBox x:Name="RegisterPasswordBox" Style="{StaticResource RegisterPasswordBox}"
+                                 md:HintAssist.Hint="Contraseña"/>
+                        <md:PackIcon Kind="Password" Width="40" 
+                                 Foreground="{DynamicResource PrimaryText}" DockPanel.Dock="Left" Height="40" Panel.ZIndex="1" Margin="-73,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Border>
 
-        <!-- Mensajes de Error 
-        <TextBlock Foreground="#e24a4d" FontSize="12">
-            <TextBlock.Text>
-                <Binding Path="(Validation.Errors)[0].ErrorContent"
-                 RelativeSource="{RelativeSource PreviousData}">
-                </Binding>
-            </TextBlock.Text>
-        </TextBlock> 
-        -->
+                <!-- Botón Iniciar Sesión -->
+                <Button x:Name="RegisterButton" Content="Ingresar"
+                        Style="{StaticResource RegisterButton}" 
+                        Command="{Binding LoginCommand}" />
 
+                <!-- Botón Registrarte -->
+                <Button x:Name="NewRegisterButton" Content="¿No tienes cuenta?"
+                        Style="{StaticResource RegisterButton}" 
+                        Command="{Binding LoginCommand}" Width="200" Height="28" />
+            </StackPanel>
+        </Border>
     </Grid>
-</Window>
+
+</UserControl>  

@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Images\mainBackground.png" />
+    <None Remove="mainBackground.png" />
     <None Remove="Resources\Poppins\Poppins-Black.ttf" />
     <None Remove="Resources\Poppins\Poppins-BlackItalic.ttf" />
     <None Remove="Resources\Poppins\Poppins-Bold.ttf" />
@@ -43,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Images\mainBackground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="mainBackground.png" />
     <Resource Include="Resources\Poppins\Poppins-Black.ttf" />
     <Resource Include="Resources\Poppins\Poppins-BlackItalic.ttf" />
     <Resource Include="Resources\Poppins\Poppins-Bold.ttf" />

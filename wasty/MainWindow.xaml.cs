@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 using wasty.ViewModels;
 
 
@@ -51,10 +52,14 @@ namespace wasty
             if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
+                MaximizeIcon.Kind = PackIconKind.WindowMaximize;
+
             }
             else
             {
                 WindowState = WindowState.Maximized;
+                MaximizeIcon.Kind = PackIconKind.WindowRestore;
+
             }
         }
 
