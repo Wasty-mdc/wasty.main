@@ -3,6 +3,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using wasty.ViewModels;
 
 namespace wasty.Views
 {
@@ -11,6 +12,8 @@ namespace wasty.Views
         public LoginView()
         {
             InitializeComponent();
+
+            DataContext = ((App)Application.Current).Services.GetService(typeof(LoginViewModel));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -21,6 +24,12 @@ namespace wasty.Views
         private void RegisterTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((LoginViewModel)this.DataContext).Contrasenia = ((PasswordBox)sender).Password; }
         }
     }
 }

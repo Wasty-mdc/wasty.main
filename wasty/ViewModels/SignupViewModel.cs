@@ -1,14 +1,16 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Security;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using wasty.Services;
+using wasty.Views;
 
 namespace wasty.ViewModels
 {
     public class SignupViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
         private string _nombre;
         private string _usuario;
@@ -16,9 +18,10 @@ namespace wasty.ViewModels
         public string Contrasenia { private get; set; }
         public string ConfirmarContrasenia { private get; set; }
 
-        public SignupViewModel(ApiService apiService)
+        public SignupViewModel(ApiService apiService, MainWindowViewModel mainWindowViewModel)
         {
             _apiService = apiService;
+            _mainWindowViewModel = mainWindowViewModel;
             CrearUsuarioCommand = new RelayCommand(async _ => await CrearUsuario());
             VolverInicioSesionCommand = new RelayCommand(VolverInicioSesion);
         }
@@ -70,6 +73,7 @@ namespace wasty.ViewModels
             if (result)
             {
                 // Usuario creado exitosamente
+                _mainWindowViewModel.CurrentView = new LoginView();
             }
             else
             {
@@ -79,7 +83,7 @@ namespace wasty.ViewModels
 
         private void VolverInicioSesion(object parameter)
         {
-            // Lógica para volver al inicio de sesión
+            _mainWindowViewModel.ShowLoginViewCommand.Execute(null);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

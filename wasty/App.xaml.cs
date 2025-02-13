@@ -29,6 +29,7 @@ namespace wasty
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<SignupViewModel>();
+            services.AddSingleton<LoginViewModel>();
             services.AddHttpClient<ApiService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5276/");
