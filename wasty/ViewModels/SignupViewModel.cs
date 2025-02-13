@@ -10,7 +10,7 @@ namespace wasty.ViewModels
     public class SignupViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
-        private readonly MainWindowViewModel _mainWindowViewModel;
+        private readonly NavigationService _navigationService;
 
         private string _nombre;
         private string _usuario;
@@ -18,12 +18,12 @@ namespace wasty.ViewModels
         public string Contrasenia { private get; set; }
         public string ConfirmarContrasenia { private get; set; }
 
-        public SignupViewModel(ApiService apiService, MainWindowViewModel mainWindowViewModel)
+        public SignupViewModel(ApiService apiService, NavigationService navigationService)
         {
             _apiService = apiService;
-            _mainWindowViewModel = mainWindowViewModel;
+            _navigationService = navigationService;
             CrearUsuarioCommand = new RelayCommand(async _ => await CrearUsuario());
-            VolverInicioSesionCommand = new RelayCommand(VolverInicioSesion);
+            LoginCommand = new RelayCommand(VolverInicioSesion);
         }
 
         public string Nombre
@@ -57,7 +57,7 @@ namespace wasty.ViewModels
         }
 
         public ICommand CrearUsuarioCommand { get; }
-        public ICommand VolverInicioSesionCommand { get; }
+        public ICommand LoginCommand { get; }
 
         private async Task CrearUsuario()
         {
@@ -73,7 +73,7 @@ namespace wasty.ViewModels
             if (result)
             {
                 // Usuario creado exitosamente
-                _mainWindowViewModel.CurrentView = new LoginView();
+                _navigationService.NavigateTo<LoginView>();
             }
             else
             {
@@ -83,7 +83,7 @@ namespace wasty.ViewModels
 
         private void VolverInicioSesion(object parameter)
         {
-            _mainWindowViewModel.ShowLoginViewCommand.Execute(null);
+            _navigationService.NavigateTo<LoginView>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

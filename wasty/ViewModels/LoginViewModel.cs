@@ -1,67 +1,66 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using wasty.Services;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using wasty.ViewModels;
+using wasty.Views;
 
-namespace wasty.ViewModels
+public class LoginViewModel : INotifyPropertyChanged
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    private readonly ApiService _apiService;
+    private readonly NavigationService _navigationService;
+    private string _email;
+    public string Contrasenia { private get; set; }
+
+    public LoginViewModel(ApiService apiService, NavigationService navigationService)
     {
-        private readonly ApiService _apiService;
-        private string _email;
-        public string Contrasenia { private get; set; }
+        _apiService = apiService;
+        _navigationService = navigationService;
+        LoginCommand = new RelayCommand(async _ => await Login());
+        RegisterCommand = new RelayCommand(NavigateToSignup);
+    }
 
-        public LoginViewModel(ApiService apiService)
+    public string Email
+    {
+        get => _email;
+        set
         {
-            _apiService = apiService;
-            LoginCommand = new RelayCommand(async _ => await Login());
-            NavigateToSignupCommand = new RelayCommand(NavigateToSignup);
+            _email = value;
+            OnPropertyChanged();
         }
+    }
 
-        public string Email
+    public ICommand LoginCommand { get; }
+    public ICommand RegisterCommand { get; }
+
+    private async Task Login()
+    {
+        var login = new
         {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-            }
-        }
+            Email,
+            Contrasenia
+        };
 
-        public ICommand LoginCommand { get; }
-        public ICommand NavigateToSignupCommand { get; }
-
-        private async Task Login()
+        var result = await _apiService.PostAsync("auth/login", login);
+        if (result)
         {
-            var login = new
-            {
-                Email,
-                Contrasenia
-            };
-
-            var result = await _apiService.PostAsync("auth/login", login);
-            if (result)
-            {
-                // Lógica para manejar inicio de sesión exitoso
-            }
-            else
-            {
-                // Lógica para manejar error en el inicio de sesión
-            }
+            _navigationService.NavigateTo<MainView>();
         }
-
-        private void NavigateToSignup(object parameter)
+        else
         {
-            // Lógica para navegar a la vista de registro
+            // Lógica para manejar error en el inicio de sesión
         }
+    }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+    private void NavigateToSignup(object parameter)
+    {
+        _navigationService.NavigateTo<SignupView>();
+    }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

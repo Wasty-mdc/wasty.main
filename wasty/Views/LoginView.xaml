@@ -57,7 +57,7 @@
                 <!-- Botón Registrarte -->
                 <Button x:Name="NewRegisterButton" Content="¿No tienes cuenta?"
                         Style="{StaticResource RegisterButton}" 
-                        Command="{Binding LoginCommand}" Width="200" Height="28" />
+                        Command="{Binding RegisterCommand}" Width="200" Height="28" />
             </StackPanel>
         </Border>
     </Grid>

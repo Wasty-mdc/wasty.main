@@ -9,6 +9,7 @@ using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
 using wasty.Services;
 using wasty.ViewModels;
+using System.Windows.Controls;
 
 
 namespace wasty
@@ -28,6 +29,9 @@ namespace wasty
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<NavigationService>(provider =>
+            new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
+
             services.AddSingleton<SignupViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddHttpClient<ApiService>(client =>
