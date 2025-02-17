@@ -25,7 +25,6 @@ namespace wasty.ViewModels
         public ICommand ShowSignupViewCommand { get; }
         public ICommand ShowMainViewCommand { get; }
 
-        //  Se añade el constructor para recibir NavigationService
         public MainWindowViewModel(NavigationService navigationService)
         {
             _navigationService = navigationService;

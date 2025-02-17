@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 using wasty.ViewModels;
 
@@ -18,12 +17,14 @@ namespace wasty.Services
 
         public void NavigateTo<TView>() where TView : UserControl
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                var view = _viewFactory(typeof(TView));
-                _mainWindowViewModel.CurrentView = view;
-            });
-        }
+            var view = _viewFactory(typeof(TView));
 
+            if (view == null)
+            {
+                throw new Exception($"No se pudo crear la vista {typeof(TView).Name}");
+            }
+
+            _mainWindowViewModel.CurrentView = view; 
+        }
     }
 }
