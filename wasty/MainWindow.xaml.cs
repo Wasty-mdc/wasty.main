@@ -23,9 +23,12 @@ namespace wasty
     {
         private readonly MainWindowViewModel _viewModel;
 
-        public MainWindow(NavigationService navigationService)
+        public MainWindow()
         {
             InitializeComponent();
+
+            // Obtener el servicio de NavigationService desde App.xaml.cs
+            var navigationService = ((App)Application.Current).Services.GetService<NavigationService>();
 
             // Pasar el NavigationService al ViewModel
             _viewModel = new MainWindowViewModel(navigationService);

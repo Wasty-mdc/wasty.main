@@ -12,12 +12,10 @@ public class NavigationService
         _mainWindowViewModel = mainWindowViewModel;
     }
 
-    public UserControl NavigateTo<TView>() where TView : UserControl
+    public object NavigateTo<TView>() where TView : UserControl
     {
         var view = _viewFactory(typeof(TView));
-        
         _mainWindowViewModel.CurrentView = view;
-        
         return view;
     }
 }

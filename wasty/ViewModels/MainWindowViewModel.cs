@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using wasty.Views;
-using wasty.Services;
 
 namespace wasty.ViewModels
 {
