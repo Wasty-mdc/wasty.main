@@ -21,7 +21,13 @@ namespace wasty
                 ConfigureServices(serviceCollection);
                 Services = serviceCollection.BuildServiceProvider();
 
+                // Verificar que MainWindow se obtenga correctamente
                 var mainWindow = Services.GetRequiredService<MainWindow>();
+                if (mainWindow == null)
+                {
+                    throw new Exception("No se pudo obtener una instancia de MainWindow desde el contenedor de dependencias.");
+                }
+
                 mainWindow.Show();
             }
             catch (Exception ex)

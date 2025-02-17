@@ -17,14 +17,18 @@ namespace wasty.Services
 
         public void NavigateTo<TView>() where TView : UserControl
         {
-            var view = _viewFactory(typeof(TView));
+            if (_mainWindowViewModel == null)
+            {
+                throw new Exception("MainWindowViewModel no está correctamente inicializado en NavigationService.");
+            }
 
+            var view = _viewFactory(typeof(TView));
             if (view == null)
             {
                 throw new Exception($"No se pudo crear la vista {typeof(TView).Name}");
             }
 
-            _mainWindowViewModel.CurrentView = view; 
+            _mainWindowViewModel.CurrentView = view;
         }
     }
 }
