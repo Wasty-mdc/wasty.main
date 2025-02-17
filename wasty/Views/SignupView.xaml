@@ -27,7 +27,7 @@
                        Foreground="{DynamicResource Neutral200}"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                <!-- Campo Nombre  -->
+                <!-- Campo Nombre con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="Account" Width="24" Height="24" 
