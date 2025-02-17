@@ -24,6 +24,9 @@ namespace wasty
             ConfigureServices(serviceCollection);
             Services = serviceCollection.BuildServiceProvider();
 
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+
             base.OnStartup(e);
         }
 
@@ -40,5 +43,29 @@ namespace wasty
                 client.BaseAddress = new Uri("http://localhost:5276/");
             });
         }
+
+        //private void ConfigureServices(IServiceCollection services)
+        //{
+        //    // Definir la factoría para crear vistas dinámicamente
+        //    Func<Type, UserControl> viewFactory = viewType => (UserControl)Activator.CreateInstance(viewType);
+
+        //    // Registrar el ViewModel de la ventana principal
+        //    services.AddSingleton<MainWindowViewModel>();
+
+        //    // Registrar NavigationService después de que MainWindowViewModel esté registrado
+        //    services.AddSingleton<NavigationService>(provider =>
+        //    {
+        //        var mainWindowViewModel = provider.GetRequiredService<MainWindowViewModel>();
+        //        return new NavigationService(viewFactory, mainWindowViewModel);
+        //    });
+
+        //    // Registrar la MainWindow
+        //    services.AddSingleton<MainWindow>(provider =>
+        //    {
+        //        var navigationService = provider.GetRequiredService<NavigationService>();
+        //        return new MainWindow(navigationService);
+        //    });
+        //}
+
     }
 }
