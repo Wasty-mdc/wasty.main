@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using wasty.ViewModels;
 
 namespace wasty.Services
 {
     public class NavigationService
     {
         private readonly Func<Type, UserControl> _viewFactory;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
-        public NavigationService(Func<Type, UserControl> viewFactory)
+        public NavigationService(Func<Type, UserControl> viewFactory, MainWindowViewModel mainWindowViewModel)
         {
             _viewFactory = viewFactory;
+            _mainWindowViewModel = mainWindowViewModel;
         }
 
         public void NavigateTo<TView>() where TView : UserControl
         {
-            var view = _viewFactory(typeof(TView));
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.Content = view;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var view = _viewFactory(typeof(TView));
+                _mainWindowViewModel.CurrentView = view;
+            });
         }
+
     }
 }

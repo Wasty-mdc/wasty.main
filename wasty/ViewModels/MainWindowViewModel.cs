@@ -1,16 +1,17 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 using wasty.Views;
+using wasty.Services;
 
 namespace wasty.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly NavigationService _navigationService;
+        private UserControl _currentView;
 
-        private object _currentView;
-        public object CurrentView
+        public UserControl CurrentView
         {
             get => _currentView;
             set
@@ -20,23 +21,25 @@ namespace wasty.ViewModels
             }
         }
 
-        // Comandos para cambiar de vista
         public ICommand ShowLoginViewCommand { get; }
         public ICommand ShowSignupViewCommand { get; }
         public ICommand ShowMainViewCommand { get; }
 
-        public MainWindowViewModel()
+        //  Se añade el constructor para recibir NavigationService
+        public MainWindowViewModel(NavigationService navigationService)
         {
-            ShowLoginViewCommand = new RelayCommand(_ => CurrentView = new LoginView());
-            ShowSignupViewCommand = new RelayCommand(_ => CurrentView = new SignupView());
-            ShowMainViewCommand = new RelayCommand(_ => CurrentView = new MainView());
+            _navigationService = navigationService;
 
-            CurrentView = new LoginView(); // Vista inicial
+            ShowLoginViewCommand = new RelayCommand(_ => _navigationService.NavigateTo<LoginView>());
+            ShowSignupViewCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
+            ShowMainViewCommand = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
+
+            // Se asegura de que `LoginView` sea la vista inicial
+            _navigationService.NavigateTo<LoginView>();
         }
 
-        protected void OnPropertyChanged(string propertyName)
-        {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

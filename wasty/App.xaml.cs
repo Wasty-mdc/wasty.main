@@ -1,16 +1,9 @@
-﻿// Lógica de interacción de la aplicación Wasty.
-// Clase principal que hereda de Application, proporcionando la configuración básica para el ciclo de vida de la aplicación.
-// Actualmente no contiene implementación adicional.
-
-using System.Configuration;
-using System.Data;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
-using System.Globalization;
-using Microsoft.Extensions.DependencyInjection;
-using wasty.Services;
 using wasty.ViewModels;
+using wasty.Services;
 using System.Windows.Controls;
-
 
 namespace wasty
 {
@@ -24,7 +17,8 @@ namespace wasty
             ConfigureServices(serviceCollection);
             Services = serviceCollection.BuildServiceProvider();
 
-            var mainWindow = new MainWindow();
+            // Obtener MainWindow correctamente desde el contenedor de servicios
+            var mainWindow = Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);
@@ -32,40 +26,26 @@ namespace wasty
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<NavigationService>(provider =>
-            new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
+            // Registrar MainWindowViewModel
+            services.AddSingleton<MainWindowViewModel>();
 
-            services.AddSingleton<SignupViewModel>();
-            services.AddSingleton<LoginViewModel>();
-            services.AddSingleton<MainViewModel>();
-            services.AddHttpClient<ApiService>(client =>
+            // Definir la factoría para crear vistas dinámicamente
+            Func<Type, UserControl> viewFactory = viewType => (UserControl)Activator.CreateInstance(viewType);
+
+            // Registrar NavigationService después de MainWindowViewModel
+            services.AddSingleton<NavigationService>(provider =>
             {
-                client.BaseAddress = new Uri("http://localhost:5276/");
+                var mainWindowViewModel = provider.GetRequiredService<MainWindowViewModel>();
+                return new NavigationService(viewFactory, mainWindowViewModel);
+            });
+
+            //  Registrar MainWindow asegurando que reciba NavigationService
+            services.AddSingleton<MainWindow>(provider =>
+            {
+                var navigationService = provider.GetRequiredService<NavigationService>();
+                return new MainWindow(navigationService);
             });
         }
-
-        //private void ConfigureServices(IServiceCollection services)
-        //{
-        //    // Definir la factoría para crear vistas dinámicamente
-        //    Func<Type, UserControl> viewFactory = viewType => (UserControl)Activator.CreateInstance(viewType);
-
-        //    // Registrar el ViewModel de la ventana principal
-        //    services.AddSingleton<MainWindowViewModel>();
-
-        //    // Registrar NavigationService después de que MainWindowViewModel esté registrado
-        //    services.AddSingleton<NavigationService>(provider =>
-        //    {
-        //        var mainWindowViewModel = provider.GetRequiredService<MainWindowViewModel>();
-        //        return new NavigationService(viewFactory, mainWindowViewModel);
-        //    });
-
-        //    // Registrar la MainWindow
-        //    services.AddSingleton<MainWindow>(provider =>
-        //    {
-        //        var navigationService = provider.GetRequiredService<NavigationService>();
-        //        return new MainWindow(navigationService);
-        //    });
-        //}
 
     }
 }
