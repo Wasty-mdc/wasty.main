@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
-using Microsoft.Extensions.DependencyInjection;
 using wasty.ViewModels;
 
 
@@ -26,12 +25,7 @@ namespace wasty
         public MainWindow()
         {
             InitializeComponent();
-
-            // Obtener el servicio de NavigationService desde App.xaml.cs
-            var navigationService = ((App)Application.Current).Services.GetService<NavigationService>();
-
-            // Pasar el NavigationService al ViewModel
-            _viewModel = new MainWindowViewModel(navigationService);
+            _viewModel = new MainWindowViewModel();
             DataContext = _viewModel;
 
             StateChanged += MainWindow_StateChanged;

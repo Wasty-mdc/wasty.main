@@ -13,6 +13,8 @@ namespace wasty.Views
         public SignupView()
         {
             InitializeComponent();
+
+            DataContext = ((App)Application.Current).Services.GetService(typeof(SignupViewModel));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

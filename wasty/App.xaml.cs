@@ -24,21 +24,14 @@ namespace wasty
             ConfigureServices(serviceCollection);
             Services = serviceCollection.BuildServiceProvider();
 
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-
             base.OnStartup(e);
         }
 
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<NavigationService>(provider =>
-            {
-                var mainWindowViewModel = provider.GetRequiredService<MainWindowViewModel>();
-                return new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType), mainWindowViewModel);
-            });
+            new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
 
-            services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<SignupViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<MainViewModel>();
@@ -47,6 +40,5 @@ namespace wasty
                 client.BaseAddress = new Uri("http://localhost:5276/");
             });
         }
-
     }
 }
