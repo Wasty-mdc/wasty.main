@@ -32,9 +32,9 @@ namespace wasty
             services.AddSingleton<NavigationService>(provider =>
             new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
 
-            services.AddSingleton<SignupViewModel>();
-            services.AddSingleton<LoginViewModel>();
-            services.AddSingleton<MainViewModel>();
+            services.AddTransient<SignupViewModel>();
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<MainViewModel>();
             services.AddHttpClient<ApiService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5276/");
