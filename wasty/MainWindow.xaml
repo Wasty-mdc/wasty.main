@@ -107,12 +107,14 @@
                 </Grid>
             </Border>
 
-            <!-- Menú de Navegación Provisional -->
+            <!-- Herramienta Dev: Navegación Provisional
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent" Margin="10">
                 <Button Content="Login" Command="{Binding ShowLoginViewCommand}" Width="100" Height="40" Cursor="Hand"/>
                 <Button Content="Signup" Command="{Binding ShowSignupViewCommand}" Width="100" Height="40" Cursor="Hand"/>
                 <Button Content="Main" Command="{Binding ShowMainViewCommand}" Width="100" Height="40" Cursor="Hand"/>
             </StackPanel>
+
+             -->
 
             <!-- Contenido Principal -->
             <Grid Grid.Row="2" Background="#F5F5F5">

@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <Page Remove="Styles.xaml" />
+    <Page Remove="Styles\mainStyles.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,7 +69,7 @@
     <Resource Include="Resources\Poppins\Poppins-SemiBoldItalic.ttf" />
     <Resource Include="Resources\Poppins\Poppins-Thin.ttf" />
     <Resource Include="Resources\Poppins\Poppins-ThinItalic.ttf" />
-    <Resource Include="Styles.xaml">
+    <Resource Include="Styles\mainStyles.xaml">
       <Generator></Generator>
     </Resource>
   </ItemGroup>

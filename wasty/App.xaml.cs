@@ -29,6 +29,13 @@ namespace wasty
 
         private void ConfigureServices(IServiceCollection services)
         {
+            // Definir la factoría para crear vistas dinámicamente
+            Func<Type, UserControl> viewFactory = viewType => (UserControl)Activator.CreateInstance(viewType);
+
+            // Registrar MainWindowViewModel
+            services.AddSingleton<MainWindowViewModel>();
+
+            // Registrar NavigationService después de MainWindowViewModel 
             services.AddSingleton<NavigationService>(provider =>
             new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
 
