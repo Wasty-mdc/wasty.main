@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Vista de inicio de sesión para Wasty, definida en XAML. 
      Contiene campos para usuario y contraseña, con enlaces a propiedades en el ViewModel y estilos reutilizables.
      Incluye soporte para validación de entrada y mensajes de error (actualmente comentados). 

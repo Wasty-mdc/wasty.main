@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Vista principal de Wasty, definida en XAML.
      Contiene un menú lateral con accesos directos y una sección de contenido principal con botones de navegación para distintas funciones del sistema.
      Utiliza MaterialDesignInXAML para iconos y estilos personalizados. 
