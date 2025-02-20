@@ -46,16 +46,16 @@ public class LoginViewModel : INotifyPropertyChanged
             Contrasenia
         };
 
-        var result = await _apiService.PostAsync<object, dynamic>("auth/login", login);
-        //if (result)
-        //{
-        //    SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
-        //    _navigationService.NavigateTo<MainView>();
-        //}
-        //else
-        //{
-        //    SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
-        //}
+        var result = await _apiService.PostAsync("auth/login", login);
+        if (result)
+        {
+            SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
+            _navigationService.NavigateTo<MainView>();
+        }
+        else
+        {
+            SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
+        }
     }
 
     private void NavigateToSignup(object parameter)

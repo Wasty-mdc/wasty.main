@@ -69,16 +69,16 @@ namespace wasty.ViewModels
                 Contrasenia
             };
 
-            var result = await _apiService.PostAsync<object, dynamic>("usuarios", usuario);
-            //if (result)
-            //{
-            //    // Usuario creado exitosamente
-            //    _navigationService.NavigateTo<LoginView>();
-            //}
-            //else
-            //{
-            //    // Error al crear usuario
-            //}
+            var result = await _apiService.PostAsync("usuarios", usuario);
+            if (result)
+            {
+                // Usuario creado exitosamente
+                _navigationService.NavigateTo<LoginView>();
+            }
+            else
+            {
+                // Error al crear usuario
+            }
         }
 
         private void VolverInicioSesion(object parameter)
