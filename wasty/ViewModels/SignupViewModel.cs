@@ -69,8 +69,8 @@ namespace wasty.ViewModels
                 Contrasenia
             };
 
-            var result = await _apiService.PostAsync("usuarios", usuario);
-            if (result)
+            var result = await _apiService.RequestAsync("POST", "usuarios", usuario);
+            if (result.GetProperty("Exito").GetBoolean())
             {
                 // Usuario creado exitosamente
                 _navigationService.NavigateTo<LoginView>();

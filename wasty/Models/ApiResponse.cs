@@ -9,29 +9,29 @@
         /// <summary>
         /// Indica si la solicitud fue exitosa.
         /// </summary>
-        public bool Exito { get; set; }
+        public bool exito { get; set; }
 
         /// <summary>
         /// Mensaje asociado con la respuesta.
         /// </summary>
-        public string Mensaje { get; set; }
+        public string mensaje { get; set; }
 
         /// <summary>
         /// Datos devueltos en la respuesta.
         /// </summary>
-        public T Datos { get; set; }
+        public T datos { get; set; }
 
         /// <summary>
         /// Lista de errores, si los hay.
         /// </summary>
-        public List<string> Errores { get; set; }
+        public List<string> errores { get; set; }
 
         /// <summary>
         /// Constructor por defecto.
         /// </summary>
         public ApiResponse()
         {
-            Errores = new List<string>();
+            errores = new List<string>();
         }
 
         /// <summary>
@@ -43,10 +43,10 @@
         /// <param name="errores">Lista de errores, si los hay.</param>
         public ApiResponse(bool exito, string mensaje, T datos, List<string> errores = null)
         {
-            Exito = exito;
-            Mensaje = mensaje;
-            Datos = datos;
-            Errores = errores ?? new List<string>();
+            exito = exito;
+            mensaje = mensaje;
+            datos = datos;
+            errores = errores ?? new List<string>();
         }
     }
 }

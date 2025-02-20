@@ -46,8 +46,8 @@ public class LoginViewModel : INotifyPropertyChanged
             Contrasenia
         };
 
-        var result = await _apiService.PostAsync("auth/login", login);
-        if (result)
+        var result = await _apiService.RequestAsync("POST", "auth/login", login);
+        if (result.GetProperty("exito").GetBoolean())
         {
             SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
             _navigationService.NavigateTo<MainView>();

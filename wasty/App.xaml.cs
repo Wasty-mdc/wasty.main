@@ -36,7 +36,7 @@ namespace wasty
             services.AddSingleton<MainWindowViewModel>();
 
             // Registrar NavigationService después de MainWindowViewModel 
-            services.AddSingleton<NavigationService>(provider =>
+            services.AddTransient<NavigationService>(provider =>
             new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
 
             services.AddTransient<SignupViewModel>();
