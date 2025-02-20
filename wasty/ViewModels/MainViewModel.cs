@@ -9,6 +9,17 @@ using wasty.Views.TableViews;
 public class MainViewModel : INotifyPropertyChanged
 {
     private readonly NavigationService _navigationService;
+    private object _currentView;
+
+    public object CurrentView
+    {
+        get => _currentView;
+        set
+        {
+            _currentView = value;
+            OnPropertyChanged(nameof(CurrentView));
+        }
+    }
 
     public MainViewModel(NavigationService navigationService)
     {
@@ -17,12 +28,13 @@ public class MainViewModel : INotifyPropertyChanged
         clientesCommand = new RelayCommand(NavigateToClientes);
         residuosCommand = new RelayCommand(NavigateToResiduos);
 
+        // Establecer la vista inicial (puede ser `MainView` o alguna tabla)
+        CurrentView = _navigationService.NavigateTo<MainView>();
     }
 
     public ICommand SalirCommand { get; }
     public ICommand clientesCommand { get; }
     public ICommand residuosCommand { get; }
-
 
     private void NavigateToLogin(object parameter)
     {
@@ -31,18 +43,23 @@ public class MainViewModel : INotifyPropertyChanged
 
     private void NavigateToClientes(object parameter)
     {
-        _navigationService.NavigateTo<ClientTableView>();
+        CurrentView = _navigationService.NavigateTo<ClientTableView>();
     }
 
     private void NavigateToResiduos(object parameter)
     {
-        _navigationService.NavigateTo<RecycTableView>();
+        CurrentView = _navigationService.NavigateTo<RecycTableView>();
+    }
+
+    public void NavigateToMainView()
+    {
+        CurrentView = _navigationService.NavigateTo<MainView>();
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
-
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
+

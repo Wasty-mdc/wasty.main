@@ -120,6 +120,7 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
+            <ContentControl Content="{Binding CurrentView}"/>
 
         </Grid>
     </Grid>

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\TableViews\TableView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\Images\mainBackground.png" />
     <None Remove="mainBackground.png" />
     <None Remove="Resources\Poppins\Poppins-Black.ttf" />
@@ -34,6 +38,7 @@
   <ItemGroup>
     <Page Remove="Styles.xaml" />
     <Page Remove="Styles\mainStyles.xaml" />
+    <Page Remove="Views\TableViews\TableView.xaml" />
   </ItemGroup>
 
   <ItemGroup>

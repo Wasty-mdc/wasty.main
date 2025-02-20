@@ -31,5 +31,10 @@ namespace wasty.Views
             if (this.DataContext != null)
             { ((LoginViewModel)this.DataContext).Contrasenia = ((PasswordBox)sender).Password; }
         }
+
+        private void NewRegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

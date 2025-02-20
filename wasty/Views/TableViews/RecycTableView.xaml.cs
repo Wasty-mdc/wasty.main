@@ -36,5 +36,14 @@ namespace wasty.Views.TableViews
                 e.Column.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.MainWindow.DataContext is MainViewModel mainViewModel)
+            {
+                mainViewModel.NavigateToMainView();
+            }
+        }
+
     }
 }

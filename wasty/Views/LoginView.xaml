@@ -12,17 +12,17 @@
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
     x:Class="wasty.Views.LoginView"
     mc:Ignorable="d"
-    Height="Auto"
-    Width="Auto"
+    Height="600"
+    Width="600"
     Background="Transparent"
 >
 
     <Grid>
-        <Border CornerRadius="15" Background="White" Padding="50,0,30,0" Width="420" Height="500"
+        <Border CornerRadius="15" Background="White" Padding="50,0,30,0" Width="500" Height="600"
             HorizontalAlignment="Center" VerticalAlignment="Center" 
             >
 
-            <StackPanel VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" Height="376">
                 <!-- Título -->
                 <TextBlock Text="Iniciar Sesión" FontSize="22" FontWeight="Bold" 
                        Foreground="{StaticResource PrimaryText}"
@@ -31,7 +31,7 @@
                 <!-- Campo Usuario con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
-                        <md:PackIcon Kind="AccountCircle" Width="40" Height="40" 
+                        <md:PackIcon Kind="Email" Width="40" Height="40" 
                                  Foreground="{DynamicResource PrimaryText}" 
                                  Margin="-50,0,5,0" VerticalAlignment="Center"/>
                         <TextBox x:Name="RegisterTextBox" Style="{StaticResource RegisterTextBox}"
@@ -46,7 +46,7 @@
                             Foreground="{DynamicResource PrimaryText}" DockPanel.Dock="Left" Height="40" Panel.ZIndex="1" Margin="-50,0,0,0" VerticalAlignment="Center"/>
                         <PasswordBox x:Name="RegisterPasswordBox" Style="{StaticResource RegisterPasswordBox}"
                                  md:HintAssist.Hint="Contraseña"
-                                 PasswordChanged="PasswordBox_PasswordChanged"/>                        
+                                 PasswordChanged="PasswordBox_PasswordChanged"/>
                     </DockPanel>
                 </Border>
 
@@ -54,11 +54,25 @@
                 <Button x:Name="RegisterButton" Content="Ingresar"
                         Style="{StaticResource RegisterButton}" 
                         Command="{Binding LoginCommand}" />
-
-                <!-- Botón Registrarte -->
                 <Button x:Name="NewRegisterButton" Content="¿No tienes cuenta?"
                         Style="{StaticResource RegisterButton}" 
-                        Command="{Binding RegisterCommand}" Width="200" Height="28" />
+                        Command="{Binding RegisterCommand}" Width="200" Height="28" Click="NewRegisterButton_Click" />
+
+                <!-- Botón Registrarte -->
+
+                <md:Snackbar MessageQueue="{Binding SnackbarMessageQueue}"
+                           VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    <md:Snackbar.Style>
+                        <Style TargetType="md:Snackbar" >
+                            <Setter Property="Background" Value="{StaticResource Error600}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SnackbarMessageQueue}" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource Success600}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </md:Snackbar.Style>
+                </md:Snackbar>
             </StackPanel>
         </Border>
     </Grid>

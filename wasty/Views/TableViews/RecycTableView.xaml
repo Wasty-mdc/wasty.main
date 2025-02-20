@@ -17,12 +17,25 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <TabControl SelectedIndex="0">
-        <!-- Pestaña 1: Tabla de Residuos -->
-        <TabItem Header="Residuos">
-            <Grid>
-                <Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Padding="2" Margin="2">
-                    <DataGrid ItemsSource="{Binding Residuos}"
+    <StackPanel>
+        <!-- Botón para volver a MainView -->
+        <Button Content="Volver a Inicio"
+         Width="150"
+         Height="40"
+         Margin="10"
+         FontSize="14"
+         FontWeight="Bold"
+         Background="#FF5722"
+         Foreground="White"
+         Cursor="Hand"
+         Click="GoBack_Click"/>
+
+        <TabControl SelectedIndex="0">
+            <!-- Pestaña 1: Tabla de Residuos -->
+            <TabItem Header="Residuos">
+                <Grid>
+                    <Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Padding="2" Margin="2">
+                        <DataGrid ItemsSource="{Binding Residuos}"
                       AutoGenerateColumns="False"
                       Style="{StaticResource CustomDataGridStyle}"
                       RowStyle="{StaticResource TableRowStyle}"
@@ -41,19 +54,20 @@
                       BorderBrush="Black" 
                       BorderThickness="1">
 
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="*" MinWidth="50" MaxWidth="110" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Tipo de Residuo" Binding="{Binding Tipo}" Width="Auto" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Peso (kg)" Binding="{Binding Peso}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Fecha de Recolección" Binding="{Binding FechaRecoleccion}" Width="*" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Empresa Gestora" Binding="{Binding EmpresaGestora}" Width="*" MinWidth="50" MaxWidth="130" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            <DataGridTextColumn Header="Destino" Binding="{Binding Destino}" Width="*" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
-            </Grid>
-        </TabItem>
-    </TabControl>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="*" MinWidth="50" MaxWidth="110" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Tipo de Residuo" Binding="{Binding Tipo}" Width="Auto" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Peso (kg)" Binding="{Binding Peso}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Fecha de Recolección" Binding="{Binding FechaRecoleccion}" Width="*" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Empresa Gestora" Binding="{Binding EmpresaGestora}" Width="*" MinWidth="50" MaxWidth="130" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Destino" Binding="{Binding Destino}" Width="*" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </UserControl>

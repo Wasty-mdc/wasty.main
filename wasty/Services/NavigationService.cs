@@ -13,12 +13,14 @@ namespace wasty.Services
             _viewFactory = viewFactory;
         }
 
-        public void NavigateTo<TView>() where TView : UserControl
+        public UserControl NavigateTo<TView>() where TView : UserControl
         {
             var view = _viewFactory(typeof(TView));
 
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.contentView.Content = view;
+
+            return view; // Ahora devuelve la vista para que pueda asignarse a CurrentView
         }
     }
 }

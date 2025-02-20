@@ -1,5 +1,7 @@
+using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using wasty.Services;
 using wasty.ViewModels;
@@ -18,6 +20,7 @@ public class LoginViewModel : INotifyPropertyChanged
         _navigationService = navigationService;
         LoginCommand = new RelayCommand(async _ => await Login());
         RegisterCommand = new RelayCommand(NavigateToSignup);
+        SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(3));
     }
 
     public string Email
@@ -29,6 +32,8 @@ public class LoginViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
+    public SnackbarMessageQueue SnackbarMessageQueue { get; }
 
     public ICommand LoginCommand { get; }
     public ICommand RegisterCommand { get; }
@@ -44,11 +49,12 @@ public class LoginViewModel : INotifyPropertyChanged
         var result = await _apiService.PostAsync("auth/login", login);
         if (result)
         {
+            SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
             _navigationService.NavigateTo<MainView>();
         }
         else
         {
-            // Lógica para manejar error en el inicio de sesión
+            SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
         }
     }
 
@@ -58,7 +64,6 @@ public class LoginViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
-
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
