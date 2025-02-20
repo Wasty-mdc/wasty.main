@@ -42,6 +42,8 @@ namespace wasty
             services.AddTransient<SignupViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<MainViewModel>();
+            services.AddTransient<ClientTableViewModel>();
+            services.AddTransient<RecycTableViewModel>();
             services.AddHttpClient<ApiService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5276/");

@@ -24,7 +24,8 @@ namespace wasty.Views.TableViews
         public RecycTableView()
         {
             InitializeComponent();
-            DataContext = new RecycTableViewModel();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(RecycTableViewModel));
+
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

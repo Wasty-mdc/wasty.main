@@ -76,7 +76,7 @@
             Margin="10">
 
                 <!-- Botón Clientes -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Clientes" >
+                <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding clientesCommand}" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="AccountMultiple" Width="80" Height="80" Foreground="#266DD3"/>
                         <TextBlock Text="Clientes" FontSize="16" FontWeight="Bold" Foreground="Black"
@@ -85,7 +85,7 @@
                 </Button>
 
                 <!-- Botón Residuos -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Residuos" >
+                <Button x:Name="residuosButton" Style="{StaticResource CentralButton}" ToolTip="Residuos" Command="{Binding residuosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="Recycle" Width="80" Height="80" Foreground="#A0C26C"/>
                         <TextBlock Text="Residuos" FontSize="16" FontWeight="Bold" Foreground="Black"

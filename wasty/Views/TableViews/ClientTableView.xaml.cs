@@ -11,7 +11,7 @@ namespace wasty.Views.TableViews
         public ClientTableView()
         {
             InitializeComponent();
-            DataContext = new ClientTableViewModel();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ClientTableViewModel));
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
