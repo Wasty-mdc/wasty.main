@@ -16,14 +16,20 @@ namespace wasty.Services
             _httpClient = httpClient;
         }
 
-        public async Task<dynamic> PostAsync<T>(string endpoint, T data)
+        public async Task<ApiResponse<TResponse>> PostAsync<TRequest, TResponse>(string endpoint, TRequest data)
         {
             var json = JsonSerializer.Serialize(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(endpoint, content);
 
-            return response;
+            // Leer el contenido de la respuesta como una cadena
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Deserializar la cadena JSON en un objeto ApiResponse<TResponse>
+            var result = JsonSerializer.Deserialize<ApiResponse<TResponse>>(responseContent);
+
+            return result;
         }
     }
 }

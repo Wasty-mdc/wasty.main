@@ -94,7 +94,7 @@ namespace wasty.ViewModels
                 Contrasenia = "Pruebas123."
             };
 
-            var result = await _apiService.PostAsync("auth/login", login);
+            var result = await _apiService.PostAsync<object, dynamic>("auth/login", login);
 
             return new List<Cliente>
                     {
