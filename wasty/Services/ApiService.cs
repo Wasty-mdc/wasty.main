@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using wasty.Models;
 
 namespace wasty.Services
 {
@@ -15,14 +16,14 @@ namespace wasty.Services
             _httpClient = httpClient;
         }
 
-        public async Task<bool> PostAsync<T>(string endpoint, T data)
+        public async Task<dynamic> PostAsync<T>(string endpoint, T data)
         {
             var json = JsonSerializer.Serialize(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(endpoint, content);
 
-            return response.IsSuccessStatusCode;
+            return response;
         }
     }
 }
