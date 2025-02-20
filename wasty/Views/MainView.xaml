@@ -26,7 +26,9 @@
         </Grid.ColumnDefinitions>
 
         <!-- Menú lateral -->
-        <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" Width="70" VerticalAlignment="Stretch"
+        <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" 
+                    Width="70" 
+                    VerticalAlignment="Stretch"
                     HorizontalAlignment="Left" >
 
             <!-- Botones del menú lateral -->
@@ -40,19 +42,25 @@
                 <md:PackIcon Kind="Star" Width="30" Height="30" Foreground="White"/>
             </Button>
 
-         </StackPanel>
-        <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" Width="70" VerticalAlignment="Bottom"
-                    HorizontalAlignment="Center" Margin="0,0,0,20">
-            <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
-                <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
-            </Button>
-            <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
-                <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-            </Button>
-            <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding SalirCommand}">
-                <md:PackIcon Kind="logout" Width="30" Height="30" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-            </Button>
         </StackPanel>
+        <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" 
+                    Width="70"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center" 
+                    Margin="0,0,0,20">
+
+                <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
+                    <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
+                </Button>
+                <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                    <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" 
+                                VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
+                </Button>
+                <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding SalirCommand}">
+                    <md:PackIcon Kind="logout" Width="30" Height="30" Foreground="White" 
+                                VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
+                </Button>
+            </StackPanel>
 
         <!-- Contenido Principal -->
         <Grid Grid.Column="1">
@@ -67,10 +75,28 @@
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
             Margin="10">
 
+                <!-- Botón Clientes -->
+                <Button Style="{StaticResource CentralButton}" ToolTip="Clientes" >
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+                        <md:PackIcon Kind="AccountMultiple" Width="80" Height="80" Foreground="#266DD3"/>
+                        <TextBlock Text="Clientes" FontSize="16" FontWeight="Bold" Foreground="Black"
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Botón Residuos -->
+                <Button Style="{StaticResource CentralButton}" ToolTip="Residuos" >
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+                        <md:PackIcon Kind="Recycle" Width="80" Height="80" Foreground="#A0C26C"/>
+                        <TextBlock Text="Residuos" FontSize="16" FontWeight="Bold" Foreground="Black"
+							   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                
                 <!-- Botón Ficheros -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#83927D"/>
+                        <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#E7E7E7"/>
                         <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>

@@ -7,232 +7,239 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:md="http://materialdesigninxaml.net/winfx/xaml"
 >
-<!-- VARIABLES GLOBALES -->
+    <!-- VARIABLES GLOBALES -->
 
-	<!-- Fuentes globales -->
-	<FontFamily x:Key="TitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
-	<FontFamily x:Key="SubtitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
-	<FontFamily x:Key="GeneralFontFamily">Segoe UI</FontFamily>
+    <!-- Fuentes globales -->
+    <FontFamily x:Key="TitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
+    <FontFamily x:Key="SubtitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
+    <FontFamily x:Key="GeneralFontFamily">Segoe UI</FontFamily>
 
-	<!-- Color de fondo principal -->
-	<SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5"/>
-	<SolidColorBrush x:Key="PrimaryText" Color="#37474F"/>
-	<SolidColorBrush x:Key="PrimaryIcon" Color="#37474F"/>
-	<SolidColorBrush x:Key="PrimaryAccent" Color="#A0C26C"/> <!-- Principal -->
-	<SolidColorBrush x:Key="PrimaryHover" Color="#388E3C"/> <!-- Hover -->
-	<SolidColorBrush x:Key="NavColor" Color="#A0C26C"/> 
+    <!-- Color de fondo principal -->
+    <SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5"/>
+    <SolidColorBrush x:Key="PrimaryText" Color="#37474F"/>
+    <SolidColorBrush x:Key="PrimaryIcon" Color="#37474F"/>
+    <SolidColorBrush x:Key="PrimaryAccent" Color="#16C172"/>
+    <!-- Principal -->
+    <SolidColorBrush x:Key="PrimaryHover" Color="#109356"/>
+    <!-- Hover -->
+    <SolidColorBrush x:Key="NavColor" Color="#16C172"/>
 
-	<!-- Error Colors -->
-	<SolidColorBrush x:Key="Error50" Color="#fceded"/>
-	<SolidColorBrush x:Key="Error100" Color="#f6c7c8"/>
-	<SolidColorBrush x:Key="Error200" Color="#f2acad"/>
-	<SolidColorBrush x:Key="Error300" Color="#ec8688"/>
-	<SolidColorBrush x:Key="Error400" Color="#e86e71"/>
-	<SolidColorBrush x:Key="Error500" Color="#e24a4d"/>
-	<SolidColorBrush x:Key="Error600" Color="#ec4346"/>
-	<SolidColorBrush x:Key="Error700" Color="#a03537"/>
-	<SolidColorBrush x:Key="Error800" Color="#7c292a"/>
-	<SolidColorBrush x:Key="Error900" Color="#5f1f20"/>
+    <!-- Error Colors -->
+    <SolidColorBrush x:Key="Error50" Color="#fceded"/>
+    <SolidColorBrush x:Key="Error100" Color="#f6c7c8"/>
+    <SolidColorBrush x:Key="Error200" Color="#f2acad"/>
+    <SolidColorBrush x:Key="Error300" Color="#ec8688"/>
+    <SolidColorBrush x:Key="Error400" Color="#e86e71"/>
+    <SolidColorBrush x:Key="Error500" Color="#e24a4d"/>
+    <SolidColorBrush x:Key="Error600" Color="#ec4346"/>
+    <SolidColorBrush x:Key="Error700" Color="#a03537"/>
+    <SolidColorBrush x:Key="Error800" Color="#7c292a"/>
+    <SolidColorBrush x:Key="Error900" Color="#5f1f20"/>
 
-	<!-- Neutral Colors -->
-	<SolidColorBrush x:Key="Neutral50" Color="#ededed"/>
-	<SolidColorBrush x:Key="Neutral100" Color="#c6c6c6"/>
-	<SolidColorBrush x:Key="Neutral200" Color="#aaaaaa"/>
-	<SolidColorBrush x:Key="Neutral300" Color="#848484"/>
-	<SolidColorBrush x:Key="Neutral400" Color="#6c6c6c"/>
-	<SolidColorBrush x:Key="Neutral500" Color="#474747"/>
-	<SolidColorBrush x:Key="Neutral600" Color="#414141"/>
-	<SolidColorBrush x:Key="Neutral700" Color="#323232"/>
-	<SolidColorBrush x:Key="Neutral800" Color="#272727"/>
-	<SolidColorBrush x:Key="Neutral900" Color="#1e1e1e"/>
+    <!-- Neutral Colors -->
+    <SolidColorBrush x:Key="Neutral50" Color="#ededed"/>
+    <SolidColorBrush x:Key="Neutral100" Color="#c6c6c6"/>
+    <SolidColorBrush x:Key="Neutral200" Color="#aaaaaa"/>
+    <SolidColorBrush x:Key="Neutral300" Color="#848484"/>
+    <SolidColorBrush x:Key="Neutral400" Color="#6c6c6c"/>
+    <SolidColorBrush x:Key="Neutral500" Color="#474747"/>
+    <SolidColorBrush x:Key="Neutral600" Color="#414141"/>
+    <SolidColorBrush x:Key="Neutral700" Color="#323232"/>
+    <SolidColorBrush x:Key="Neutral800" Color="#272727"/>
+    <SolidColorBrush x:Key="Neutral900" Color="#1e1e1e"/>
 
-	<!-- Success Colors -->
-	<SolidColorBrush x:Key="Success50" Color="#ecf7ee"/>
-	<SolidColorBrush x:Key="Success100" Color="#c3e7cb"/>
-	<SolidColorBrush x:Key="Success200" Color="#a6dcb2"/>
-	<SolidColorBrush x:Key="Success300" Color="#7dcc8e"/>
-	<SolidColorBrush x:Key="Success400" Color="#64c279"/>
-	<SolidColorBrush x:Key="Success500" Color="#3db357"/>
-	<SolidColorBrush x:Key="Success600" Color="#38a34f"/>
-	<SolidColorBrush x:Key="Success700" Color="#2b7f3e"/>
-	<SolidColorBrush x:Key="Success800" Color="#226230"/>
-	<SolidColorBrush x:Key="Success900" Color="#1a4b25"/>
+    <!-- Success Colors -->
+    <SolidColorBrush x:Key="Success50" Color="#ecf7ee"/>
+    <SolidColorBrush x:Key="Success100" Color="#c3e7cb"/>
+    <SolidColorBrush x:Key="Success200" Color="#a6dcb2"/>
+    <SolidColorBrush x:Key="Success300" Color="#7dcc8e"/>
+    <SolidColorBrush x:Key="Success400" Color="#64c279"/>
+    <SolidColorBrush x:Key="Success500" Color="#3db357"/>
+    <SolidColorBrush x:Key="Success600" Color="#38a34f"/>
+    <SolidColorBrush x:Key="Success700" Color="#2b7f3e"/>
+    <SolidColorBrush x:Key="Success800" Color="#226230"/>
+    <SolidColorBrush x:Key="Success900" Color="#1a4b25"/>
 
-	<!-- Warning Colors -->
-	<SolidColorBrush x:Key="Warning50" Color="#fcf8ed"/>
-	<SolidColorBrush x:Key="Warning100" Color="#f6e9c7"/>
-	<SolidColorBrush x:Key="Warning200" Color="#f2deac"/>
-	<SolidColorBrush x:Key="Warning300" Color="#eccf86"/>
-	<SolidColorBrush x:Key="Warning400" Color="#e8c56e"/>
-	<SolidColorBrush x:Key="Warning500" Color="#e2b74a"/>
-	<SolidColorBrush x:Key="Warning600" Color="#cea743"/>
-	<SolidColorBrush x:Key="Warning700" Color="#a08235"/>
-	<SolidColorBrush x:Key="Warning800" Color="#7c6529"/>
-	<SolidColorBrush x:Key="Warning900" Color="#5f4d1f"/>
+    <!-- Warning Colors -->
+    <SolidColorBrush x:Key="Warning50" Color="#fcf8ed"/>
+    <SolidColorBrush x:Key="Warning100" Color="#f6e9c7"/>
+    <SolidColorBrush x:Key="Warning200" Color="#f2deac"/>
+    <SolidColorBrush x:Key="Warning300" Color="#eccf86"/>
+    <SolidColorBrush x:Key="Warning400" Color="#e8c56e"/>
+    <SolidColorBrush x:Key="Warning500" Color="#e2b74a"/>
+    <SolidColorBrush x:Key="Warning600" Color="#cea743"/>
+    <SolidColorBrush x:Key="Warning700" Color="#a08235"/>
+    <SolidColorBrush x:Key="Warning800" Color="#7c6529"/>
+    <SolidColorBrush x:Key="Warning900" Color="#5f4d1f"/>
 
-	<!-- Estilo global para Titulos -->
-	<Style x:Key="TitleTextStyle" TargetType="TextBlock">
-		<Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}"/>
-		<Setter Property="FontSize" Value="28"/>
-		<Setter Property="FontWeight" Value="Bold"/>
-		<Setter Property="Foreground" Value="#333"/>
-	</Style>
+    <!-- Estilo global para Titulos -->
+    <Style x:Key="TitleTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#333"/>
+    </Style>
 
-	<!-- Estilo global para Subtitulos -->
-	<Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
-		<Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}"/>
-		<Setter Property="FontSize" Value="20"/>
-		<Setter Property="FontWeight" Value="SemiBold"/>
-		<Setter Property="Foreground" Value="#666"/>
-	</Style>
+    <!-- Estilo global para Subtitulos -->
+    <Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="#666"/>
+    </Style>
 
-	<!-- Estilo global para Texto general -->
-	<Style x:Key="GeneralTextStyle" TargetType="TextBlock">
-		<Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}"/>
-		<Setter Property="FontWeight" Value="Normal"/>
-		<Setter Property="Foreground" Value="#000"/>
-	</Style>
+    <!-- Estilo global para Texto general -->
+    <Style x:Key="GeneralTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#000"/>
+    </Style>
 
-	<!-- Estilo para los iconos de Navegación -->
-	<Style x:Key="NavButton" TargetType="Button">
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderThickness" Value="0"/>
-		<Setter Property="Width" Value="50"/>
-		<Setter Property="Height" Value="50"/>
-		<Setter Property="Margin" Value="10"/>
-		<Setter Property="Padding" Value="5"/>
-		<Setter Property="HorizontalAlignment" Value="Center"/>
-		<Setter Property="Cursor" Value="Hand"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border Background="{TemplateBinding Background}" CornerRadius="5">
-						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					</Border>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Background" Value="#7C6A58"/>
-						</Trigger>
-						<Trigger Property="IsPressed" Value="True">
-							<Setter Property="Background" Value="#5A4A3A"/>
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+    <!-- Estilo para los iconos de Navegación -->
+    <Style x:Key="NavButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#266DD3"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#266dd3"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-	<!-- Estilos para los botones centrales -->
-	<Style x:Key="CentralButton" TargetType="Button">
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderThickness" Value="0"/>
-		<Setter Property="Padding" Value="10"/>
-		<Setter Property="Cursor" Value="Hand"/>
-		<Setter Property="HorizontalAlignment" Value="Center"/>
-		<Setter Property="VerticalAlignment" Value="Center"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border Background="{TemplateBinding Background}" CornerRadius="10">
-						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					</Border>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Background" Value="#E0E0E0"/>
-						</Trigger>
-						<Trigger Property="IsPressed" Value="True">
-							<Setter Property="Background" Value="#CCCCCC"/>
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+    <!-- Estilos para los botones centrales -->
+    <Style x:Key="CentralButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E0E0E0"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#CCCCCC"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-	
-	<!-- Estilo para el Border de RegisterTextBox -->
-	<Style x:Key="RegisterTextBoxBorder" TargetType="Border">
-		<Setter Property="CornerRadius" Value="8"/>
-		<Setter Property="BorderBrush" Value="#90A4AE"/>
-		<Setter Property="BorderThickness" Value="1"/>
-		<Setter Property="Background" Value="White"/>
-		<Setter Property="Padding" Value="2"/>
-		<Setter Property="Margin" Value="8"/>
 
-	</Style>
+    <!-- Estilo para el Border de RegisterTextBox -->
+    <Style x:Key="RegisterTextBoxBorder" TargetType="Border">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="#90A4AE"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Margin" Value="8"/>
 
-	<!-- Estilo para RegisterTextBox -->
-	<Style x:Key="RegisterTextBox" TargetType="TextBox">
-		<Setter Property="FontSize" Value="16"/>
-		<Setter Property="Padding" Value="8"/>
-		<Setter Property="Margin" Value="2"/>
-		<Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderThickness" Value="0"/> <!-- Se elimina borde para evitar dobles bordes -->
-	</Style>
+    </Style>
 
-	<!-- Estilo para el Border de RegisterPasswordBox -->
-	<Style x:Key="RegisterPasswordBoxBorder" TargetType="Border">
-		<Setter Property="CornerRadius" Value="8"/>
-		<Setter Property="BorderBrush" Value="#90A4AE"/>
-		<Setter Property="BorderThickness" Value="1"/>
-		<Setter Property="Background" Value="White"/>
-		<Setter Property="Padding" Value="2"/>
-		<Setter Property="Margin" Value="8"/>
-	</Style>
+    <!-- Estilo para RegisterTextBox -->
+    <Style x:Key="RegisterTextBox" TargetType="TextBox">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <!-- Se elimina borde para evitar dobles bordes -->
+    </Style>
 
-	<!-- Estilo para RegisterPasswordBox -->
-	<Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
-		<Setter Property="FontSize" Value="16"/>
-		<Setter Property="Padding" Value="8"/>
-		<Setter Property="Margin" Value="2"/>
-		<Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderThickness" Value="0"/> <!-- Se elimina borde para evitar dobles bordes -->
-	</Style>
+    <!-- Estilo para el Border de RegisterPasswordBox -->
+    <Style x:Key="RegisterPasswordBoxBorder" TargetType="Border">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="#90A4AE"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Margin" Value="8"/>
+    </Style>
 
-<!-- Estilo para el RegisterButton (Adaptado a las medidas de las cajas de texto) -->
-<Style x:Key="RegisterButton" TargetType="Button">
-    <Setter Property="Width" Value="250"/> <!-- Ahora igual a las cajas de texto -->
-    <Setter Property="Height" Value="50"/> <!-- Igual a las cajas -->
-    <Setter Property="Margin" Value="10,20,10,10"/> <!-- Espaciado coherente -->
-    <Setter Property="Background" Value="#FAF3DD"/> <!-- Color de fondo inicial -->
-    <Setter Property="Foreground" Value="Black"/>
-    <Setter Property="FontSize" Value="16"/>
-    <Setter Property="BorderBrush" Value="#FAF3DD"/>
-    <Setter Property="BorderThickness" Value="2"/>
-    <Setter Property="Padding" Value="10"/>
-    <Setter Property="Cursor" Value="Hand"/>
-    <Setter Property="Template">
-        <Setter.Value>
-            <ControlTemplate TargetType="Button">
-                <Border Background="{TemplateBinding Background}"
+    <!-- Estilo para RegisterPasswordBox -->
+    <Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <!-- Se elimina borde para evitar dobles bordes -->
+    </Style>
+
+    <!-- Estilo para el RegisterButton (Adaptado a las medidas de las cajas de texto) -->
+    <Style x:Key="RegisterButton" TargetType="Button">
+        <Setter Property="Width" Value="250"/>
+        <!-- Ahora igual a las cajas de texto -->
+        <Setter Property="Height" Value="50"/>
+        <!-- Igual a las cajas -->
+        <Setter Property="Margin" Value="10,20,10,10"/>
+        <!-- Espaciado coherente -->
+        <Setter Property="Background" Value="#FAF3DD"/>
+        <!-- Color de fondo inicial -->
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="BorderBrush" Value="#FAF3DD"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="2"
-                        CornerRadius="10"> <!-- Ahora coincide con las cajas -->
-                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
-            </ControlTemplate>
-        </Setter.Value>
-    </Setter>
-    <Style.Triggers>
-        <!-- Efecto hover -->
-        <Trigger Property="IsMouseOver" Value="True">
-            <Setter Property="Background" Value="#A0C26C"/> <!-- Verde oscuro en hover -->
-            <Setter Property="BorderBrush" Value="#A0C26C"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Trigger>
+                        CornerRadius="10">
+                        <!-- Ahora coincide con las cajas -->
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!-- Efecto hover -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#A0C26C"/>
+                <!-- Verde oscuro en hover -->
+                <Setter Property="BorderBrush" Value="#A0C26C"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
 
-        <!-- Efecto clic -->
-        <Trigger Property="IsPressed" Value="True">
-            <Setter Property="Background" Value="#8A9F56"/> <!-- Verde aún más oscuro al presionar -->
-            <Setter Property="BorderBrush" Value="#8A9F56"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Trigger>
-    </Style.Triggers>
-</Style>
-
-
-
-
+            <!-- Efecto clic -->
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#8A9F56"/>
+                <!-- Verde aún más oscuro al presionar -->
+                <Setter Property="BorderBrush" Value="#8A9F56"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

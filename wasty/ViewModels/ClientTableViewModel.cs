@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace wasty.ViewModels
 {
-    public class TableViewModel : INotifyPropertyChanged
+    public class ClientTableViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Cliente> Clientes { get; set; }
         public ICommand ToggleStickyColumnCommand { get; }
@@ -28,7 +28,7 @@ namespace wasty.ViewModels
             }
         }
 
-        public TableViewModel()
+        public ClientTableViewModel()
         {
             Clientes = new ObservableCollection<Cliente>(GetMockData());
             _stickyColumns = new Dictionary<string, bool>();
