@@ -19,16 +19,13 @@
 
     <StackPanel>
         <!-- Botón para volver a MainView -->
-        <Button Content="Volver a Inicio"
-            Width="150"
-            Height="40"
+        <Button 
+            Width="50"
+            Height="50"
             Margin="10"
-            FontSize="14"
-            FontWeight="Bold"
-            Background="#FF5722"
-            Foreground="White"
-            Cursor="Hand"
-            Click="GoBack_Click"/>
+            Cursor="Hand">
+            <md:PackIcon Kind="ArrowLeft" Width="24" Height="24" Foreground="Black"/>
+        </Button>
 
         <TabControl SelectedIndex="0">
 
