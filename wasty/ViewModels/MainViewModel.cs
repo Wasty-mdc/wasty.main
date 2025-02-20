@@ -27,9 +27,6 @@ public class MainViewModel : INotifyPropertyChanged
         SalirCommand = new RelayCommand(NavigateToLogin);
         clientesCommand = new RelayCommand(NavigateToClientes);
         residuosCommand = new RelayCommand(NavigateToResiduos);
-
-        // Establecer la vista inicial (puede ser `MainView` o alguna tabla)
-        CurrentView = _navigationService.NavigateTo<MainView>();
     }
 
     public ICommand SalirCommand { get; }
@@ -43,17 +40,17 @@ public class MainViewModel : INotifyPropertyChanged
 
     private void NavigateToClientes(object parameter)
     {
-        CurrentView = _navigationService.NavigateTo<ClientTableView>();
+        _navigationService.NavigateTo<ClientTableView>();
     }
 
     private void NavigateToResiduos(object parameter)
     {
-        CurrentView = _navigationService.NavigateTo<RecycTableView>();
+        _navigationService.NavigateTo<RecycTableView>();
     }
 
     public void NavigateToMainView()
     {
-        CurrentView = _navigationService.NavigateTo<MainView>();
+        _navigationService.NavigateTo<MainView>();
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
