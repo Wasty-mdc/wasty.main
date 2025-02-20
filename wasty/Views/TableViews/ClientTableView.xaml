@@ -23,7 +23,8 @@
             Width="50"
             Height="50"
             Margin="10"
-            Cursor="Hand">
+            Cursor="Hand"
+            Click="GoBack_Click">
             <md:PackIcon Kind="ArrowLeft" Width="24" Height="24" Foreground="Black"/>
         </Button>
 
