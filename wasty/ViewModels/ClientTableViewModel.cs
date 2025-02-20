@@ -5,14 +5,18 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using wasty.Services;
+using wasty.Views;
 
 namespace wasty.ViewModels
 {
     public class ClientTableViewModel : INotifyPropertyChanged
     {
+        private readonly NavigationService _navigationService;
         public ObservableCollection<Cliente> Clientes { get; set; }
         public ICommand ToggleStickyColumnCommand { get; }
         public ICommand ToggleColumnVisibilityCommand { get; }
+        public ICommand VolverCommand { get; }
 
         private Dictionary<string, bool> _stickyColumns;
         private Dictionary<string, bool> _hiddenColumns;
@@ -28,13 +32,15 @@ namespace wasty.ViewModels
             }
         }
 
-        public ClientTableViewModel()
+        public ClientTableViewModel(NavigationService navigationService)
         {
+            _navigationService = navigationService;
             Clientes = new ObservableCollection<Cliente>(GetMockData());
             _stickyColumns = new Dictionary<string, bool>();
             _hiddenColumns = new Dictionary<string, bool>();
             ToggleStickyColumnCommand = new RelayCommand<string>(ToggleStickyColumn);
-            ToggleColumnVisibilityCommand = new RelayCommand<string>(ToggleColumnVisibility);
+            ToggleColumnVisibilityCommand = new RelayCommand<string>(ToggleColumnVisibility); 
+            VolverCommand = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
         }
 
         private void ToggleStickyColumn(string columnName)

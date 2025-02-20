@@ -19,7 +19,7 @@ public class LoginViewModel : INotifyPropertyChanged
         _apiService = apiService;
         _navigationService = navigationService;
         LoginCommand = new RelayCommand(async _ => await Login());
-        RegisterCommand = new RelayCommand(NavigateToSignup);
+        RegisterCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
         SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(3));
     }
 
