@@ -17,7 +17,6 @@ namespace wasty.ViewModels
     {
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
-        public ObservableCollection<Cliente> Clientes { get; set; }
         public ICommand ToggleStickyColumnCommand { get; }
         public ICommand ToggleColumnVisibilityCommand { get; }
         public ICommand VolverCommand { get; }
@@ -25,6 +24,17 @@ namespace wasty.ViewModels
         private Dictionary<string, bool> _stickyColumns;
         private Dictionary<string, bool> _hiddenColumns;
         private int _frozenColumnCount;
+        private ObservableCollection<Cliente> _clientes;
+
+        public ObservableCollection<Cliente> Clientes
+        {
+            get => _clientes;
+            set
+            {
+                _clientes = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int FrozenColumnCount
         {
@@ -46,7 +56,7 @@ namespace wasty.ViewModels
             ToggleStickyColumnCommand = new RelayCommand<string>(ToggleStickyColumn);
             ToggleColumnVisibilityCommand = new RelayCommand<string>(ToggleColumnVisibility); 
             VolverCommand = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
-            Init();
+            Init().GetAwaiter();
         }
 
         private async Task Init()
@@ -124,17 +134,17 @@ namespace wasty.ViewModels
 
                 return clientesList;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ObservableCollection<Cliente>();
             }
 
-                    //    new Cliente { Codigo = "012", NombreComercial = "Empresa L", NombreFiscal = "Empresa L. Cooperativa",
-                    //                  NIF = "55667788Q", Fiscalidad = "Cooperativa", Domicilio = "Avenida del Cid 55", CodigoPostal = "46190",
-                    //                  Provincia = "Valencia", Poblacion = "Riba-roja de Túria", Zona = "07 Riba-roja", Telefono = "962889900",
-                    //                  Email = "empresaL@example.com", TituloRelacion = "Cliente", Comercial = "Isabel Moreno", Estado = "Activo" }
+            //    new Cliente { Codigo = "012", NombreComercial = "Empresa L", NombreFiscal = "Empresa L. Cooperativa",
+            //                  NIF = "55667788Q", Fiscalidad = "Cooperativa", Domicilio = "Avenida del Cid 55", CodigoPostal = "46190",
+            //                  Provincia = "Valencia", Poblacion = "Riba-roja de Túria", Zona = "07 Riba-roja", Telefono = "962889900",
+            //                  Email = "empresaL@example.com", TituloRelacion = "Cliente", Comercial = "Isabel Moreno", Estado = "Activo" }
 
-                    //};
+            //};
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
