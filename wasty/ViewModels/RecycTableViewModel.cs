@@ -4,19 +4,33 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Input;
+using wasty.Services;
 
 namespace wasty.ViewModels
 {
     public class RecycTableViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Residuo> Residuos { get; set; }
+        private readonly ApiService _apiService;
         public ICommand ToggleStickyColumnCommand { get; }
         public ICommand ToggleColumnVisibilityCommand { get; }
 
         private Dictionary<string, bool> _stickyColumns;
         private Dictionary<string, bool> _hiddenColumns;
         private int _frozenColumnCount;
+        private ObservableCollection<Residuo> _residuos;
+
+        public ObservableCollection<Residuo> Residuos
+        {
+            get => _residuos;
+            set
+            {
+                _residuos = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int FrozenColumnCount
         {
@@ -28,13 +42,20 @@ namespace wasty.ViewModels
             }
         }
 
-        public RecycTableViewModel()
+        public RecycTableViewModel(ApiService apiService, NavigationService navigationService)
         {
-            Residuos = new ObservableCollection<Residuo>(GetMockData());
+            _apiService = apiService;
+            Residuos = new ObservableCollection<Residuo>();
             _stickyColumns = new Dictionary<string, bool>();
             _hiddenColumns = new Dictionary<string, bool>();
             ToggleStickyColumnCommand = new RelayCommand<string>(ToggleStickyColumn);
             ToggleColumnVisibilityCommand = new RelayCommand<string>(ToggleColumnVisibility);
+            Init().GetAwaiter();
+        }
+
+        private async Task Init()
+        {
+            Residuos = await GetData();
         }
 
         private void ToggleStickyColumn(string columnName)
@@ -78,14 +99,44 @@ namespace wasty.ViewModels
             return !_hiddenColumns.TryGetValue(columnName, out bool isHidden) || !isHidden;
         }
 
-        private List<Residuo> GetMockData()
+        private async Task<ObservableCollection<Residuo>> GetData()
         {
-            return new List<Residuo>
+            JsonElement tokenElement = default;
+            JsonElement residuosElement = default;
+            string token = "";
+            string residuos = "";
+            var login = new
             {
-                new Residuo { Codigo = "R001", Tipo = "Plástico", Peso = 120, Estado = "Procesado", Ubicacion = "Planta A", FechaRecoleccion = DateTime.Now, EmpresaGestora = "EcoResiduos S.A.", Destino = "Reciclaje" },
-                new Residuo { Codigo = "R002", Tipo = "Vidrio", Peso = 85, Estado = "Pendiente", Ubicacion = "Planta B", FechaRecoleccion = DateTime.Now, EmpresaGestora = "GreenWaste Ltd.", Destino = "Reciclaje" },
-                new Residuo { Codigo = "R003", Tipo = "Papel", Peso = 150, Estado = "Procesado", Ubicacion = "Planta C", FechaRecoleccion = DateTime.Now, EmpresaGestora = "RecyclePlus", Destino = "Reutilización" }
+                Email = "Pruebas123@pruebas.com",
+                Contrasenia = "Pruebas123."
             };
+
+            var auth = await _apiService.RequestAsync("POST", "auth/login", login);
+
+            if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
+                token = tokenElement.GetString();
+
+            var result = await _apiService.RequestAsync("GET", "residuos", "", token);
+
+            if (result.TryGetProperty("datos", out residuosElement))
+                residuos = residuosElement.GetRawText();
+
+            try
+            {
+                ObservableCollection<Residuo> residuosList = JsonSerializer.Deserialize<ObservableCollection<Residuo>>(residuos);
+
+                return residuosList;
+            }
+            catch (Exception ex)
+            {
+                return new ObservableCollection<Residuo>();
+            }
+            //return new List<Residuo>
+            //{
+            //    new Residuo { Codigo = "R001", Tipo = "Plástico", Peso = 120, Estado = "Procesado", Ubicacion = "Planta A", FechaRecoleccion = DateTime.Now, EmpresaGestora = "EcoResiduos S.A.", Destino = "Reciclaje" },
+            //    new Residuo { Codigo = "R002", Tipo = "Vidrio", Peso = 85, Estado = "Pendiente", Ubicacion = "Planta B", FechaRecoleccion = DateTime.Now, EmpresaGestora = "GreenWaste Ltd.", Destino = "Reciclaje" },
+            //    new Residuo { Codigo = "R003", Tipo = "Papel", Peso = 150, Estado = "Procesado", Ubicacion = "Planta C", FechaRecoleccion = DateTime.Now, EmpresaGestora = "RecyclePlus", Destino = "Reutilización" }
+            //};
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -97,7 +148,9 @@ namespace wasty.ViewModels
 
     public class Residuo
     {
-        public string Codigo { get; set; }
+        [JsonPropertyName("codResiduo")]
+        public int Codigo { get; set; }
+        [JsonPropertyName("nombre")]
         public string Tipo { get; set; }
         public double Peso { get; set; }
         public string Estado { get; set; }
