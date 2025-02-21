@@ -70,7 +70,7 @@ namespace wasty.ViewModels
             };
 
             var result = await _apiService.RequestAsync("POST", "usuarios", usuario);
-            if (result.GetProperty("Exito").GetBoolean())
+            if (result.GetProperty("exito").GetBoolean())
             {
                 // Usuario creado exitosamente
                 _navigationService.NavigateTo<LoginView>();
