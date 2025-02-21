@@ -16,7 +16,6 @@ namespace wasty.ViewModels
     {
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
-        public ObservableCollection<Residuo> Residuos { get; set; }
         public ICommand ToggleStickyColumnCommand { get; }
         public ICommand ToggleColumnVisibilityCommand { get; }
         public ICommand VolverCommand { get; }
@@ -50,6 +49,7 @@ namespace wasty.ViewModels
         public RecycTableViewModel(ApiService apiService, NavigationService navigationService)
         {
             _apiService = apiService;
+            _navigationService = navigationService;
             Residuos = new ObservableCollection<Residuo>();
             _stickyColumns = new Dictionary<string, bool>();
             _hiddenColumns = new Dictionary<string, bool>();
