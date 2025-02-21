@@ -164,18 +164,18 @@ namespace wasty.ViewModels
         public string NombreFiscal { get; set; }
         [JsonPropertyName("nif")]
         public string NIF { get; set; }
-        public string Fiscalidad { get; set; } = "";
-        public string Domicilio { get; set; } = "";
-        public string CodigoPostal { get; set; } = "";
-        public string Provincia { get; set; } = "";
-        public string Poblacion { get; set; } = "";
-        public string Zona { get; set; } = "";
+      //  public string Fiscalidad { get; set; } = "";
+      //  public string Domicilio { get; set; } = "";
+      //  public string CodigoPostal { get; set; } = "";
+      //  public string Provincia { get; set; } = "";
+      //  public string Poblacion { get; set; } = "";
+      //  public string Zona { get; set; } = "";
         [JsonPropertyName("telefono")]
         public string Telefono { get; set; }
         [JsonPropertyName("email")]
         public string Email { get; set; }
-        public string TituloRelacion { get; set; } = "";
-        public string Comercial { get; set; } = "";
+       // public string TituloRelacion { get; set; } = "";
+       // public string Comercial { get; set; } = "";
         public string Estado { get; set; } = "Activo";
     }
 

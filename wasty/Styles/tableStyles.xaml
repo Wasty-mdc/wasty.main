@@ -59,6 +59,13 @@
         <Setter Property="GridLinesVisibility" Value="All"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="CanUserResizeColumns" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="5" Color="Gray" Opacity="0.2"/>
+            </Setter.Value>
+        </Setter>
+
     </Style>
 
     <!-- Estilo para encabezados con iconos de fijado y ocultar columnas -->
@@ -67,6 +74,8 @@
         <Setter Property="Foreground" Value="#000000"/>
         <Setter Property="Padding" Value="8"/>
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="BorderBrush" Value="#000000"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3"/>
         <Setter Property="FontFamily" Value="Poppins"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="15"/>
@@ -121,13 +130,19 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderThickness" Value="0.5"/>
         <Setter Property="BorderBrush" Value="#BDBDBD"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#DDE8F8"/>
+                <!-- Azul claro al pasar el mouse -->
+            </Trigger>
+        </Style.Triggers>
     </Style>
-
     <Style x:Key="TableRowSelectedStyle" TargetType="DataGridRow">
-        <Setter Property="Background" Value="#A0C26C"/>
+        <Setter Property="Background" Value="#4CAF50"/>
+        <!-- Verde más vibrante -->
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="BorderThickness" Value="0.5"/>
         <Setter Property="BorderBrush" Value="#BDBDBD"/>
-        <Setter Property="Height" Value="Auto"/>
     </Style>
 </ResourceDictionary>

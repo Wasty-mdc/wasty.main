@@ -96,7 +96,7 @@
                 <!-- Botón Ficheros -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#E7E7E7"/>
+                        <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#232C33"/>
                         <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>

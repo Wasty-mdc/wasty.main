@@ -22,7 +22,7 @@
     <!-- Principal -->
     <SolidColorBrush x:Key="PrimaryHover" Color="#109356"/>
     <!-- Hover -->
-    <SolidColorBrush x:Key="NavColor" Color="#16C172"/>
+    <SolidColorBrush x:Key="NavColor" Color="#2C6E49"/>
 
     <!-- Error Colors -->
     <SolidColorBrush x:Key="Error50" Color="#fceded"/>
@@ -113,7 +113,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#266DD3"/>
+                            <Setter Property="Background" Value="#276FBF"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="#266dd3"/>
