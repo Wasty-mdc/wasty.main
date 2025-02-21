@@ -16,8 +16,8 @@
 
     <!-- Color de fondo principal -->
     <SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5"/>
-    <SolidColorBrush x:Key="PrimaryText" Color="#37474F"/>
-    <SolidColorBrush x:Key="PrimaryIcon" Color="#37474F"/>
+    <SolidColorBrush x:Key="PrimaryText" Color="#0F0F0F"/>
+    <SolidColorBrush x:Key="PrimaryIcon" Color="#2D2E2E"/>
     <SolidColorBrush x:Key="PrimaryAccent" Color="#16C172"/>
     <!-- Principal -->
     <SolidColorBrush x:Key="PrimaryHover" Color="#109356"/>
@@ -164,18 +164,17 @@
     </Style>
 
     <!-- Estilo para RegisterTextBox -->
-    <Style x:Key="RegisterTextBox" TargetType="TextBox">
+    <Style x:Key="RegisterTextBox" TargetType="TextBox" >
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Padding" Value="8"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <!-- Se elimina borde para evitar dobles bordes -->
     </Style>
 
     <!-- Estilo para el Border de RegisterPasswordBox -->
-    <Style x:Key="RegisterPasswordBoxBorder" TargetType="Border">
+    <Style x:Key="RegisterPasswordBoxBorder" TargetType="Border" >
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="BorderBrush" Value="#90A4AE"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -195,7 +194,7 @@
         <!-- Se elimina borde para evitar dobles bordes -->
     </Style>
 
-    <!-- Estilo para el RegisterButton (Adaptado a las medidas de las cajas de texto) -->
+    <!-- Estilo para el RegisterButton -->
     <Style x:Key="RegisterButton" TargetType="Button">
         <Setter Property="Width" Value="250"/>
         <!-- Ahora igual a las cajas de texto -->

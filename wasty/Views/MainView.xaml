@@ -72,8 +72,10 @@
             </Grid.RowDefinitions>
 
             <!-- Botones centrales -->
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
-            Margin="10">
+            <WrapPanel 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       Margin="10">
 
                 <!-- Botón Clientes -->
                 <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding clientesCommand}" >
@@ -119,8 +121,16 @@
 								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-            </StackPanel>
-            <ContentControl Content="{Binding CurrentView}"/>
+                <!-- Botón Estadísticas -->
+                <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+                        <md:PackIcon Kind="ChartBox" Width="80" Height="80" Foreground="#E9D985"/>
+                        <TextBlock Text="Estadísticas" FontSize="16" FontWeight="Bold" Foreground="Black"
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+            <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>
     </Grid>

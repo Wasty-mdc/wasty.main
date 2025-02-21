@@ -74,11 +74,11 @@ namespace wasty
         {
             if (WindowState == WindowState.Maximized)
             {
-                Margin = new Thickness(0);
+                Margin = new Thickness(1);
             }
             else
             {
-                Margin = new Thickness(-1);
+                Margin = new Thickness(0);
             }
         }
     }

@@ -71,7 +71,11 @@
             </Grid.RowDefinitions>
 
             <!-- Barra de Título Personalizada -->
-            <Border Grid.Row="0" Background="#2C2F33" Height="50" MouseDown="Window_MouseDown" VerticalAlignment="Center" >
+            <Border Grid.Row="0" 
+                    Background="#0F0F0F" 
+                    Height="50" 
+                    MouseDown="Window_MouseDown" 
+                    VerticalAlignment="Center" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -121,7 +125,7 @@
                 <Image Source="pack://application:,,,/Assets/Images/mainbackground.png" 
                Stretch="Fill"
                Panel.ZIndex="-1"/>
-                <ContentControl Content="{Binding CurrentView}" Opacity="0.995" Name="contentView" >
+                <ContentControl Content="{Binding CurrentView}" Name="contentView" >
                     <ContentControl.Background>
                         <ImageBrush ImageSource="/mainBackground.png" Opacity="1"/>
                     </ContentControl.Background>

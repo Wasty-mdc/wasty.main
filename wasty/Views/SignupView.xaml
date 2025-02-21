@@ -24,15 +24,20 @@
             <StackPanel VerticalAlignment="Center">
                 <!-- Titulo -->
                 <TextBlock Text="Crear Cuenta" FontSize="22" FontWeight="Bold" 
-                       Foreground="{DynamicResource Neutral200}"
+                       Foreground="{StaticResource Neutral200}"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
                 <!-- Campo Nombre con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="Account" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryText}" 
-                                 Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                 Foreground="{StaticResource PrimaryIcon}" 
+                                 Margin="5,0" Cursor="Help"
+                                 HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <md:PackIcon.ToolTip>
+                                <ToolTip Content="Introduce tu Nombre" />
+                            </md:PackIcon.ToolTip>
+                        </md:PackIcon>
                         <TextBox x:Name="SignupNameTextBox" Style="{StaticResource RegisterTextBox}"
                              md:HintAssist.Hint="Nombre" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
@@ -42,8 +47,13 @@
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="AccountCircle" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryText}" 
-                                 Margin="5,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                 Foreground="{StaticResource PrimaryIcon}" 
+                                 Margin="5,0" Cursor="Help"
+                                 HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <md:PackIcon.ToolTip>
+                                <ToolTip Content="Introduce tu Usuario" />
+                            </md:PackIcon.ToolTip>
+                        </md:PackIcon>
                         <TextBox x:Name="SignupUSerTextBox" Style="{StaticResource RegisterTextBox}"
                              md:HintAssist.Hint="Usuario" Text="{Binding Usuario, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
@@ -53,10 +63,14 @@
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="Email" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryText}" 
-                                 Margin="5,0" VerticalAlignment="Center"/>
+                                 Foreground="{StaticResource PrimaryIcon}" 
+                                 Margin="5,0" VerticalAlignment="Center" Cursor="Help">
+                            <md:PackIcon.ToolTip>
+                                <ToolTip Content="Introduce tu Correo Electrónico" />
+                            </md:PackIcon.ToolTip>
+                        </md:PackIcon>
                         <TextBox x:Name="SignupEmailTextBox" Style="{StaticResource RegisterTextBox}"
-                                 md:HintAssist.Hint="Correo Electronico" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
                 </Border>
 
@@ -64,11 +78,14 @@
                 <Border Style="{StaticResource RegisterPasswordBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="PasswordAdd" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryText}" 
-                                 Margin="5,0" VerticalAlignment="Center"/>
+                                 Foreground="{StaticResource PrimaryIcon}" 
+                                 Margin="5,0" VerticalAlignment="Center" Cursor="Help">
+                            <md:PackIcon.ToolTip>
+                                <ToolTip Content="Introduce tu Contraseña" />
+                            </md:PackIcon.ToolTip>
+                        </md:PackIcon>
                         <PasswordBox x:Name="SignupPasswordBox" Style="{StaticResource RegisterPasswordBox}"
-                                 md:HintAssist.Hint="Contrasena"
-                                 PasswordChanged="PasswordBox_PasswordChanged"/>
+                                     PasswordChanged="PasswordBox_PasswordChanged"/>
                     </DockPanel>
                 </Border>
 
@@ -76,10 +93,13 @@
                 <Border Style="{StaticResource RegisterPasswordBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="PasswordCheck" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryText}" 
-                                 Margin="5,0" VerticalAlignment="Center"/>
+                                 Foreground="{StaticResource PrimaryIcon}" 
+                                 Margin="5,0" VerticalAlignment="Center" Cursor="Help">
+                            <md:PackIcon.ToolTip>
+                                <ToolTip Content="Verifica tu Contraseña" />
+                            </md:PackIcon.ToolTip>
+                        </md:PackIcon>
                         <PasswordBox x:Name="SignupConfirmPasswordBox" Style="{StaticResource RegisterPasswordBox}"
-                                 md:HintAssist.Hint="Confirmar Contrasena"
                                  PasswordChanged="PasswordBox_ConfirmPasswordChanged"/>
                     </DockPanel>
                 </Border>
