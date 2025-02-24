@@ -12,49 +12,94 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Selector de campos -->
             <RowDefinition Height="*"/>
-            <!-- Tabla -->
         </Grid.RowDefinitions>
 
-        <!-- Área de selección de columnas -->
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <!-- Botón para volver a MainView -->
+        <!-- Barra superior amarilla -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="LightYellow" Height="80" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Botón para volver -->
             <Button Command="{Binding VolverCommand}"
-            Width="50"
-            Height="50"
-            Margin="10"
-            Cursor="Hand">
+                    Width="50"
+                    Height="50"
+                    Margin="10"
+                    Cursor="Hand"
+                    Background="Transparent" HorizontalAlignment="Left">
                 <md:PackIcon Kind="ArrowLeft" Width="24" Height="24" Foreground="Black"/>
             </Button>
-            
-            <TextBlock Text="Arrastra los campos aquí:" VerticalAlignment="Center" Margin="5"/>
 
-            <!-- Campos disponibles -->
-            <ListBox ItemsSource="{Binding AvailableFields}"
-                     AllowDrop="True"
-                     DragOver="FieldsList_DragOver"
-                     Drop="FieldsList_Drop"
-                     SelectionMode="Multiple"
-                     DisplayMemberPath="Name"
-                     Width="200" Height="100" Background="LightGray"/>
+            <!-- Barra de búsqueda restaurada -->
+            <Border Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Background="White" Padding="5" BorderBrush="Gray" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="200" Height="30" Text="{Binding SearchText}" BorderThickness="0"/>
+                    <Button Width="30" Height="30" Command="{Binding SearchCommand}" 
+                            Background="Transparent" BorderThickness="0" Cursor="Hand">
+                        <md:PackIcon Kind="Magnify" Width="24" Height="24" Foreground="Black"/>
+                    </Button>
+                </StackPanel>
+            </Border>
 
-            <!-- Campos seleccionados -->
-            <ListBox ItemsSource="{Binding SelectedFields}"
-                     AllowDrop="True"
-                     DragOver="SelectedList_DragOver"
-                     Drop="SelectedList_Drop"
-                     SelectionMode="Multiple"
-                     DisplayMemberPath="Name"
-                     Width="200" Height="100" Background="LightGreen"/>
+            <!-- Contenedor de campos disponibles -->
+            <ItemsControl ItemsSource="{Binding AvailableFields}" Grid.Column="1" HorizontalAlignment="Center" Width="Auto">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" ItemHeight="40" ItemWidth="120"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
+                                CornerRadius="5" Margin="5" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                AllowDrop="True" MouseMove="Field_MouseMove">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <md:PackIcon Kind="{Binding Icon}" Width="16" Height="16" Margin="2"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" 
+                                           FontSize="16" FontWeight="SemiBold" FontFamily="{StaticResource SubtitleFontFamily}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Botón Generar Tabla -->
+            <Button Content="Generar tabla" Background="SteelBlue" Foreground="White" Width="120" Height="40" Margin="20,10,10,10"
+                    Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Padding="5"
+                    Command="{Binding GenerateTableCommand}"/>
+        </Grid>
+
+        <!-- Barra lateral azul (Campos seleccionados) -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Background="LightSteelBlue" Width="200" AllowDrop="True" 
+                    DragOver="SelectedFields_DragOver" Drop="SelectedFields_Drop" Margin="0,0,5,0">
+            <TextBlock Text="Campos seleccionados:" FontWeight="Bold" Margin="10"/>
+            <ItemsControl ItemsSource="{Binding SelectedFields}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <md:PackIcon Kind="{Binding Icon}" Width="30" Height="30" Margin="5"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
 
         <!-- Tabla dinámica -->
         <DataGrid ItemsSource="{Binding FilteredData}" AutoGenerateColumns="False"
-                  Grid.Row="1" Margin="10">
+                  Grid.Row="1" Grid.Column="1" Margin="10">
             <DataGrid.Columns>
-                <!-- Las columnas se generan en el ViewModel -->
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

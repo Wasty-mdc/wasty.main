@@ -54,11 +54,11 @@
             </Button>
             <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
                 <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" 
-                                VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
+                                VerticalAlignment="Bottom" HorizontalAlignment="Center" />
             </Button>
             <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding SalirCommand}">
                 <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White" 
-                                VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
+                                VerticalAlignment="Bottom" HorizontalAlignment="Center" />
             </Button>
         </StackPanel>
 
@@ -81,7 +81,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="AccountMultiple" Width="80" Height="80" Foreground="#266DD3"/>
                         <TextBlock Text="Clientes" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -90,7 +90,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="Recycle" Width="80" Height="80" Foreground="#A0C26C"/>
                         <TextBlock Text="Residuos" FontSize="16" FontWeight="Bold" Foreground="Black"
-							   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+							   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -99,7 +99,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#232C33"/>
                         <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -108,7 +108,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="SafeSquareOutline" Width="80" Height="80" Foreground="#83927D"/>
                         <TextBlock Text="Gestión" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -117,7 +117,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#5C839D"/>
                         <TextBlock Text="Facturación" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
                 <!-- Botón Estadísticas -->
@@ -125,7 +125,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="ChartBox" Width="80" Height="80" Foreground="#E9D985"/>
                         <TextBlock Text="Estadísticas" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
             </WrapPanel>

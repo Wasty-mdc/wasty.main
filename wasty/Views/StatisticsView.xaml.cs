@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using wasty.ViewModels;
 
 namespace wasty.Views
 {
@@ -23,42 +13,42 @@ namespace wasty.Views
         public StatisticsView()
         {
             InitializeComponent();
-        }
-        private void FieldsList_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effects = DragDropEffects.Move;
+            DataContext = ((App)Application.Current).Services.GetService(typeof(StatisticsViewModel));
         }
 
-        private void FieldsList_Drop(object sender, DragEventArgs e)
+        // Método para iniciar el arrastre de un campo
+        private void Field_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(string)))
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
-                string field = (string)e.Data.GetData(typeof(string));
-                if (!((StatisticsViewModel)DataContext).SelectedFields.Contains(field))
+                var field = ((Border)sender).DataContext as Field;
+                if (field != null)
                 {
-                    ((StatisticsViewModel)DataContext).SelectedFields.Add(field);
-                    ((StatisticsViewModel)DataContext).AvailableFields.Remove(field);
+                    DragDrop.DoDragDrop((DependencyObject)sender, field, DragDropEffects.Move);
                 }
             }
         }
 
-        private void SelectedList_DragOver(object sender, DragEventArgs e)
+        // Permitir la acción de arrastre en la barra lateral
+        private void SelectedFields_DragOver(object sender, DragEventArgs e)
         {
             e.Effects = DragDropEffects.Move;
         }
 
-        private void SelectedList_Drop(object sender, DragEventArgs e)
+        // Manejo de la acción de soltar en la barra lateral (mueve el campo a los seleccionados)
+        private void SelectedFields_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(string)))
+            if (e.Data.GetDataPresent(typeof(Field)))
             {
-                string field = (string)e.Data.GetData(typeof(string));
-                if (!((StatisticsViewModel)DataContext).AvailableFields.Contains(field))
+                var field = (Field)e.Data.GetData(typeof(Field));
+                var viewModel = (StatisticsViewModel)DataContext;
+
+                if (!viewModel.SelectedFields.Contains(field))
                 {
-                    ((StatisticsViewModel)DataContext).AvailableFields.Add(field);
-                    ((StatisticsViewModel)DataContext).SelectedFields.Remove(field);
+                    viewModel.SelectedFields.Add(field);
+                    viewModel.AvailableFields.Remove(field);
                 }
             }
         }
-
     }
 }
