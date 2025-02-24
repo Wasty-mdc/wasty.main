@@ -49,23 +49,7 @@
                       Margin="4"
                       BorderBrush="Black" 
                       BorderThickness="1">
-
-                            <!--<DataGrid.Columns>
-                                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="*" MaxWidth="110" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Fiscalidad" Binding="{Binding Fiscalidad}" Width="*" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Domicilio" Binding="{Binding Domicilio}" Width="*" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="C.Postal" Binding="{Binding CodigoPostal}" Width="*" MaxWidth="130" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Provincia" Binding="{Binding Provincia}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Zona" Binding="{Binding Zona}" Width="*" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Población" Binding="{Binding Poblacion}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Comercial" Binding="{Binding Comercial}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Título Relación" Binding="{Binding TituloRelacion}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                            </DataGrid.Columns>-->
+                            
                         </DataGrid>
                     </Border>
                 </Grid>

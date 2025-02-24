@@ -66,10 +66,9 @@
                         Command="{Binding LoginCommand}" />
                 <Button x:Name="NewRegisterButton" Content="¿No tienes cuenta?"
                         Style="{StaticResource RegisterButton}" 
-                        Command="{Binding RegisterCommand}" Width="200" Height="28" Click="NewRegisterButton_Click" />
+                        Command="{Binding RegisterCommand}" Width="200" Height="28" />
 
-                <!-- Botón Registrarte -->
-
+                <!-- Snackbar para mensajes de error y éxito -->
                 <md:Snackbar MessageQueue="{Binding SnackbarMessageQueue}"
                            VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <md:Snackbar.Style>
@@ -87,4 +86,4 @@
         </Border>
     </Grid>
 
-</UserControl>  
+</UserControl>

@@ -10,10 +10,6 @@
         WindowStyle="None"
         ResizeMode="CanResize">
 
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
-
     <!-- Ajustar la estructura de la ventana con WindowChrome -->
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" CornerRadius="10" ResizeBorderThickness="5"/>
@@ -74,8 +70,10 @@
             <Border Grid.Row="0" 
                     Background="#0F0F0F" 
                     Height="50" 
-                    MouseDown="Window_MouseDown" 
-                    VerticalAlignment="Center" >
+                    VerticalAlignment="Center">
+                <Border.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding DragMoveCommand}" />
+                </Border.InputBindings>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -93,39 +91,30 @@
 
                     <!-- Botón Minimizar -->
                     <Button Grid.Column="1" Style="{StaticResource TitleBarButtonStyle}"
-                            Click="MinimizeButton_Click">
+                            Command="{Binding MinimizeCommand}">
                         <md:PackIcon Kind="WindowMinimize" Width="18" Height="18"/>
                     </Button>
 
                     <!-- Botón Maximizar/Restaurar -->
                     <Button Grid.Column="2" Style="{StaticResource TitleBarButtonStyle}"
-                            Click="MaximizeButton_Click">
+                            Command="{Binding MaximizeCommand}">
                         <md:PackIcon x:Name="MaximizeIcon" Kind="WindowMaximize" Width="18" Height="18"/>
                     </Button>
 
                     <!-- Botón Cerrar -->
                     <Button Grid.Column="3" Style="{StaticResource TitleBarButtonStyle}"
-                            Click="CloseButton_Click">
+                            Command="{Binding CloseCommand}">
                         <md:PackIcon Kind="WindowClose" Width="18" Height="18"/>
                     </Button>
                 </Grid>
             </Border>
-
-            <!-- Herramienta Dev: Navegación Provisional
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent" Margin="10">
-                <Button Content="Login" Command="{Binding ShowLoginViewCommand}" Width="100" Height="40" Cursor="Hand"/>
-                <Button Content="Signup" Command="{Binding ShowSignupViewCommand}" Width="100" Height="40" Cursor="Hand"/>
-                <Button Content="Main" Command="{Binding ShowMainViewCommand}" Width="100" Height="40" Cursor="Hand"/>
-            </StackPanel>
-
-             -->
 
             <!-- Contenido Principal -->
             <Grid Grid.Row="2" Background="#F5F5F5">
                 <Image Source="pack://application:,,,/Assets/Images/mainbackground.png" 
                Stretch="Fill"
                Panel.ZIndex="-1"/>
-                <ContentControl Content="{Binding CurrentView}" Name="contentView" >
+                <ContentControl Content="{Binding CurrentView}" Name="CurrentView" >
                     <ContentControl.Background>
                         <ImageBrush ImageSource="/mainBackground.png" Opacity="1"/>
                     </ContentControl.Background>

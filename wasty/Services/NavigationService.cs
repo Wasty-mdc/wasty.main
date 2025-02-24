@@ -18,7 +18,7 @@ namespace wasty.Services
             var view = _viewFactory(typeof(TView));
 
             var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.contentView.Content = view;
+            mainWindow.CurrentView.Content = view;
         }
     }
 }

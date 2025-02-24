@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using wasty.ViewModels;
 
 namespace wasty.Views.TableViews
@@ -11,9 +9,11 @@ namespace wasty.Views.TableViews
         public ClientTableView()
         {
             InitializeComponent();
+            // Establecer el DataContext al ClientTableViewModel
             DataContext = ((App)Application.Current).Services.GetService(typeof(ClientTableViewModel));
         }
 
+        // Evento para manejar la generación automática de columnas en el DataGrid
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             var viewModel = DataContext as ClientTableViewModel;
@@ -22,14 +22,5 @@ namespace wasty.Views.TableViews
                 e.Column.Visibility = Visibility.Collapsed;
             }
         }
-        private void GoBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.MainWindow.DataContext is MainViewModel mainViewModel)
-            {
-                mainViewModel.NavigateToMainView();
-            }
-        }
-
-
     }
 }

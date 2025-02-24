@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Vista de registro de usuario para Wasty, definida en XAML.
-     Contiene campos de entrada para nombre, usuario, correo y contrasenas, con botones para crear una cuenta o volver al inicio de sesion.
+     Contiene campos de entrada para nombre, usuario, correo y contraseñas, con botones para crear una cuenta o volver al inicio de sesión.
      Usa estilos reutilizables para una interfaz consistente. 
   -->
 
@@ -22,7 +22,7 @@
             HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center">
-                <!-- Titulo -->
+                <!-- Título -->
                 <TextBlock Text="Crear Cuenta" FontSize="22" FontWeight="Bold" 
                        Foreground="{StaticResource Neutral200}"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
@@ -59,7 +59,7 @@
                     </DockPanel>
                 </Border>
 
-                <!-- Campo Correo Electronico con Icono -->
+                <!-- Campo Correo Electrónico con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="Email" Width="24" Height="24" 
@@ -74,7 +74,7 @@
                     </DockPanel>
                 </Border>
 
-                <!-- Campo Contrasena con Icono -->
+                <!-- Campo Contraseña con Icono -->
                 <Border Style="{StaticResource RegisterPasswordBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="PasswordAdd" Width="24" Height="24" 
@@ -89,7 +89,7 @@
                     </DockPanel>
                 </Border>
 
-                <!-- Campo Confirmar Contrasena con Icono -->
+                <!-- Campo Confirmar Contraseña con Icono -->
                 <Border Style="{StaticResource RegisterPasswordBoxBorder}">
                     <DockPanel>
                         <md:PackIcon Kind="PasswordCheck" Width="24" Height="24" 
@@ -104,13 +104,13 @@
                     </DockPanel>
                 </Border>
 
-                <!-- Boton Registrarse -->
+                <!-- Botón Registrarse -->
                 <Button x:Name="SignupButton" Content="Registrarse"
                         Style="{StaticResource RegisterButton}" 
                         Command="{Binding CrearUsuarioCommand}" />
 
-                <!-- Boton Volver a Iniciar Sesion -->
-                <Button x:Name="BackToLoginButton" Content="Volver a Iniciar Sesion"
+                <!-- Botón Volver a Iniciar Sesión -->
+                <Button x:Name="BackToLoginButton" Content="Volver a Iniciar Sesión"
                         Style="{StaticResource RegisterButton}" 
                         Height="30" Width="150" HorizontalAlignment="Right" FontSize="14" Cursor="Hand"
                         Command="{Binding LoginCommand}" />

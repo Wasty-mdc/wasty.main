@@ -49,18 +49,18 @@
                     HorizontalAlignment="Center" 
                     Margin="0,0,0,20">
 
-                <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
-                    <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
-                </Button>
-                <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
-                    <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" 
+            <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
+                <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
+            </Button>
+            <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" 
                                 VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-                </Button>
-                <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding SalirCommand}">
-                    <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White" 
+            </Button>
+            <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding NavigateToLoginCommand}">
+                <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White" 
                                 VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-                </Button>
-            </StackPanel>
+            </Button>
+        </StackPanel>
 
         <!-- Contenido Principal -->
         <Grid Grid.Column="1">
@@ -78,7 +78,7 @@
                        Margin="10">
 
                 <!-- Botón Clientes -->
-                <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding clientesCommand}" >
+                <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding NavigateToClientesCommand}" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="AccountMultiple" Width="80" Height="80" Foreground="#266DD3"/>
                         <TextBlock Text="Clientes" FontSize="16" FontWeight="Bold" Foreground="Black"
@@ -87,16 +87,16 @@
                 </Button>
 
                 <!-- Botón Residuos -->
-                <Button x:Name="residuosButton" Style="{StaticResource CentralButton}" ToolTip="Residuos" Command="{Binding residuosCommand}">
+                <Button x:Name="residuosButton" Style="{StaticResource CentralButton}" ToolTip="Residuos" Command="{Binding NavigateToResiduosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="Recycle" Width="80" Height="80" Foreground="#A0C26C"/>
                         <TextBlock Text="Residuos" FontSize="16" FontWeight="Bold" Foreground="Black"
 							   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-                
+
                 <!-- Botón Ficheros -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" >
+                <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" Command="{Binding ShowFicherosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#232C33"/>
                         <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
@@ -105,7 +105,7 @@
                 </Button>
 
                 <!-- Botón Gestión -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Gestión">
+                <Button Style="{StaticResource CentralButton}" ToolTip="Gestión" Command="{Binding ShowGestionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="SafeSquareOutline" Width="80" Height="80" Foreground="#83927D"/>
                         <TextBlock Text="Gestión" FontSize="16" FontWeight="Bold" Foreground="Black"
@@ -114,7 +114,7 @@
                 </Button>
 
                 <!-- Botón Facturación -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Facturación">
+                <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#5C839D"/>
                         <TextBlock Text="Facturación" FontSize="16" FontWeight="Bold" Foreground="Black"
