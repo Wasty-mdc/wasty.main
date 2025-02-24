@@ -74,14 +74,15 @@
             <!-- Botones centrales -->
             <WrapPanel 
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" Grid.RowSpan="2">
+                       VerticalAlignment="Center"
+                       Margin="10">
 
                 <!-- Botón Clientes -->
                 <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding NavigateToClientesCommand}" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="AccountMultiple" Width="80" Height="80" Foreground="#266DD3"/>
                         <TextBlock Text="Clientes" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
 
@@ -90,7 +91,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="Recycle" Width="80" Height="80" Foreground="#A0C26C"/>
                         <TextBlock Text="Residuos" FontSize="16" FontWeight="Bold" Foreground="Black"
-							   HorizontalAlignment="Center" />
+							   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
 
@@ -99,7 +100,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#232C33"/>
                         <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
 
@@ -108,7 +109,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="SafeSquareOutline" Width="80" Height="80" Foreground="#83927D"/>
                         <TextBlock Text="Gestión" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
 
@@ -117,15 +118,15 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#5C839D"/>
                         <TextBlock Text="Facturación" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
                 <!-- Botón Estadísticas -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas" Command="{Binding NavigateToStatisticsCommand}">
+                <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="ChartBox" Width="80" Height="80" Foreground="#E9D985"/>
                         <TextBlock Text="Estadísticas" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
             </WrapPanel>

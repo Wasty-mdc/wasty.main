@@ -20,7 +20,6 @@ public class LoginViewModel : INotifyPropertyChanged
         _apiService = apiService;
         _navigationService = navigationService;
         LoginCommand = new RelayCommand(async _ => await Login());
-        SkipCommand = new RelayCommand(async _ => await SkipLogin());
         RegisterCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
         SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(3));
     }
@@ -42,8 +41,6 @@ public class LoginViewModel : INotifyPropertyChanged
     // Comandos para iniciar sesión y registrarse
     public ICommand LoginCommand { get; }
     public ICommand RegisterCommand { get; }
-    public ICommand SkipCommand { get; }
-
 
     // Método para manejar el inicio de sesión
     private async Task Login()
@@ -71,15 +68,6 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
         }
-    }
-    private async Task SkipLogin()
-    {
-        // Definir credenciales predeterminadas
-        Email = "Pruebas123@pruebas.com";
-        Contrasenia = "Pruebas123.";
-
-        // Llamar directamente a la función de Login
-        await Login();
     }
 
     // Método para navegar a la vista de registro
