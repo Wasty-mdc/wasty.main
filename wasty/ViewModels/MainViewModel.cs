@@ -27,11 +27,14 @@ public class MainViewModel : INotifyPropertyChanged
         SalirCommand = new RelayCommand(NavigateToLogin);
         clientesCommand = new RelayCommand(NavigateToClientes);
         residuosCommand = new RelayCommand(NavigateToResiduos);
+        statisticsCommand = new RelayCommand(NavigateToStatistics);
+
     }
 
     public ICommand SalirCommand { get; }
     public ICommand clientesCommand { get; }
     public ICommand residuosCommand { get; }
+    public ICommand statisticsCommand { get; }
 
     private void NavigateToLogin(object parameter)
     {
@@ -51,6 +54,10 @@ public class MainViewModel : INotifyPropertyChanged
     public void NavigateToMainView()
     {
         _navigationService.NavigateTo<MainView>();
+    }
+    public void NavigateToStatistics(object parameter)
+    {
+        _navigationService.NavigateTo<StatisticsView>();
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
