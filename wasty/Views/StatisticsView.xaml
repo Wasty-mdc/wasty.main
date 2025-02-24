@@ -3,10 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:wasty.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             Height="Auto"
+             Width="Auto"
+             Background="Transparent">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Selector de campos -->
+            <RowDefinition Height="*"/>
+            <!-- Tabla -->
+        </Grid.RowDefinitions>
+
+        <!-- Área de selección de columnas -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+
+            <!-- Botón para volver a MainView -->
+            <Button Command="{Binding VolverCommand}"
+            Width="50"
+            Height="50"
+            Margin="10"
+            Cursor="Hand">
+                <md:PackIcon Kind="ArrowLeft" Width="24" Height="24" Foreground="Black"/>
+            </Button>
             
+            <TextBlock Text="Arrastra los campos aquí:" VerticalAlignment="Center" Margin="5"/>
+
+            <!-- Campos disponibles -->
+            <ListBox ItemsSource="{Binding AvailableFields}"
+                     AllowDrop="True"
+                     DragOver="FieldsList_DragOver"
+                     Drop="FieldsList_Drop"
+                     SelectionMode="Multiple"
+                     DisplayMemberPath="Name"
+                     Width="200" Height="100" Background="LightGray"/>
+
+            <!-- Campos seleccionados -->
+            <ListBox ItemsSource="{Binding SelectedFields}"
+                     AllowDrop="True"
+                     DragOver="SelectedList_DragOver"
+                     Drop="SelectedList_Drop"
+                     SelectionMode="Multiple"
+                     DisplayMemberPath="Name"
+                     Width="200" Height="100" Background="LightGreen"/>
+        </StackPanel>
+
+        <!-- Tabla dinámica -->
+        <DataGrid ItemsSource="{Binding FilteredData}" AutoGenerateColumns="False"
+                  Grid.Row="1" Margin="10">
+            <DataGrid.Columns>
+                <!-- Las columnas se generan en el ViewModel -->
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
