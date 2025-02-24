@@ -49,18 +49,18 @@
                     HorizontalAlignment="Center" 
                     Margin="0,0,0,20">
 
-            <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
-                <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
-            </Button>
-            <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
-                <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" 
+                <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
+                    <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
+                </Button>
+                <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                    <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White" 
                                 VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-            </Button>
-            <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding SalirCommand}">
-                <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White" 
+                </Button>
+                <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding SalirCommand}">
+                    <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White" 
                                 VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-            </Button>
-        </StackPanel>
+                </Button>
+            </StackPanel>
 
         <!-- Contenido Principal -->
         <Grid Grid.Column="1">
@@ -74,7 +74,8 @@
             <!-- Botones centrales -->
             <WrapPanel 
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" Grid.RowSpan="2">
+                       VerticalAlignment="Center"
+                       Margin="10">
 
                 <!-- Botón Clientes -->
                 <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding clientesCommand}" >
@@ -93,7 +94,7 @@
 							   HorizontalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-
+                
                 <!-- Botón Ficheros -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
@@ -121,7 +122,7 @@
                     </StackPanel>
                 </Button>
                 <!-- Botón Estadísticas -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas" Command="{Binding statisticsCommand}">
+                <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="ChartBox" Width="80" Height="80" Foreground="#E9D985"/>
                         <TextBlock Text="Estadísticas" FontSize="16" FontWeight="Bold" Foreground="Black"
