@@ -19,7 +19,7 @@
 
     <StackPanel>
         <!-- Botón para volver a MainView -->
-        <Button Command="{Binding VolverCommand}"
+        <Button Command="{Binding NavigateToMainView}"
             Width="50"
             Height="50"
             Margin="10"
