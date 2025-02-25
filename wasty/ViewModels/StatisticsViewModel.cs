@@ -21,19 +21,37 @@ public class StatisticsViewModel : INotifyPropertyChanged
     public StatisticsViewModel(NavigationService navigationService)
     {
         _navigationService = navigationService;
-        VolverCommand = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
-        GenerateTableCommand = new RelayCommand(_ => UpdateTable());
+        VolverCommand = new RelayCommand<object>(_ => _navigationService.NavigateTo<MainView>());
+        GenerateTableCommand = new RelayCommand<object>(_ => UpdateTable());
 
         // Mock Data - Campos disponibles con icono y background
         AvailableFields = new ObservableCollection<Field>
-        {
-            new Field("Fecha", "Calendar", "LightBlue"),
-            new Field("Cliente", "Account", "LightGreen"),
-            new Field("Producto", "PackageVariant", "LightYellow"),
-            new Field("Cantidad", "Counter", "LightPink"),
-            new Field("Precio", "CurrencyUsd", "LightCyan"),
-            new Field("Total", "Calculator", "LightGray")
-        };
+    {
+        new Field("Fecha", "Calendar", "LightBlue"),
+        new Field("Cliente", "Account", "LightGreen"),
+        new Field("Producto", "PackageVariant", "LightYellow"),
+        new Field("Cantidad", "Counter", "LightPink"),
+        new Field("Precio", "CurrencyUsd", "LightCyan"),
+        new Field("Total", "Calculator", "LightGray"),
+        new Field("ID Pedido", "Barcode", "LightSalmon"),
+        new Field("Estado", "CheckboxMarked", "LightCoral"),
+        new Field("Método de Pago", "CreditCard", "LightSkyBlue"),
+        new Field("Descuento", "Percent", "LightGoldenrodYellow"),
+        new Field("Envío", "Truck", "LightSlateGray"),
+        new Field("Impuesto", "FileDocument", "LightSteelBlue"),
+        new Field("Notas", "Note", "LightSeaGreen"),
+        new Field("Almacén", "Warehouse", "LightGoldenrodYellow"),
+        new Field("Proveedor", "Factory", "LightBlue"),
+        new Field("Stock", "Package", "LightGreen"),
+        new Field("Categoría", "Tag", "LightYellow"),
+        new Field("Subcategoría", "TagMultiple", "LightCyan"),
+        new Field("Unidad de Medida", "ScaleBalance", "LightSalmon"),
+        new Field("Código SKU", "BarcodeScan", "LightPink"),
+        new Field("Peso", "Weight", "LightGray"),
+        new Field("Volumen", "CubeOutline", "LightGoldenrodYellow"),
+        new Field("Longitud", "Ruler", "LightSkyBlue"),
+    };
+
 
         SelectedFields = new ObservableCollection<Field>();
         FilteredData = new ObservableCollection<object>();

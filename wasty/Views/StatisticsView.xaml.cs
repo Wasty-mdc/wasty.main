@@ -5,9 +5,6 @@ using wasty.ViewModels;
 
 namespace wasty.Views
 {
-    /// <summary>
-    /// Lógica de interacción para StatisticsView.xaml
-    /// </summary>
     public partial class StatisticsView : UserControl
     {
         public StatisticsView()
@@ -16,37 +13,36 @@ namespace wasty.Views
             DataContext = ((App)Application.Current).Services.GetService(typeof(StatisticsViewModel));
         }
 
-        // Método para iniciar el arrastre de un campo
-        private void Field_MouseMove(object sender, MouseEventArgs e)
+        private void OnFieldMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && sender is Border border && border.DataContext is Field field)
             {
-                var field = ((Border)sender).DataContext as Field;
-                if (field != null)
-                {
-                    DragDrop.DoDragDrop((DependencyObject)sender, field, DragDropEffects.Move);
-                }
+                DragDrop.DoDragDrop(border, field, DragDropEffects.Move);
             }
         }
 
-        // Permitir la acción de arrastre en la barra lateral
-        private void SelectedFields_DragOver(object sender, DragEventArgs e)
+        private void OnFieldsListDragOver(object sender, DragEventArgs e)
         {
             e.Effects = DragDropEffects.Move;
+            e.Handled = true;
         }
 
-        // Manejo de la acción de soltar en la barra lateral (mueve el campo a los seleccionados)
-        private void SelectedFields_Drop(object sender, DragEventArgs e)
+        private void OnFieldsListDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(Field)))
             {
                 var field = (Field)e.Data.GetData(typeof(Field));
                 var viewModel = (StatisticsViewModel)DataContext;
 
-                if (!viewModel.SelectedFields.Contains(field))
+                if (viewModel.SelectedFields.Contains(field))
                 {
-                    viewModel.SelectedFields.Add(field);
+                    viewModel.SelectedFields.Remove(field);
+                    viewModel.AvailableFields.Add(field);
+                }
+                else if (viewModel.AvailableFields.Contains(field))
+                {
                     viewModel.AvailableFields.Remove(field);
+                    viewModel.SelectedFields.Add(field);
                 }
             }
         }

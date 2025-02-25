@@ -18,10 +18,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!-- Barra superior amarilla -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="LightYellow" Height="80" VerticalAlignment="Top">
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="LightYellow" Height="Auto" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -32,62 +33,70 @@
             <Button Command="{Binding VolverCommand}"
                     Width="50"
                     Height="50"
-                    Margin="10"
                     Cursor="Hand"
+                    Margin="10,5,5,5"
                     Background="Transparent" HorizontalAlignment="Left">
                 <md:PackIcon Kind="ArrowLeft" Width="24" Height="24" Foreground="Black"/>
             </Button>
 
-            <!-- Barra de búsqueda restaurada -->
-            <Border Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Background="White" Padding="5" BorderBrush="Gray" BorderThickness="1">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Width="200" Height="30" Text="{Binding SearchText}" BorderThickness="0"/>
-                    <Button Width="30" Height="30" Command="{Binding SearchCommand}" 
-                            Background="Transparent" BorderThickness="0" Cursor="Hand">
-                        <md:PackIcon Kind="Magnify" Width="24" Height="24" Foreground="Black"/>
-                    </Button>
-                </StackPanel>
-            </Border>
-
-            <!-- Contenedor de campos disponibles -->
-            <ItemsControl ItemsSource="{Binding AvailableFields}" Grid.Column="1" HorizontalAlignment="Center" Width="Auto">
+            <!-- Contenedor de campos disponibles con WrapPanel -->
+            <ItemsControl ItemsSource="{Binding AvailableFields}" Grid.Column="1" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" ItemHeight="40" ItemWidth="120"/>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" MaxWidth="1200"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
-                                CornerRadius="5" Margin="5" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                AllowDrop="True" MouseMove="Field_MouseMove">
+                                CornerRadius="5" Margin="5" Cursor="Hand"
+                                Width="Auto" Height="Auto"
+                                PreviewMouseMove="OnFieldMouseMove">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <md:PackIcon Kind="{Binding Icon}" Width="16" Height="16" Margin="2"/>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" 
-                                           FontSize="16" FontWeight="SemiBold" FontFamily="{StaticResource SubtitleFontFamily}"/>
+                                <md:PackIcon Kind="{Binding Icon}" Width="15" Height="15" Margin="2"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <!-- Botón Generar Tabla -->
-            <Button Content="Generar tabla" Background="SteelBlue" Foreground="White" Width="120" Height="40" Margin="20,10,10,10"
-                    Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Padding="5"
-                    Command="{Binding GenerateTableCommand}"/>
+            <!-- Contenedor para la barra de búsqueda y el botón de generar tabla -->
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,0,10,0">
+
+                <!-- Barra de búsqueda -->
+                <Border Background="White" Padding="5" BorderBrush="Gray" BorderThickness="1" Margin="5,10,5,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="200" Height="24" Text="{Binding SearchText}" BorderThickness="0"/>
+                        <Button Width="30" Height="30" Command="{Binding SearchCommand}" 
+                                Background="Transparent" BorderThickness="0" Cursor="Hand">
+                            <md:PackIcon Kind="Magnify" Width="24" Height="24" Foreground="Black"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <!-- Botón Generar Tabla -->
+                <Button Content="Generar tabla" Background="SteelBlue" Foreground="White" 
+                        Width="120" Height="40" Cursor="Hand"
+                        Command="{Binding GenerateTableCommand}"/>
+            </StackPanel>
         </Grid>
 
         <!-- Barra lateral azul (Campos seleccionados) -->
-        <StackPanel Grid.Row="1" Grid.Column="0" Background="LightSteelBlue" Width="200" AllowDrop="True" 
-                    DragOver="SelectedFields_DragOver" Drop="SelectedFields_Drop" Margin="0,0,5,0">
+        <StackPanel Grid.Row="1" Grid.Column="0" Background="LightSteelBlue" Width="200"
+                    AllowDrop="True"
+                    PreviewDragOver="OnFieldsListDragOver"
+                    PreviewDrop="OnFieldsListDrop"
+                    Margin="0,0,5,0">
             <TextBlock Text="Campos seleccionados:" FontWeight="Bold" Margin="10"/>
             <ItemsControl ItemsSource="{Binding SelectedFields}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}">
+                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
+                                Width="Auto" Height="Auto"
+                                PreviewMouseMove="OnFieldMouseMove">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <md:PackIcon Kind="{Binding Icon}" Width="30" Height="30" Margin="5"/>
+                                <md:PackIcon Kind="{Binding Icon}" Width="20" Height="20" Margin="5"/>
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
                             </StackPanel>
                         </Border>
