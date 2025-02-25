@@ -25,7 +25,7 @@
             <!-- Contenido principal -->
         </Grid.ColumnDefinitions>
 
-        <!-- Menú lateral -->
+        <!-- Menú Navegación lateral -->
         <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" 
                     Width="70" 
                     VerticalAlignment="Stretch"

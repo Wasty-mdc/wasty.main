@@ -38,6 +38,7 @@
   <ItemGroup>
     <Page Remove="Styles.xaml" />
     <Page Remove="Styles\mainStyles.xaml" />
+    <Page Remove="Styles\statisticStyles.xaml" />
     <Page Remove="Views\TableViews\TableView.xaml" />
   </ItemGroup>
 
@@ -78,6 +79,7 @@
     <Resource Include="Styles\mainStyles.xaml">
       <Generator></Generator>
     </Resource>
+    <Resource Include="Styles\statisticStyles.xaml" />
   </ItemGroup>
 
 </Project>

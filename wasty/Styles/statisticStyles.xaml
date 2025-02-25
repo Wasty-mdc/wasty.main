@@ -1,0 +1,63 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml"
+>
+
+    <!-- Estilos para la barra lateral azul -->
+    <Style x:Key="SidebarStyle" TargetType="StackPanel">
+        <Setter Property="Background" Value="#2C3E50"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="Margin" Value="5,5,10,5"/>
+    </Style>
+
+    <!-- Estilo para los TextBlock de la barra lateral -->
+    <Style x:Key="SidebarTextStyle" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="0,10,0,10"/>
+    </Style>
+
+    <!-- Estilo para los Bordes de los campos seleccionados -->
+    <Style x:Key="FieldBorderStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
+    <!-- Estilo para los iconos de los campos seleccionados -->
+    <Style x:Key="FieldIconStyle" TargetType="md:PackIcon">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!-- Estilo para los botones generales -->
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="180"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="20"/>
+    </Style>
+
+    <!-- Estilo específico para el botón de limpiar filtros -->
+    <Style x:Key="ClearButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Setter Property="Background" Value="Red"/>
+    </Style>
+
+    <!-- Estilo para la DataGrid -->
+    <Style x:Key="DataGridStyle" TargetType="DataGrid">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="RowBackground" Value="White"/>
+        <Setter Property="AlternatingRowBackground" Value="#ECF0F1"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
+</ResourceDictionary>

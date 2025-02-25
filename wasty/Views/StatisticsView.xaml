@@ -89,20 +89,49 @@
                     PreviewDrop="OnFieldsListDrop"
                     Margin="0,0,5,0">
             <TextBlock Text="Campos seleccionados:" FontWeight="Bold" Margin="10"/>
+
             <ItemsControl ItemsSource="{Binding SelectedFields}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
-                                Width="Auto" Height="Auto"
-                                PreviewMouseMove="OnFieldMouseMove">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <md:PackIcon Kind="{Binding Icon}" Width="20" Height="20" Margin="5"/>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
-                            </StackPanel>
-                        </Border>
+                        <StackPanel>
+                            <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
+                                    Width="Auto" Height="Auto"
+                                    PreviewMouseMove="OnFieldMouseMove">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <md:PackIcon Kind="{Binding Icon}" Width="20" Height="20" Margin="5"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
+                                </StackPanel>
+                            </Border>
+                            <!-- Mostrar CheckBoxes solo si el campo es filtrable -->
+                            <ItemsControl ItemsSource="{Binding DataContext.FilterableValues[Name], RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                <ItemsControl.Style>
+                                    <Style TargetType="ItemsControl">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsFilterable}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ItemsControl.Style>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding}" 
+                                                  IsChecked="{Binding DataContext.SelectedFilters[Name], RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, Converter={StaticResource MultiSelectConverter}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+
+            <!-- Botón para limpiar filtros -->
+            <Button Content="Limpiar Filtros" 
+                    Background="LightSlateGray" Foreground="White"
+                    Command="{Binding ClearFiltersCommand}" 
+                    Width="150" Height="30" 
+                    HorizontalAlignment="Center"
+                    Margin="10"/>
         </StackPanel>
 
         <!-- Tabla dinámica -->
