@@ -16,7 +16,7 @@ public class RecycTableViewModel : INotifyPropertyChanged
     private readonly NavigationService _navigationService;
     public ICommand ToggleStickyColumnCommand { get; }
     public ICommand ToggleColumnVisibilityCommand { get; }
-    public ICommand VolverCommand { get; }
+    public ICommand NavigateToMainView { get; }
 
     private Dictionary<string, bool> _stickyColumns;
     private Dictionary<string, bool> _hiddenColumns;
@@ -55,7 +55,7 @@ public class RecycTableViewModel : INotifyPropertyChanged
         _hiddenColumns = new Dictionary<string, bool>();
         ToggleStickyColumnCommand = new RelayCommand<string>(ToggleStickyColumn);
         ToggleColumnVisibilityCommand = new RelayCommand<string>(ToggleColumnVisibility);
-        VolverCommand = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
+        NavigateToMainView = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
 
         Init().GetAwaiter();
     }

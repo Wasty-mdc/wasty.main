@@ -64,11 +64,20 @@
                 <Button x:Name="RegisterButton" Content="Ingresar"
                         Style="{StaticResource RegisterButton}" 
                         Command="{Binding LoginCommand}" />
+                
                 <Button x:Name="NewRegisterButton" Content="¿No tienes cuenta?"
                         Style="{StaticResource RegisterButton}" 
                         Command="{Binding RegisterCommand}" Width="200" Height="28" />
 
-                <!-- Snackbar para mensajes de error y éxito -->
+                <Button x:Name="SkipButton" Content="Skip"
+                        Width="50"
+                        Height="50"
+                        Margin="10"
+                        Cursor="Hand" 
+                        Command="{Binding SkipCommand}" />
+
+                <!-- Snackbar -->
+
                 <md:Snackbar MessageQueue="{Binding SnackbarMessageQueue}"
                            VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <md:Snackbar.Style>
