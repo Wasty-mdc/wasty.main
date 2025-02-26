@@ -121,7 +121,9 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <CheckBox Content="{Binding}" 
-                                                  IsChecked="{Binding DataContext.SelectedFilters[Name], RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, Converter={StaticResource MultiSelectConverter}}"/>
+                                                  IsChecked="{Binding DataContext.SelectedFilters[Name], 
+                                                  RelativeSource={RelativeSource AncestorType=UserControl},
+                                                  Mode=TwoWay, Converter={StaticResource MultiSelectConverter}}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

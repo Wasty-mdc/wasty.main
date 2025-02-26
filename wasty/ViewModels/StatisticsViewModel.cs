@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json;
 using System.Windows.Input;
 using wasty.Models;
 using wasty.Services;
@@ -11,9 +12,10 @@ using wasty.Views;
 
 public class StatisticsViewModel : INotifyPropertyChanged
 {
+    private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
 
-    public ObservableCollection<Field> AvailableFields { get; set; }
+    private ObservableCollection<Field> _availableFields { get; set; }
     public ObservableCollection<Field> SelectedFields { get; set; }
     private ObservableCollection<object> _filteredData;
     public ObservableCollection<object> FilteredData
@@ -23,6 +25,16 @@ public class StatisticsViewModel : INotifyPropertyChanged
         {
             _filteredData = value;
             OnPropertyChanged(nameof(FilteredData));
+        }
+    }
+    // Propiedad que representa la colección de clientes
+    public ObservableCollection<Field> AvailableFields
+    {
+        get => _availableFields;
+        set
+        {
+            _availableFields = value;
+            OnPropertyChanged(nameof(AvailableFields));
         }
     }
 
@@ -42,25 +54,15 @@ public class StatisticsViewModel : INotifyPropertyChanged
     public ICommand GenerateTableCommand { get; }
     public ICommand ClearFiltersCommand { get; }
 
-    public StatisticsViewModel(NavigationService navigationService)
+    public StatisticsViewModel(ApiService apiService, NavigationService navigationService)
     {
+        _apiService = apiService;
         _navigationService = navigationService;
         VolverCommand = new RelayCommand<object>(_ => _navigationService.NavigateTo<MainView>());
         GenerateTableCommand = new RelayCommand<object>(_ => UpdateTable());
         ClearFiltersCommand = new RelayCommand<object>(_ => ClearFilters());
 
-        // Mock Data - Campos disponibles con icono y background
-        AvailableFields = new ObservableCollection<Field>
-        {
-            new Field("Año", "Calendar", "LightBlue", true),
-            new Field("Cliente", "Account", "LightGreen", true),
-            new Field("Producto", "PackageVariant", "LightYellow", true),
-            new Field("Categoría", "Tag", "LightGoldenrodYellow", true),
-            new Field("Estado", "CheckboxMarked", "LightCoral", true),
-            new Field("Cantidad", "Counter", "LightPink"),
-            new Field("Precio", "CurrencyUsd", "LightCyan"),
-            new Field("Total", "Calculator", "LightGray")
-        };
+        AvailableFields = new ObservableCollection<Field>();
 
         SelectedFields = new ObservableCollection<Field>();
         FilteredData = new ObservableCollection<object>();
@@ -76,6 +78,53 @@ public class StatisticsViewModel : INotifyPropertyChanged
         };
 
         SelectedFilters = new Dictionary<string, List<string>>();
+        Init().GetAwaiter();
+    }
+
+    // Método para inicializar la vista modelo
+    private async Task Init()
+    {
+        AvailableFields = await GetData();
+    }
+
+    private async Task<ObservableCollection<Field>> GetData()
+    {
+        JsonElement tokenElement = default;
+        JsonElement fieldsElement = default;
+        ObservableCollection<Field> fieldsList = new ObservableCollection<Field>();
+        string token = "";
+        string fields = "";
+        var login = new
+        {
+            Email = "Pruebas123@pruebas.com",
+            Contrasenia = "Pruebas123."
+        };
+
+        var auth = await _apiService.RequestAsync("POST", "auth/login", login);
+
+        if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
+            token = tokenElement.GetString();
+
+        var result = await _apiService.RequestAsync("GET", "data/tablas", "", token);
+
+        if (result.TryGetProperty("datos", out fieldsElement))
+            fields = fieldsElement.GetRawText();
+
+        try
+        {
+            var fieldsNames = JsonSerializer.Deserialize<List<string>>(fields);
+
+            foreach(var i in fieldsNames)
+            {
+                fieldsList.Add(new Field(i,"Calendar", "LightRed"));
+            }
+
+            return fieldsList;
+        }
+        catch (Exception ex)
+        {
+            return new ObservableCollection<Field>();
+        }
     }
 
     private void UpdateTable()
