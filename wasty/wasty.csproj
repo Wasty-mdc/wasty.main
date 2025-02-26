@@ -79,7 +79,9 @@
     <Resource Include="Styles\mainStyles.xaml">
       <Generator></Generator>
     </Resource>
-    <Resource Include="Styles\statisticStyles.xaml" />
+    <Resource Include="Styles\statisticStyles.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

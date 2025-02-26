@@ -9,6 +9,11 @@
              Height="Auto"
              Width="Auto"
              Background="Transparent">
+    
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/statisticStyles.xaml"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Barra superior amarilla -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="LightYellow" Height="Auto" VerticalAlignment="Top" >
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#FFAAFAC8" Height="Auto" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -43,17 +48,19 @@
             <ItemsControl ItemsSource="{Binding AvailableFields}" Grid.Column="1" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" MaxWidth="1200"/>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" MaxWidth="1200" Margin="0,10,0,0"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
-                                CornerRadius="5" Margin="5" Cursor="Hand"
-                                Width="Auto" Height="Auto"
+                        <Border Style="{StaticResource FieldBorderStyle}" Background="{Binding Background}"
                                 PreviewMouseMove="OnFieldMouseMove">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <md:PackIcon Kind="{Binding Icon}" Width="15" Height="15" Margin="2"/>
+                                <md:PackIcon Kind="{Binding Icon}"
+                                 Width="15"
+                                 Height="15"
+                                 Margin="2"
+                                 Foreground="Black"/>
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
                             </StackPanel>
                         </Border>
@@ -65,9 +72,9 @@
             <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,0,10,0">
 
                 <!-- Barra de búsqueda -->
-                <Border Background="White" Padding="5" BorderBrush="Gray" BorderThickness="1" Margin="5,10,5,5">
+                <Border Style="{StaticResource SearchBarStyle}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="200" Height="24" Text="{Binding SearchText}" BorderThickness="0"/>
+                        <TextBox Style="{StaticResource SearchTextBoxStyle}" Text="{Binding SearchText}"/>
                         <Button Width="30" Height="30" Command="{Binding SearchCommand}" 
                                 Background="Transparent" BorderThickness="0" Cursor="Hand">
                             <md:PackIcon Kind="Magnify" Width="24" Height="24" Foreground="Black"/>
@@ -77,25 +84,23 @@
 
                 <!-- Botón Generar Tabla -->
                 <Button Content="Generar tabla" Background="SteelBlue" Foreground="White" 
-                        Width="120" Height="40" Cursor="Hand"
+                        Width="120" Height="40" Cursor="Hand" Margin="10"
                         Command="{Binding GenerateTableCommand}"/>
             </StackPanel>
         </Grid>
 
         <!-- Barra lateral azul (Campos seleccionados) -->
-        <StackPanel Grid.Row="1" Grid.Column="0" Background="LightSteelBlue" Width="200"
+        <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource SidebarStyle}"
                     AllowDrop="True"
                     PreviewDragOver="OnFieldsListDragOver"
-                    PreviewDrop="OnFieldsListDrop"
-                    Margin="0,0,5,0">
-            <TextBlock Text="Campos seleccionados:" FontWeight="Bold" Margin="10"/>
+                    PreviewDrop="OnFieldsListDrop">
+            <TextBlock Style="{StaticResource SidebarTextStyle}" Text="Campos seleccionados:"/>
 
             <ItemsControl ItemsSource="{Binding SelectedFields}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
-                                    Width="Auto" Height="Auto"
+                            <Border Style="{StaticResource FieldBorderStyle}" Background="{Binding Background}"
                                     PreviewMouseMove="OnFieldMouseMove">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <md:PackIcon Kind="{Binding Icon}" Width="20" Height="20" Margin="5"/>
@@ -129,16 +134,12 @@
             <Button Content="Limpiar Filtros" 
                     Background="LightSlateGray" Foreground="White"
                     Command="{Binding ClearFiltersCommand}" 
-                    Width="150" Height="30" 
-                    HorizontalAlignment="Center"
-                    Margin="10"/>
+                    Width="120" Height="30" Cursor="Hand"
+                    HorizontalAlignment="Left"
+                    Margin="40,5,5,5"/>
         </StackPanel>
 
         <!-- Tabla dinámica -->
-        <DataGrid ItemsSource="{Binding FilteredData}" AutoGenerateColumns="False"
-                  Grid.Row="1" Grid.Column="1" Margin="10">
-            <DataGrid.Columns>
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid ItemsSource="{Binding FilteredData}" Style="{StaticResource DataGridStyle}" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </UserControl>
