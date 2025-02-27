@@ -38,13 +38,27 @@ namespace wasty.Views
                 if (viewModel.SelectedFields.Contains(field))
                 {
                     viewModel.SelectedFields.Remove(field);
-                    viewModel.AvailableFields.Add(field);
+
+                    // Asegurar que se reusa la misma referencia en AvailableFields
+                    if (!viewModel.AvailableFields.Any(f => f.Name == field.Name))
+                    {
+                        viewModel.AvailableFields.Add(field);
+                    }
                 }
                 else if (viewModel.AvailableFields.Contains(field))
                 {
                     viewModel.AvailableFields.Remove(field);
-                    viewModel.SelectedFields.Add(field);
+
+                    // Asegurar que se reusa la misma referencia en SelectedFields
+                    if (!viewModel.SelectedFields.Any(f => f.Name == field.Name))
+                    {
+                        viewModel.SelectedFields.Add(field);
+                    }
                 }
+
+                // Notificar cambios
+                viewModel.OnPropertyChanged(nameof(viewModel.SelectedFields));
+                viewModel.OnPropertyChanged(nameof(viewModel.AvailableFields));
             }
         }
     }

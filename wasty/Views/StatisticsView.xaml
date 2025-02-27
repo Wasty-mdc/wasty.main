@@ -9,7 +9,7 @@
              Height="Auto"
              Width="Auto"
              Background="Transparent">
-    
+
     <UserControl.Resources>
         <ResourceDictionary Source="../Styles/statisticStyles.xaml"/>
     </UserControl.Resources>
@@ -44,7 +44,7 @@
                 <md:PackIcon Kind="ArrowLeft" Width="24" Height="24" Foreground="Black"/>
             </Button>
 
-            <!-- Contenedor de campos disponibles con WrapPanel -->
+            <!-- Contenedor de campos disponibles -->
             <ItemsControl ItemsSource="{Binding AvailableFields}" Grid.Column="1" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -100,33 +100,41 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Border Style="{StaticResource FieldBorderStyle}" Background="{Binding Background}"
+                            <!-- Contenedor del campo con el botón de expansión -->
+                            <Border BorderBrush="Black" BorderThickness="1" Padding="5" Background="{Binding Background}"
+                                    Width="Auto" Height="Auto"
                                     PreviewMouseMove="OnFieldMouseMove">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <md:PackIcon Kind="{Binding Icon}" Width="20" Height="20" Margin="5"/>
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14" Margin="10,0,10,0"/>
+                                    <Button Command="{Binding DataContext.ToggleExpandCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}" 
+                                            Background="Transparent" 
+                                            BorderThickness="0" BorderBrush="Transparent" 
+                                            HorizontalAlignment="Center" Cursor="Hand">
+                                        <md:PackIcon Kind="ArrowDown" Width="14" Height="14" Margin="2"/>
+                                    </Button>
                                 </StackPanel>
                             </Border>
-                            <!-- Mostrar CheckBoxes solo si el campo es filtrable -->
-                            <ItemsControl ItemsSource="{Binding DataContext.FilterableValues[Name], RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                <ItemsControl.Style>
-                                    <Style TargetType="ItemsControl">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsFilterable}" Value="False">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ItemsControl.Style>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Content="{Binding}" 
-                                                  IsChecked="{Binding DataContext.SelectedFilters[Name], 
-                                                  RelativeSource={RelativeSource AncestorType=UserControl},
-                                                  Mode=TwoWay, Converter={StaticResource MultiSelectConverter}}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+
+                            <!-- Expander para mostrar filtros -->
+                            <StackPanel Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                                <!-- TextBox para filtrar -->
+                                <TextBox Width="180" Height="24" Text="{Binding FilterText, Mode=TwoWay}"/>
+
+                                <!-- CheckBox list -->
+                                <ItemsControl ItemsSource="{Binding FilteredOptions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding}" 
+                                                      IsChecked="{Binding DataContext.SelectedFilters[Name], 
+                                                      RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, 
+                                                      Converter={StaticResource MultiSelectConverter}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

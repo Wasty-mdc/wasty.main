@@ -15,7 +15,6 @@ public class StatisticsViewModel : INotifyPropertyChanged
     private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
 
-    private ObservableCollection<Field> _availableFields { get; set; }
     public ObservableCollection<Field> SelectedFields { get; set; }
     private ObservableCollection<object> _filteredData;
     public ObservableCollection<object> FilteredData
@@ -28,6 +27,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         }
     }
     // Propiedad que representa la colección de clientes
+    private ObservableCollection<Field> _availableFields { get; set; }
     public ObservableCollection<Field> AvailableFields
     {
         get => _availableFields;
@@ -53,6 +53,8 @@ public class StatisticsViewModel : INotifyPropertyChanged
     public ICommand VolverCommand { get; }
     public ICommand GenerateTableCommand { get; }
     public ICommand ClearFiltersCommand { get; }
+    public ICommand ToggleExpandCommand { get; }
+
 
     public StatisticsViewModel(ApiService apiService, NavigationService navigationService)
     {
@@ -61,6 +63,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         VolverCommand = new RelayCommand<object>(_ => _navigationService.NavigateTo<MainView>());
         GenerateTableCommand = new RelayCommand<object>(_ => UpdateTable());
         ClearFiltersCommand = new RelayCommand<object>(_ => ClearFilters());
+        ToggleExpandCommand = new RelayCommand<Field>(ToggleExpand);
 
         AvailableFields = new ObservableCollection<Field>();
 
@@ -116,7 +119,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
             foreach(var i in fieldsNames)
             {
-                fieldsList.Add(new Field(i,"Calendar", "LightRed"));
+                fieldsList.Add(new Field(i,"Calendar", "#6CD4FF"));
             }
 
             return fieldsList;
@@ -126,7 +129,10 @@ public class StatisticsViewModel : INotifyPropertyChanged
             return new ObservableCollection<Field>();
         }
     }
-
+    private void ToggleExpand(Field field)
+    {
+        field.IsExpanded = !field.IsExpanded;
+    }
     private void UpdateTable()
     {
         var allData = GetAllData(); // Obtiene la data completa
@@ -173,7 +179,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(string propertyName)
+    public void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
