@@ -64,7 +64,7 @@ namespace wasty.ViewModels
                 if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
                     token = tokenElement.GetString();
 
-                var result = await _apiService.RequestAsync("GET", "estadistica/paneles", "", token);
+                var result = await _apiService.RequestAsync("GET", "estadisticas/paneles", "", token);
 
                 if (result.TryGetProperty("datos", out itemsElement))
                     items = itemsElement.GetRawText();

@@ -81,22 +81,22 @@ public class StatisticsViewModel : INotifyPropertyChanged
         };
 
         SelectedFilters = new Dictionary<string, List<string>>();
-        Init().GetAwaiter();
+        //Init().GetAwaiter();
     }
 
     // Método para inicializar la vista modelo
-    private async Task Init()
+    public async Task Init(string tabla)
     {
-        AvailableFields = await GetData();
+        AvailableFields = await GetData(tabla);
     }
 
-    private async Task<ObservableCollection<Field>> GetData()
+    private async Task<ObservableCollection<Field>> GetData(string tabla)
     {
         JsonElement tokenElement = default;
         JsonElement fieldsElement = default;
+        string fields = string.Empty;
         ObservableCollection<Field> fieldsList = new ObservableCollection<Field>();
-        string token = "";
-        string fields = "";
+        string token = string.Empty;
         var login = new
         {
             Email = "Pruebas123@pruebas.com",
@@ -108,7 +108,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
             token = tokenElement.GetString();
 
-        var result = await _apiService.RequestAsync("GET", "data/tablas", "", token);
+        var result = await _apiService.RequestAsync("GET", $"estadisticas/columnas/{tabla}", "", token);
 
         if (result.TryGetProperty("datos", out fieldsElement))
             fields = fieldsElement.GetRawText();

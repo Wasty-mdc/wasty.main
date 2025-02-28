@@ -18,7 +18,7 @@ namespace wasty.Views
         public void ReceiveParameter(object parameter)
         {
             var viewModel = (StatisticsViewModel)DataContext;
-            //viewModel.Initialize(parameter);
+            viewModel.Init(parameter.ToString());
         }
 
         private void OnFieldMouseMove(object sender, MouseEventArgs e)
