@@ -29,22 +29,14 @@ namespace wasty.ViewModels
         {
             _apiService = apiService;
             _navigationService = navigationService;
-            NavigateToStatisticsCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsView>());
+            NavigateToStatisticsCommand = new RelayCommand<object>(NavigateToStatistics);
             Botones = new ObservableCollection<BotonPanelStats>();
             Init().GetAwaiter();
-            //Botones = new ObservableCollection<BotonPanelStats>
-            //{
-            //    new BotonPanelStats { Nombre = "CLIENTES", Icono = "AccountMultiple", Comando = "ClientesCommand", ColorFondo = "#2271b1" },
-            //    new BotonPanelStats { Nombre = "RESIDUOS", Icono = "Recycle", Comando = "ResiduosCommand", ColorFondo = "#A3BE8C" },
-            //    new BotonPanelStats { Nombre = "ENVIOS", Icono = "Truck", Comando = "EnviosCommand", ColorFondo = "#F3CC5C" },
-            //    new BotonPanelStats { Nombre = "RECOGIDAS", Icono = "Cube", Comando = "RecogidasCommand", ColorFondo = "#E57373" },
-            //    new BotonPanelStats { Nombre = "STOCK", Icono = "Warehouse", Comando = "StockCommand", ColorFondo = "#A67C52" },
-            //    new BotonPanelStats { Nombre = "COBROS", Icono = "Calculator", Comando = "CobrosCommand", ColorFondo = "#4A90E2" },
-            //    new BotonPanelStats { Nombre = "PAGOS", Icono = "CashMultiple", Comando = "PagosCommand", ColorFondo = "#F39C12" },
-            //    new BotonPanelStats { Nombre = "MATERIAL", Icono = "Archive", Comando = "MaterialCommand", ColorFondo = "#2D2D2D" },
-            //    new BotonPanelStats { Nombre = "VENTAS", Icono = "Store", Comando = "VentasCommand", ColorFondo = "#2E7D32" },
-            //    new BotonPanelStats { Nombre = "COBROS", Icono = "Cart", Comando = "CobrosCommand2", ColorFondo = "#B71C1C" }
-            //};
+        }
+
+        private void NavigateToStatistics(object parameter)
+        {
+            _navigationService.NavigateTo<StatisticsView>(parameter);
         }
 
         private async Task Init()

@@ -2,16 +2,23 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using wasty.Models;
+using wasty.Services;
 using wasty.ViewModels;
 
 namespace wasty.Views
 {
-    public partial class StatisticsView : UserControl
+    public partial class StatisticsView : UserControl, IParameterReceiver
     {
         public StatisticsView()
         {
             InitializeComponent();
             DataContext = ((App)Application.Current).Services.GetService(typeof(StatisticsViewModel));
+        }
+
+        public void ReceiveParameter(object parameter)
+        {
+            var viewModel = (StatisticsViewModel)DataContext;
+            //viewModel.Initialize(parameter);
         }
 
         private void OnFieldMouseMove(object sender, MouseEventArgs e)
