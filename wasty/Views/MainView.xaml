@@ -80,7 +80,7 @@
                 <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding NavigateToClientesCommand}" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="AccountMultiple" Width="80" Height="80" Foreground="#266DD3"/>
-                        <TextBlock Text="Clientes" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <TextBlock Text="CLIENTES" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
@@ -89,7 +89,7 @@
                 <Button x:Name="residuosButton" Style="{StaticResource CentralButton}" ToolTip="Residuos" Command="{Binding NavigateToResiduosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="Recycle" Width="80" Height="80" Foreground="#A0C26C"/>
-                        <TextBlock Text="Residuos" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <TextBlock Text="RESIDUOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 							   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
@@ -98,7 +98,7 @@
                 <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" Command="{Binding ShowFicherosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#edf2f4"/>
-                        <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <TextBlock Text="FICHEROS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
@@ -107,7 +107,7 @@
                 <Button Style="{StaticResource CentralButton}" ToolTip="Gestión" Command="{Binding ShowGestionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="SafeSquareOutline" Width="80" Height="80" Foreground="#22333b"/>
-                        <TextBlock Text="Gestión" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <TextBlock Text="GESTIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
@@ -115,16 +115,16 @@
                 <!-- Botón Facturación -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#99582a"/>
-                        <TextBlock Text="Facturación" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#99582a" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="FACTURACIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
                 <!-- Botón Estadísticas -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas" Command="{Binding NavigateToStatisticsCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="ChartBox" Width="80" Height="80" Foreground="#E9D985"/>
-                        <TextBlock Text="Estadísticas" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <md:PackIcon Kind="ChartBox" Width="80" Height="80" Foreground="#E9D985" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="ESTADÍSTICAS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
