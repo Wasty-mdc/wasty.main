@@ -1,20 +1,46 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 using wasty.Services;
 using wasty.Views;
-using System.ComponentModel;
+using wasty.Models;
 
 namespace wasty.ViewModels
 {
     public class StatisticsPanelViewModel : INotifyPropertyChanged
     {
         private readonly NavigationService _navigationService;
-
         public ICommand NavigateToStatisticsCommand { get; }
+
+        private ObservableCollection<BotonPanelStats> _botones;
+        public ObservableCollection<BotonPanelStats> Botones
+        {
+            get => _botones;
+            set
+            {
+                _botones = value;
+                OnPropertyChanged(nameof(Botones));
+            }
+        }
 
         public StatisticsPanelViewModel(NavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateToStatisticsCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsView>());
+
+            Botones = new ObservableCollection<BotonPanelStats>
+            {
+                new BotonPanelStats { Nombre = "CLIENTES", Icono = "AccountMultiple", Comando = "ClientesCommand", ColorFondo = "#2271b1" },
+                new BotonPanelStats { Nombre = "RESIDUOS", Icono = "Recycle", Comando = "ResiduosCommand", ColorFondo = "#A3BE8C" },
+                new BotonPanelStats { Nombre = "ENVIOS", Icono = "Truck", Comando = "EnviosCommand", ColorFondo = "#F3CC5C" },
+                new BotonPanelStats { Nombre = "RECOGIDAS", Icono = "Cube", Comando = "RecogidasCommand", ColorFondo = "#E57373" },
+                new BotonPanelStats { Nombre = "STOCK", Icono = "Warehouse", Comando = "StockCommand", ColorFondo = "#A67C52" },
+                new BotonPanelStats { Nombre = "COBROS", Icono = "Calculator", Comando = "CobrosCommand", ColorFondo = "#4A90E2" },
+                new BotonPanelStats { Nombre = "PAGOS", Icono = "CashMultiple", Comando = "PagosCommand", ColorFondo = "#F39C12" },
+                new BotonPanelStats { Nombre = "MATERIAL", Icono = "Archive", Comando = "MaterialCommand", ColorFondo = "#2D2D2D" },
+                new BotonPanelStats { Nombre = "VENTAS", Icono = "Store", Comando = "VentasCommand", ColorFondo = "#2E7D32" },
+                new BotonPanelStats { Nombre = "COBROS", Icono = "Cart", Comando = "CobrosCommand2", ColorFondo = "#B71C1C" }
+            };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -43,79 +43,26 @@
                        HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,56,0,20"/>
 
             <!-- Contenedor de Botones organizados en linea -->
-            <WrapPanel HorizontalAlignment="Center" Width="Auto" Margin="10">
-                <!-- Boton CLIENTES -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#266DD3">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="AccountMultiple" Width="56" Height="56" Foreground="White" Margin="20,0,0,0"/>
-                        <TextBlock Text="CLIENTES" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton RESIDUOS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#A0C26C">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="Recycle" Width="56" Height="56" Foreground="White" Margin="20,0,0,0"/>
-                        <TextBlock Text="RESIDUOS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton ENVIOS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#FFD166">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="Truck" Width="56" Height="56" Foreground="White" Margin="10,0,0,0"/>
-                        <TextBlock Text="ENVIOS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton RECOGIDAS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#FF6B6B">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="PackageVariantClosed" Width="56" Height="56" Foreground="White" Margin="25,0,0,0"/>
-                        <TextBlock Text="RECOGIDAS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton STOCK -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#A27035">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="Warehouse" Width="56" Height="56" Foreground="White" Margin="5,0,0,0"/>
-                        <TextBlock Text="STOCK" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton COBROS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#27ae60">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="PointOfSale" Width="56" Height="56" Foreground="White" Margin="15,0,0,0"/>
-                        <TextBlock Text="COBROS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton PAGOS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#f39c12">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="CashFast" Width="56" Height="56" Foreground="White" Margin="5,0,0,0"/>
-                        <TextBlock Text="PAGOS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton MATERIAL -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#343a40">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="Archive" Width="56" Height="56" Foreground="White" Margin="15,0,0,0"/>
-                        <TextBlock Text="MATERIAL" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton VENTAS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#2d6a4f ">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="Store" Width="56" Height="56" Foreground="White" Margin="10,0,0,0"/>
-                        <TextBlock Text="VENTAS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <!-- Boton COBROS -->
-                <Button Style="{StaticResource StatsButtonStyle}" Background="#8d0801 ">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <md:PackIcon Kind="CartVariant" Width="56" Height="56" Foreground="White" Margin="10,0,0,0"/>
-                        <TextBlock Text="COBROS" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
+            <ItemsControl ItemsSource="{Binding Botones}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-            </WrapPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource StatsButtonStyle}" Background="{Binding ColorFondo}" Command="{Binding Comando}">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <md:PackIcon Kind="{Binding Icono}" Width="56" Height="56" 
+                                             Foreground="White" 
+                                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Nombre}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
     </Grid>
 </UserControl>
