@@ -110,16 +110,12 @@
             </Border>
 
             <!-- Contenido Principal -->
-            <Grid Grid.Row="2" Background="#F5F5F5">
-                <Image Source="pack://application:,,,/Assets/Images/mainbackground.png" 
-               Stretch="Fill"
-               Panel.ZIndex="-1"/>
-                <ContentControl Content="{Binding CurrentView}" Name="CurrentView" >
-                    <ContentControl.Background>
-                        <ImageBrush ImageSource="/mainBackground.png" Opacity="1"/>
-                    </ContentControl.Background>
-                </ContentControl>
+            <Grid Grid.Row="2" Background="{StaticResource MainGradientBackground}">
+                <ContentControl Content="{Binding CurrentView}" Name="CurrentView"
+                    Background="Transparent"/>
             </Grid>
+
+
         </Grid>
     </Border>
 </Window>

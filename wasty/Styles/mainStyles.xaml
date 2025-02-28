@@ -22,7 +22,7 @@
     <!-- Principal -->
     <SolidColorBrush x:Key="PrimaryHover" Color="#109356"/>
     <!-- Hover -->
-    <SolidColorBrush x:Key="NavColor" Color="#2C6E49"/>
+    <SolidColorBrush x:Key="NavColor" Color="#0ead69"/>
 
     <!-- Error Colors -->
     <SolidColorBrush x:Key="Error50" Color="#fceded"/>
@@ -95,6 +95,14 @@
         <Setter Property="Foreground" Value="#000"/>
     </Style>
 
+    <!-- Gradiente para el Fondo Principal -->
+    <LinearGradientBrush x:Key="MainGradientBackground" StartPoint="0,1" EndPoint="1,0">
+        <GradientStop Color="#00d664" Offset="0"/>
+        <!-- hsla(148, 100%, 47%, 1) -->
+        <GradientStop Color="#1b66c9" Offset="1"/>
+        <!-- hsla(211, 90%, 47%, 1) -->
+    </LinearGradientBrush>
+
     <!-- Estilo para los iconos de Navegación -->
     <Style x:Key="NavButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
@@ -116,7 +124,7 @@
                             <Setter Property="Background" Value="#276FBF"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#266dd3"/>
+                            <Setter Property="Background" Value="#1b66c9"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -140,10 +148,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#E0E0E0"/>
+                            <Setter Property="Background" Value="#FFFFFF"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#CCCCCC"/>
+                            <Setter Property="Background" Value="#F0F0F0"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -202,11 +210,11 @@
         <!-- Igual a las cajas -->
         <Setter Property="Margin" Value="10,20,10,10"/>
         <!-- Espaciado coherente -->
-        <Setter Property="Background" Value="#FAF3DD"/>
+        <Setter Property="Background" Value="#47FF9D"/>
         <!-- Color de fondo inicial -->
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="BorderBrush" Value="#FAF3DD"/>
+        <Setter Property="BorderBrush" Value="#47FF9D"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -226,17 +234,17 @@
         <Style.Triggers>
             <!-- Efecto hover -->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#A0C26C"/>
+                <Setter Property="Background" Value="#00d664"/>
                 <!-- Verde oscuro en hover -->
-                <Setter Property="BorderBrush" Value="#A0C26C"/>
+                <Setter Property="BorderBrush" Value="#00d664"/>
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>
 
             <!-- Efecto clic -->
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#8A9F56"/>
+                <Setter Property="Background" Value="#00A34C"/>
                 <!-- Verde aún más oscuro al presionar -->
-                <Setter Property="BorderBrush" Value="#8A9F56"/>
+                <Setter Property="BorderBrush" Value="#00A34C"/>
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>
         </Style.Triggers>

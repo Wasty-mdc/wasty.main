@@ -97,7 +97,7 @@
                 <!-- Botón Ficheros -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" Command="{Binding ShowFicherosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#232C33"/>
+                        <md:PackIcon Kind="FileDocument" Width="80" Height="80" Foreground="#edf2f4"/>
                         <TextBlock Text="Ficheros" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
@@ -106,7 +106,7 @@
                 <!-- Botón Gestión -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Gestión" Command="{Binding ShowGestionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="SafeSquareOutline" Width="80" Height="80" Foreground="#83927D"/>
+                        <md:PackIcon Kind="SafeSquareOutline" Width="80" Height="80" Foreground="#22333b"/>
                         <TextBlock Text="Gestión" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
@@ -115,7 +115,7 @@
                 <!-- Botón Facturación -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#5C839D"/>
+                        <md:PackIcon Kind="WalletOutline" Width="80" Height="80" Foreground="#99582a"/>
                         <TextBlock Text="Facturación" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
