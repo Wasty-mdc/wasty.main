@@ -103,6 +103,38 @@
         <!-- hsla(211, 90%, 47%, 1) -->
     </LinearGradientBrush>
 
+    <!-- Estilo para los botones de la barra de título -->
+    <Style x:Key="TitleBarButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#555"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#777"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Estilo para los iconos de Navegación -->
     <Style x:Key="NavButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>

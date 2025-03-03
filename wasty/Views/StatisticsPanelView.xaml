@@ -52,7 +52,10 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Style="{StaticResource StatsButtonStyle}" Background="{Binding ColorFondo}" Command="{Binding DataContext.NavigateToStatisticsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Tabla}">
+                        <Button Style="{StaticResource StatsButtonStyle}" Background="{Binding ColorFondo}" 
+                                Command="{Binding NavigateToStatisticsCommand,
+                                        RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding Tabla}">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <md:PackIcon Kind="{Binding Icono}" Width="56" Height="56" 
                                              Foreground="White" 

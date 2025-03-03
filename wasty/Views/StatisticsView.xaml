@@ -118,7 +118,7 @@
                             </Border>
 
                             <!-- Expander para mostrar filtros -->
-                            <StackPanel Visibility="{Binding IsExpanded}">
+                            <StackPanel Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                                 <!-- TextBox para filtrar -->
                                 <TextBox Width="180" Height="24" Text="{Binding FilterText, Mode=TwoWay}"/>

@@ -10,67 +10,41 @@
         WindowStyle="None"
         ResizeMode="CanResize">
 
-    <!-- Ajustar la estructura de la ventana con WindowChrome -->
+    <!-- Configuración de la ventana para permitir bordes redondeados y redimensionado -->
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" CornerRadius="10" ResizeBorderThickness="5"/>
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
-        <!-- Estilo para los botones de la barra de título -->
-        <Style x:Key="TitleBarButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#555"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#777"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Importar estilos desde MainStyles.xaml -->
+                <ResourceDictionary Source="Styles/mainStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Conversor BooleanToVisibility para ocultar/mostrar elementos según autenticación -->
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <!-- Border principal con esquinas redondeadas y sombra -->
+
+    <!-- Contenedor principal con bordes redondeados y sombra -->
     <Border x:Name="MainBorder" CornerRadius="10" Margin="-1">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Opacity="0.3"/>
         </Border.Effect>
 
         <Grid>
-            <!-- Definir Filas -->
+            <!-- Definir la estructura de filas -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <!-- Barra de Título -->
-                <RowDefinition Height="Auto"/>
-                <!-- Menú de navegación -->
+                <!-- Barra de título -->
                 <RowDefinition Height="*"/>
-                <!-- Contenido Principal -->
+                <!-- Contenido completo de la app -->
             </Grid.RowDefinitions>
 
             <!-- Barra de Título Personalizada -->
-            <Border Grid.Row="0" 
-                    Background="#0F0F0F" 
-                    Height="50" 
-                    VerticalAlignment="Center">
+            <Border Grid.Row="0" Background="#0F0F0F" Height="50">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding DragMoveCommand}" />
                 </Border.InputBindings>
@@ -85,23 +59,16 @@
                         <ColumnDefinition Width="40"/>
                         <!-- Cerrar -->
                     </Grid.ColumnDefinitions>
-
                     <TextBlock Text="Wasty" Foreground="White" VerticalAlignment="Center"
                                Margin="10" FontSize="14" FontWeight="Bold"/>
-
-                    <!-- Botón Minimizar -->
                     <Button Grid.Column="1" Style="{StaticResource TitleBarButtonStyle}"
                             Command="{Binding MinimizeCommand}">
                         <md:PackIcon Kind="WindowMinimize" Width="18" Height="18"/>
                     </Button>
-
-                    <!-- Botón Maximizar/Restaurar -->
                     <Button Grid.Column="2" Style="{StaticResource TitleBarButtonStyle}"
                             Command="{Binding MaximizeCommand}">
                         <md:PackIcon x:Name="MaximizeIcon" Kind="WindowMaximize" Width="18" Height="18"/>
                     </Button>
-
-                    <!-- Botón Cerrar -->
                     <Button Grid.Column="3" Style="{StaticResource TitleBarButtonStyle}"
                             Command="{Binding CloseCommand}">
                         <md:PackIcon Kind="WindowClose" Width="18" Height="18"/>
@@ -109,13 +76,35 @@
                 </Grid>
             </Border>
 
-            <!-- Contenido Principal -->
-            <Grid Grid.Row="2" Background="{StaticResource MainGradientBackground}">
-                <ContentControl Content="{Binding CurrentView}" Name="CurrentView"
-                    Background="Transparent"/>
+            <!-- Contenido de la aplicación -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <!-- Menú lateral compacto -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Contenido principal -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Menú de navegación lateral -->
+                <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" 
+                            Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                            Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
+                    <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
+                        <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource NavButton}" ToolTip="Historial">
+                        <md:PackIcon Kind="History" Width="30" Height="30" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource NavButton}" ToolTip="Favoritos">
+                        <md:PackIcon Kind="Star" Width="30" Height="30" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+
+                <!-- Contenido principal dinámico -->
+                <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}">
+                    <ContentControl Content="{Binding CurrentView}" Name="CurrentView" Background="Transparent"/>
+                </Grid>
             </Grid>
-
-
         </Grid>
     </Border>
 </Window>
