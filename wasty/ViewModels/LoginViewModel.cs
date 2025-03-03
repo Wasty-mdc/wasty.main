@@ -11,11 +11,12 @@ public class LoginViewModel : INotifyPropertyChanged
 {
     private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
+    private readonly AuthService _authService;
     private string _email;
     public string Contrasenia { private get; set; }
 
     // Constructor que inicializa el servicio de API, el servicio de navegación y los comandos
-    public LoginViewModel(ApiService apiService, NavigationService navigationService)
+    public LoginViewModel(ApiService apiService, NavigationService navigationService, AuthService authService)
     {
         _apiService = apiService;
         _navigationService = navigationService;
@@ -23,6 +24,7 @@ public class LoginViewModel : INotifyPropertyChanged
         SkipCommand = new RelayCommand(async _ => await SkipLogin());
         RegisterCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
         SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(3));
+        _authService = authService;
     }
 
     // Propiedad para el correo electrónico
@@ -54,22 +56,30 @@ public class LoginViewModel : INotifyPropertyChanged
             Contrasenia
         };
 
-        var result = await _apiService.RequestAsync("POST", "auth/login", login);
-        //Si la API está caida, o presenta problemas, result será null
-        if (result is null)
+        try
         {
-            SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
+            var result = await _apiService.RequestAsync("POST", "auth/login", login);
+            //Si la API está caida, o presenta problemas, result será null
+            if (result is null)
+            {
+                SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
+            }
+            //Si la API responde con éxito, result será un objeto con la propiedad "exito" en true
+            else if (result.GetProperty("exito").GetBoolean())
+            {
+                _authService.IsAuthenticated = true;
+                SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
+                _navigationService.NavigateTo<MainView>();
+            }
+            //Si la API responde con un error de login, result será un objeto con la propiedad "exito" en false
+            else
+            {
+                SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
+            }
         }
-        //Si la API responde con éxito, result será un objeto con la propiedad "exito" en true
-        else if (result.GetProperty("exito").GetBoolean())
+        catch(Exception ex)
         {
-            SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
-            _navigationService.NavigateTo<MainView>();
-        }
-        //Si la API responde con un error de login, result será un objeto con la propiedad "exito" en false
-        else
-        {
-            SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
+
         }
     }
     private async Task SkipLogin()

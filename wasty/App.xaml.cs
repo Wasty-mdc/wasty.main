@@ -32,6 +32,9 @@ namespace wasty
             // Definir la factoría para crear vistas dinámicamente
             Func<Type, UserControl> viewFactory = viewType => (UserControl)Activator.CreateInstance(viewType);
 
+            // Registrar AuthenticationService
+            services.AddSingleton<AuthService>();
+
             // Registrar MainWindowViewModel
             services.AddSingleton<MainWindowViewModel>();
 

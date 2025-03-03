@@ -3,12 +3,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using wasty.Services;
 using wasty.Views;
 
 namespace wasty.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly AuthService _authService;
         // Evento para notificar cambios en las propiedades
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,8 +47,10 @@ namespace wasty.ViewModels
         public ICommand CloseCommand { get; }
         public ICommand DragMoveCommand { get; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(AuthService authService)
         {
+            _authService = authService;
+            _authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
             // Inicializar comandos de navegación
             ShowLoginViewCommand = new RelayCommand(_ =>
             {
@@ -75,6 +79,7 @@ namespace wasty.ViewModels
             // Establecer la vista inicial
             IsAuthenticated = false;
             CurrentView = new LoginView();
+            _authService = authService;
         }
 
         // Método para alternar entre maximizar y restaurar la ventana
