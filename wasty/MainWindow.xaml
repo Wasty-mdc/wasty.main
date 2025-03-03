@@ -15,6 +15,7 @@
         <WindowChrome CaptionHeight="0" CornerRadius="10" ResizeBorderThickness="5"/>
     </WindowChrome.WindowChrome>
 
+    <!-- Importación de Recursos -->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

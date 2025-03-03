@@ -44,13 +44,13 @@ namespace wasty.Models
             }
         }
 
-        public Field(string name, string icon, string background, bool isFilterable = false, List<string> options = null)
+        public Field(string name, string icon, string background, bool isFilterable = false, bool isExpanded = false, List<string> options = null)
         {
             Name = name;
             Icon = icon;
             Background = background;
             IsFilterable = isFilterable;
-            IsExpanded = false;
+            IsExpanded = isExpanded;
             AllOptions = options ?? new List<string>();
             FilteredOptions = new List<string>(AllOptions);
         }

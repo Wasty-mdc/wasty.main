@@ -5,7 +5,7 @@
 
     <!-- Estilos generales de la vista -->
     <Style x:Key="SidebarStyle" TargetType="StackPanel">
-        <Setter Property="Background" Value="#5D9AE9"/>
+        <Setter Property="Background" Value="#bfdbf7"/>
         <Setter Property="Width" Value="250"/>
         <Setter Property="Margin" Value="0,0,5,0"/>
     </Style>

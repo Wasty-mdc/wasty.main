@@ -15,6 +15,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
     private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
 
+    private readonly List<HeaderColumn> _headerColumn = HeaderColumn.ObtenerHeaders();
     public ObservableCollection<Field> SelectedFields { get; set; }
     private ObservableCollection<object> _filteredData;
     public ObservableCollection<object> FilteredData
@@ -53,6 +54,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
     public ICommand VolverCommand { get; }
     public ICommand GenerateTableCommand { get; }
     public ICommand ClearFiltersCommand { get; }
+    public ICommand RemoveFieldCommand { get; }
     public ICommand ToggleExpandCommand { get; }
 
 
@@ -60,10 +62,12 @@ public class StatisticsViewModel : INotifyPropertyChanged
     {
         _apiService = apiService;
         _navigationService = navigationService;
+
         VolverCommand = new RelayCommand<object>(_ => _navigationService.NavigateTo<MainView>());
         GenerateTableCommand = new RelayCommand<object>(_ => UpdateTable());
         ClearFiltersCommand = new RelayCommand<object>(_ => ClearFilters());
         ToggleExpandCommand = new RelayCommand<Field>(ToggleExpand);
+        RemoveFieldCommand = new RelayCommand<Field>(RemoveField);
 
         AvailableFields = new ObservableCollection<Field>();
 
@@ -119,7 +123,12 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
             foreach(var i in fieldsNames)
             {
-                fieldsList.Add(new Field(i,"Calendar", "#6CD4FF"));
+                var header = _headerColumn.FirstOrDefault(s => i.Contains(s.Nombre));
+                if (header is not null)
+                {
+                    fieldsList.Add(new Field(i, header.Icono, header.Color));
+                }else 
+                    fieldsList.Add(new Field(i, "FileAlertOutline", "#9C9C9C"));
             }
 
             return fieldsList;
@@ -131,7 +140,12 @@ public class StatisticsViewModel : INotifyPropertyChanged
     }
     private void ToggleExpand(Field field)
     {
+        foreach (var f in SelectedFields)
+        {
+            if (f != field) f.IsExpanded = false;
+        }
         field.IsExpanded = !field.IsExpanded;
+        OnPropertyChanged(nameof(SelectedFields));
     }
     private void UpdateTable()
     {
@@ -161,12 +175,28 @@ public class StatisticsViewModel : INotifyPropertyChanged
             FilteredData.Add(item);
         }
     }
+    private void RemoveField(Field field)
+    {
+        if (SelectedFields.Contains(field))
+        {
+            SelectedFields.Remove(field);
+            if (!AvailableFields.Any(f => f.Name == field.Name))
+            {
+                AvailableFields.Add(field);
+            }
+            OnPropertyChanged(nameof(SelectedFields));
+            OnPropertyChanged(nameof(AvailableFields));
+        }
+    }
 
     private void ClearFilters()
     {
+        foreach (var field in SelectedFields.ToList())
+        {
+            RemoveField(field);
+        }
         SelectedFilters.Clear();
         OnPropertyChanged(nameof(SelectedFilters));
-        UpdateTable();
     }
 
     private List<Dictionary<string, object>> GetAllData()
