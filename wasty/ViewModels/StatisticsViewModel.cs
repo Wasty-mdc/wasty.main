@@ -81,7 +81,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         };
 
         SelectedFilters = new Dictionary<string, List<string>>();
-        //Init().GetAwaiter();
+        Init("ClienteResiduo").GetAwaiter();
     }
 
     // Método para inicializar la vista modelo

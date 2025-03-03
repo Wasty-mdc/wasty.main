@@ -30,7 +30,7 @@ public class MainViewModel : INotifyPropertyChanged
         NavigateToLoginCommand = new RelayCommand(_ => _navigationService.NavigateTo<LoginView>());
         NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientTableView>());
         NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<RecycTableView>());
-        NavigateToStatisticsCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
+        NavigateToStatisticsCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsView>());
         ShowFicherosCommand = new RelayCommand(ShowFicheros);
         ShowGestionCommand = new RelayCommand(ShowGestion);
         ShowFacturacionCommand = new RelayCommand(ShowFacturacion);

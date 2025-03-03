@@ -11,7 +11,16 @@
              Background="Transparent">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="../Styles/statisticStyles.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Importar estilos desde MainStyles.xaml -->
+                <ResourceDictionary Source="../Styles/mainStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/statisticStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Conversor BooleanToVisibility para ocultar/mostrar elementos según autenticación -->
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Background="WhiteSmoke">
@@ -118,7 +127,7 @@
                             </Border>
 
                             <!-- Expander para mostrar filtros -->
-                            <StackPanel Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisConverter}}">
 
                                 <!-- TextBox para filtrar -->
                                 <TextBox Width="180" Height="24" Text="{Binding FilterText, Mode=TwoWay}"/>
@@ -129,7 +138,8 @@
                                         <DataTemplate>
                                             <CheckBox Content="{Binding}" 
                                                       IsChecked="{Binding DataContext.SelectedFilters[Name], 
-                                                      RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay
+                                                      RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, 
+                                                      Converter={StaticResource MultiSelectConverter}
                                                       }"/>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
