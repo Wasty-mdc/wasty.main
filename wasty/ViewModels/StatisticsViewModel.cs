@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Documents;
@@ -13,6 +14,7 @@ using wasty.Models;
 using wasty.Services;
 using wasty.ViewModels;
 using wasty.Views;
+using static MaterialDesignThemes.Wpf.Theme.ToolBar;
 
 public class StatisticsViewModel : INotifyPropertyChanged
 {
@@ -21,8 +23,8 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
     private readonly List<HeaderColumn> _headerColumn = HeaderColumn.ObtenerHeaders();
     public ObservableCollection<Field> SelectedFields { get; set; }
-    private ObservableCollection<object> _filteredData;
-    public ObservableCollection<object> FilteredData
+    private DataTable _filteredData;
+    public DataTable FilteredData
     {
         get => _filteredData;
         set
@@ -86,7 +88,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         AvailableFields = new ObservableCollection<Field>();
 
         SelectedFields = new ObservableCollection<Field>();
-        FilteredData = new ObservableCollection<object>();
+        FilteredData = new DataTable();
 
         // Diccionario de valores filtrables (simulación de datos desde la BD)
         FilterableValues = new ObservableCollection<Dictionary<string, List<string>>>();
@@ -147,14 +149,63 @@ public class StatisticsViewModel : INotifyPropertyChanged
     }
     public async Task OnSelectedFieldsChanged(string fieldName)
     {
-        //if (e.Action == NotifyCollectionChangedAction.Add)
-        //{
-            //Field field = (Field)e.NewItems[0];
-            List<string> values = new List<string>();
+        List<string> values = new List<string>();
 
+        JsonElement tokenElement = default;
+        JsonElement recordsElement = default;
+        string json = string.Empty;
+        string token = string.Empty;
+        var login = new
+        {
+            Email = "Pruebas123@pruebas.com",
+            Contrasenia = "Pruebas123."
+        };
+
+        var auth = await _apiService.RequestAsync("POST", "auth/login", login);
+
+        if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
+            token = tokenElement.GetString();
+
+        var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla=ClienteResiduo&campos={fieldName}", "", token);
+
+        if (result.TryGetProperty("datos", out recordsElement))
+            json = recordsElement.GetRawText();
+
+        var records = JsonSerializer.Deserialize<List<dynamic>>(json);
+
+        foreach(JsonElement jElement in records)
+        {
+            if (jElement.TryGetProperty(fieldName, out JsonElement property))
+                values.Add(property.GetRawText());
+        }
+
+        FilterableValues.Add(
+            new Dictionary<string, List<string>>
+            {
+                { fieldName, values.Take(5).ToList() }
+            }
+        );
+    }
+    private void ToggleExpand(Field field)
+    {
+        foreach (var f in SelectedFields)
+        {
+            if (f != field) f.IsExpanded = false;
+        }
+        field.IsExpanded = !field.IsExpanded;
+        OnPropertyChanged(nameof(SelectedFields));
+    }
+    private async Task UpdateTable()
+    {
+        var dataTable = new DataTable();
+        var campos = string.Join(",", SelectedFields.Select(t => t.Name));
+
+        if (!string.IsNullOrWhiteSpace(campos))
+        {
             JsonElement tokenElement = default;
             JsonElement fieldsElement = default;
-            string json = string.Empty;
+            string fields = string.Empty;
+            ObservableCollection<Field> fieldsList = new ObservableCollection<Field>();
             string token = string.Empty;
             var login = new
             {
@@ -167,68 +218,35 @@ public class StatisticsViewModel : INotifyPropertyChanged
             if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
                 token = tokenElement.GetString();
 
-            var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla=ClienteResiduo&campos={fieldName}", "", token);
+            var result = await _apiService.RequestAsync("GET", $"estadisticas/datos/?tabla=ClienteResiduo&campos={campos}", "", token);
 
             if (result.TryGetProperty("datos", out fieldsElement))
-                json = fieldsElement.GetRawText();
+                fields = fieldsElement.GetRawText();
+            
+            var jsonArray = JsonDocument.Parse(fields).RootElement.EnumerateArray();
 
-            var fieldsNames = JsonSerializer.Deserialize<List<dynamic>>(json);
-
-            try
+            if (jsonArray.Any())
             {
-                foreach(JsonElement jElement in fieldsNames)
+                // Obtener las propiedades del primer objeto para definir las columnas
+                foreach (var property in jsonArray.First().EnumerateObject())
                 {
-                    if (jElement.TryGetProperty(fieldName, out JsonElement property))
-                        values.Add(property.GetRawText());
+                    dataTable.Columns.Add(property.Name);
                 }
-            }catch(Exception ex)
-            {
 
+                // Añadir filas al DataTable
+                foreach (var jsonObject in jsonArray)
+                {
+                    var row = dataTable.NewRow();
+                    foreach (var property in jsonObject.EnumerateObject())
+                    {
+                        row[property.Name] = property.Value.ToString();
+                    }
+                    dataTable.Rows.Add(row);
+                }
             }
-            FilterableValues.Add(
-                new Dictionary<string, List<string>>
-                {
-                    { fieldName, values.Take(5).ToList() }
-                }
-            );
-        //}
-    }
-    private void ToggleExpand(Field field)
-    {
-        foreach (var f in SelectedFields)
-        {
-            if (f != field) f.IsExpanded = false;
-        }
-        field.IsExpanded = !field.IsExpanded;
-        OnPropertyChanged(nameof(SelectedFields));
-    }
-    private void UpdateTable()
-    {
-        var allData = GetAllData(); // Obtiene la data completa
-
-        if (SelectedFields.Count == 0)
-        {
-            FilteredData.Clear();
-            return;
         }
 
-        if (SelectedFilters.Count == 0 || SelectedFilters.All(f => f.Value.Count == 0))
-        {
-            FilteredData = new ObservableCollection<object>(allData.Select(row =>
-                SelectedFields.ToDictionary(field => field.Name, field => row.ContainsKey(field.Name) ? row[field.Name] : null)));
-            return;
-        }
-
-        var filtered = allData
-            .Where(row => SelectedFilters.All(filtro =>
-                !row.ContainsKey(filtro.Key) || filtro.Value.Contains(row[filtro.Key].ToString())))
-            .Select(row => SelectedFields.ToDictionary(field => field.Name, field => row.ContainsKey(field.Name) ? row[field.Name] : null));
-
-        FilteredData.Clear();
-        foreach (var item in filtered)
-        {
-            FilteredData.Add(item);
-        }
+        FilteredData = dataTable;
     }
     private void RemoveField(Field field)
     {
