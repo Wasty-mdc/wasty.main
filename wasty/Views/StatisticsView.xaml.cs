@@ -53,6 +53,7 @@ namespace wasty.Views
                     // Asegurar que se reusa la misma referencia en AvailableFields
                     if (!viewModel.AvailableFields.Any(f => f.Name == field.Name))
                     {
+                        await viewModel.OnSelectedFieldsChanged(field.Name, "REMOVE");
                         viewModel.AvailableFields.Add(field);
                     }
                 }
@@ -63,7 +64,7 @@ namespace wasty.Views
                     // Asegurar que se reusa la misma referencia en SelectedFields
                     if (!viewModel.SelectedFields.Any(f => f.Name == field.Name))
                     {
-                        await viewModel.OnSelectedFieldsChanged(field.Name);
+                        await viewModel.OnSelectedFieldsChanged(field.Name, "ADD");
                         viewModel.SelectedFields.Add(field);
                     }
                 }

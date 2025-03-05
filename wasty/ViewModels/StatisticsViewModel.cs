@@ -10,6 +10,8 @@ using System.Windows.Documents;
 using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
 using System.Xml.Linq;
+using Microsoft.VisualBasic;
+using OpenTK.Input;
 using wasty.Models;
 using wasty.Services;
 using wasty.ViewModels;
@@ -20,11 +22,12 @@ public class StatisticsViewModel : INotifyPropertyChanged
 {
     private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
+    private string Tabla;
 
     private readonly List<HeaderColumn> _headerColumn = HeaderColumn.ObtenerHeaders();
     public ObservableCollection<Field> SelectedFields { get; set; }
-    private DataTable _filteredData;
-    public DataTable FilteredData
+    private DataView _filteredData;
+    public DataView FilteredData
     {
         get => _filteredData;
         set
@@ -88,7 +91,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         AvailableFields = new ObservableCollection<Field>();
 
         SelectedFields = new ObservableCollection<Field>();
-        FilteredData = new DataTable();
+        FilteredData = new DataView();
 
         // Diccionario de valores filtrables (simulación de datos desde la BD)
         FilterableValues = new ObservableCollection<Dictionary<string, List<string>>>();
@@ -100,10 +103,11 @@ public class StatisticsViewModel : INotifyPropertyChanged
     // Método para inicializar la vista modelo
     public async Task Init(string tabla)
     {
-        AvailableFields = await GetData(tabla);
+        Tabla = tabla;
+        AvailableFields = await GetFields(tabla);
     }
 
-    private async Task<ObservableCollection<Field>> GetData(string tabla)
+    private async Task<ObservableCollection<Field>> GetFields(string tabla)
     {
         JsonElement tokenElement = default;
         JsonElement fieldsElement = default;
@@ -147,7 +151,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
             return new ObservableCollection<Field>();
         }
     }
-    public async Task OnSelectedFieldsChanged(string fieldName)
+    public async Task OnSelectedFieldsChanged(string fieldName, string action)
     {
         List<string> values = new List<string>();
 
@@ -166,7 +170,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
             token = tokenElement.GetString();
 
-        var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla=ClienteResiduo&campos={fieldName}", "", token);
+        var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla={Tabla}&campos={fieldName}", "", token);
 
         if (result.TryGetProperty("datos", out recordsElement))
             json = recordsElement.GetRawText();
@@ -178,13 +182,18 @@ public class StatisticsViewModel : INotifyPropertyChanged
             if (jElement.TryGetProperty(fieldName, out JsonElement property))
                 values.Add(property.GetRawText());
         }
-
-        FilterableValues.Add(
-            new Dictionary<string, List<string>>
-            {
-                { fieldName, values.Take(5).ToList() }
-            }
-        );
+        if (action is "ADD")
+        {
+            FilterableValues.Add(
+                new Dictionary<string, List<string>>{
+                    { fieldName, values.Take(5).ToList() }
+                }
+            );
+        } else
+        {
+            var itemToRemove = FilterableValues.FirstOrDefault(dict => dict.ContainsKey(fieldName));
+            FilterableValues.Remove(itemToRemove);
+        }
     }
     private void ToggleExpand(Field field)
     {
@@ -197,11 +206,12 @@ public class StatisticsViewModel : INotifyPropertyChanged
     }
     private async Task UpdateTable()
     {
-        var dataTable = new DataTable();
+        var dataView = new DataView();
         var campos = string.Join(",", SelectedFields.Select(t => t.Name));
 
         if (!string.IsNullOrWhiteSpace(campos))
         {
+            DataTable dataTable = new DataTable();
             JsonElement tokenElement = default;
             JsonElement fieldsElement = default;
             string fields = string.Empty;
@@ -244,9 +254,12 @@ public class StatisticsViewModel : INotifyPropertyChanged
                     dataTable.Rows.Add(row);
                 }
             }
+
+            dataView = dataTable.DefaultView;
+            dataView.Sort = $"{SelectedFields.Select(t => t.Name).FirstOrDefault()} ASC";
         }
 
-        FilteredData = dataTable;
+        FilteredData = dataView;
     }
     private void RemoveField(Field field)
     {
@@ -269,16 +282,8 @@ public class StatisticsViewModel : INotifyPropertyChanged
             RemoveField(field);
         }
         SelectedFilters.Clear();
+        FilterableValues.Clear();
         OnPropertyChanged(nameof(SelectedFilters));
-    }
-
-    private List<Dictionary<string, object>> GetAllData()
-    {
-        return new List<Dictionary<string, object>>
-        {
-            new Dictionary<string, object> { { "Año", "2023" }, { "Cliente", "Empresa A" }, { "Producto", "Papel" }, { "Categoría", "Reciclable" }, { "Estado", "Pendiente" }, { "Cantidad", 50 }, { "Precio", 2.5 }, { "Total", 125 } },
-            new Dictionary<string, object> { { "Año", "2022" }, { "Cliente", "Empresa B" }, { "Producto", "Plástico" }, { "Categoría", "No Reciclable" }, { "Estado", "Completado" }, { "Cantidad", 100 }, { "Precio", 1.5 }, { "Total", 150 } }
-        };
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
