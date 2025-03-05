@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
+using System.Windows.Documents;
+using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
+using System.Xml.Linq;
 using wasty.Models;
 using wasty.Services;
 using wasty.ViewModels;
@@ -39,7 +43,17 @@ public class StatisticsViewModel : INotifyPropertyChanged
         }
     }
 
-    public Dictionary<string, List<string>> FilterableValues { get; set; }
+    private ObservableCollection<Dictionary<string, List<string>>> _filterableValues { get; set; }
+    public ObservableCollection<Dictionary<string, List<string>>> FilterableValues
+    {
+        get => _filterableValues;
+        set
+        {
+            _filterableValues = value;
+            OnPropertyChanged(nameof(FilterableValues));
+        }
+    }
+
     private Dictionary<string, List<string>> _selectedFilters;
     public Dictionary<string, List<string>> SelectedFilters
     {
@@ -75,14 +89,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         FilteredData = new ObservableCollection<object>();
 
         // Diccionario de valores filtrables (simulación de datos desde la BD)
-        FilterableValues = new Dictionary<string, List<string>>
-        {
-            { "Año", new List<string> { "2020", "2021", "2022", "2023", "2024", "2025" } },
-            { "Cliente", new List<string> { "Empresa A", "Empresa B", "Empresa C", "Empresa D" } },
-            { "Producto", new List<string> { "Papel", "Plástico", "Vidrio", "Metal" } },
-            { "Categoría", new List<string> { "Reciclable", "No Reciclable" } },
-            { "Estado", new List<string> { "Pendiente", "Completado", "Cancelado" } }
-        };
+        FilterableValues = new ObservableCollection<Dictionary<string, List<string>>>();
 
         SelectedFilters = new Dictionary<string, List<string>>();
         Init("ClienteResiduo").GetAwaiter();
@@ -136,6 +143,54 @@ public class StatisticsViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             return new ObservableCollection<Field>();
+        }
+    }
+    public async Task OnSelectedFieldsChanged(NotifyCollectionChangedEventArgs e)
+    {
+        if (e.Action == NotifyCollectionChangedAction.Add)
+        {
+            Field field = (Field)e.NewItems[0];
+            List<string> values = new List<string>();
+
+            JsonElement tokenElement = default;
+            JsonElement fieldsElement = default;
+            string json = string.Empty;
+            string token = string.Empty;
+            var login = new
+            {
+                Email = "Pruebas123@pruebas.com",
+                Contrasenia = "Pruebas123."
+            };
+
+            var auth = await _apiService.RequestAsync("POST", "auth/login", login);
+
+            if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
+                token = tokenElement.GetString();
+
+            var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla=ClienteResiduo&campos={field.Name}", "", token);
+
+            if (result.TryGetProperty("datos", out fieldsElement))
+                json = fieldsElement.GetRawText();
+
+            var fieldsNames = JsonSerializer.Deserialize<List<dynamic>>(json);
+
+            try
+            {
+                foreach(JsonElement jElement in fieldsNames)
+                {
+                    if (jElement.TryGetProperty(field.Name, out JsonElement property))
+                        values.Add(property.GetRawText());
+                }
+            }catch(Exception ex)
+            {
+
+            }
+            FilterableValues.Add(
+                new Dictionary<string, List<string>>
+                {
+                    { field.Name, values.Take(5).ToList() }
+                }
+            );
         }
     }
     private void ToggleExpand(Field field)

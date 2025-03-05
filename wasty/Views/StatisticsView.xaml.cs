@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Specialized;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using wasty.Models;
@@ -13,6 +14,9 @@ namespace wasty.Views
         {
             InitializeComponent();
             DataContext = ((App)Application.Current).Services.GetService(typeof(StatisticsViewModel));
+
+            var viewModel = (StatisticsViewModel)DataContext;
+            viewModel.SelectedFields.CollectionChanged += OnSelectedFieldsChanged;
         }
 
         public void ReceiveParameter(object parameter)
@@ -67,6 +71,11 @@ namespace wasty.Views
                 viewModel.OnPropertyChanged(nameof(viewModel.SelectedFields));
                 viewModel.OnPropertyChanged(nameof(viewModel.AvailableFields));
             }
+        }
+        private void OnSelectedFieldsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            var viewModel = (StatisticsViewModel)DataContext;
+            viewModel.OnSelectedFieldsChanged(e);
         }
     }
 }
