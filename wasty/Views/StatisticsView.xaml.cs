@@ -16,7 +16,7 @@ namespace wasty.Views
             DataContext = ((App)Application.Current).Services.GetService(typeof(StatisticsViewModel));
 
             var viewModel = (StatisticsViewModel)DataContext;
-            viewModel.SelectedFields.CollectionChanged += OnSelectedFieldsChanged;
+            //viewModel.SelectedFields.CollectionChanged += OnSelectedFieldsChanged;
         }
 
         public void ReceiveParameter(object parameter)
@@ -39,7 +39,7 @@ namespace wasty.Views
             e.Handled = true;
         }
 
-        private void OnFieldsListDrop(object sender, DragEventArgs e)
+        private async void OnFieldsListDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(Field)))
             {
@@ -63,19 +63,20 @@ namespace wasty.Views
                     // Asegurar que se reusa la misma referencia en SelectedFields
                     if (!viewModel.SelectedFields.Any(f => f.Name == field.Name))
                     {
+                        await viewModel.OnSelectedFieldsChanged(field.Name);
                         viewModel.SelectedFields.Add(field);
                     }
                 }
 
                 // Notificar cambios
-                viewModel.OnPropertyChanged(nameof(viewModel.SelectedFields));
-                viewModel.OnPropertyChanged(nameof(viewModel.AvailableFields));
+                //viewModel.OnPropertyChanged(nameof(viewModel.SelectedFields));
+                //viewModel.OnPropertyChanged(nameof(viewModel.AvailableFields));
             }
         }
         private void OnSelectedFieldsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var viewModel = (StatisticsViewModel)DataContext;
-            viewModel.OnSelectedFieldsChanged(e);
+            //viewModel.OnSelectedFieldsChanged(e);
         }
     }
 }

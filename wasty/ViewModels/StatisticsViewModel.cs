@@ -145,11 +145,11 @@ public class StatisticsViewModel : INotifyPropertyChanged
             return new ObservableCollection<Field>();
         }
     }
-    public async Task OnSelectedFieldsChanged(NotifyCollectionChangedEventArgs e)
+    public async Task OnSelectedFieldsChanged(string fieldName)
     {
-        if (e.Action == NotifyCollectionChangedAction.Add)
-        {
-            Field field = (Field)e.NewItems[0];
+        //if (e.Action == NotifyCollectionChangedAction.Add)
+        //{
+            //Field field = (Field)e.NewItems[0];
             List<string> values = new List<string>();
 
             JsonElement tokenElement = default;
@@ -167,7 +167,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
             if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
                 token = tokenElement.GetString();
 
-            var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla=ClienteResiduo&campos={field.Name}", "", token);
+            var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla=ClienteResiduo&campos={fieldName}", "", token);
 
             if (result.TryGetProperty("datos", out fieldsElement))
                 json = fieldsElement.GetRawText();
@@ -178,7 +178,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
             {
                 foreach(JsonElement jElement in fieldsNames)
                 {
-                    if (jElement.TryGetProperty(field.Name, out JsonElement property))
+                    if (jElement.TryGetProperty(fieldName, out JsonElement property))
                         values.Add(property.GetRawText());
                 }
             }catch(Exception ex)
@@ -188,10 +188,10 @@ public class StatisticsViewModel : INotifyPropertyChanged
             FilterableValues.Add(
                 new Dictionary<string, List<string>>
                 {
-                    { field.Name, values.Take(5).ToList() }
+                    { fieldName, values.Take(5).ToList() }
                 }
             );
-        }
+        //}
     }
     private void ToggleExpand(Field field)
     {
