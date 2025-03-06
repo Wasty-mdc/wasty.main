@@ -109,8 +109,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="White" BorderThickness="1" CornerRadius="1" Padding="5" Background="{Binding Background}"
-                                Width="Auto" Height="Auto" AllowDrop="True"
-                                PreviewMouseMove="OnFieldMouseMove">
+                                Width="Auto" Height="Auto" AllowDrop="True">
+                            <!--PreviewMouseMove="OnFieldMouseMove">-->
                             <Expander IsExpanded="True" Cursor="Hand">
                                 <Expander.Header>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -138,7 +138,7 @@
                                         </ItemsControl.ItemsSource>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <CheckBox Content="{Binding}" IsChecked="False" />
+                                                <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

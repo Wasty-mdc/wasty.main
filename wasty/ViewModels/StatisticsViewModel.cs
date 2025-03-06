@@ -14,6 +14,7 @@ using Microsoft.VisualBasic;
 using OpenTK.Input;
 using wasty.Models;
 using wasty.Services;
+using wasty.Utils;
 using wasty.ViewModels;
 using wasty.Views;
 using static MaterialDesignThemes.Wpf.Theme.ToolBar;
@@ -48,8 +49,8 @@ public class StatisticsViewModel : INotifyPropertyChanged
         }
     }
 
-    private ObservableCollection<Dictionary<string, List<string>>> _filterableValues { get; set; }
-    public ObservableCollection<Dictionary<string, List<string>>> FilterableValues
+    private ObservableCollection<Dictionary<string, List<CheckBoxItemModel>>> _filterableValues { get; set; }
+    public ObservableCollection<Dictionary<string, List<CheckBoxItemModel>>> FilterableValues
     {
         get => _filterableValues;
         set
@@ -94,7 +95,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         FilteredData = new DataView();
 
         // Diccionario de valores filtrables (simulación de datos desde la BD)
-        FilterableValues = new ObservableCollection<Dictionary<string, List<string>>>();
+        FilterableValues = new ObservableCollection<Dictionary<string, List<CheckBoxItemModel>>>();
 
         SelectedFilters = new Dictionary<string, List<string>>();
         Init("ClienteResiduo").GetAwaiter();
@@ -184,9 +185,18 @@ public class StatisticsViewModel : INotifyPropertyChanged
         }
         if (action is "ADD")
         {
+            List<CheckBoxItemModel> valuesCheckBox = new List<CheckBoxItemModel>();
+            foreach(string value in values.Take(5))
+            {
+                valuesCheckBox.Add(new CheckBoxItemModel
+                {
+                    Value = value.Replace("\"","")
+                });
+            }
+
             FilterableValues.Add(
-                new Dictionary<string, List<string>>{
-                    { fieldName, values.Take(5).ToList() }
+                new Dictionary<string, List<CheckBoxItemModel>>{
+                    { fieldName, valuesCheckBox }
                 }
             );
         } else
@@ -208,6 +218,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
     {
         var dataView = new DataView();
         var campos = string.Join(",", SelectedFields.Select(t => t.Name));
+        var filtros = string.Empty;
 
         if (!string.IsNullOrWhiteSpace(campos))
         {
@@ -257,6 +268,22 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
             dataView = dataTable.DefaultView;
             dataView.Sort = $"{SelectedFields.Select(t => t.Name).FirstOrDefault()} ASC";
+
+            foreach(var campo in SelectedFields.Select(t => t.Name))
+            {
+                var filtroName = campo;
+                string filtroValues = string.Empty;
+
+                foreach (var item in FilterableValues.FirstOrDefault(s => s.ContainsKey(campo)))
+                {
+                    filtroValues = string.Join(", ", item.Value.Where(s => s.IsChecked).Select(s => $"'{s.Value}'"));
+                }
+                filtros += $"{filtroName} IN ({filtroValues}) AND ";
+            }
+
+            filtros = Utils.RemoveLastWord(filtros);
+
+            dataView.RowFilter = filtros;
         }
 
         FilteredData = dataView;
