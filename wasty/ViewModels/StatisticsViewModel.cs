@@ -186,7 +186,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         if (action is "ADD")
         {
             List<CheckBoxItemModel> valuesCheckBox = new List<CheckBoxItemModel>();
-            foreach(string value in values.Take(5))
+            foreach(string value in values.OrderBy(s => s))
             {
                 valuesCheckBox.Add(new CheckBoxItemModel
                 {
