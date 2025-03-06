@@ -52,14 +52,8 @@
                       BorderThickness="1">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="*" MinWidth="50" MaxWidth="110" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Tipo de Residuo" Binding="{Binding Tipo}" Width="Auto" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Peso (kg)" Binding="{Binding Peso}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}" Width="Auto" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Fecha de Recolección" Binding="{Binding FechaRecoleccion}" Width="*" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Empresa Gestora" Binding="{Binding EmpresaGestora}" Width="*" MinWidth="50" MaxWidth="130" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
-                                <DataGridTextColumn Header="Destino" Binding="{Binding Destino}" Width="*" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Código" Binding="{Binding Id}" Width="*" MinWidth="50" MaxWidth="110" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
+                                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="Auto" MinWidth="50" HeaderStyle="{StaticResource TableColumnHeaderStyle}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
