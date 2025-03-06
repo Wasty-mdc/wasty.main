@@ -129,19 +129,21 @@
                                 <StackPanel>
                                     
                                     <TextBox Width="180" Height="24" BorderBrush="Black" BorderThickness="1" Text="{Binding FilterText, Mode=TwoWay}"/>
-                                    <ItemsControl>
-                                        <ItemsControl.ItemsSource>
-                                            <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
-                                                <Binding Path="DataContext.FilterableValues" RelativeSource="{RelativeSource AncestorType=UserControl}" IsAsync="True" />
-                                                <Binding Path="Text" ElementName="campo" />
-                                            </MultiBinding>
-                                        </ItemsControl.ItemsSource>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="200">
+                                        <ItemsControl>
+                                            <ItemsControl.ItemsSource>
+                                                <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
+                                                    <Binding Path="DataContext.FilterableValues" RelativeSource="{RelativeSource AncestorType=UserControl}" IsAsync="True" />
+                                                    <Binding Path="Text" ElementName="campo" />
+                                                </MultiBinding>
+                                            </ItemsControl.ItemsSource>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
                                 </StackPanel>
                             </Expander>
                         </Border>
