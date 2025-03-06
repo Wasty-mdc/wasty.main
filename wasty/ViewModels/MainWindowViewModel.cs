@@ -10,6 +10,7 @@ namespace wasty.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly NavigationService _navigationService;
         private readonly AuthService _authService;
         // Evento para notificar cambios en las propiedades
         public event PropertyChangedEventHandler PropertyChanged;
@@ -47,15 +48,17 @@ namespace wasty.ViewModels
         public ICommand CloseCommand { get; }
         public ICommand DragMoveCommand { get; }
 
-        public MainWindowViewModel(AuthService authService)
+        public MainWindowViewModel(NavigationService navigationService, AuthService authService)
         {
+            _navigationService = navigationService;
             _authService = authService;
             _authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
             // Inicializar comandos de navegación
             ShowLoginViewCommand = new RelayCommand(_ =>
             {
                 IsAuthenticated = false;
-                CurrentView = new LoginView();
+                //CurrentView = new LoginView();
+                _navigationService.NavigateTo<LoginView>();
             });
 
             ShowSignupViewCommand = new RelayCommand(_ =>
@@ -67,7 +70,8 @@ namespace wasty.ViewModels
             ShowMainViewCommand = new RelayCommand(_ =>
             {
                 IsAuthenticated = true;
-                CurrentView = new MainView();
+                //CurrentView = new MainView();
+                _navigationService.NavigateTo<MainView>();
             });
 
             // Inicializar comandos de interacción con la ventana
