@@ -127,9 +127,8 @@
 
                                 <!-- Contenido del Expander (Filtros y Checkboxes) -->
                                 <StackPanel>
-                                    
                                     <TextBox Width="180" Height="24" BorderBrush="Black" BorderThickness="1" Text="{Binding FilterText, Mode=TwoWay}"/>
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="200">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="300">
                                         <ItemsControl>
                                             <ItemsControl.ItemsSource>
                                                 <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
