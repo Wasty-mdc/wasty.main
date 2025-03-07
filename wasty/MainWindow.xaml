@@ -7,6 +7,7 @@
         Title="Wasty"
         Width="1600"
         Height="900"
+        Background="{StaticResource MainGradientBackground}"
         WindowStyle="None"
         ResizeMode="CanResize">
 
@@ -87,38 +88,40 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Menú de navegación lateral -->
-                <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" 
-                            Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left"
-                            Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
-                    <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
-                        <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
-                    </Button>
-                    <Button Style="{StaticResource NavButton}" ToolTip="Historial">
-                        <md:PackIcon Kind="History" Width="30" Height="30" Foreground="White"/>
-                    </Button>
-                    <Button Style="{StaticResource NavButton}" ToolTip="Favoritos">
-                        <md:PackIcon Kind="Star" Width="30" Height="30" Foreground="White"/>
-                    </Button>
-                </StackPanel>
-                <!-- Sección inferior del menú lateral -->
-                <StackPanel Grid.Column="0" Background="{StaticResource NavColor}" 
-                            Width="70" VerticalAlignment="Bottom"
-                            HorizontalAlignment="Center" Margin="0,0,0,20"
-                            Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
-
-                    <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
-                        <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
-                    </Button>
-                    <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
-                        <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
-                    </Button>
-                    <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
-                        <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White"/>
-                    </Button>
-                </StackPanel>
+                <Grid Grid.Column="0" Background="{StaticResource NavColor}"                                 
+                      Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
+                    <StackPanel
+                                Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+>
+                        <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
+                            <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButton}" ToolTip="Historial">
+                            <md:PackIcon Kind="History" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButton}" ToolTip="Favoritos">
+                            <md:PackIcon Kind="Star" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                    </StackPanel>
+                    <!-- Sección inferior del menú lateral -->
+                    <StackPanel  
+                                Width="70" VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center" Margin="0,0,0,20"
+                                >
+                        <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
+                            <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                            <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
+                            <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
 
                 <!-- Contenido principal dinámico -->
-                <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}">
+                <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}" >
                     <ContentControl Content="{Binding CurrentView}" Name="CurrentView" Background="Transparent"/>
                 </Grid>
             </Grid>

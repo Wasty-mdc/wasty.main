@@ -19,7 +19,7 @@
                 <ResourceDictionary Source="../Styles/statisticStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Conversor BooleanToVisibility para ocultar/mostrar elementos según autenticación -->
+            <!-- Conversor BooleanToVisibility  -->
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
             <converters:FilterableValuesMultiConverter x:Key="FilterableValuesMultiConverter" />
         </ResourceDictionary>
@@ -127,8 +127,13 @@
 
                                 <!-- Contenido del Expander (Filtros y Checkboxes) -->
                                 <StackPanel>
-                                    <TextBox Width="180" Height="24" BorderBrush="Black" BorderThickness="1" Text="{Binding FilterText, Mode=TwoWay}"/>
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="300">
+                                    <TextBox Width="Auto" Height="20" 
+                                             BorderBrush="Black" BorderThickness="1"
+                                             FontSize="16"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Text="{Binding FilterText, Mode=TwoWay}"/>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                                  MaxHeight="300" Background="Transparent" BorderBrush="Transparent" Foreground="#232323">
                                         <ItemsControl>
                                             <ItemsControl.ItemsSource>
                                                 <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
@@ -138,7 +143,7 @@
                                             </ItemsControl.ItemsSource>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked}" />
+                                                    <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked}" Margin="2" FontWeight="Medium" Foreground="White" />
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
@@ -150,13 +155,27 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-        <!-- Botón para limpiar filtros -->
-            <Button Content="Limpiar Filtros" 
-                    Background="LightSlateGray" Foreground="White"
-                    Command="{Binding ClearFiltersCommand}" 
-                    Width="120" Height="30" Cursor="Hand"
-                    HorizontalAlignment="Left"
-                    Margin="5,5,5,5"/>
+            <!-- Botón para limpiar filtros -->
+            <Border BorderBrush="White"
+                    BorderThickness="2"
+                    CornerRadius="8"
+                    Width="150"
+                    Height="40"
+                    Background="Transparent">   
+                <Button Content="Limpiar Filtros"
+                        FontWeight="Bold"
+                        Padding="10,5"
+                        Background="#757575"
+                        Foreground="White"
+                        Command="{Binding ClearFiltersCommand}" 
+                        Width="144" Height="34"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        BorderBrush="Transparent"
+                        HorizontalAlignment="Center">
+                </Button>
+            </Border>
+
         </StackPanel>
 
         <!-- Tabla dinámica -->
