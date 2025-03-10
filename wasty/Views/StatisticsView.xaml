@@ -127,7 +127,7 @@
 
                                 <!-- Contenido del Expander (Filtros y Checkboxes) -->
                                 <StackPanel>
-                                    <TextBox Width="Auto" Height="20" 
+                                    <TextBox Width="Auto" Height="20" MinWidth="120"
                                              BorderBrush="Black" BorderThickness="1"
                                              FontSize="16"
                                              VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -161,7 +161,7 @@
                     CornerRadius="8"
                     Width="150"
                     Height="40"
-                    Background="Transparent">   
+                    Background="Transparent">
                 <Button Content="Limpiar Filtros"
                         FontWeight="Bold"
                         Padding="10,5"
@@ -175,7 +175,6 @@
                         HorizontalAlignment="Center">
                 </Button>
             </Border>
-
         </StackPanel>
 
         <!-- Tabla dinámica -->
