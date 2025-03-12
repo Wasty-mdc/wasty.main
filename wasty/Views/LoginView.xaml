@@ -68,13 +68,44 @@
                 <Button x:Name="NewRegisterButton" Content="¿No tienes cuenta?"
                         Style="{StaticResource RegisterButton}" 
                         Command="{Binding RegisterCommand}" Width="200" Height="28" />
-
-                <Button x:Name="SkipButton" Content="Skip"
+                <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
+                    <Button x:Name="SkipButton" Content="Skip"
                         Width="50"
                         Height="50"
-                        Margin="10"
+                        Margin="5"
                         Cursor="Hand" 
-                        Command="{Binding SkipCommand}" />
+                        Command="{Binding SkipCommand}">
+                    </Button>
+                    <Button x:Name="SkipButtonG" Content="Skip G"
+                        Width="50"
+                        Height="50"
+                        Margin="5"
+                        Cursor="Hand" 
+                        Command="{Binding SkipCommandG}">
+                    </Button>
+                    <Button x:Name="SkipButtonT" Content="Skip T"
+                        Width="50"
+                        Height="50"
+                        Margin="5"
+                        Cursor="Hand" 
+                        Command="{Binding SkipCommandT}">
+                    </Button>
+                    <Button x:Name="SkipButtonS" Content="Skip S"
+                        Width="50"
+                        Height="50"
+                        Margin="5"
+                        Cursor="Hand" 
+                        Command="{Binding SkipCommandS}">
+                    </Button>
+                    <Button x:Name="SkipButtonH" Content="Skip H"
+                        Width="50"
+                        Height="50"
+                        Margin="5"
+                        Cursor="Hand" 
+                        Command="{Binding SkipCommandH}">
+                    </Button>
+
+                </WrapPanel>
 
                 <!-- Snackbar -->
 
