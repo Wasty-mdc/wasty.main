@@ -104,77 +104,77 @@
                     AllowDrop="True" Width="Auto"
                     PreviewDragOver="OnFieldsListDragOver"
                     PreviewDrop="OnFieldsListDrop">
-            <TextBlock Text=" - CAMPOS SELECCIONADOS - " FontWeight="Bold" Margin="5" />
-            <ItemsControl ItemsSource="{Binding SelectedFields, IsAsync=True}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="White" BorderThickness="1" CornerRadius="1" Padding="5" Background="{Binding Background}"
+            
+            <TextBlock Text=" - CAMPOS SELECCIONADOS - " 
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold" Margin="5" />
+            <!-- Botón para limpiar filtros -->
+            <Button Content="Limpiar Filtros"
+                         FontWeight="Bold"
+                         Padding="10,5"
+                         Background="#757575"
+                         Foreground="White"
+                         Command="{Binding ClearFiltersCommand}" 
+                         Width="144" Height="34"
+                         Cursor="Hand"
+                         BorderThickness="0"
+                         BorderBrush="Transparent"
+                         HorizontalAlignment="Center"
+                         Margin="2,2,2,8">
+            </Button>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                          MaxHeight="870"
+                          Background="Transparent" BorderBrush="Transparent" Foreground="#232323">
+                <ItemsControl ItemsSource="{Binding SelectedFields, IsAsync=True}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="1" Padding="5" Background="{Binding Background}"
                                 Width="Auto" Height="Auto" AllowDrop="True">
-                            <!--PreviewMouseMove="OnFieldMouseMove">-->
-                            <Expander IsExpanded="True" Cursor="Hand">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <md:PackIcon Kind="{Binding Icon}" Width="16" Height="16" Margin="1" 
+                                <!--PreviewMouseMove="OnFieldMouseMove">-->
+                                <Expander IsExpanded="True" Cursor="Hand">
+                                    <Expander.Header>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <md:PackIcon Kind="{Binding Icon}" Width="16" Height="16" Margin="1" 
                                                      VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                        <TextBlock x:Name="campo" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                            <TextBlock x:Name="campo" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                    FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap" Margin="4,2,4,2"/>
-                                        <Button Command="{Binding DataContext.RemoveFieldCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            <Button Command="{Binding DataContext.RemoveFieldCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                 CommandParameter="{Binding}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right">
-                                            <md:PackIcon Kind="Close" Width="14" Height="14" Margin="1"/>
-                                        </Button>
-                                    </StackPanel>
-                                </Expander.Header>
+                                                <md:PackIcon Kind="Close" Width="14" Height="14" Margin="1"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Expander.Header>
 
-                                <!-- Contenido del Expander (Filtros y Checkboxes) -->
-                                <StackPanel>
-                                    <TextBox Width="Auto" Height="20" MinWidth="120"
+                                    <!-- Contenido del Expander (Filtros y Checkboxes) -->
+                                    <StackPanel>
+                                        <TextBox Width="Auto" Height="20" MinWidth="130"
                                              BorderBrush="Black" BorderThickness="1"
                                              FontSize="16"
                                              VerticalAlignment="Center" HorizontalAlignment="Center"
                                              Text="{Binding FilterText, Mode=TwoWay}"/>
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
                                                   MaxHeight="300" Background="Transparent" BorderBrush="Transparent" Foreground="#232323">
-                                        <ItemsControl>
-                                            <ItemsControl.ItemsSource>
-                                                <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
-                                                    <Binding Path="DataContext.FilterableValues" RelativeSource="{RelativeSource AncestorType=UserControl}" IsAsync="True" />
-                                                    <Binding Path="Text" ElementName="campo" />
-                                                </MultiBinding>
-                                            </ItemsControl.ItemsSource>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked}" Margin="2" FontWeight="Medium" Foreground="White" />
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                    </ScrollViewer>
-                                </StackPanel>
-                            </Expander>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <!-- Botón para limpiar filtros -->
-            <Border BorderBrush="White"
-                    BorderThickness="2"
-                    CornerRadius="8"
-                    Width="150"
-                    Height="40"
-                    Background="Transparent">
-                <Button Content="Limpiar Filtros"
-                        FontWeight="Bold"
-                        Padding="10,5"
-                        Background="#757575"
-                        Foreground="White"
-                        Command="{Binding ClearFiltersCommand}" 
-                        Width="144" Height="34"
-                        Cursor="Hand"
-                        BorderThickness="0"
-                        BorderBrush="Transparent"
-                        HorizontalAlignment="Center">
-                </Button>
-            </Border>
+                                            <ItemsControl>
+                                                <ItemsControl.ItemsSource>
+                                                    <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
+                                                        <Binding Path="DataContext.FilterableValues" RelativeSource="{RelativeSource AncestorType=UserControl}" IsAsync="True" />
+                                                        <Binding Path="Text" ElementName="campo" />
+                                                    </MultiBinding>
+                                                </ItemsControl.ItemsSource>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked}" Margin="2" FontWeight="Medium" Foreground="White" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </StackPanel>
+                                </Expander>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </StackPanel>
 
         <!-- Tabla dinámica -->
