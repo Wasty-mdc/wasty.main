@@ -43,7 +43,7 @@
             <ItemsControl ItemsSource="{Binding Bloques}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Expander Label="{Binding Nombre}" IsExpanded="True">
+                        <Expander Header="{Binding Nombre}" IsExpanded="True">
                             <ItemsControl ItemsSource="{Binding Campos}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
