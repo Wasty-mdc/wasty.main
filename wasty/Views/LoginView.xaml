@@ -77,7 +77,6 @@
                         Command="{Binding SkipCommand}">
                     </Button>
                     <Button x:Name="SkipButtonG" Content="Skip G"
-                        Background="Orange"
                         Width="50"
                         Height="50"
                         Margin="5"
@@ -85,7 +84,6 @@
                         Command="{Binding SkipCommandG}">
                     </Button>
                     <Button x:Name="SkipButtonT" Content="Skip T"
-                        Background="SteelBlue"
                         Width="50"
                         Height="50"
                         Margin="5"
@@ -93,7 +91,6 @@
                         Command="{Binding SkipCommandT}">
                     </Button>
                     <Button x:Name="SkipButtonS" Content="Skip S"
-                        Background="MediumPurple"
                         Width="50"
                         Height="50"
                         Margin="5"
@@ -101,7 +98,6 @@
                         Command="{Binding SkipCommandS}">
                     </Button>
                     <Button x:Name="SkipButtonH" Content="Skip H"
-                        Background="Yellow"
                         Width="50"
                         Height="50"
                         Margin="5"
