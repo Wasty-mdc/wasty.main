@@ -1,1 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="wasty.Views.Formulario"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:local="clr-namespace:wasty.Utils"
+			 xmlns:viewModels="clr-namespace:wasty.ViewModels"
+			 Height="Auto" Width="Auto">
+
+	<UserControl.Resources>
+		<!-- Plantilla para campos de texto -->
+		<DataTemplate x:Key="TextoTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding Nombre}" Width="150"/>
+				<TextBox Text="{Binding Valor, Mode=TwoWay}" Width="200"/>
+			</StackPanel>
+		</DataTemplate>
+
+		<!-- Plantilla para campos numéricos -->
+		<DataTemplate x:Key="NumeroTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding Nombre}" Width="150"/>
+				<TextBox Text="{Binding Valor, Mode=TwoWay}" Width="100"/>
+			</StackPanel>
+		</DataTemplate>
+
+		<!-- Plantilla para campos de fecha -->
+		<DataTemplate x:Key="FechaTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding Nombre}" Width="150"/>
+				<DatePicker SelectedDate="{Binding Valor, Mode=TwoWay}" Width="150"/>
+			</StackPanel>
+		</DataTemplate>
+
+		<!-- Selector de Plantilla -->
+		<local:CampoTemplateSelector x:Key="CampoSelector"
+			TextoTemplate="{StaticResource TextoTemplate}"
+			NumeroTemplate="{StaticResource NumeroTemplate}"
+			FechaTemplate="{StaticResource FechaTemplate}"/>
+	</UserControl.Resources>
+
+    <Grid>
+        <StackPanel>
+            <ItemsControl ItemsSource="{Binding Bloques}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Label="{Binding Nombre}" IsExpanded="True">
+                            <ItemsControl ItemsSource="{Binding Campos}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl Content="{Binding}" 
+                                                        ContentTemplateSelector="{StaticResource CampoSelector}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Botón para guardar -->
+            <Button Content="Guardar" Command="{Binding GuardarCommand}" Margin="10"/>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>
