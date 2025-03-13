@@ -12,7 +12,7 @@ namespace wasty.Models
     {
 
         private string _email;
-        private bool _isAuthenticated;
+        //private bool _isAuthenticated;
 
         public string Email
         {
@@ -23,15 +23,15 @@ namespace wasty.Models
                 OnPropertyChanged();
             }
         }
-        public bool IsAuthenticated
-        {
-            get => _isAuthenticated;
-            set
-            {
-                _isAuthenticated = value;
-                OnPropertyChanged(nameof(IsAuthenticated));
-            }
-        }
+        //public bool IsAuthenticated
+        //{
+        //    get => _isAuthenticated;
+        //    set
+        //    {
+        //        _isAuthenticated = value;
+        //        OnPropertyChanged(nameof(IsAuthenticated));
+        //    }
+        //}
 
         // Evento para notificar cambios en las propiedades
         public event PropertyChangedEventHandler PropertyChanged;

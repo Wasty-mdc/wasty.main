@@ -68,32 +68,32 @@ class LoginViewModel : LoginModel
     {
         Email = "Pruebas123@pruebas.com";
         Contrasenia = "Pruebas123.";
-        await Login();
+        await LoginAsync();
     }
 // Skips Personal de cada instancia
     private async Task SkipLoginG()
     {
         Email = "gonzalo@pruebas.com";
         Contrasenia = "Gonzalo123.";
-        await Login();
+        await LoginAsync();
     }
     private async Task SkipLoginT()
     {
         Email = "toni@pruebas.com";
         Contrasenia = "Toni123.";
-        await Login();
+        await LoginAsync();
     }
     private async Task SkipLoginS()
     {
         Email = "santi@pruebas.com";
         Contrasenia = "Santi123.";
-        await Login();
+        await LoginAsync();
     }
     private async Task SkipLoginH()
     {
         Email = "henry@pruebas.com";
         Contrasenia = "Henry123.";
-        await Login();
+        await LoginAsync();
     }
 // Skips Personal de cada instancia
 

@@ -146,35 +146,36 @@
                                         </StackPanel>
                                     </Expander.Header>
 
-                                <!-- Contenido del Expander (Filtros y Checkboxes) -->
-                                <StackPanel>
-                                    <TextBox Width="Auto" Height="20" MinWidth="120"
+                                    <!-- Contenido del Expander (Filtros y Checkboxes) -->
+                                    <StackPanel>
+                                        <TextBox Width="Auto" Height="20" MinWidth="120"
                                              BorderBrush="Black" BorderThickness="1"
                                              FontSize="16"
                                              VerticalAlignment="Center" HorizontalAlignment="Center"
                                              Text="{Binding FilterText, Mode=TwoWay}"/>
                                         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
                                                   MaxHeight="300" Background="Transparent" BorderBrush="Transparent" Foreground="#232323">
-                                        <ItemsControl>
-                                            <ItemsControl.ItemsSource>
-                                                <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
-                                                    <Binding Path="DataContext.FilterableValues" RelativeSource="{RelativeSource AncestorType=UserControl}" IsAsync="True" />
-                                                    <Binding Path="Text" ElementName="campo" />
-                                                </MultiBinding>
-                                            </ItemsControl.ItemsSource>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked}" Margin="2" FontWeight="Medium" Foreground="White" />
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                    </ScrollViewer>
-                                </StackPanel>
-                            </Expander>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                            <ItemsControl>
+                                                <ItemsControl.ItemsSource>
+                                                    <MultiBinding Converter="{StaticResource FilterableValuesMultiConverter}">
+                                                        <Binding Path="DataContext.FilterableValues" RelativeSource="{RelativeSource AncestorType=UserControl}" IsAsync="True" />
+                                                        <Binding Path="Text" ElementName="campo" />
+                                                    </MultiBinding>
+                                                </ItemsControl.ItemsSource>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Content="{Binding Value}" IsChecked="{Binding IsChecked}" Margin="2" FontWeight="Medium" Foreground="White" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </StackPanel>
+                                </Expander>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
             <!-- Botón para limpiar filtros -->
             <Border BorderBrush="White"
