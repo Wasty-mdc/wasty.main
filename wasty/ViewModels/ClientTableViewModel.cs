@@ -12,13 +12,13 @@ public class ClientTableViewModel : INotifyPropertyChanged
 {
     private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
-    private ObservableCollection<Cliente> _clientes;
+    private ObservableCollection<ClienteModel> _clientes;
 
     // Comando para volver a la vista principal
     public ICommand NavigateToMainView { get; }
 
     // Propiedad que representa la colección de clientes
-    public ObservableCollection<Cliente> Clientes
+    public ObservableCollection<ClienteModel> Clientes
     {
         get => _clientes;
         set
@@ -35,7 +35,7 @@ public class ClientTableViewModel : INotifyPropertyChanged
         _navigationService = navigationService;
         NavigateToMainView = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
         // Inicializar la colección de clientes (puedes cargar datos aquí)
-        Clientes = new ObservableCollection<Cliente>();
+        Clientes = new ObservableCollection<ClienteModel>();
         Init().GetAwaiter();
     }
 
@@ -53,37 +53,19 @@ public class ClientTableViewModel : INotifyPropertyChanged
     }
 
     // Método para obtener los datos de clientes
-    private async Task<ObservableCollection<Cliente>> GetData()
+    private async Task<ObservableCollection<ClienteModel>> GetData()
     {
-        JsonElement tokenElement = default;
-        JsonElement clientesElement = default;
-        string token = "";
-        string clientes = "";
-        var login = new
-        {
-            Email = "Pruebas123@pruebas.com",
-            Contrasenia = "Pruebas123."
-        };
-
-        var auth = await _apiService.RequestAsync("POST", "auth/login", login);
-
-        if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
-            token = tokenElement.GetString();
-
-        var result = await _apiService.RequestAsync("GET", "clientes", "", token);
-
-        if (result.TryGetProperty("datos", out clientesElement))
-            clientes = clientesElement.GetRawText();
+        var result = await _apiService.RequestAsync("GET", "clientes", "");
 
         try
         {
-            ObservableCollection<Cliente> clientesList = JsonSerializer.Deserialize<ObservableCollection<Cliente>>(clientes);
+            ObservableCollection<ClienteModel> clientesList = JsonSerializer.Deserialize<ObservableCollection<ClienteModel>>(result.datos);
 
             return clientesList;
         }
         catch (Exception ex)
         {
-            return new ObservableCollection<Cliente>();
+            return new ObservableCollection<ClienteModel>();
         }
     }
 

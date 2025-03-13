@@ -80,7 +80,7 @@ public class SignupViewModel : INotifyPropertyChanged
         {
             //Espacio para manejar el mensaje de error cuando la API está fuera de servicio.
         }
-        else if (result.GetProperty("exito").GetBoolean())
+        else if (result.exito)
         {
             // Usuario creado exitosamente
             _navigationService.NavigateTo<LoginView>();

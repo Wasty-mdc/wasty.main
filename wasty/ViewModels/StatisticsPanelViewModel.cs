@@ -61,12 +61,12 @@ namespace wasty.ViewModels
 
                 var auth = await _apiService.RequestAsync("POST", "auth/login", login);
 
-                if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
+                if (auth.datos.TryGetProperty("token", out tokenElement))
                     token = tokenElement.GetString();
 
-                var result = await _apiService.RequestAsync("GET", "estadisticas/paneles", "", token);
+                var result = await _apiService.RequestAsync("GET", "estadisticas/paneles", "");
 
-                if (result.TryGetProperty("datos", out itemsElement))
+                if (result.datos.TryGetProperty("datos", out itemsElement))
                     items = itemsElement.GetRawText();
 
                 var itemsList = JsonSerializer.Deserialize<ObservableCollection<BotonPanelStats>>(items);

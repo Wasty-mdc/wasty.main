@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace wasty.Models
 {
-    public class Residuo
+    class Token
     {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-        [JsonPropertyName("nombre")]
-        public string Nombre { get; set; }
+        [JsonInclude]
+        public string token { get; set; }
+        [JsonInclude]
+        public string tokenRefrendacion { get; set; }
     }
 }

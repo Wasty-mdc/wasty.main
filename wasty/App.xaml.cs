@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using wasty.Services;
 using wasty.ViewModels;
 using System.Windows.Controls;
+using wasty.Helpers;
+using wasty.Models;
 
 
 namespace wasty
@@ -32,16 +34,21 @@ namespace wasty
             // Definir la factoría para crear vistas dinámicamente
             Func<Type, UserControl> viewFactory = viewType => (UserControl)Activator.CreateInstance(viewType);
 
-            // Registrar AuthenticationService
-            services.AddSingleton<AuthService>();
+            services.AddSingleton<IsolatedStorageHelper>();
 
-            // Registrar MainWindowViewModel
-            services.AddSingleton<MainWindowViewModel>();
-
-            // Registrar NavigationService después de MainWindowViewModel 
+            services.AddHttpClient<ApiService>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5276/");
+            });
             services.AddTransient<NavigationService>(provider =>
-            new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType)));
+                new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType))
+            );
+            services.AddSingleton<AuthService>();
+            services.AddSingleton<SessionService>();
 
+            services.AddSingleton<AuthModel>();
+
+            services.AddSingleton<MainWindowViewModel>();
             services.AddTransient<SignupViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<MainViewModel>();
@@ -49,10 +56,7 @@ namespace wasty
             services.AddTransient<RecycTableViewModel>();
             services.AddTransient<StatisticsViewModel>();
             services.AddTransient<StatisticsPanelViewModel>();
-            services.AddHttpClient<ApiService>(client =>
-            {
-                client.BaseAddress = new Uri("http://localhost:5276/");
-            });
+            
         }
     }
 }

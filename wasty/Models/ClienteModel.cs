@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace wasty.Models
 {
-    public class Cliente
+    public class ClienteModel
     {
         [JsonPropertyName("id")]
         public int Codigo { get; set; }
