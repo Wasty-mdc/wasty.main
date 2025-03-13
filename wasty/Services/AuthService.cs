@@ -9,11 +9,10 @@ using wasty.Models;
 
 namespace wasty.Services
 {
-    public class AuthService : AuthModel
+    public class AuthService
     {
         private readonly ApiService _apiService;
         private readonly SessionService _sessionService;
-
         public AuthService(ApiService apiService, SessionService sessionService)
         {
             _apiService = apiService;

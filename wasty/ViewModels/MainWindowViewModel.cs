@@ -3,16 +3,18 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using wasty.Models;
 using wasty.Services;
 using wasty.Views;
 
 namespace wasty.ViewModels
 {
-    public class MainWindowViewModel : MainWindowModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly NavigationService _navigationService;
-        private readonly AuthService _authService;        
+        private readonly AuthService _authService;
+        // Evento para notificar cambios en las propiedades
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         // Comandos para cambiar de vista
         public ICommand ShowLoginViewCommand { get; }
@@ -39,7 +41,7 @@ namespace wasty.ViewModels
 
             ShowSignupViewCommand = new RelayCommand(_ =>
             {
-                IsAuthenticated = true;
+                IsAuthenticated = false;
                 CurrentView = new SignupView();
             });
 
@@ -55,10 +57,11 @@ namespace wasty.ViewModels
             MaximizeCommand = new RelayCommand(_ => ToggleMaximize());
             CloseCommand = new RelayCommand(_ => Application.Current.Shutdown());
             DragMoveCommand = new RelayCommand(_ => Application.Current.MainWindow.DragMove());
-            //_authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
+            _authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
             // Establecer la vista inicial
-            IsAuthenticated = true;
+            IsAuthenticated = false;
             CurrentView = new LoginView();
+            _authService = authService;
         }
 
         // Método para alternar entre maximizar y restaurar la ventana
@@ -72,6 +75,12 @@ namespace wasty.ViewModels
             {
                 Application.Current.MainWindow.WindowState = WindowState.Maximized;
             }
+        }
+
+        // Método para invocar el evento PropertyChanged
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

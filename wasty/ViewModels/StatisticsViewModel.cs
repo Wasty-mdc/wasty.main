@@ -119,13 +119,14 @@ public class StatisticsViewModel : INotifyPropertyChanged
         {
             var fieldsNames = JsonSerializer.Deserialize<List<string>>(result.datos);
 
-            foreach(var i in fieldsNames)
+            foreach (var i in fieldsNames)
             {
                 var header = _headerColumn.FirstOrDefault(s => i.Contains(s.Nombre));
                 if (header is not null)
                 {
                     fieldsList.Add(new Field(i, header.Icono, header.Color));
-                }else 
+                }
+                else
                     fieldsList.Add(new Field(i, "FileAlertOutline", "#9C9C9C"));
             }
 
@@ -144,7 +145,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
         var records = JsonSerializer.Deserialize<List<dynamic>>(result.datos);
 
-        foreach(JsonElement jElement in records)
+        foreach (JsonElement jElement in records)
         {
             if (jElement.TryGetProperty(fieldName, out JsonElement property))
                 values.Add(property.GetRawText());
@@ -152,11 +153,11 @@ public class StatisticsViewModel : INotifyPropertyChanged
         if (action is "ADD")
         {
             List<CheckBoxItemModel> valuesCheckBox = new List<CheckBoxItemModel>();
-            foreach(string value in values.OrderBy(s => s))
+            foreach (string value in values.OrderBy(s => s))
             {
                 valuesCheckBox.Add(new CheckBoxItemModel
                 {
-                    Value = value.Replace("\"","")
+                    Value = value.Replace("\"", "")
                 });
             }
 
@@ -165,7 +166,8 @@ public class StatisticsViewModel : INotifyPropertyChanged
                     { fieldName, valuesCheckBox }
                 }
             );
-        } else
+        }
+        else
         {
             var itemToRemove = FilterableValues.FirstOrDefault(dict => dict.ContainsKey(fieldName));
             FilterableValues.Remove(itemToRemove);
@@ -235,7 +237,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
                 dataView.RowFilter = filtros;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
         }

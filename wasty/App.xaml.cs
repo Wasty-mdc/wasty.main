@@ -56,7 +56,7 @@ namespace wasty
             services.AddTransient<RecycTableViewModel>();
             services.AddTransient<StatisticsViewModel>();
             services.AddTransient<StatisticsPanelViewModel>();
-            
+
         }
     }
 }

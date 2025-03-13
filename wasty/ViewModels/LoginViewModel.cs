@@ -22,28 +22,15 @@ class LoginViewModel : LoginModel
         _navigationService = navigationService;
         LoginCommand = new RelayCommand(async _ => await LoginAsync());
         SkipCommand = new RelayCommand(async _ => await SkipLogin());
-        // Skips Personal de cada instancia
-        SkipCommandG = new RelayCommand(async _ => await SkipLoginG());
-        SkipCommandT = new RelayCommand(async _ => await SkipLoginT());
-        SkipCommandS = new RelayCommand(async _ => await SkipLoginS());
-        SkipCommandH = new RelayCommand(async _ => await SkipLoginH());
-        // Skips Personal de cada instancia
         RegisterCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
         SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(3));
         _authService = authService;
-    }        
+    }
 
     // Comandos para iniciar sesión y registrarse
     public ICommand LoginCommand { get; }
     public ICommand RegisterCommand { get; }
     public ICommand SkipCommand { get; }
-    // Skips Personal de cada instancia
-    public ICommand SkipCommandG { get; }
-    public ICommand SkipCommandT { get; }
-    public ICommand SkipCommandS { get; }
-    public ICommand SkipCommandH { get; }
-    // Skips Personal de cada instancia
-
 
 
     // Método para manejar el inicio de sesión
@@ -56,47 +43,24 @@ class LoginViewModel : LoginModel
             {
                 SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
                 _navigationService.NavigateTo<MainView>();
-            } else
+            }
+            else
                 SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
 
         }
     }
     private async Task SkipLogin()
     {
+        // Definir credenciales predeterminadas
         Email = "Pruebas123@pruebas.com";
         Contrasenia = "Pruebas123.";
-        await LoginAsync();
-    }
-// Skips Personal de cada instancia
-    private async Task SkipLoginG()
-    {
-        Email = "gonzalo@pruebas.com";
-        Contrasenia = "Gonzalo123.";
-        await LoginAsync();
-    }
-    private async Task SkipLoginT()
-    {
-        Email = "toni@pruebas.com";
-        Contrasenia = "Toni123.";
-        await LoginAsync();
-    }
-    private async Task SkipLoginS()
-    {
-        Email = "santi@pruebas.com";
-        Contrasenia = "Santi123.";
-        await LoginAsync();
-    }
-    private async Task SkipLoginH()
-    {
-        Email = "henry@pruebas.com";
-        Contrasenia = "Henry123.";
-        await LoginAsync();
-    }
-// Skips Personal de cada instancia
 
+        // Llamar directamente a la función de Login
+        await LoginAsync();
+    }
 
     // Método para navegar a la vista de registro
     private void NavigateToSignup(object parameter)
@@ -104,5 +68,5 @@ class LoginViewModel : LoginModel
         _navigationService.NavigateTo<SignupView>();
     }
 
-   
+
 }

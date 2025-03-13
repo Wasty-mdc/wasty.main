@@ -44,7 +44,7 @@ namespace wasty.Services
 
                 return JsonSerializer.Deserialize<ApiResponse<dynamic>>(responseContent);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -63,7 +63,8 @@ namespace wasty.Services
                 var tokenResponse = JsonSerializer.Deserialize<Token>(apiResponse.datos);
                 _sessionService.SaveToken(tokenResponse.tokenRefrendacion);
                 return tokenResponse.token;
-            } else
+            }
+            else
             {
                 _sessionService.ClearToken();
             }
