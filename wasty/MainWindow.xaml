@@ -35,8 +35,7 @@
         <Grid>
             <!-- Definir la estructura de filas -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <!-- Barra de título -->
+
                 <RowDefinition Height="*"/>
                 <!-- Contenido completo de la app -->
             </Grid.RowDefinitions>
