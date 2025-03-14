@@ -8,13 +8,9 @@
         Width="1600"
         Height="900"
         Background="{StaticResource MainGradientBackground}"
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         ResizeMode="CanResize">
 
-    <!-- Configuración de la ventana para permitir bordes redondeados y redimensionado -->
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" CornerRadius="10" ResizeBorderThickness="5"/>
-    </WindowChrome.WindowChrome>
 
     <!-- Importación de Recursos -->
     <Window.Resources>
@@ -44,39 +40,6 @@
                 <RowDefinition Height="*"/>
                 <!-- Contenido completo de la app -->
             </Grid.RowDefinitions>
-
-            <!-- Barra de Título Personalizada -->
-            <Border Grid.Row="0" Background="#0F0F0F" Height="50">
-                <Border.InputBindings>
-                    <MouseBinding Gesture="LeftClick" Command="{Binding DragMoveCommand}" />
-                </Border.InputBindings>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <!-- Espacio para mover la ventana -->
-                        <ColumnDefinition Width="40"/>
-                        <!-- Minimizar -->
-                        <ColumnDefinition Width="40"/>
-                        <!-- Maximizar -->
-                        <ColumnDefinition Width="40"/>
-                        <!-- Cerrar -->
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Wasty" Foreground="White" VerticalAlignment="Center"
-                               Margin="10" FontSize="14" FontWeight="Bold"/>
-                    <Button Grid.Column="1" Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding MinimizeCommand}">
-                        <md:PackIcon Kind="WindowMinimize" Width="18" Height="18"/>
-                    </Button>
-                    <Button Grid.Column="2" Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding MaximizeCommand}">
-                        <md:PackIcon x:Name="MaximizeIcon" Kind="WindowMaximize" Width="18" Height="18"/>
-                    </Button>
-                    <Button Grid.Column="3" Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding CloseCommand}">
-                        <md:PackIcon Kind="WindowClose" Width="18" Height="18"/>
-                    </Button>
-                </Grid>
-            </Border>
 
             <!-- Contenido de la aplicación -->
             <Grid Grid.Row="1">
