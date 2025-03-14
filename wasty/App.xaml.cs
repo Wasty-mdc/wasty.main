@@ -56,7 +56,11 @@ namespace wasty
             services.AddTransient<RecycTableViewModel>();
             services.AddTransient<StatisticsViewModel>();
             services.AddTransient<StatisticsPanelViewModel>();
-
+            services.AddTransient<ClientPanelViewModel>();
+            services.AddHttpClient<ApiService>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5276/");
+            });
         }
     }
 }

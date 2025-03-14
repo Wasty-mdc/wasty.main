@@ -105,16 +105,20 @@
                     </StackPanel>
                     <!-- Sección inferior del menú lateral -->
                     <StackPanel  
-                                Width="70" VerticalAlignment="Bottom"
+                                Width="60" VerticalAlignment="Bottom"
                                 HorizontalAlignment="Center" Margin="0,0,0,20"
                                 >
-                        <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Volver atrás">
+                            <md:PackIcon Kind="ArrowLeftBoldBoxOutline"
+                                         Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
                             <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Perfil">
                             <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
                             <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White"/>
                         </Button>
                     </StackPanel>

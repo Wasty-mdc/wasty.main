@@ -33,7 +33,6 @@ public class ClientTableViewModel : INotifyPropertyChanged
     {
         _apiService = apiService;
         _navigationService = navigationService;
-        NavigateToMainView = new RelayCommand(_ => _navigationService.NavigateTo<MainView>());
         // Inicializar la colección de clientes (puedes cargar datos aquí)
         Clientes = new ObservableCollection<ClienteModel>();
         Init().GetAwaiter();
