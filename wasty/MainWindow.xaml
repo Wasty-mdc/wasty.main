@@ -5,8 +5,7 @@
         xmlns:views="clr-namespace:wasty.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Wasty"
-        Width="1600"
-        Height="900"
+        WindowState="Maximized"
         Background="{StaticResource MainGradientBackground}"
         WindowStyle="SingleBorderWindow"
         ResizeMode="CanResize">

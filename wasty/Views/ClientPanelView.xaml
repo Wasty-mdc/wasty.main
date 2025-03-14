@@ -164,12 +164,12 @@
                         <TextBox/>
 
                         <!-- Bloque de Online -->
-                        <GroupBox Header="  Online  " FontWeight="Bold" MaxHeight="100" BorderThickness="0.5"
+                        <GroupBox Header="  Online  " MaxHeight="100" BorderThickness="0.5"
                                   >
                             <StackPanel>
                                 <TextBlock Text="Contraseña Online " Margin="2"/>
                                 <TextBox/>
-                                <CheckBox Name="AccessOnline" Content="Acceso Online" Margin="5"/>
+                                <CheckBox Name="AccessOnline" Content="Acceso Online" Margin="5" Foreground="White"/>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
@@ -202,11 +202,11 @@
                             </StackPanel>
                         </GroupBox>
                          <!-- Bloque de Checkbox-->
-                        <UniformGrid Columns="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                            <CheckBox Name="CbListaDeCorreo"  Content="Lista de Correo"/>
-                            <CheckBox Name="CbFevauto" Content="Fevauto" />
-                            <CheckBox Name="CbClienteGes" Content="Cliente Gestor" />
-                            <CheckBox Name="CbClienteEsp" Content="Cliente Esporádico" />
+                        <UniformGrid Columns="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <CheckBox Name="CbListaDeCorreo"  Content="Lista de Correo" Margin="2" Foreground="White"/>
+                            <CheckBox Name="CbFevauto" Content="Fevauto" Margin="2" Foreground="White"/>
+                            <CheckBox Name="CbClienteGes" Content="Cliente Gestor" Margin="2" Foreground="White"/>
+                            <CheckBox Name="CbClienteEsp" Content="Cliente Esporádico" Margin="2" Foreground="White"/>
                         </UniformGrid>
                     </StackPanel>
                 </GroupBox>
@@ -268,6 +268,8 @@
                         <TextBox Height="260" TextWrapping="Wrap" AcceptsReturn="True"/>
                     </StackPanel>
                 </GroupBox>
+                
+                
 
                 <GroupBox Header="  Datos de Pagos  " FontWeight="Bold" BorderBrush="#c44536" BorderThickness="2">
                     <!-- Bloque de Datos Pagos -->
@@ -321,9 +323,9 @@
                             <ComboBoxItem Content="Anual"/>
                         </ComboBox>
 
-                        <CheckBox Content="Cobro a Fin Periodo"/>
+                        <CheckBox Content="Cobro a Fin Periodo" Margin="2" Foreground="White"/>
 
-                        <CheckBox Content="No Cobrar (Marca de Rojo)"/>
+                        <CheckBox Content="No Cobrar (Marca de Rojo)" Margin="2" Foreground="White"/>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="  Datos de Pagos  " FontWeight="Bold" BorderBrush="#c44536" BorderThickness="2">
@@ -350,6 +352,68 @@
                         <TextBlock Text="Taras:"/>
                         <TextBox MaxHeight="20"/>
                     </UniformGrid>
+                </GroupBox>
+
+                <GroupBox Header="  N I M A  " FontWeight="Bold" 
+          BorderBrush="#A0C26C" BorderThickness="2">
+                    <WrapPanel Margin="2">
+                        <GroupBox Header="  Datos NIMA  "  FontWeight="Bold" Margin="1" BorderThickness="0.5" >
+                            <UniformGrid Columns="2">
+                                <TextBlock Text="NIMA:"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Inscripción (P01/P02):"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Inscripción (P03/P04):"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Actividad Económica:"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Forma Jurídica:"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Código INE:"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="CNAE:"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Gestor Habitual:"/>
+                                <TextBox MaxHeight="20"/>
+                                <TextBlock Text="Comunidad Autónoma:"/>
+                                <TextBox MaxHeight="20"/>
+                            </UniformGrid>
+                        </GroupBox>
+                        <GroupBox Header="  Medio Ambiente  "  FontWeight="Bold" Margin="1" BorderThickness="0.5" >
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Responsable:"/>
+                                    <TextBox/>
+
+                                    <TextBlock Text="Cargo:"/>
+                                    <TextBox/>
+
+                                    <TextBlock Text="Teléfono:"/>
+                                    <TextBox/>
+
+                                    <TextBlock Text="NIF:"/>
+                                    <TextBox/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="  Legalidad  "  FontWeight="Bold" Margin="1" BorderThickness="0.5" >
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Responsable Legal:"/>
+                                    <TextBox/>
+
+                                    <TextBlock Text="Cargo:"/>
+                                    <TextBox/>
+
+                                    <TextBlock Text="Teléfono:"/>
+                                    <TextBox/>
+
+                                    <TextBlock Text="NIF:"/>
+                                    <TextBox/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </WrapPanel>
                 </GroupBox>
 
                 <!-- Bloque de Recogidas -->
