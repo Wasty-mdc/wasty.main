@@ -41,8 +41,6 @@
                 <!-- Contenido completo de la app -->
             </Grid.RowDefinitions>
 
-
-
             <!-- Contenido de la aplicación -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
