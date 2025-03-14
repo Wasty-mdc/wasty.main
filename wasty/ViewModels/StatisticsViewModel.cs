@@ -98,7 +98,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         FilterableValues = new ObservableCollection<Dictionary<string, List<CheckBoxItemModel>>>();
 
         SelectedFilters = new Dictionary<string, List<string>>();
-        Init("ClienteResiduo").GetAwaiter();
+        //Init("ClienteResiduo").GetAwaiter();
     }
 
     // Método para inicializar la vista modelo

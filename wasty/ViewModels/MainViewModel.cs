@@ -20,7 +20,7 @@ public class MainViewModel : MainModel
         NavigateToLoginCommand = new RelayCommand(_ => _authService.Logout());
         NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientTableView>());
         NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<RecycTableView>());
-        NavigateToStatisticsCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsView>());
+        NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
         ShowFicherosCommand = new RelayCommand(ShowFicheros);
         ShowGestionCommand = new RelayCommand(ShowGestion);
         ShowFacturacionCommand = new RelayCommand(ShowFacturacion);
@@ -30,7 +30,7 @@ public class MainViewModel : MainModel
     public ICommand NavigateToLoginCommand { get; }
     public ICommand NavigateToClientesCommand { get; }
     public ICommand NavigateToResiduosCommand { get; }
-    public ICommand NavigateToStatisticsCommand { get; }
+    public ICommand NavigateToStatisticsPanelCommand { get; }
     public ICommand ShowFicherosCommand { get; }
     public ICommand ShowGestionCommand { get; }
     public ICommand ShowFacturacionCommand { get; }

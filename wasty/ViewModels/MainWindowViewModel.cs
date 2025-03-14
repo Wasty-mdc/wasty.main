@@ -3,12 +3,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using wasty.Models;
 using wasty.Services;
 using wasty.Views;
 
 namespace wasty.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : MainWindowModel
     {
         private readonly NavigationService _navigationService;
         private readonly AuthService _authService;
@@ -57,7 +58,7 @@ namespace wasty.ViewModels
             MaximizeCommand = new RelayCommand(_ => ToggleMaximize());
             CloseCommand = new RelayCommand(_ => Application.Current.Shutdown());
             DragMoveCommand = new RelayCommand(_ => Application.Current.MainWindow.DragMove());
-            _authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
+            //_authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
             // Establecer la vista inicial
             IsAuthenticated = false;
             CurrentView = new LoginView();
