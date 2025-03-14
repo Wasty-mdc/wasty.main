@@ -51,22 +51,10 @@
 
         <!-- Estilo para los botones CRUD -->
         <Style x:Key="CrudButtonStyle" TargetType="Button">
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#72ECEAE8"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
         <!-- Estilo para los iconos de los botones -->
@@ -327,25 +315,25 @@
                     <!-- Bloque de Datos Precios -->
                     <UniformGrid Columns="2" Margin="2">
                         <TextBlock Text="Chatarra Mecánica:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Chatarra Plancha:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Plástica:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Papel Archivo:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Aluminio:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Baterías (Unidades):"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Baterías (Kilos):"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Aceite:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Cartón:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                         <TextBlock Text="Taras:"/>
-                        <TextBox/>
+                        <TextBox MaxHeight="20"/>
                     </UniformGrid>
                 </GroupBox>
 
@@ -422,7 +410,7 @@
                         <TextBlock Text="Días próxima retirada:"/>
                         <TextBox/>
 
-                        <CheckBox Content="Alarma"/>
+                        <CheckBox Content="Alarma" Margin="5" Foreground="White"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -436,7 +424,7 @@
                         <TextBlock Text="Días próxima retirada:"/>
                         <TextBox/>
 
-                        <CheckBox Content="Alarma"/>
+                        <CheckBox Content="Alarma" Margin="5" Foreground="White"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -450,7 +438,7 @@
                         <TextBlock Text="Días próxima retirada:"/>
                         <TextBox/>
 
-                        <CheckBox Content="Alarma"/>
+                        <CheckBox Content="Alarma" Margin="5" Foreground="White"/>
 
                         <TextBlock Text="Contenedor del Aceite:"/>
                         <ComboBox>
@@ -506,7 +494,7 @@
                         <TextBlock Text="Días próxima retirada:"/>
                         <TextBox/>
 
-                        <CheckBox Content="Alarma"/>
+                        <CheckBox Content="Alarma" Margin="5" Foreground="White"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -520,7 +508,7 @@
                         <TextBlock Text="Días próxima retirada:"/>
                         <TextBox/>
 
-                        <CheckBox Content="Alarma"/>
+                        <CheckBox Content="Alarma" Margin="5" Foreground="White"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -534,7 +522,7 @@
                         <TextBlock Text="Días próxima retirada:"/>
                         <TextBox/>
 
-                        <CheckBox Content="Alarma"/>
+                        <CheckBox Content="Alarma" Margin="5" Foreground="White"/>
 
                         <TextBlock Text="Contenedor del Aceite:"/>
                         <ComboBox>

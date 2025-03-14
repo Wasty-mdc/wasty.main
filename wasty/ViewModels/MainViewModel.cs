@@ -18,7 +18,7 @@ public class MainViewModel : MainModel
         _navigationService = navigationService;
         _authService = authService;
         NavigateToLoginCommand = new RelayCommand(_ => _authService.Logout());
-        NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientTableView>());
+        NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
         NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<RecycTableView>());
         NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
         ShowFicherosCommand = new RelayCommand(ShowFicheros);
