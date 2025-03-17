@@ -5,16 +5,11 @@
         xmlns:views="clr-namespace:wasty.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Wasty"
-        Width="1600"
-        Height="900"
+        WindowState="Maximized"
         Background="{StaticResource MainGradientBackground}"
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         ResizeMode="CanResize">
 
-    <!-- Configuración de la ventana para permitir bordes redondeados y redimensionado -->
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" CornerRadius="10" ResizeBorderThickness="5"/>
-    </WindowChrome.WindowChrome>
 
     <!-- Importación de Recursos -->
     <Window.Resources>
@@ -39,44 +34,10 @@
         <Grid>
             <!-- Definir la estructura de filas -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <!-- Barra de título -->
+
                 <RowDefinition Height="*"/>
                 <!-- Contenido completo de la app -->
             </Grid.RowDefinitions>
-
-            <!-- Barra de Título Personalizada -->
-            <Border Grid.Row="0" Background="#0F0F0F" Height="50">
-                <Border.InputBindings>
-                    <MouseBinding Gesture="LeftClick" Command="{Binding DragMoveCommand}" />
-                </Border.InputBindings>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <!-- Espacio para mover la ventana -->
-                        <ColumnDefinition Width="40"/>
-                        <!-- Minimizar -->
-                        <ColumnDefinition Width="40"/>
-                        <!-- Maximizar -->
-                        <ColumnDefinition Width="40"/>
-                        <!-- Cerrar -->
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Wasty" Foreground="White" VerticalAlignment="Center"
-                               Margin="10" FontSize="14" FontWeight="Bold"/>
-                    <Button Grid.Column="1" Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding MinimizeCommand}">
-                        <md:PackIcon Kind="WindowMinimize" Width="18" Height="18"/>
-                    </Button>
-                    <Button Grid.Column="2" Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding MaximizeCommand}">
-                        <md:PackIcon x:Name="MaximizeIcon" Kind="WindowMaximize" Width="18" Height="18"/>
-                    </Button>
-                    <Button Grid.Column="3" Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding CloseCommand}">
-                        <md:PackIcon Kind="WindowClose" Width="18" Height="18"/>
-                    </Button>
-                </Grid>
-            </Border>
 
             <!-- Contenido de la aplicación -->
             <Grid Grid.Row="1">
@@ -105,16 +66,20 @@
                     </StackPanel>
                     <!-- Sección inferior del menú lateral -->
                     <StackPanel  
-                                Width="70" VerticalAlignment="Bottom"
+                                Width="60" VerticalAlignment="Bottom"
                                 HorizontalAlignment="Center" Margin="0,0,0,20"
                                 >
-                        <Button Style="{StaticResource NavButton}" ToolTip="Configuración">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Volver atrás">
+                            <md:PackIcon Kind="ArrowLeftBoldBoxOutline"
+                                         Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
                             <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Perfil">
                             <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
                             <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White"/>
                         </Button>
                     </StackPanel>

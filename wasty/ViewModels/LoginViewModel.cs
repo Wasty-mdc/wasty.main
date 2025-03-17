@@ -3,43 +3,29 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using wasty.Models;
 using wasty.Services;
 using wasty.ViewModels;
 using wasty.Views;
 
-public class LoginViewModel : INotifyPropertyChanged
+class LoginViewModel : LoginModel
 {
-    private readonly ApiService _apiService;
     private readonly NavigationService _navigationService;
     private readonly AuthService _authService;
-    private string _email;
     public string Contrasenia { private get; set; }
+    // Propiedad para la cola de mensajes de Snackbar
+    public SnackbarMessageQueue SnackbarMessageQueue { get; }
 
     // Constructor que inicializa el servicio de API, el servicio de navegación y los comandos
-    public LoginViewModel(ApiService apiService, NavigationService navigationService, AuthService authService)
+    public LoginViewModel(NavigationService navigationService, AuthService authService)
     {
-        _apiService = apiService;
         _navigationService = navigationService;
-        LoginCommand = new RelayCommand(async _ => await Login());
+        LoginCommand = new RelayCommand(async _ => await LoginAsync());
         SkipCommand = new RelayCommand(async _ => await SkipLogin());
         RegisterCommand = new RelayCommand(_ => _navigationService.NavigateTo<SignupView>());
         SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(3));
         _authService = authService;
     }
-
-    // Propiedad para el correo electrónico
-    public string Email
-    {
-        get => _email;
-        set
-        {
-            _email = value;
-            OnPropertyChanged();
-        }
-    }
-
-    // Propiedad para la cola de mensajes de Snackbar
-    public SnackbarMessageQueue SnackbarMessageQueue { get; }
 
     // Comandos para iniciar sesión y registrarse
     public ICommand LoginCommand { get; }
@@ -48,36 +34,20 @@ public class LoginViewModel : INotifyPropertyChanged
 
 
     // Método para manejar el inicio de sesión
-    private async Task Login()
+    private async Task LoginAsync()
     {
-        var login = new
-        {
-            Email,
-            Contrasenia
-        };
-
         try
         {
-            var result = await _apiService.RequestAsync("POST", "auth/login", login);
-            //Si la API está caida, o presenta problemas, result será null
-            if (result is null)
+            var result = await _authService.LoginAsync(Email, Contrasenia);
+            if (result)
             {
-                SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
-            }
-            //Si la API responde con éxito, result será un objeto con la propiedad "exito" en true
-            else if (result.GetProperty("exito").GetBoolean())
-            {
-                _authService.IsAuthenticated = true;
                 SnackbarMessageQueue.Enqueue("Inicio de sesión exitoso", "OK", () => { });
                 _navigationService.NavigateTo<MainView>();
             }
-            //Si la API responde con un error de login, result será un objeto con la propiedad "exito" en false
             else
-            {
                 SnackbarMessageQueue.Enqueue("Error en el inicio de sesión.", "OK", () => { });
-            }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
 
         }
@@ -89,7 +59,7 @@ public class LoginViewModel : INotifyPropertyChanged
         Contrasenia = "Pruebas123.";
 
         // Llamar directamente a la función de Login
-        await Login();
+        await LoginAsync();
     }
 
     // Método para navegar a la vista de registro
@@ -98,12 +68,5 @@ public class LoginViewModel : INotifyPropertyChanged
         _navigationService.NavigateTo<SignupView>();
     }
 
-    // Evento para notificar cambios en las propiedades
-    public event PropertyChangedEventHandler PropertyChanged;
 
-    // Método para invocar el evento PropertyChanged
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 }

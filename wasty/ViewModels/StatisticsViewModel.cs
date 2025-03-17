@@ -98,7 +98,7 @@ public class StatisticsViewModel : INotifyPropertyChanged
         FilterableValues = new ObservableCollection<Dictionary<string, List<CheckBoxItemModel>>>();
 
         SelectedFilters = new Dictionary<string, List<string>>();
-        Init("ClienteResiduo").GetAwaiter();
+        //Init("ClienteResiduo").GetAwaiter();
     }
 
     // Método para inicializar la vista modelo
@@ -110,38 +110,23 @@ public class StatisticsViewModel : INotifyPropertyChanged
 
     private async Task<ObservableCollection<Field>> GetFields(string tabla)
     {
-        JsonElement tokenElement = default;
-        JsonElement fieldsElement = default;
         string fields = string.Empty;
         ObservableCollection<Field> fieldsList = new ObservableCollection<Field>();
-        string token = string.Empty;
-        var login = new
-        {
-            Email = "Pruebas123@pruebas.com",
-            Contrasenia = "Pruebas123."
-        };
 
-        var auth = await _apiService.RequestAsync("POST", "auth/login", login);
-
-        if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
-            token = tokenElement.GetString();
-
-        var result = await _apiService.RequestAsync("GET", $"estadisticas/columnas/{tabla}", "", token);
-
-        if (result.TryGetProperty("datos", out fieldsElement))
-            fields = fieldsElement.GetRawText();
+        var result = await _apiService.RequestAsync("GET", $"estadisticas/columnas/{tabla}", "");
 
         try
         {
-            var fieldsNames = JsonSerializer.Deserialize<List<string>>(fields);
+            var fieldsNames = JsonSerializer.Deserialize<List<string>>(result.datos);
 
-            foreach(var i in fieldsNames)
+            foreach (var i in fieldsNames)
             {
                 var header = _headerColumn.FirstOrDefault(s => i.Contains(s.Nombre));
                 if (header is not null)
                 {
                     fieldsList.Add(new Field(i, header.Icono, header.Color));
-                }else 
+                }
+                else
                     fieldsList.Add(new Field(i, "FileAlertOutline", "#9C9C9C"));
             }
 
@@ -156,29 +141,11 @@ public class StatisticsViewModel : INotifyPropertyChanged
     {
         List<string> values = new List<string>();
 
-        JsonElement tokenElement = default;
-        JsonElement recordsElement = default;
-        string json = string.Empty;
-        string token = string.Empty;
-        var login = new
-        {
-            Email = "Pruebas123@pruebas.com",
-            Contrasenia = "Pruebas123."
-        };
+        var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla={Tabla}&campos={fieldName}", "");
 
-        var auth = await _apiService.RequestAsync("POST", "auth/login", login);
+        var records = JsonSerializer.Deserialize<List<dynamic>>(result.datos);
 
-        if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
-            token = tokenElement.GetString();
-
-        var result = await _apiService.RequestAsync("GET", $"/estadisticas/datos?tabla={Tabla}&campos={fieldName}", "", token);
-
-        if (result.TryGetProperty("datos", out recordsElement))
-            json = recordsElement.GetRawText();
-
-        var records = JsonSerializer.Deserialize<List<dynamic>>(json);
-
-        foreach(JsonElement jElement in records)
+        foreach (JsonElement jElement in records)
         {
             if (jElement.TryGetProperty(fieldName, out JsonElement property))
                 values.Add(property.GetRawText());
@@ -186,11 +153,11 @@ public class StatisticsViewModel : INotifyPropertyChanged
         if (action is "ADD")
         {
             List<CheckBoxItemModel> valuesCheckBox = new List<CheckBoxItemModel>();
-            foreach(string value in values.OrderBy(s => s))
+            foreach (string value in values.OrderBy(s => s))
             {
                 valuesCheckBox.Add(new CheckBoxItemModel
                 {
-                    Value = value.Replace("\"","")
+                    Value = value.Replace("\"", "")
                 });
             }
 
@@ -199,7 +166,8 @@ public class StatisticsViewModel : INotifyPropertyChanged
                     { fieldName, valuesCheckBox }
                 }
             );
-        } else
+        }
+        else
         {
             var itemToRemove = FilterableValues.FirstOrDefault(dict => dict.ContainsKey(fieldName));
             FilterableValues.Remove(itemToRemove);
@@ -223,67 +191,55 @@ public class StatisticsViewModel : INotifyPropertyChanged
         if (!string.IsNullOrWhiteSpace(campos))
         {
             DataTable dataTable = new DataTable();
-            JsonElement tokenElement = default;
-            JsonElement fieldsElement = default;
-            string fields = string.Empty;
             ObservableCollection<Field> fieldsList = new ObservableCollection<Field>();
-            string token = string.Empty;
-            var login = new
+
+            var result = await _apiService.RequestAsync("GET", $"estadisticas/datos/?tabla=ClienteResiduo&campos={campos}", "");
+            try
             {
-                Email = "Pruebas123@pruebas.com",
-                Contrasenia = "Pruebas123."
-            };
+                JsonElement.ArrayEnumerator jsonArray = result.datos.EnumerateArray();
 
-            var auth = await _apiService.RequestAsync("POST", "auth/login", login);
-
-            if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
-                token = tokenElement.GetString();
-
-            var result = await _apiService.RequestAsync("GET", $"estadisticas/datos/?tabla=ClienteResiduo&campos={campos}", "", token);
-
-            if (result.TryGetProperty("datos", out fieldsElement))
-                fields = fieldsElement.GetRawText();
-            
-            var jsonArray = JsonDocument.Parse(fields).RootElement.EnumerateArray();
-
-            if (jsonArray.Any())
-            {
-                // Obtener las propiedades del primer objeto para definir las columnas
-                foreach (var property in jsonArray.First().EnumerateObject())
+                if (jsonArray.Any())
                 {
-                    dataTable.Columns.Add(property.Name);
-                }
-
-                // Añadir filas al DataTable
-                foreach (var jsonObject in jsonArray)
-                {
-                    var row = dataTable.NewRow();
-                    foreach (var property in jsonObject.EnumerateObject())
+                    // Obtener las propiedades del primer objeto para definir las columnas
+                    foreach (var property in jsonArray.First().EnumerateObject())
                     {
-                        row[property.Name] = property.Value.ToString();
+                        dataTable.Columns.Add(property.Name);
                     }
-                    dataTable.Rows.Add(row);
+
+                    // Añadir filas al DataTable
+                    foreach (var jsonObject in jsonArray)
+                    {
+                        var row = dataTable.NewRow();
+                        foreach (var property in jsonObject.EnumerateObject())
+                        {
+                            row[property.Name] = property.Value.ToString();
+                        }
+                        dataTable.Rows.Add(row);
+                    }
                 }
-            }
 
-            dataView = dataTable.DefaultView;
-            dataView.Sort = $"{SelectedFields.Select(t => t.Name).FirstOrDefault()} ASC";
+                dataView = dataTable.DefaultView;
+                dataView.Sort = $"{SelectedFields.Select(t => t.Name).FirstOrDefault()} ASC";
 
-            foreach(var campo in SelectedFields.Select(t => t.Name))
-            {
-                var filtroName = campo;
-                string filtroValues = string.Empty;
-
-                foreach (var item in FilterableValues.FirstOrDefault(s => s.ContainsKey(campo)))
+                foreach (var campo in SelectedFields.Select(t => t.Name))
                 {
-                    filtroValues = string.Join(", ", item.Value.Where(s => s.IsChecked).Select(s => $"'{s.Value}'"));
+                    var filtroName = campo;
+                    string filtroValues = string.Empty;
+
+                    foreach (var item in FilterableValues.FirstOrDefault(s => s.ContainsKey(campo)))
+                    {
+                        filtroValues = string.Join(", ", item.Value.Where(s => s.IsChecked).Select(s => $"'{s.Value}'"));
+                    }
+                    filtros += $"{filtroName} IN ({filtroValues}) AND ";
                 }
-                filtros += $"{filtroName} IN ({filtroValues}) AND ";
+
+                filtros = Utils.RemoveLastWord(filtros);
+
+                dataView.RowFilter = filtros;
             }
-
-            filtros = Utils.RemoveLastWord(filtros);
-
-            dataView.RowFilter = filtros;
+            catch (Exception ex)
+            {
+            }
         }
 
         FilteredData = dataView;

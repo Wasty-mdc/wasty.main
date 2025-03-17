@@ -79,5 +79,53 @@ namespace wasty.Views
             var viewModel = (StatisticsViewModel)DataContext;
             //viewModel.OnSelectedFieldsChanged(e);
         }
+
+
+
+
+        ///////////////////////////////////////////////////////77
+        private Point _startPoint;
+        private void OnFieldMouseMove2(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = _startPoint - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                    Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                // Get the dragged item
+                var border = sender as Border;
+                if (border == null) return;
+
+                var data = border.DataContext;
+
+                // Initialize the drag & drop operation
+                DragDrop.DoDragDrop(border, data, DragDropEffects.Move);
+            }
+        }
+
+        private void OnFieldDragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Move;
+            e.Handled = true;
+        }
+
+        private void OnFieldDrop(object sender, DragEventArgs e)
+        {
+            //if (e.Data.GetDataPresent(typeof(Field)))
+            //{
+            //    var droppedData = e.Data.GetData(typeof(Field)) as Field;
+            //    var target = ((Border)sender).DataContext as Field;
+
+            //    // Handle the drop logic here, e.g., reordering items in the collection
+            //    var viewModel = DataContext as Field;
+            //    viewModel.MoveItem(droppedData, target);
+            //}
+        }
+        private void OnFieldMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _startPoint = e.GetPosition(null);
+        }
     }
 }

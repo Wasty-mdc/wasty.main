@@ -3,39 +3,20 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using wasty.Models;
 using wasty.Services;
 using wasty.Views;
 
 namespace wasty.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : MainWindowModel
     {
         private readonly NavigationService _navigationService;
         private readonly AuthService _authService;
+        private readonly AuthModel _authModel;
         // Evento para notificar cambios en las propiedades
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private bool _isAuthenticated;
-        public bool IsAuthenticated
-        {
-            get => _isAuthenticated;
-            set
-            {
-                _isAuthenticated = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private object _currentView;
-        public object CurrentView
-        {
-            get => _currentView;
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged();
-            }
-        }
 
         // Comandos para cambiar de vista
         public ICommand ShowLoginViewCommand { get; }
@@ -48,11 +29,11 @@ namespace wasty.ViewModels
         public ICommand CloseCommand { get; }
         public ICommand DragMoveCommand { get; }
 
-        public MainWindowViewModel(NavigationService navigationService, AuthService authService)
+        public MainWindowViewModel(NavigationService navigationService, AuthService authService, AuthModel authModel)
         {
             _navigationService = navigationService;
             _authService = authService;
-            _authService.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authService.IsAuthenticated;
+            _authModel = authModel;
             // Inicializar comandos de navegación
             ShowLoginViewCommand = new RelayCommand(_ =>
             {
@@ -79,9 +60,9 @@ namespace wasty.ViewModels
             MaximizeCommand = new RelayCommand(_ => ToggleMaximize());
             CloseCommand = new RelayCommand(_ => Application.Current.Shutdown());
             DragMoveCommand = new RelayCommand(_ => Application.Current.MainWindow.DragMove());
-
+            _authModel.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authModel.IsAuthenticated;
             // Establecer la vista inicial
-            IsAuthenticated = false;
+            //IsAuthenticated = true;
             CurrentView = new LoginView();
             _authService = authService;
         }

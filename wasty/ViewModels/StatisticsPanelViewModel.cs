@@ -50,26 +50,9 @@ namespace wasty.ViewModels
             string items = "";
             try
             {
-                JsonElement tokenElement = default;
-                ObservableCollection<BotonPanelStats> fieldsList = new ObservableCollection<BotonPanelStats>();
-                string token = "";
-                var login = new
-                {
-                    Email = "Pruebas123@pruebas.com",
-                    Contrasenia = "Pruebas123."
-                };
+                var result = await _apiService.RequestAsync("GET", "estadisticas/paneles", "");
 
-                var auth = await _apiService.RequestAsync("POST", "auth/login", login);
-
-                if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
-                    token = tokenElement.GetString();
-
-                var result = await _apiService.RequestAsync("GET", "estadisticas/paneles", "", token);
-
-                if (result.TryGetProperty("datos", out itemsElement))
-                    items = itemsElement.GetRawText();
-
-                var itemsList = JsonSerializer.Deserialize<ObservableCollection<BotonPanelStats>>(items);
+                var itemsList = JsonSerializer.Deserialize<ObservableCollection<BotonPanelStats>>(result.datos);
 
                 return itemsList;
             }

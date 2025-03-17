@@ -21,10 +21,10 @@ public class RecycTableViewModel : INotifyPropertyChanged
     private Dictionary<string, bool> _stickyColumns;
     private Dictionary<string, bool> _hiddenColumns;
     private int _frozenColumnCount;
-    private ObservableCollection<Residuo> _residuos;
+    private ObservableCollection<ResiduoModel> _residuos;
 
     // Propiedad que representa la colección de residuos
-    public ObservableCollection<Residuo> Residuos
+    public ObservableCollection<ResiduoModel> Residuos
     {
         get => _residuos;
         set
@@ -50,7 +50,7 @@ public class RecycTableViewModel : INotifyPropertyChanged
     {
         _apiService = apiService;
         _navigationService = navigationService;
-        Residuos = new ObservableCollection<Residuo>();
+        Residuos = new ObservableCollection<ResiduoModel>();
         _stickyColumns = new Dictionary<string, bool>();
         _hiddenColumns = new Dictionary<string, bool>();
         ToggleStickyColumnCommand = new RelayCommand<string>(ToggleStickyColumn);
@@ -112,37 +112,19 @@ public class RecycTableViewModel : INotifyPropertyChanged
     }
 
     // Método para obtener los datos de residuos
-    private async Task<ObservableCollection<Residuo>> GetData()
+    private async Task<ObservableCollection<ResiduoModel>> GetData()
     {
-        JsonElement tokenElement = default;
-        JsonElement residuosElement = default;
-        string token = "";
-        string residuos = "";
-        var login = new
-        {
-            Email = "Pruebas123@pruebas.com",
-            Contrasenia = "Pruebas123."
-        };
-
-        var auth = await _apiService.RequestAsync("POST", "auth/login", login);
-
-        if (auth.TryGetProperty("datos", out JsonElement datosElement) && datosElement.TryGetProperty("token", out tokenElement))
-            token = tokenElement.GetString();
-
-        var result = await _apiService.RequestAsync("GET", "residuos", "", token);
-
-        if (result.TryGetProperty("datos", out residuosElement))
-            residuos = residuosElement.GetRawText();
+        var result = await _apiService.RequestAsync("GET", "residuos", "");
 
         try
         {
-            ObservableCollection<Residuo> residuosList = JsonSerializer.Deserialize<ObservableCollection<Residuo>>(residuos);
+            ObservableCollection<ResiduoModel> residuosList = JsonSerializer.Deserialize<ObservableCollection<ResiduoModel>>(result.datos);
 
             return residuosList;
         }
         catch (Exception ex)
         {
-            return new ObservableCollection<Residuo>();
+            return new ObservableCollection<ResiduoModel>();
         }
     }
 

@@ -53,7 +53,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource StatsButtonStyle}" Background="{Binding ColorFondo}" 
-                                Command="{Binding NavigateToStatisticsCommand,
+                                Command="{Binding DataContext.NavigateToStatisticsCommand,
                                         RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                 CommandParameter="{Binding Tabla}">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
