@@ -10,6 +10,8 @@ namespace wasty.Utils {
             public DataTemplate TextoTemplate { get; set; }
             public DataTemplate NumeroTemplate { get; set; }
             public DataTemplate FechaTemplate { get; set; }
+            public DataTemplate PickerTemplate { get; set; }
+            public DataTemplate CheckboxTemplate { get; set; }
 
             public override DataTemplate SelectTemplate(object item, DependencyObject container)
             {
@@ -20,6 +22,8 @@ namespace wasty.Utils {
                         "Texto" => TextoTemplate,
                         "Número" => NumeroTemplate,
                         "Fecha" => FechaTemplate,
+                        "Picker" => PickerTemplate,
+                        "Checkbox" => CheckboxTemplate,
                         _ => TextoTemplate
                     };
                 }

@@ -7,6 +7,7 @@ namespace wasty.Models
 	{
 		public string Nombre {  get; set; }
 		public ObservableCollection<CampoFormulario> Campos { get; set; }
+		public bool IsFirst { get; set; }
 	}
 }
 
