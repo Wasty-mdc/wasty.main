@@ -120,9 +120,28 @@
             </StackPanel>
 
             <!-- Barra de búsqueda -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">
-                <md:PackIcon Kind="AccountSearchOutline" Style="{StaticResource CrudIconStyle}"/>
-                <TextBox Width="260" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="10"
+                Height="40">
+                <Button Style="{StaticResource CrudButtonStyle}">
+                    <md:PackIcon Kind="AccountSearchOutline" 
+                             Style="{StaticResource CrudIconStyle}"
+                             VerticalAlignment="Center" 
+                             Width="30" Height="30"/>
+                </Button>
+                <StackPanel Orientation="Vertical">
+                    <TextBox Width="260" 
+                         Height="30" 
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" 
+                         Margin="5"  Foreground="Black"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ListView ItemsSource="{Binding ClientesFiltrados}"/>
+                </StackPanel>
             </StackPanel>
         </DockPanel>
 

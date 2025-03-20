@@ -65,8 +65,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource FieldBorderStyle}" Background="{Binding Background}"
-        PreviewMouseMove="OnFieldMouseMove2" PreviewMouseLeftButtonDown="OnFieldMouseLeftButtonDown"
-        Drop="OnFieldDrop" DragOver="OnFieldDragOver">
+                                PreviewMouseMove="OnFieldMouseMove2" PreviewMouseLeftButtonDown="OnFieldMouseLeftButtonDown"
+                                Drop="OnFieldDrop" DragOver="OnFieldDragOver">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <md:PackIcon Kind="{Binding Icon}"
                                  Width="15"
