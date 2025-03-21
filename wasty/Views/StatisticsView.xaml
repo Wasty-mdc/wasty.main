@@ -38,7 +38,7 @@
         </Grid.ColumnDefinitions>
         
                 <!-- Barra superior amarilla -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#47FF9D" Height="Auto" VerticalAlignment="Top" >
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#f0ead2" Height="Auto" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

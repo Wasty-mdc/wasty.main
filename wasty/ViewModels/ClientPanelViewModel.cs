@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,10 +27,8 @@ namespace wasty.ViewModels
             get => _searchText;
             set
             {
-                if (SetProperty(ref _searchText, value)) // Ahora SetProperty devuelve un bool
-                {
+                if (SetProperty(ref _searchText, value))
                     FiltrarClientes();
-                }
             }
         }
 
@@ -39,9 +38,7 @@ namespace wasty.ViewModels
             set
             {
                 if (SetProperty(ref _clientes, value))
-                {
-                    FiltrarClientes(); // Se actualiza la lista filtrada cuando cambian los clientes
-                }
+                    FiltrarClientes();
             }
         }
 
@@ -50,6 +47,24 @@ namespace wasty.ViewModels
             get => _clientesFiltrados;
             set => SetProperty(ref _clientesFiltrados, value);
         }
+
+        // --- VISIBILIDAD DINÁMICA PARA GROUPBOXES ---
+
+        private Dictionary<string, bool> _groupBoxVisibility = new();
+        public Dictionary<string, bool> GroupBoxVisibility
+        {
+            get => _groupBoxVisibility;
+            set
+            {
+                _groupBoxVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ToggleGroupBoxVisibilityCommand { get; }
+        public ICommand ShowAllGroupBoxesCommand { get; }
+
+        // --------------------------------------------
 
         public ICommand CreateCommand { get; }
         public ICommand UpdateCommand { get; }
@@ -65,14 +80,51 @@ namespace wasty.ViewModels
             UpdateCommand = new RelayCommand(UpdateClient);
             DisableCommand = new RelayCommand(DisableClient);
             LoadClientCommand = new RelayCommand(LoadClient);
+
+            ToggleGroupBoxVisibilityCommand = new RelayCommand<string>(ToggleGroupBoxVisibility);
+            ShowAllGroupBoxesCommand = new RelayCommand<string>(ShowAllGroupBoxes);
+
+            InicializarVisibilidad();
         }
 
-        private void CreateClient(object obj) { /* Lógica para crear un cliente */ }
-        private void UpdateClient(object obj) { /* Lógica para actualizar un cliente */ }
-        private void DisableClient(object obj) { /* Lógica para deshabilitar un cliente */ }
+        private void InicializarVisibilidad()
+        {
+            var keys = new[]
+            {
+                "DatosClientes", "Online", "DatosGenerales", "Horario", "Ubicacion",
+                "Contacto", "Comercial", "Observaciones", "DatosPagos", "DatosPrecios",
+                "NIMA", "DatosNIMA", "MedioAmbiente", "Legalidad", "Recogidas",
+                "DatosRecogidas", "NoPeligrosas", "Peligrosas", "Aceite"
+            };
+
+            foreach (var key in keys)
+                GroupBoxVisibility[key] = true;
+        }
+
+        private void ToggleGroupBoxVisibility(string key)
+        {
+            if (GroupBoxVisibility.ContainsKey(key))
+            {
+                GroupBoxVisibility[key] = !GroupBoxVisibility[key];
+                OnPropertyChanged(nameof(GroupBoxVisibility));
+            }
+        }
+
+        private void ShowAllGroupBoxes(string show)
+        {
+            var keys = GroupBoxVisibility.Keys.ToList();
+            foreach (var key in keys)
+                GroupBoxVisibility[key] = true;
+
+            OnPropertyChanged(nameof(GroupBoxVisibility));
+        }
+
+        private void CreateClient(object obj) { /* lógica crear */ }
+        private void UpdateClient(object obj) { /* lógica actualizar */ }
+        private void DisableClient(object obj) { /* lógica desactivar */ }
+
         private void LoadClient(object obj)
         {
-            // Simulación de carga de datos
             Clientes = new ObservableCollection<ClienteModel>
             {
                 new ClienteModel { NombreFiscal = "Empresa ABC", NombreComercial = "ABC S.A." },
@@ -91,9 +143,7 @@ namespace wasty.ViewModels
             if (string.IsNullOrWhiteSpace(SearchText))
             {
                 foreach (var cliente in Clientes)
-                {
                     ClientesFiltrados.Add(cliente);
-                }
             }
             else
             {
@@ -104,9 +154,7 @@ namespace wasty.ViewModels
                 );
 
                 foreach (var cliente in filtrados)
-                {
                     ClientesFiltrados.Add(cliente);
-                }
             }
         }
 
@@ -116,15 +164,12 @@ namespace wasty.ViewModels
             {
                 storage = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true; // Indica que el valor cambió
+                return true;
             }
-            return false; // Indica que el valor no cambió
+            return false;
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }

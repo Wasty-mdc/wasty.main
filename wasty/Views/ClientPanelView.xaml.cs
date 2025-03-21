@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wasty.ViewModels;
 
 namespace wasty.Views
 {
@@ -24,6 +25,7 @@ namespace wasty.Views
         {
             InitializeComponent();
         }
+
         private void GrupoPrincipal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (GrupoSecundario == null) return;
