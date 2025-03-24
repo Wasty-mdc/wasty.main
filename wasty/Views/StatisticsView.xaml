@@ -38,7 +38,7 @@
         </Grid.ColumnDefinitions>
         
                 <!-- Barra superior amarilla -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#47FF9D" Height="Auto" VerticalAlignment="Top" >
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#f0ead2" Height="Auto" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -65,8 +65,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource FieldBorderStyle}" Background="{Binding Background}"
-        PreviewMouseMove="OnFieldMouseMove2" PreviewMouseLeftButtonDown="OnFieldMouseLeftButtonDown"
-        Drop="OnFieldDrop" DragOver="OnFieldDragOver">
+                                PreviewMouseMove="OnFieldMouseMove2" PreviewMouseLeftButtonDown="OnFieldMouseLeftButtonDown"
+                                Drop="OnFieldDrop" DragOver="OnFieldDragOver">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <md:PackIcon Kind="{Binding Icon}"
                                  Width="15"
