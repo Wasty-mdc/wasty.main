@@ -4,8 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:wasty.Views"
-             xmlns:viewModels="clr-namespace:wasty.ViewModels" xmlns:utils="clr-namespace:wasty.Utils"
-             xmlns:behaviors="clr-namespace:wasty.Utils.Behaviors"
+             xmlns:viewModels="clr-namespace:wasty.ViewModels" 
+             xmlns:utils="clr-namespace:wasty.Utils"
              xmlns:models="clr-namespace:wasty.Models"
              Height="Auto" Width="Auto">
 
@@ -81,7 +81,16 @@
         <DataTemplate x:Key="TextoTemplate">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Nombre}"/>
-                <TextBox Text="{Binding Valor, Mode=TwoWay}" />
+                <TextBox Text="{Binding Valor, Mode=TwoWay}">
+                    <utils:PlaceholderService.Placeholder>
+                        <MultiBinding StringFormat="Introduce un {0}">
+                            <Binding Path="Nombre"/>
+                        </MultiBinding>
+                    </utils:PlaceholderService.Placeholder>
+                    <i:Interaction.Behaviors>
+                        <utils:ValidationBehavior CampoFormulario="{Binding}" />
+                    </i:Interaction.Behaviors>
+                </TextBox>
             </StackPanel>
         </DataTemplate>
 
@@ -93,7 +102,16 @@
                 <TextBlock Text="{Binding Nombre}"/>
                 <TextBox Text="{Binding Valor, Mode=TwoWay}"
                  PreviewTextInput="OnlyNumbers_PreviewTextInput"
-                 LostFocus="ValidateDecimalFormat" />
+                 LostFocus="ValidateDecimalFormat">
+                    <utils:PlaceholderService.Placeholder>
+                        <MultiBinding StringFormat="Introduce un {0}">
+                            <Binding Path="Nombre"/>
+                        </MultiBinding>
+                    </utils:PlaceholderService.Placeholder>
+                    <i:Interaction.Behaviors>
+                        <utils:ValidationBehavior CampoFormulario="{Binding}" />
+                    </i:Interaction.Behaviors>
+                </TextBox>
             </StackPanel>
         </DataTemplate>
 

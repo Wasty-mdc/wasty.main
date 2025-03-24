@@ -58,25 +58,10 @@ using wasty.Models;
 
             public ICommand SeleccionarGrupoCommand { get; }
 
-        public bool HayErroresEnFormulario()
-        {
-            foreach (var bloque in Bloques)
-            {
-                foreach (var campo in bloque.Campos)
-                {
-                    // Validar si hay errores en cada campo
-                    if (!EsCampoValido(campo))
-                        return true;
-                }
-            }
-            return false;
-        }
-
         public ICommand GuardarCommand { get; }
 
         public FormularioViewModel()
             {
-                GuardarCommand = new RelayCommand(Guardar, PuedeGuardar);
                 Bloques = new ObservableCollection<BloqueFormulario>
             {
                 new BloqueFormulario
@@ -355,54 +340,6 @@ using wasty.Models;
 
             // Notificar que el botón "Guardar" debe actualizarse
             CommandManager.InvalidateRequerySuggested();
-        }
-
-
-        private bool EsCampoValido(CampoFormulario campo)
-        {
-            // Verifica si el campo está vacío y debería ser obligatorio
-            if (campo.TipoValidacion == "Vacio" && string.IsNullOrWhiteSpace(campo.Valor))
-                return false;
-
-            // Valida DNI
-            if (campo.TipoValidacion == "DNI" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^\d{8}[A-Za-z]$"))
-                return false;
-
-            // Valida NIF
-            if (campo.TipoValidacion == "NIF" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^\d{8}[A-Za-z]$"))
-                return false;
-
-            // Valida NIMA
-            if (campo.TipoValidacion == "NIMA" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^\d{14}$"))
-                return false;
-
-            // Valida CNAE (4 dígitos)
-            if (campo.TipoValidacion == "CNAE" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^\d{4}$"))
-                return false;
-
-            // Valida INE (1-5 dígitos)
-            if (campo.TipoValidacion == "INE" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^\d{1,5}$"))
-                return false;
-
-            // Valida Teléfono (9 dígitos)
-            if (campo.TipoValidacion == "Telefono" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^\d{9}$"))
-                return false;
-
-            // Valida Email
-            if (campo.TipoValidacion == "Correo" && !System.Text.RegularExpressions.Regex.IsMatch(campo.Valor, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                return false;
-
-            return true; // Si pasó todas las validaciones, es válido
-        }
-
-        private bool PuedeGuardar(object param)
-        {
-            return !HayErroresEnFormulario(); // El botón estará deshabilitado si hay errores
-        }
-
-        private void Guardar(object param)
-        {
-            MessageBox.Show("Formulario guardado correctamente.");
         }
     }
 
