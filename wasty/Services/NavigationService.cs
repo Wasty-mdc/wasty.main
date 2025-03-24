@@ -20,7 +20,7 @@ namespace wasty.Services
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.CurrentView.Content = view;
         }
-        public void NavigateTo<TView>(object parameter) where TView : UserControl
+        public void NavigateTo<TView>(object parameter) where TView : UserControl 
         {
             var view = _viewFactory(typeof(TView));
 

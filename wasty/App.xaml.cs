@@ -12,6 +12,7 @@ using wasty.ViewModels;
 using System.Windows.Controls;
 using wasty.Helpers;
 using wasty.Models;
+using Wasty.ViewModels;
 
 
 namespace wasty
@@ -57,6 +58,9 @@ namespace wasty
             services.AddTransient<StatisticsViewModel>();
             services.AddTransient<StatisticsPanelViewModel>();
             services.AddTransient<ClientPanelViewModel>();
+            services.AddTransient<ResiduosViewModel>();
+            services.AddTransient<ResiduosPanelViewModel>();
+
             services.AddHttpClient<ApiService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5276/");

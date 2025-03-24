@@ -19,7 +19,8 @@ public class MainViewModel : MainModel
         _authService = authService;
         NavigateToLoginCommand = new RelayCommand(_ => _authService.Logout());
         NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
-        NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<RecycTableView>());
+        NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosView>());
+        NavigateToResiduosPanelCommand = new RelayCommand(_ => new ResiduosPanelView().ShowDialog());
         NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
         ShowFicherosCommand = new RelayCommand(ShowFicheros);
         ShowGestionCommand = new RelayCommand(ShowGestion);
@@ -30,6 +31,8 @@ public class MainViewModel : MainModel
     public ICommand NavigateToLoginCommand { get; }
     public ICommand NavigateToClientesCommand { get; }
     public ICommand NavigateToResiduosCommand { get; }
+    public ICommand NavigateToResiduosPanelCommand { get; }
+
     public ICommand NavigateToStatisticsPanelCommand { get; }
     public ICommand ShowFicherosCommand { get; }
     public ICommand ShowGestionCommand { get; }
