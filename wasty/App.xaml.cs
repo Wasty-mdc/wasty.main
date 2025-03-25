@@ -53,10 +53,9 @@ namespace wasty
             services.AddTransient<SignupViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<MainViewModel>();
-            services.AddTransient<ClientTableViewModel>();
-            services.AddTransient<RecycTableViewModel>();
             services.AddTransient<StatisticsViewModel>();
             services.AddTransient<StatisticsPanelViewModel>();
+            services.AddTransient<ClientViewModel>();
             services.AddTransient<ClientPanelViewModel>();
             services.AddTransient<ResiduosViewModel>();
             services.AddTransient<ResiduosPanelViewModel>();

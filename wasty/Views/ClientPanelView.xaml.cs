@@ -19,7 +19,7 @@ namespace wasty.Views
     /// <summary>
     /// Lógica de interacción para ClientPanelView.xaml
     /// </summary>
-    public partial class ClientPanelView : UserControl
+    public partial class ClientPanelView : Window
     {
         public ClientPanelView()
         {

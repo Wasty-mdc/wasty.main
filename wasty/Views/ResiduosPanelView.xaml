@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wasty.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Detalles del residuo" Height="800" Width="1000"
+        Title="Panel de Residuos" Height="800" Width="1000"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource MainGradientBackground}">
 

@@ -4,7 +4,6 @@ using wasty.Models;
 using wasty.Services;
 using wasty.ViewModels;
 using wasty.Views;
-using wasty.Views.TableViews;
 
 public class MainViewModel : MainModel
 {
@@ -18,8 +17,9 @@ public class MainViewModel : MainModel
         _navigationService = navigationService;
         _authService = authService;
         NavigateToLoginCommand = new RelayCommand(_ => _authService.Logout());
-        NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
-        NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
+        NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientView>());
+        NavigateToClientPanelCommand = new RelayCommand(_ => new ClientPanelView().ShowDialog());
+        NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosView>());
         NavigateToResiduosPanelCommand = new RelayCommand(_ => new ResiduosPanelView().ShowDialog());
         NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
         ShowFicherosCommand = new RelayCommand(ShowFicheros);
@@ -30,6 +30,7 @@ public class MainViewModel : MainModel
     // Comandos para la navegación
     public ICommand NavigateToLoginCommand { get; }
     public ICommand NavigateToClientesCommand { get; }
+    public ICommand NavigateToClientPanelCommand { get; }
     public ICommand NavigateToResiduosCommand { get; }
     public ICommand NavigateToResiduosPanelCommand { get; }
 
