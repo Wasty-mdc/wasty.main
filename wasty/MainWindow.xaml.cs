@@ -1,19 +1,17 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
+using Microsoft.Win32;
 using wasty.ViewModels;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Net.Http;
-using System.Windows.Controls;
 
 namespace wasty
 {
     public partial class MainWindow : Window
     {
-        private const int DWMWA_CAPTION_COLOR = 35; // Cambia el color de la barra de título
-        private const int DWMWA_TEXT_COLOR = 34; // Cambia el color del borde de la ventana
-        private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20; // Forzar modo oscuro en Windows 11s
+        private const int DWMWA_CAPTION_COLOR = 35;
+        private const int DWMWA_TEXT_COLOR = 34;
+        private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
 
         private IntPtr hwnd;
 
@@ -21,33 +19,76 @@ namespace wasty
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref uint attrValue, int attrSize);
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
-        
+
         public MainWindow()
         {
             InitializeComponent();
-            // Establecer el DataContext al MainWindowViewModel
             DataContext = ((App)Application.Current).Services.GetService(typeof(MainWindowViewModel));
-            Loaded += MainWindow_Loaded;
 
+            Loaded += MainWindow_Loaded;
+            Unloaded += MainWindow_Unloaded;
+
+            SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var hwnd = new WindowInteropHelper(this).Handle;
+            hwnd = new WindowInteropHelper(this).Handle;
+            ApplyWindowTheme();
+        }
 
-            uint titleBarColor = 0xFF000000; // Negro (ARGB: AARRGGBB)
-            uint textColor = 0xFFFFFFFF; // Blanco (ARGB: AARRGGBB)
+        private void MainWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
+        }
 
-            // Cambiar el color de la barra de título
+        private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (e.Category == UserPreferenceCategory.General)
+            {
+                Dispatcher.Invoke(() => ApplyWindowTheme());
+            }
+        }
+
+        private void ApplyWindowTheme()
+        {
+            bool isDark = ThemeHelper.IsDarkThemeEnabled();
+
+            uint titleBarColor = isDark ? 0xFF000000 : 0xFFFFFFFF;
+            uint textColor = isDark ? 0xFFFFFFFF : 0xFF000000;
+            int useDarkMode = isDark ? 1 : 0;
+
             DwmSetWindowAttribute(hwnd, DWMWA_CAPTION_COLOR, ref titleBarColor, sizeof(uint));
-
-            // Cambiar el color del texto en la barra de título
             DwmSetWindowAttribute(hwnd, DWMWA_TEXT_COLOR, ref textColor, sizeof(uint));
-
-            int useDarkMode = 1; // IMPORTANTE: Esto es INT, no UINT
             DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDarkMode, sizeof(int));
         }
     }
+
+    public static class ThemeHelper
+    {
+        public static bool IsDarkThemeEnabled()
+        {
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+                {
+                    if (key != null)
+                    {
+                        object registryValueObject = key.GetValue("AppsUseLightTheme");
+                        if (registryValueObject != null)
+                        {
+                            int registryValue = (int)registryValueObject;
+                            return registryValue == 0; // 0 = oscuro, 1 = claro
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Si falla, asumimos tema claro
+            }
+
+            return false;
+        }
+    }
 }
-
-
