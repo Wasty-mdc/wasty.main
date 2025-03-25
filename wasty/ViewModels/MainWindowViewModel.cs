@@ -31,9 +31,7 @@ namespace wasty.ViewModels
             // Inicializar comandos de navegación
             ShowLoginViewCommand = new RelayCommand(_ =>
             {
-                IsAuthenticated = false;
-                //CurrentView = new LoginView();
-                _navigationService.NavigateTo<LoginView>();
+                _authService.Logout();
             });
 
             ShowSignupViewCommand = new RelayCommand(_ =>
@@ -44,8 +42,6 @@ namespace wasty.ViewModels
 
             ShowMainViewCommand = new RelayCommand(_ =>
             {
-                IsAuthenticated = true;
-                //CurrentView = new MainView();
                 _navigationService.NavigateTo<MainView>();
             });
 
