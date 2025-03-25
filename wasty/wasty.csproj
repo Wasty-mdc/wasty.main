@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\TableViews\TableView.xaml.cs" />
+    <Compile Remove="Views\TableViews\**" />
+    <EmbeddedResource Remove="Views\TableViews\**" />
+    <None Remove="Views\TableViews\**" />
+    <Page Remove="Views\TableViews\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\ClientTableViewModel.cs" />
+    <Compile Remove="ViewModels\RecycTableViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +47,6 @@
     <Page Remove="Styles.xaml" />
     <Page Remove="Styles\mainStyles.xaml" />
     <Page Remove="Styles\statisticStyles.xaml" />
-    <Page Remove="Views\TableViews\TableView.xaml" />
   </ItemGroup>
 
   <ItemGroup>

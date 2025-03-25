@@ -7,10 +7,19 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\ClientView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Formulario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ClientPanelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ResiduosPanelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ResiduosView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\StatisticsView.xaml.cs">

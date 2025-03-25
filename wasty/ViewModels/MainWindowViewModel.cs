@@ -23,12 +23,6 @@ namespace wasty.ViewModels
         public ICommand ShowSignupViewCommand { get; }
         public ICommand ShowMainViewCommand { get; }
 
-        // Comandos para la interacción con la ventana
-        public ICommand MinimizeCommand { get; }
-        public ICommand MaximizeCommand { get; }
-        public ICommand CloseCommand { get; }
-        public ICommand DragMoveCommand { get; }
-
         public MainWindowViewModel(NavigationService navigationService, AuthService authService, AuthModel authModel)
         {
             _navigationService = navigationService;
@@ -37,9 +31,7 @@ namespace wasty.ViewModels
             // Inicializar comandos de navegación
             ShowLoginViewCommand = new RelayCommand(_ =>
             {
-                IsAuthenticated = false;
-                //CurrentView = new LoginView();
-                _navigationService.NavigateTo<LoginView>();
+                _authService.Logout();
             });
 
             ShowSignupViewCommand = new RelayCommand(_ =>
@@ -50,34 +42,14 @@ namespace wasty.ViewModels
 
             ShowMainViewCommand = new RelayCommand(_ =>
             {
-                IsAuthenticated = true;
-                //CurrentView = new MainView();
                 _navigationService.NavigateTo<MainView>();
             });
 
-            // Inicializar comandos de interacción con la ventana
-            MinimizeCommand = new RelayCommand(_ => Application.Current.MainWindow.WindowState = WindowState.Minimized);
-            MaximizeCommand = new RelayCommand(_ => ToggleMaximize());
-            CloseCommand = new RelayCommand(_ => Application.Current.Shutdown());
-            DragMoveCommand = new RelayCommand(_ => Application.Current.MainWindow.DragMove());
             _authModel.OnAuthenticationChanged += (s, e) => IsAuthenticated = _authModel.IsAuthenticated;
             // Establecer la vista inicial
             //IsAuthenticated = true;
             CurrentView = new LoginView();
             _authService = authService;
-        }
-
-        // Método para alternar entre maximizar y restaurar la ventana
-        private void ToggleMaximize()
-        {
-            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-            }
-            else
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            }
         }
 
         // Método para invocar el evento PropertyChanged

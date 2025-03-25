@@ -12,6 +12,7 @@ using wasty.ViewModels;
 using System.Windows.Controls;
 using wasty.Helpers;
 using wasty.Models;
+using Wasty.ViewModels;
 
 
 namespace wasty
@@ -41,7 +42,7 @@ namespace wasty
                 client.BaseAddress = new Uri("http://localhost:5276/");
             });
             services.AddTransient<NavigationService>(provider =>
-                new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType))
+                new NavigationService(viewType => (object)Activator.CreateInstance(viewType))
             );
             services.AddSingleton<AuthService>();
             services.AddSingleton<SessionService>();
@@ -52,11 +53,13 @@ namespace wasty
             services.AddTransient<SignupViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<MainViewModel>();
-            services.AddTransient<ClientTableViewModel>();
-            services.AddTransient<RecycTableViewModel>();
             services.AddTransient<StatisticsViewModel>();
             services.AddTransient<StatisticsPanelViewModel>();
+            services.AddTransient<ClientViewModel>();
             services.AddTransient<ClientPanelViewModel>();
+            services.AddTransient<ResiduosViewModel>();
+            services.AddTransient<ResiduosPanelViewModel>();
+
             services.AddHttpClient<ApiService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5276/");
