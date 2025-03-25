@@ -25,7 +25,7 @@ namespace wasty.ViewModels
         {
             _navigationService = navigationService;
 
-            NavigateToClientPanelCommand = new RelayCommand(_ => new ClientPanelView().ShowDialog());
+            NavigateToClientPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
 
         }
         public ICommand NavigateToClientPanelCommand { get; }

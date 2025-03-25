@@ -26,7 +26,7 @@ namespace wasty.ViewModels
             }
         }
 
-        public ICommand AbrirDetalleResiduoCommand { get; }
+        public ICommand NavigateToResiduosPanelCommand { get; }
         public ICommand VolverAlMenuCommand { get; }
 
         public ResiduosViewModel(ApiService apiService, NavigationService navigationService)
@@ -41,16 +41,9 @@ namespace wasty.ViewModels
                 new Residuo { Codigo = 2, Denominacion = "Baterías de plomo*", LER = "160601", Fecha = DateTime.Now, Origen = "MANUEL DIAZ CHILET", Destino = "METALLS DEL CAMP", OperadorTraslado = "ECO TITAN S.L.", Activo = true }
             };
 
-            AbrirDetalleResiduoCommand = new RelayCommand(_ => AbrirDetalleResiduo(), _ => ResiduoSeleccionado != null);
+            NavigateToResiduosPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
             VolverAlMenuCommand = new RelayCommand(_ => VolverAlMenu());
         }
-
-        private void AbrirDetalleResiduo()
-        {
-           // var panel = new ResiduosPanelView(ResiduoSeleccionado, _apiService, _navigationService);
-           // panel.ShowDialog();
-        }
-
         private void VolverAlMenu()
         {
             _navigationService.NavigateTo<MainView>();

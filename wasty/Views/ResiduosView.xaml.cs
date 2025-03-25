@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wasty.Models;
 using wasty.Services;
 using wasty.ViewModels;
+using Wasty.ViewModels;
 
 namespace wasty.Views
 {
@@ -26,7 +27,7 @@ namespace wasty.Views
         public ResiduosView()
         {
             InitializeComponent();
-            // DataContext = new ResiduosViewModel();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ResiduosPanelViewModel));
         }
     }
 

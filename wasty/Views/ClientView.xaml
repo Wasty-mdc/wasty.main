@@ -77,7 +77,7 @@
                 </StackPanel>
             </DockPanel>
 
-            <DataGrid ItemsSource="{Binding Clientes}"
+            <!--<DataGrid ItemsSource="{Binding Clientes}"
                             SelectedItem="{Binding ClienteSeleccionado}"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
@@ -92,7 +92,7 @@
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                     <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
         </StackPanel>
     </Grid>
 </UserControl>
