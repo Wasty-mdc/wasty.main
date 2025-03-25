@@ -19,7 +19,7 @@ public class MainViewModel : MainModel
         _authService = authService;
         NavigateToLoginCommand = new RelayCommand(_ => _authService.Logout());
         NavigateToClientesCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
-        NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosView>());
+        NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
         NavigateToResiduosPanelCommand = new RelayCommand(_ => new ResiduosPanelView().ShowDialog());
         NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
         ShowFicherosCommand = new RelayCommand(ShowFicheros);

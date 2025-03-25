@@ -42,7 +42,7 @@ namespace wasty
                 client.BaseAddress = new Uri("http://localhost:5276/");
             });
             services.AddTransient<NavigationService>(provider =>
-                new NavigationService(viewType => (UserControl)Activator.CreateInstance(viewType))
+                new NavigationService(viewType => (object)Activator.CreateInstance(viewType))
             );
             services.AddSingleton<AuthService>();
             services.AddSingleton<SessionService>();
