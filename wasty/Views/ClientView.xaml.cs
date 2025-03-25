@@ -24,7 +24,7 @@ namespace wasty.Views
         public ClientView()
         {
             InitializeComponent();
-            DataContext = ((App)Application.Current).Services.GetService(typeof(ClientPanelViewModel));
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ClientViewModel));
         }
     }
 }

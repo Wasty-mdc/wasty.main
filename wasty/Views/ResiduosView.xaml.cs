@@ -27,7 +27,7 @@ namespace wasty.Views
         public ResiduosView()
         {
             InitializeComponent();
-            DataContext = ((App)Application.Current).Services.GetService(typeof(ResiduosPanelViewModel));
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ResiduosViewModel));
         }
     }
 
