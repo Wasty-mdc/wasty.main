@@ -24,8 +24,7 @@
 
             <StackPanel VerticalAlignment="Center" Height="376">
                 <!-- Título -->
-                <TextBlock Text="Iniciar Sesión" FontSize="22" FontWeight="Bold" 
-                       Foreground="{StaticResource PrimaryText}"
+                <TextBlock Text="Iniciar Sesión" Style="{StaticResource TextTitle}"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
                 <!-- Campo Usuario con Icono -->

@@ -9,11 +9,90 @@
 >
     <!-- VARIABLES GLOBALES -->
 
+    <!--___________________________________________________*FUENTES*___________________________________________________-->
+    
     <!-- Fuentes globales -->
     <FontFamily x:Key="TitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
     <FontFamily x:Key="SubtitleFontFamily">pack://application:,,,/Fonts/#Poppins</FontFamily>
     <FontFamily x:Key="GeneralFontFamily">Segoe UI</FontFamily>
 
+    <!-- Font weights -->
+    <FontWeight x:Key="FontW10">Thin</FontWeight>
+    <FontWeight x:Key="FontW20">ExtraLight</FontWeight>
+    <FontWeight x:Key="FontW30">Light</FontWeight>
+    <FontWeight x:Key="FontW40">Normal</FontWeight>
+    <FontWeight x:Key="FontW50">Medium</FontWeight>
+    <FontWeight x:Key="FontW60">SemiBold</FontWeight>
+    <FontWeight x:Key="FontW70">Bold</FontWeight>
+    <FontWeight x:Key="FontW80">ExtraBold</FontWeight>
+    <FontWeight x:Key="FontW90">Black</FontWeight>
+
+    <!-- ExtraSmall - Notas, subtítulos muy pequeños -->
+    <Style x:Key="TextXS" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW40}" />
+        <Setter Property="Foreground" Value="#888" />
+    </Style>
+
+    <!-- Small - Texto secundario, descripciones -->
+    <Style x:Key="TextS" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW40}" />
+        <Setter Property="Foreground" Value="#666" />
+    </Style>
+
+    <!-- Base - Texto general estándar -->
+    <Style x:Key="TextBase" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW40}" />
+        <Setter Property="Foreground" Value="#000" />
+    </Style>
+
+    <!-- Medium - Subtítulos o secciones -->
+    <Style x:Key="TextM" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW60}" />
+        <Setter Property="Foreground" Value="#444" />
+    </Style>
+
+    <!-- Large - Encabezados menores, botones llamativos -->
+    <Style x:Key="TextL" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW60}" />
+        <Setter Property="Foreground" Value="#333" />
+    </Style>
+
+    <!-- ExtraLarge - Encabezados principales -->
+    <Style x:Key="TextXL" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW70}" />
+        <Setter Property="Foreground" Value="#222" />
+    </Style>
+
+    <!-- Title - Títulos grandes o destacados -->
+    <Style x:Key="TextTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW70}" />
+        <Setter Property="Foreground" Value="#111" />
+    </Style>
+
+    <!-- Display - Portadas, nombres de pantallas -->
+    <Style x:Key="TextDisplay" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="{StaticResource FontW90}" />
+        <Setter Property="Foreground" Value="#000" />
+    </Style>
+
+    <!--___________________________________________________*COLORES*___________________________________________________-->
+    
     <!-- Color de fondo principal -->
     <SolidColorBrush x:Key="PrimaryBackground" Color="#F5F5F5"/>
     <SolidColorBrush x:Key="PrimaryText" Color="#0F0F0F"/>
@@ -72,29 +151,6 @@
     <SolidColorBrush x:Key="Warning800" Color="#7c6529"/>
     <SolidColorBrush x:Key="Warning900" Color="#5f4d1f"/>
 
-    <!-- Estilo global para Titulos -->
-    <Style x:Key="TitleTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource TitleFontFamily}"/>
-        <Setter Property="FontSize" Value="28"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="#333"/>
-    </Style>
-
-    <!-- Estilo global para Subtitulos -->
-    <Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource SubtitleFontFamily}"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#666"/>
-    </Style>
-
-    <!-- Estilo global para Texto general -->
-    <Style x:Key="GeneralTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource GeneralFontFamily}"/>
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="Foreground" Value="#000"/>
-    </Style>
-
     <!-- Gradiente para el Fondo Principal -->
     <LinearGradientBrush x:Key="MainGradientBackground" StartPoint="0,1" EndPoint="1,0">
         <GradientStop Color="#00d664" Offset="0"/>
@@ -103,37 +159,7 @@
         <!-- hsla(211, 90%, 47%, 1) -->
     </LinearGradientBrush>
 
-    <!-- Estilo para los botones de la barra de título -->
-    <Style x:Key="TitleBarButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#555"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#777"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <!--___________________________________________________*ICONOS*___________________________________________________-->
 
     <!-- Estilo para los iconos de Navegación -->
     <Style x:Key="NavButton" TargetType="Button">
@@ -191,27 +217,33 @@
         </Setter>
     </Style>
 
-    <!-- Estilos para los botones centrales -->
-    <Style x:Key="CentralButton" TargetType="Button">
+    <!--___________________________________________________*ICONOS*___________________________________________________-->
+    
+    <!-- Estilo para los botones de la barra de título -->
+    <Style x:Key="TitleBarButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="White"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFFFFF"/>
+                            <Setter Property="Background" Value="#555"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#F0F0F0"/>
+                            <Setter Property="Background" Value="#777"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -219,49 +251,8 @@
         </Setter>
     </Style>
 
-
-    <!-- Estilo para el Border de RegisterTextBox -->
-    <Style x:Key="RegisterTextBoxBorder" TargetType="Border">
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="BorderBrush" Value="#90A4AE"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Padding" Value="2"/>
-        <Setter Property="Margin" Value="8"/>
-
-    </Style>
-
-    <!-- Estilo para RegisterTextBox -->
-    <Style x:Key="RegisterTextBox" TargetType="TextBox" >
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Padding" Value="8"/>
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-    </Style>
-
-    <!-- Estilo para el Border de RegisterPasswordBox -->
-    <Style x:Key="RegisterPasswordBoxBorder" TargetType="Border" >
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="BorderBrush" Value="#90A4AE"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Padding" Value="2"/>
-        <Setter Property="Margin" Value="8"/>
-    </Style>
-
-    <!-- Estilo para RegisterPasswordBox -->
-    <Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Padding" Value="8"/>
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <!-- Se elimina borde para evitar dobles bordes -->
-    </Style>
-
+    <!--___________________________________________________*BOTONES*___________________________________________________-->
+    
     <!-- Estilo para el RegisterButton -->
     <Style x:Key="RegisterButton" TargetType="Button">
         <Setter Property="Width" Value="250"/>
@@ -308,5 +299,79 @@
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    
+    <!-- Estilos para los botones centrales -->
+    <Style x:Key="CentralButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#F0F0F0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--___________________________________________________*TEXTBOX*___________________________________________________-->
+    
+    <!-- Estilo para el Border de RegisterTextBox -->
+    <Style x:Key="RegisterTextBoxBorder" TargetType="Border">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="#90A4AE"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Margin" Value="8"/>
+
+    </Style>
+
+    <!-- Estilo para RegisterTextBox -->
+    <Style x:Key="RegisterTextBox" TargetType="TextBox" >
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!--___________________________________________________*PASSWORDBOX*___________________________________________________-->
+    
+    <!-- Estilo para el Border de RegisterPasswordBox -->
+    <Style x:Key="RegisterPasswordBoxBorder" TargetType="Border" >
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="#90A4AE"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Margin" Value="8"/>
+    </Style>
+
+    <!-- Estilo para RegisterPasswordBox -->
+    <Style x:Key="RegisterPasswordBox" TargetType="PasswordBox">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <!-- Se elimina borde para evitar dobles bordes -->
     </Style>
 </ResourceDictionary>

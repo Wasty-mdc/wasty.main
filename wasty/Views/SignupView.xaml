@@ -23,7 +23,7 @@
 
             <StackPanel VerticalAlignment="Center">
                 <!-- Título -->
-                <TextBlock Text="Crear Cuenta" FontSize="22" FontWeight="Bold" 
+                <TextBlock Text="Crear Cuenta" Style="{StaticResource TextTitle}"
                        Foreground="{StaticResource Neutral200}"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
