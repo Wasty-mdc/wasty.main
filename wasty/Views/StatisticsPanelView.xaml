@@ -10,31 +10,17 @@
              Width="Auto"
              Background="Transparent">
 
-    <!-- Definicion de estilos reutilizables para los Botones de estadisticas -->
     <UserControl.Resources>
-        <Style x:Key="StatsButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,10"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Width" Value="320"/>
-            <Setter Property="Height" Value="160"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Importar estilos desde MainStyles.xaml -->
+                <ResourceDictionary Source="../Styles/mainStyles.xaml"/>
+                <!-- Importar estilos desde statisticsPanelStyles.xaml -->
+                <ResourceDictionary Source="../Styles/statisticsPanelStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
-
+    
     <!-- Estructura principal del panel de estadisticas -->
     <Grid Background="{StaticResource MainGradientBackground}">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
