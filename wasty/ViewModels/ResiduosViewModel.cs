@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Text.Json;
 using System.Windows.Input;
 using wasty.Models;
 using wasty.Services;
@@ -13,8 +14,6 @@ namespace wasty.ViewModels
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
 
-        public ObservableCollection<Residuo> Residuos { get; set; }
-
         private Residuo _residuoSeleccionado;
         public Residuo ResiduoSeleccionado
         {
@@ -26,6 +25,17 @@ namespace wasty.ViewModels
             }
         }
 
+        private ObservableCollection<ResiduoModel> _residuos;
+        public ObservableCollection<ResiduoModel> Residuos
+        {
+            get => _residuos;
+            set
+            {
+                _residuos = value;
+                OnPropertyChanged(nameof(Residuos));
+            }
+        }
+
         public ICommand NavigateToResiduosPanelCommand { get; }
         public ICommand VolverAlMenuCommand { get; }
 
@@ -34,15 +44,32 @@ namespace wasty.ViewModels
             _apiService = apiService;
             _navigationService = navigationService;
 
-            // Simulación de datos (puedes sustituirlo con llamadas reales al API)
-            Residuos = new ObservableCollection<Residuo>
-            {
-                new Residuo { Codigo = 1, Denominacion = "Aceite usado*", LER = "130205", Fecha = DateTime.Now, Origen = "MANUEL DIAZ CHILET", Destino = "METALLS DEL CAMP", OperadorTraslado = "ECO TITAN S.L.", Activo = true },
-                new Residuo { Codigo = 2, Denominacion = "Baterías de plomo*", LER = "160601", Fecha = DateTime.Now, Origen = "MANUEL DIAZ CHILET", Destino = "METALLS DEL CAMP", OperadorTraslado = "ECO TITAN S.L.", Activo = true }
-            };
-
             NavigateToResiduosPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
             VolverAlMenuCommand = new RelayCommand(_ => VolverAlMenu());
+            Init().GetAwaiter();
+        }
+
+        private async Task Init()
+        {
+            Residuos = await GetData();
+        }
+
+        private async Task<ObservableCollection<ResiduoModel>> GetData()
+        {
+            JsonElement itemsElement = default;
+            string items = "";
+            try
+            {
+                var result = await _apiService.RequestAsync("GET", "residuos", "");
+
+                var itemsList = JsonSerializer.Deserialize<ObservableCollection<ResiduoModel>>(result.datos);
+
+                return itemsList;
+            }
+            catch (Exception ex)
+            {
+                return new ObservableCollection<ResiduoModel>();
+            }
         }
         private void VolverAlMenu()
         {

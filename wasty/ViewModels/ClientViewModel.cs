@@ -3,12 +3,16 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using wasty.Services;
 using wasty.Views;
+using System.Collections.ObjectModel;
+using wasty.Models;
+using System.Text.Json;
 
 namespace wasty.ViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
         private readonly NavigationService _navigationService;
+        private readonly ApiService _apiService;
 
         private string _clienteNombre = "METALLS DEL CAMP. SLU.";
         public string ClienteNombre
@@ -21,15 +25,49 @@ namespace wasty.ViewModels
             }
         }
 
-        public ClientViewModel(NavigationService navigationService)
+        private ObservableCollection<ClienteModel> _clientes;
+        public ObservableCollection<ClienteModel> Clientes
+        {
+            get => _clientes;
+            set
+            {
+                _clientes = value;
+                OnPropertyChanged(nameof(Clientes));
+            }
+        }
+
+        public ClientViewModel(NavigationService navigationService, ApiService apiService)
         {
             _navigationService = navigationService;
+            _apiService = apiService;
 
             NavigateToClientPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
-
+            Init().GetAwaiter();
         }
         public ICommand NavigateToClientPanelCommand { get; }
 
+        private async Task Init()
+        {
+            Clientes = await GetData();
+        }
+
+        private async Task<ObservableCollection<ClienteModel>> GetData()
+        {
+            JsonElement itemsElement = default;
+            string items = "";
+            try
+            {
+                var result = await _apiService.RequestAsync("GET", "clientes", "");
+
+                var itemsList = JsonSerializer.Deserialize<ObservableCollection<ClienteModel>>(result.datos);
+
+                return itemsList;
+            }
+            catch (Exception ex)
+            {
+                return new ObservableCollection<ClienteModel>();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
