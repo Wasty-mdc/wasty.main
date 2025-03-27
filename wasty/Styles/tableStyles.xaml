@@ -13,19 +13,24 @@
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserDeleteRows" Value="False"/>
         <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="RowHeight" Value="36"/>
+        <Setter Property="RowHeight" Value="24"/>
         <Setter Property="ColumnHeaderHeight" Value="40"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="GridLinesVisibility" Value="All"/>
         <Setter Property="HorizontalGridLinesBrush" Value="Black"/>
+        <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="AlternatingRowBackground" Value="#D9D9D9"/>
-        <Setter Property="RowBackground" Value="Black"/>
-        <Setter Property="BorderBrush" Value="#C9C9C9"/>
+        <Setter Property="RowBackground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="ColumnWidth" Value="*"/>
     </Style>
+
+    <!-- Estilo para las filas -->
     <Style TargetType="DataGridRow">
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="Black"/>
@@ -40,11 +45,13 @@
                 <Setter Property="Background" Value="#DCEFFF"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#90CAF9"/>
+                <Setter Property="Background" Value="#D7D7D7"/>
                 <Setter Property="Foreground" Value="Black"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <!-- Estilo para encabezados -->
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="#0EAD69"/>
         <Setter Property="Foreground" Value="White"/>
