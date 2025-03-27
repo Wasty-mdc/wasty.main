@@ -12,6 +12,8 @@ namespace wasty.Models
         [JsonPropertyName("id")]
         public int Id { get; set; }
         [JsonPropertyName("nombre")]
-        public string Nombre { get; set; }
+        public string Denominacion { get; set; }
+        [JsonPropertyName("codigoLER")]
+        public string LER { get; set; }
     }
 }

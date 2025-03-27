@@ -9,16 +9,21 @@
              Height="Auto"
              Width="Auto"
              Background="#4CECEAE8" >
+
     <UserControl.Resources>
         <ResourceDictionary>
+            <!-- MergedDictionaries primero -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/panelStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/tableStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Conversor -->
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-        <Grid Background="{StaticResource MainGradientBackground}">
+
+
+    <Grid Background="{StaticResource MainGradientBackground}">
         <StackPanel>
             <!-- Barra superior con botones CRUD -->
             <DockPanel Background="#0ead69">

@@ -9,15 +9,19 @@
              Height="Auto"
              Width="Auto"
              Background="#4CECEAE8" >
+
     <UserControl.Resources>
         <ResourceDictionary>
+            <!-- MergedDictionaries primero -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/mainStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/tableStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Conversor -->
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
-
+    
     <Grid Background="{StaticResource MainGradientBackground}">
         <StackPanel>
             <!-- Barra superior con botones CRUD -->
@@ -58,22 +62,22 @@
                 </StackPanel>
             </DockPanel>
 
-            <!--<DataGrid ItemsSource="{Binding Clientes}"
+            <DataGrid ItemsSource="{Binding Clientes}"
                             SelectedItem="{Binding ClienteSeleccionado}"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             IsReadOnly="True"
                            >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="NombreComercial" Binding="{Binding NombreComercial}" />
+                    <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
                     <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
-                    <DataGridTextColumn Header="NombreFiscal" Binding="{Binding NombreFiscal}" />
+                    <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}" />
                     <DataGridTextColumn Header="Identificador" Binding="{Binding Identificador}" />
                     <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                     <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
                 </DataGrid.Columns>
-            </DataGrid>-->
+            </DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>
