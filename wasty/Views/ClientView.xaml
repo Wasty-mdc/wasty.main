@@ -12,12 +12,9 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <!-- MergedDictionaries primero -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/tableStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/mainStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <!-- Conversor -->
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
