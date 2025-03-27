@@ -14,7 +14,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/ClientPanelStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/panelStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         </ResourceDictionary>

@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:utils="clr-namespace:wasty.Utils"
+                    xmlns:models="clr-namespace:wasty.Models">
+
+    <!-- Plantilla texto -->
+    <DataTemplate x:Key="TextoTemplate">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Nombre}"/>
+            <TextBox Text="{Binding Valor, Mode=TwoWay}">
+                <utils:PlaceholderService.Placeholder>
+                    <MultiBinding StringFormat="Introduce un {0}">
+                        <Binding Path="Nombre"/>
+                    </MultiBinding>
+                </utils:PlaceholderService.Placeholder>
+                <i:Interaction.Behaviors>
+                    <utils:ValidationBehavior CampoFormulario="{Binding}" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Plantilla número -->
+    <DataTemplate x:Key="NumeroTemplate"
+              xmlns:utils="clr-namespace:wasty.Utils">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Nombre}"/>
+            <TextBox Text="{Binding Valor, Mode=TwoWay}"
+                 utils:SoloNumerosHelper.ActivarSoloNumeros="True">
+                <utils:PlaceholderService.Placeholder>
+                    <MultiBinding StringFormat="Introduce un {0}">
+                        <Binding Path="Nombre"/>
+                    </MultiBinding>
+                </utils:PlaceholderService.Placeholder>
+                <i:Interaction.Behaviors>
+                    <utils:ValidationBehavior CampoFormulario="{Binding}" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+    </DataTemplate>
+
+
+    <!-- Plantilla fecha -->
+    <DataTemplate x:Key="FechaTemplate">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Nombre}" />
+            <DatePicker SelectedDate="{Binding Valor, Mode=TwoWay}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Plantilla Picker -->
+    <DataTemplate x:Key="PickerTemplate">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Nombre}"/>
+            <ComboBox ItemsSource="{Binding Opciones}" SelectedItem="{Binding Valor, Mode=TwoWay}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Plantilla Checkbox -->
+    <DataTemplate x:Key="CheckboxTemplate">
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="{Binding Nombre}" IsChecked="{Binding EstaSeleccionado, Mode=TwoWay}"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Selector de plantillas -->
+    <utils:CampoTemplateSelector x:Key="CampoSelector"
+                                 TextoTemplate="{StaticResource TextoTemplate}"
+                                 NumeroTemplate="{StaticResource NumeroTemplate}"
+                                 FechaTemplate="{StaticResource FechaTemplate}"
+                                 PickerTemplate="{StaticResource PickerTemplate}"
+                                 CheckboxTemplate="{StaticResource CheckboxTemplate}"/>
+</ResourceDictionary>
