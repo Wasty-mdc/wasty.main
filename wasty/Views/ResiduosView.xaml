@@ -10,31 +10,12 @@
              Width="Auto"
              Background="#4CECEAE8" >
     <UserControl.Resources>
-        <!-- Estilo para los botones CRUD -->
-        <Style x:Key="CrudButtonStyle" TargetType="Button">
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-
-        <!-- Estilo para los iconos de los botones -->
-        <Style x:Key="CrudIconStyle" TargetType="md:PackIcon">
-            <Setter Property="Width" Value="32"/>
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <!-- Estilo para los textos debajo de los botones -->
-        <Style x:Key="CrudTextStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-        </Style>
-
-        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/panelStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        </ResourceDictionary>
     </UserControl.Resources>
     
         <Grid Background="{StaticResource MainGradientBackground}">
