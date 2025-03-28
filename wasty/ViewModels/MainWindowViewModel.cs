@@ -36,7 +36,7 @@ namespace wasty.ViewModels
 
             ShowSignupViewCommand = new RelayCommand(_ =>
             {
-                IsAuthenticated = false;
+                //IsAuthenticated = false;
                 CurrentView = new SignupView();
             });
 
