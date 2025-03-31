@@ -5,55 +5,81 @@
         xmlns:views="clr-namespace:wasty.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Wasty"
-        WindowState="Maximized"
-        Background="{StaticResource MainGradientBackground}"
-        WindowStyle="SingleBorderWindow"
-        ResizeMode="CanResize">
+        WindowState="Normal"
+        Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        AllowsTransparency="True">
 
-
-    <!-- Importación de Recursos -->
+    <!-- Recursos -->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Importar estilos desde MainStyles.xaml -->
                 <ResourceDictionary Source="Styles/mainStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <!-- Conversor BooleanToVisibility para ocultar/mostrar elementos según autenticación -->
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
-
-    <!-- Contenedor principal con bordes redondeados y sombra -->
-    <Border x:Name="MainBorder" CornerRadius="10" >
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" Opacity="0.3"/>
-        </Border.Effect>
-
+    <Border x:Name="MainBorder" CornerRadius="10" Background="{StaticResource MainGradientBackground}">
         <Grid>
-            <!-- Definir la estructura de filas -->
             <Grid.RowDefinitions>
-
+                <RowDefinition Height="32"/>
                 <RowDefinition Height="*"/>
-                <!-- Contenido completo de la app -->
             </Grid.RowDefinitions>
 
-            <!-- Contenido de la aplicación -->
+            <!-- Barra personalizada -->
+            <Border Background="#1C1C1C" Height="32" Padding="8,0" MouseLeftButtonDown="Barra_MouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo + nombre -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                        <TextBlock Text="Wasty" VerticalAlignment="Center" Foreground="White" Style="{StaticResource TextM}" Margin="0,0,10,0"/>
+                    </StackPanel>
+
+                    <!-- Botones navegación -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
+                        <Button Style="{StaticResource MaterialDesignToolButton}" Margin="0,0,4,0">
+                            <md:PackIcon Kind="ArrowLeft" Width="20" Height="20"/>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignToolButton}">
+                            <md:PackIcon Kind="ArrowRight" Width="20" Height="20"/>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- Botones funcionales -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="3">
+                        <Button Style="{StaticResource AnimatedWindowButtonStyle}" Click="Minimizar_Click">
+                            <md:PackIcon Kind="WindowMinimize" Width="20" Height="20" Foreground="White"/>
+                        </Button>
+
+                        <Button Style="{StaticResource AnimatedWindowButtonStyle}" Click="MaximizarRestaurar_Click">
+                            <md:PackIcon x:Name="MaxRestoreIcon" Kind="WindowMaximize" Width="20" Height="20" Foreground="White"/>
+                        </Button>
+
+                        <Button Style="{StaticResource AnimatedCloseButtonStyle}" Click="Cerrar_Click">
+                            <md:PackIcon Kind="Close" Width="20" Height="20" Foreground="White"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Contenido de la app -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
-                    <!-- Menú lateral compacto -->
                     <ColumnDefinition Width="*"/>
-                    <!-- Contenido principal -->
                 </Grid.ColumnDefinitions>
 
-                <!-- Menú de navegación lateral -->
-                <Grid Grid.Column="0" Background="{StaticResource NavColor}"                                 
-                      Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
-                    <StackPanel
-                                Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left"
->
+                <!-- Navegación lateral -->
+                <Grid Grid.Column="0" Background="{StaticResource NavColor}" Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
+                    <StackPanel Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left">
                         <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
                             <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
                         </Button>
@@ -64,14 +90,10 @@
                             <md:PackIcon Kind="Star" Width="30" Height="30" Foreground="White"/>
                         </Button>
                     </StackPanel>
-                    <!-- Sección inferior del menú lateral -->
-                    <StackPanel  
-                                Width="60" VerticalAlignment="Bottom"
-                                HorizontalAlignment="Center" Margin="0,0,0,20"
-                                >
+
+                    <StackPanel Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
                         <Button Style="{StaticResource NavButtonDown}" ToolTip="Volver atrás">
-                            <md:PackIcon Kind="ArrowLeftBoldBoxOutline"
-                                         Width="30" Height="30" Foreground="White"/>
+                            <md:PackIcon Kind="ArrowLeftBoldBoxOutline" Width="30" Height="30" Foreground="White"/>
                         </Button>
                         <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
                             <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
@@ -85,8 +107,8 @@
                     </StackPanel>
                 </Grid>
 
-                <!-- Contenido principal dinámico -->
-                <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}" >
+                <!-- Vista dinámica -->
+                <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}">
                     <ContentControl Content="{Binding CurrentView}" Name="CurrentView" Background="Transparent"/>
                 </Grid>
             </Grid>
