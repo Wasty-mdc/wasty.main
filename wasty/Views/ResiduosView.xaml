@@ -71,11 +71,13 @@
                            >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" />
-                        <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" />
                         <DataGridTextColumn Header="Denominación" Binding="{Binding Denominacion}" />
                         <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
+                        <DataGridTextColumn Header="Tratamiento" Binding="{Binding Tratamiento}" />
+                        <DataGridTextColumn Header="Peligrosidad" Binding="{Binding Peligrosidad}" />
+                        <DataGridTextColumn Header="ONU" Binding="{Binding ONU}" />
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" /> <!-- Booleano: true(Peligroso) false(No Peligroso)-->
                         <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
-                        <DataGridTextColumn Header="Operador" Binding="{Binding OperadorTraslado}" />
                         <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
                     </DataGrid.Columns>
                 </DataGrid>

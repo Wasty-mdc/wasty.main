@@ -11,7 +11,6 @@ using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
-using OpenTK.Input;
 using wasty.Models;
 using wasty.Services;
 using wasty.Utils;
