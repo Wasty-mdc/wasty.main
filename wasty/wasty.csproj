@@ -22,25 +22,6 @@
 
   <ItemGroup>
     <None Remove="Assets\Images\mainBackground.png" />
-    <None Remove="mainBackground.png" />
-    <None Remove="Resources\Poppins\Poppins-Black.ttf" />
-    <None Remove="Resources\Poppins\Poppins-BlackItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-Bold.ttf" />
-    <None Remove="Resources\Poppins\Poppins-BoldItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-ExtraBold.ttf" />
-    <None Remove="Resources\Poppins\Poppins-ExtraBoldItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-ExtraLight.ttf" />
-    <None Remove="Resources\Poppins\Poppins-ExtraLightItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-Italic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-Light.ttf" />
-    <None Remove="Resources\Poppins\Poppins-LightItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-Medium.ttf" />
-    <None Remove="Resources\Poppins\Poppins-MediumItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-Regular.ttf" />
-    <None Remove="Resources\Poppins\Poppins-SemiBold.ttf" />
-    <None Remove="Resources\Poppins\Poppins-SemiBoldItalic.ttf" />
-    <None Remove="Resources\Poppins\Poppins-Thin.ttf" />
-    <None Remove="Resources\Poppins\Poppins-ThinItalic.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc5.4" />
     <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
@@ -64,25 +44,6 @@
     <Resource Include="Assets\Images\mainBackground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="mainBackground.png" />
-    <Resource Include="Resources\Poppins\Poppins-Black.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-BlackItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-Bold.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-BoldItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-ExtraBold.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-ExtraLight.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-ExtraLightItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-Italic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-Light.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-LightItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-Medium.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-MediumItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-Regular.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-SemiBold.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-SemiBoldItalic.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-Thin.ttf" />
-    <Resource Include="Resources\Poppins\Poppins-ThinItalic.ttf" />
     <Resource Include="Styles\mainStyles.xaml">
       <Generator></Generator>
     </Resource>
