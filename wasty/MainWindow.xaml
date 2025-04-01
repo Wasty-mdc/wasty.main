@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border x:Name="MainBorder" CornerRadius="10" Background="{StaticResource MainGradientBackground}">
+    <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
 
             <!-- Barra personalizada -->
-            <Border Background="#1C1C1C" Height="32" Padding="8,0" MouseLeftButtonDown="Barra_MouseLeftButtonDown">
+            <Border Background="#1C1C1C" Height="32" MouseLeftButtonDown="Barra_MouseLeftButtonDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -39,34 +39,43 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Logo + nombre -->
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Margin="10,0,0,0">
                         <TextBlock Text="Wasty" VerticalAlignment="Center" Foreground="White" Style="{StaticResource TextM}" Margin="0,0,10,0"/>
                     </StackPanel>
 
                     <!-- Botones navegación -->
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
-                        <Button Style="{StaticResource MaterialDesignToolButton}" Margin="0,0,4,0">
+                        <Button Style="{StaticResource MaterialDesignToolButton}" Margin="0,0,4,0" VerticalAlignment="Center">
                             <md:PackIcon Kind="ArrowLeft" Width="20" Height="20"/>
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignToolButton}">
+                        <Button Style="{StaticResource MaterialDesignToolButton}" VerticalAlignment="Center">
                             <md:PackIcon Kind="ArrowRight" Width="20" Height="20"/>
                         </Button>
                     </StackPanel>
 
-                    <!-- Botones funcionales -->
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="3">
-                        <Button Style="{StaticResource AnimatedWindowButtonStyle}" Click="Minimizar_Click">
-                            <md:PackIcon Kind="WindowMinimize" Width="20" Height="20" Foreground="White"/>
+                    <!-- Botones de acciones -->
+                    <Grid Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36"/>
+                            <ColumnDefinition Width="36"/>
+                            <ColumnDefinition Width="36"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Minimizar -->
+                        <Button Style="{StaticResource AnimatedWindowButtonStyle}" Grid.Column="0" Click="Minimizar_Click">
+                            <md:PackIcon Kind="WindowMinimize" Width="16" Height="16" Foreground="White"/>
                         </Button>
 
-                        <Button Style="{StaticResource AnimatedWindowButtonStyle}" Click="MaximizarRestaurar_Click">
-                            <md:PackIcon x:Name="MaxRestoreIcon" Kind="WindowMaximize" Width="20" Height="20" Foreground="White"/>
+                        <!-- Maximizar -->
+                        <Button x:Name="BtnMaximize" Style="{StaticResource AnimatedWindowButtonStyle}" Grid.Column="1" Click="MaximizarRestaurar_Click">
+                            <md:PackIcon x:Name="MaxRestoreIcon" Kind="WindowMaximize" Width="16" Height="16" Foreground="White"/>
                         </Button>
 
-                        <Button Style="{StaticResource AnimatedCloseButtonStyle}" Click="Cerrar_Click">
-                            <md:PackIcon Kind="Close" Width="20" Height="20" Foreground="White"/>
+                        <!-- Cerrar -->
+                        <Button Style="{StaticResource AnimatedCloseButtonStyle}" Grid.Column="2" Click="Cerrar_Click">
+                            <md:PackIcon Kind="Close" Width="18" Height="18" Foreground="White"/>
                         </Button>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
             </Border>
 
