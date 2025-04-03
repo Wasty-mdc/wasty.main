@@ -14,8 +14,8 @@ namespace wasty.ViewModels
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
 
-        private Residuo _residuoSeleccionado;
-        public Residuo ResiduoSeleccionado
+        private ResiduoModel _residuoSeleccionado;
+        public ResiduoModel ResiduoSeleccionado
         {
             get => _residuoSeleccionado;
             set
@@ -44,9 +44,14 @@ namespace wasty.ViewModels
             _apiService = apiService;
             _navigationService = navigationService;
 
-            NavigateToResiduosPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
+            NavigateToResiduosPanelCommand = new RelayCommand<object>(NavigateToResiduosPanel);
             VolverAlMenuCommand = new RelayCommand(_ => VolverAlMenu());
             Init().GetAwaiter();
+        }
+
+        private void NavigateToResiduosPanel(object parameter)
+        {
+            _navigationService.NavigateTo<ResiduosPanelView>(parameter);
         }
 
         private async Task Init()

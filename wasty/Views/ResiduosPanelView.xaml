@@ -47,7 +47,7 @@
                         </GroupBox.Header>
                         <WrapPanel Margin="10">
                             <TextBlock Text="Residuo:"/>
-                            <TextBlock Text="{Binding Residuo.Nombre}"/>
+                            <TextBlock Text="{Binding Residuo.Denominacion}"/>
                             <TextBlock Text="Referencia:"/>
                             <TextBlock Text="{Binding Residuo.Referencia}"/>
                             <TextBlock Text="Proceso:"/>
@@ -70,13 +70,13 @@
                             <TextBlock Text="LER RAEE:"/>
                             <TextBlock Text="{Binding Residuo.LerRaee}"/>
                             <TextBlock Text="Proceso D:"/>
-                            <TextBlock Text="{Binding Residuo.ProcesoD}"/>
+                            <TextBlock Text="{Binding Residuo.TratamientoD}"/>
                             <TextBlock Text="Proceso R:"/>
-                            <TextBlock Text="{Binding Residuo.ProcesoR}"/>
+                            <TextBlock Text="{Binding Residuo.TratamientoR}"/>
                             <TextBlock Text="Desagregado:"/>
                             <TextBlock Text="{Binding Residuo.Desagregado}"/>
                             <TextBlock Text="Peligrosidad 1:"/>
-                            <TextBlock Text="{Binding Residuo.Peligrosidad1}"/>
+                            <TextBlock Text="{Binding Residuo.Peligrosidad}"/>
                             <TextBlock Text="Peligrosidad 2:"/>
                             <TextBlock Text="{Binding Residuo.Peligrosidad2}"/>
                             <TextBlock Text="Proceso en origen:"/>
@@ -95,7 +95,7 @@
                         </GroupBox.Header>
                         <WrapPanel Margin="10">
                             <TextBlock Text="ONU:"/>
-                            <TextBlock Text="{Binding Residuo.ONU}"/>
+                            <TextBlock Text="{Binding Residuo.NumeroONU}"/>
                             <TextBlock Text="Descripción ADR:"/>
                             <TextBlock Text="{Binding Residuo.DescripcionADR}"/>
                         </WrapPanel>

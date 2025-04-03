@@ -8,9 +8,9 @@ namespace Wasty.ViewModels
     {
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
-        private Residuo _residuo;
+        private ResiduoModel _residuo;
 
-        public Residuo Residuo
+        public ResiduoModel Residuo
         {
             get => _residuo;
             set
@@ -27,6 +27,11 @@ namespace Wasty.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public async Task Init(ResiduoModel residuo)
+        {
+            Residuo = residuo;
+        }
 
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

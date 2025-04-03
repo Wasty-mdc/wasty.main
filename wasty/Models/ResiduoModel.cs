@@ -23,5 +23,7 @@ namespace wasty.Models
         public string TratamientoR { get; set; }
         [JsonPropertyName("codigoTratamientoD")]
         public string TratamientoD { get; set; }
+        [JsonPropertyName("codigosPeligrosidad")]
+        public string Peligrosidad { get; set; }
     }
 }

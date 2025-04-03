@@ -20,12 +20,18 @@ namespace wasty.Views
     /// <summary>
     /// Lógica de interacción para ResiduosPanelView.xaml
     /// </summary>
-    public partial class ResiduosPanelView : Window
+    public partial class ResiduosPanelView : Window, IParameterReceiver
     {
         public ResiduosPanelView()
         {
             InitializeComponent();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ResiduosPanelViewModel));
         }
 
+        public void ReceiveParameter(object parameter)
+        {
+            var viewModel = (ResiduosPanelViewModel)DataContext;
+            viewModel.Init((ResiduoModel)parameter);
+        }
     }
 }

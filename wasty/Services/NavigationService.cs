@@ -35,7 +35,7 @@ namespace wasty.Services
                 }
             }
         }
-        public void NavigateTo<TView>(object parameter) where TView : UserControl 
+        public void NavigateTo<TView>(object parameter)
         {
             var view = _viewFactory(typeof(TView));
 
@@ -44,8 +44,15 @@ namespace wasty.Services
                 parameterReceiver.ReceiveParameter(parameter);
             }
 
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.CurrentView.Content = view;
+            if (view is Window window)
+            {
+                window.ShowDialog();
+            }
+            else if (view is UserControl userControl)
+            {
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.CurrentView.Content = view;
+            }
         }
     }
 
