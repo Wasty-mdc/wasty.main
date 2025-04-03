@@ -17,6 +17,7 @@ namespace wasty.ViewModels
         private readonly NavigationService _navigationService;
 
         private string _searchText;
+        private ClienteModel _cliente;
         private ObservableCollection<ClienteModel> _clientes;
         private ObservableCollection<ClienteModel> _clientesFiltrados = new ObservableCollection<ClienteModel>();
 
@@ -28,6 +29,16 @@ namespace wasty.ViewModels
             set
             {
                 if (SetProperty(ref _searchText, value))
+                    FiltrarClientes();
+            }
+        }
+
+        public ClienteModel Cliente
+        {
+            get => _cliente;
+            set
+            {
+                if (SetProperty(ref _cliente, value))
                     FiltrarClientes();
             }
         }
@@ -85,6 +96,11 @@ namespace wasty.ViewModels
             ShowAllGroupBoxesCommand = new RelayCommand<string>(ShowAllGroupBoxes);
 
             InicializarVisibilidad();
+        }
+
+        public async Task Init(ClienteModel cliente)
+        {
+            Cliente = cliente;
         }
 
         private void InicializarVisibilidad()

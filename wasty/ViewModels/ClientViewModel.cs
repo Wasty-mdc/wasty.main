@@ -36,15 +36,31 @@ namespace wasty.ViewModels
             }
         }
 
+        private ClienteModel _clienteSeleccionado;
+        public ClienteModel ClienteSeleccionado
+        {
+            get => _clienteSeleccionado;
+            set
+            {
+                _clienteSeleccionado = value;
+                OnPropertyChanged(nameof(ClienteSeleccionado));
+            }
+        }
+
         public ClientViewModel(NavigationService navigationService, ApiService apiService)
         {
             _navigationService = navigationService;
             _apiService = apiService;
 
-            NavigateToClientPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
+            NavigateToClientPanelCommand = new RelayCommand<object>(NavigateToClientPanel);
             Init().GetAwaiter();
         }
         public ICommand NavigateToClientPanelCommand { get; }
+
+        private void NavigateToClientPanel(object parameter)
+        {
+            _navigationService.NavigateTo<ClientPanelView>(parameter);
+        }
 
         private async Task Init()
         {

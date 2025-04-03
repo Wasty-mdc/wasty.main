@@ -12,18 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wasty.Models;
+using wasty.Services;
 using wasty.ViewModels;
+using Wasty.ViewModels;
 
 namespace wasty.Views
 {
     /// <summary>
     /// Lógica de interacción para ClientPanelView.xaml
     /// </summary>
-    public partial class ClientPanelView : Window
+    public partial class ClientPanelView : Window, IParameterReceiver
     {
         public ClientPanelView()
         {
             InitializeComponent();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ClientPanelViewModel));
         }
 
         private void GrupoPrincipal_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,5 +77,10 @@ namespace wasty.Views
             }
         }
 
+        public void ReceiveParameter(object parameter)
+        {
+            var viewModel = (ClientPanelViewModel)DataContext;
+            viewModel.Init((ClienteModel)parameter);
+        }
     }
 }

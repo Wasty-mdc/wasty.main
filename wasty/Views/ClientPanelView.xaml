@@ -70,7 +70,7 @@
 
             <!-- Nombre del Cliente que se está mostrando -->
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="CLIENTE : METALLS DEL CAMP. SLU." Style="{StaticResource TextTitle}" Foreground="White"
+                <TextBlock Text="{Binding Cliente.NombreFiscal}" Style="{StaticResource TextTitle}" Foreground="White"
                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,0,0,0"/>
             </StackPanel>
 
@@ -146,11 +146,11 @@
                         <TextBlock Text="Grupo Secundario:"/>
                         <ComboBox Name="GrupoSecundario" IsEnabled="False"/>
                         <TextBlock Text="NIF/CIF:"/>
-                        <TextBox/>
+                        <TextBox Text="{Binding Cliente.NIF}"/>
                         <TextBlock Text="Nombre Fiscal:"/>
-                        <TextBox/>
+                        <TextBox Text="{Binding Cliente.NombreFiscal}"/>
                         <TextBlock Text="Nombre Comercial:"/>
-                        <TextBox/>
+                        <TextBox Text="{Binding Cliente.NombreComercial}"/>
 
                         <!-- Bloque de Online -->
                         <GroupBox MaxHeight="100"
