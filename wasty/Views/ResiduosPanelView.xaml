@@ -14,75 +14,118 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/panelStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/panelStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         </ResourceDictionary>
     </Window.Resources>
 
     <ScrollViewer>
-        <WrapPanel Margin="20" Orientation="Vertical">
-            <!-- BLOQUE: Identificación general -->
-            <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Identificacion], Converter={StaticResource BoolToVisibility}}">
+        <WrapPanel Margin="20">
+
+            <!-- Grupo: Datos residuo (engloba los subgrupos) -->
+            <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Residuo], Converter={StaticResource BoolToVisibility}}">
                 <GroupBox.Header>
                     <DockPanel>
-                        <TextBlock Text="  Identificación del residuo " FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Text="  Datos residuo " FontWeight="Bold" VerticalAlignment="Center"/>
                         <Button DockPanel.Dock="Right"
                                 Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                CommandParameter="Identificacion"
+                                CommandParameter="Residuo"
                                 Style="{StaticResource CrudButtonStyle}">
                             <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                         </Button>
                     </DockPanel>
                 </GroupBox.Header>
                 <WrapPanel Margin="10">
-                    <TextBlock Text="Código:"/>
-                    <TextBlock Text="{Binding Codigo}"/>
-                    <TextBlock Text="Fecha:"/>
-                    <TextBlock Text="{Binding Fecha, StringFormat='dd-MM-yyyy'}"/>
-                    <TextBlock Text="Denominación:"/>
-                    <TextBlock Text="{Binding Denominacion}"/>
-                    <TextBlock Text="LER:"/>
-                    <TextBlock Text="{Binding LER}"/>
-                    <TextBlock Text="Tipo:"/>
-                    <TextBlock Text="{Binding Tipo}"/>
-                    <TextBlock Text="Peligrosidad:"/>
-                    <TextBlock Text="{Binding Peligrosidad1}"/>
-                    <TextBlock Text="ONU:"/>
-                    <TextBlock Text="{Binding ONU}"/>
-                    <TextBlock Text="ADR:"/>
-                    <TextBlock Text="{Binding ADR}"/>
+
+                    <!-- Subgrupo: Identificación básica -->
+                    <GroupBox Margin="5">
+                        <GroupBox.Header>
+                            <DockPanel>
+                                <TextBlock Text="  Información básica " FontWeight="Bold" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </GroupBox.Header>
+                        <WrapPanel Margin="10">
+                            <TextBlock Text="Residuo:"/>
+                            <TextBlock Text="{Binding Residuo.Nombre}"/>
+                            <TextBlock Text="Referencia:"/>
+                            <TextBlock Text="{Binding Residuo.Referencia}"/>
+                            <TextBlock Text="Proceso:"/>
+                            <TextBlock Text="{Binding Residuo.Proceso}"/>
+                        </WrapPanel>
+                    </GroupBox>
+
+                    <!-- Subgrupo: Tablas identificación residuo -->
+                    <GroupBox Margin="5">
+                        <GroupBox.Header>
+                            <DockPanel>
+                                <TextBlock Text="  Tablas de Identificación del Residuo " FontWeight="Bold" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </GroupBox.Header>
+                        <WrapPanel Margin="10">
+                            <TextBlock Text="LER:"/>
+                            <TextBlock Text="{Binding Residuo.LER}"/>
+                            <TextBlock Text="Tipo:"/>
+                            <TextBlock Text="{Binding Residuo.Tipo}"/>
+                            <TextBlock Text="LER RAEE:"/>
+                            <TextBlock Text="{Binding Residuo.LerRaee}"/>
+                            <TextBlock Text="Proceso D:"/>
+                            <TextBlock Text="{Binding Residuo.ProcesoD}"/>
+                            <TextBlock Text="Proceso R:"/>
+                            <TextBlock Text="{Binding Residuo.ProcesoR}"/>
+                            <TextBlock Text="Desagregado:"/>
+                            <TextBlock Text="{Binding Residuo.Desagregado}"/>
+                            <TextBlock Text="Peligrosidad 1:"/>
+                            <TextBlock Text="{Binding Residuo.Peligrosidad1}"/>
+                            <TextBlock Text="Peligrosidad 2:"/>
+                            <TextBlock Text="{Binding Residuo.Peligrosidad2}"/>
+                            <TextBlock Text="Proceso en origen:"/>
+                            <TextBlock Text="{Binding Residuo.ProcesoOrigen}"/>
+                            <TextBlock Text="Proceso en destino:"/>
+                            <TextBlock Text="{Binding Residuo.ProcesoDestino}"/>
+                        </WrapPanel>
+                    </GroupBox>
+
+                    <!-- Subgrupo: Carta de porte -->
+                    <GroupBox  Margin="5">
+                        <GroupBox.Header>
+                            <DockPanel>
+                                <TextBlock Text="  Carta de porte " FontWeight="Bold" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </GroupBox.Header>
+                        <WrapPanel Margin="10">
+                            <TextBlock Text="ONU:"/>
+                            <TextBlock Text="{Binding Residuo.ONU}"/>
+                            <TextBlock Text="Descripción ADR:"/>
+                            <TextBlock Text="{Binding Residuo.DescripcionADR}"/>
+                        </WrapPanel>
+                    </GroupBox>
+
+                    <!-- Subgrupo: Condiciones aceptación -->
+                    <GroupBox Margin="5">
+                        <GroupBox.Header>
+                            <DockPanel>
+                                <TextBlock Text="  Condiciones de aceptación " FontWeight="Bold" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </GroupBox.Header>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Acondicionamiento:" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Residuo.Acondicionamiento}"/>
+                            <TextBlock Text="Parámetros de envasado:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <TextBlock Text="{Binding Residuo.ParametrosEnvasado}" TextWrapping="Wrap"/>
+                            <TextBlock Text="Condiciones físico-químicas:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <TextBlock Text="{Binding Residuo.CondicionesFisicoQuimicas}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </GroupBox>
+
                 </WrapPanel>
             </GroupBox>
 
-            <!-- BLOQUE: Transporte -->
-            <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Transporte], Converter={StaticResource BoolToVisibility}}">
-                <GroupBox.Header>
-                    <DockPanel>
-                        <TextBlock Text="  Transporte " FontWeight="Bold" VerticalAlignment="Center"/>
-                        <Button DockPanel.Dock="Right"
-                                Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                CommandParameter="Transporte"
-                                Style="{StaticResource CrudButtonStyle}">
-                            <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
-                        </Button>
-                    </DockPanel>
-                </GroupBox.Header>
-                <WrapPanel Margin="10">
-                    <TextBlock Text="Origen:"/>
-                    <TextBlock Text="{Binding Origen}"/>
-                    <TextBlock Text="Destino:"/>
-                    <TextBlock Text="{Binding Destino}"/>
-                    <TextBlock Text="Operador traslados:"/>
-                    <TextBlock Text="{Binding OperadorTraslado}"/>
-                </WrapPanel>
-            </GroupBox>
-
-            <!-- BLOQUE: Datos contrato -->
+            <!-- BLOQUE: Datos contrato 
             <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Contrato], Converter={StaticResource BoolToVisibility}}">
                 <GroupBox.Header>
                     <DockPanel>
-                        <TextBlock Text="  Datos contrato " FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Text="  Datos del Contrato " FontWeight="Bold" VerticalAlignment="Center"/>
                         <Button DockPanel.Dock="Right"
                                 Command="{Binding ToggleGroupBoxVisibilityCommand}"
                                 CommandParameter="Contrato"
@@ -111,7 +154,7 @@
                 </WrapPanel>
             </GroupBox>
 
-            <!-- BLOQUE: Notificación -->
+            BLOQUE: Notificación 
             <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Notificacion], Converter={StaticResource BoolToVisibility}}">
                 <GroupBox.Header>
                     <DockPanel>
@@ -138,7 +181,7 @@
                 </WrapPanel>
             </GroupBox>
 
-            <!-- BLOQUE: Tratamientos -->
+            BLOQUE: Tratamientos
             <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Tratamientos], Converter={StaticResource BoolToVisibility}}">
                 <GroupBox.Header>
                     <DockPanel>
@@ -167,7 +210,7 @@
                 </WrapPanel>
             </GroupBox>
 
-            <!-- BLOQUE: Facturación -->
+            BLOQUE: Facturación
             <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Facturacion], Converter={StaticResource BoolToVisibility}}">
                 <GroupBox.Header>
                     <DockPanel>
@@ -194,7 +237,7 @@
                 </WrapPanel>
             </GroupBox>
 
-            <!-- BLOQUE: Integridad -->
+            BLOQUE: Integridad 
             <GroupBox BorderBrush="#e5e5e5" Visibility="{Binding GroupBoxVisibility[Integridad], Converter={StaticResource BoolToVisibility}}">
                 <GroupBox.Header>
                     <DockPanel>
@@ -212,7 +255,7 @@
                Margin="10"
                FontWeight="Bold"/>
             </GroupBox>
-
+-->
         </WrapPanel>
     </ScrollViewer>
 </Window>
