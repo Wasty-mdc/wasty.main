@@ -70,12 +70,13 @@
                             IsReadOnly="True"
                            >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" />
+                        <DataGridTextColumn Header="Código" Binding="{Binding Referencia}" />
                         <DataGridTextColumn Header="Denominación" Binding="{Binding Denominacion}" />
                         <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
-                        <DataGridTextColumn Header="Tratamiento" Binding="{Binding Tratamiento}" />
+                        <DataGridTextColumn Header="TratamientoR" Binding="{Binding TratamientoR}" />
+                        <DataGridTextColumn Header="TratamientoD" Binding="{Binding TratamientoD}" />
                         <DataGridTextColumn Header="Peligrosidad" Binding="{Binding Peligrosidad}" />
-                        <DataGridTextColumn Header="ONU" Binding="{Binding ONU}" />
+                        <DataGridTextColumn Header="ONU" Binding="{Binding NumeroONU}" />
                         <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" /> <!-- Booleano: true(Peligroso) false(No Peligroso)-->
                         <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
                         <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
