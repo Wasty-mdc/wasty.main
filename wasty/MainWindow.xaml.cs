@@ -42,6 +42,28 @@ namespace wasty
         private bool _isMaximized = false;
         private bool _restoreBoundsSet = false;
         private double _restoreWidth, _restoreHeight, _restoreLeft, _restoreTop;
+        private const uint MONITOR_DEFAULTTONEAREST = 2;
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public int left, top, right, bottom;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct MONITORINFO
+        {
+            public int cbSize;
+            public RECT rcMonitor;
+            public RECT rcWork;
+            public int dwFlags;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO lpmi);
 
         // Importaciones para llamadas a API de Windows
         [DllImport("dwmapi.dll")]
@@ -74,13 +96,9 @@ namespace wasty
                 }
                 else if (WindowState == WindowState.Normal)
                 {
-                    // Si venimos de minimizar, actualizamos visualmente el borde
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        MainBorder.InvalidateVisual();
-                        InvalidateVisual();
-                        UpdateLayout();
-                    }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+                    // Truco definitivo: oculta y vuelve a mostrar la ventana para forzar repintado real del HWND
+                    Hide();
+                    Show();
                 }
             };
         }
@@ -122,9 +140,9 @@ namespace wasty
 
         private void MaximizarRestaurar_Click(object sender, RoutedEventArgs e)
         {
-            // Alterna entre restaurar y maximizar usando nuestras dimensiones personalizadas
             if (_isMaximized)
             {
+                // Restaurar ventana
                 Left = _restoreLeft;
                 Top = _restoreTop;
                 Width = _restoreWidth;
@@ -154,12 +172,18 @@ namespace wasty
                     _restoreBoundsSet = true;
                 }
 
-                var screen = SystemParameters.WorkArea;
+                // Obtenemos área de trabajo del monitor actual (sin usar Forms)
+                IntPtr monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+                MONITORINFO monitorInfo = new MONITORINFO();
+                monitorInfo.cbSize = Marshal.SizeOf(typeof(MONITORINFO));
+                GetMonitorInfo(monitor, ref monitorInfo);
+                RECT workArea = monitorInfo.rcWork;
 
-                Top = screen.Top;
-                Left = screen.Left;
-                Width = screen.Width;
-                Height = screen.Height;
+                // ⚠️ Aquí está la clave: restamos 1px al ancho/alto para evitar borde del sistema
+                Left = workArea.left;
+                Top = workArea.top;
+                Width = workArea.right - workArea.left - 1;
+                Height = workArea.bottom - workArea.top - 1;
 
                 MaxRestoreIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowRestore;
                 MainBorder.Margin = new Thickness(0);
@@ -169,6 +193,7 @@ namespace wasty
                 _isMaximized = true;
             }
         }
+
 
         private void Cerrar_Click(object sender, RoutedEventArgs e)
         {

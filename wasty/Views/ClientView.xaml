@@ -62,12 +62,13 @@
                 </StackPanel>
             </DockPanel>
 
-            <DataGrid ItemsSource="{Binding Clientes}"
-                            SelectedItem="{Binding ClienteSeleccionado}"
-                            AutoGenerateColumns="False"
-                            CanUserAddRows="False"
-                            IsReadOnly="True"
-                           >
+            <DataGrid ItemsSource="{Binding PaginadorClientes.ItemsPaginados}"
+                      SelectedItem="{Binding ClienteSeleccionado}"
+                      MouseDoubleClick="DataGrid_MouseDoubleClick"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      Margin="10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
                     <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
@@ -78,6 +79,23 @@
                     <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
                 </DataGrid.Columns>
             </DataGrid>
+
+            <!-- Controles de paginación -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Anterior" Command="{Binding PaginadorClientes.AnteriorCommand}" 
+            Margin="5" Style="{StaticResource CrudButtonStyle}" />
+
+                <TextBlock Text="{Binding PaginadorClientes.PaginaActual}" 
+               VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="10,0" />
+
+                <TextBlock Text=" / " VerticalAlignment="Center" FontSize="16"/>
+
+                <TextBlock Text="{Binding PaginadorClientes.TotalPaginas}" 
+               VerticalAlignment="Center" FontSize="16" Margin="5,0" />
+
+                <Button Content="Siguiente" Command="{Binding PaginadorClientes.SiguienteCommand}" 
+            Margin="5" Style="{StaticResource CrudButtonStyle}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

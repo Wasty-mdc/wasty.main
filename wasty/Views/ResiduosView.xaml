@@ -57,6 +57,7 @@
             <!-- Tabla con paginación -->
             <DataGrid ItemsSource="{Binding PaginadorResiduos.ItemsPaginados}"
                       SelectedItem="{Binding ResiduoSeleccionado}"
+                      MouseDoubleClick="DataGrid_MouseDoubleClick"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       IsReadOnly="True"

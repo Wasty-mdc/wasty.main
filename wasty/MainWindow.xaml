@@ -29,8 +29,9 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
         </ResourceDictionary>
     </Window.Resources>
-
-    <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}">
+    <Border Background="Black" Padding="1">
+        <!-- este es el "tapa-borde" -->
+        <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
@@ -131,5 +132,6 @@
                 </Grid>
             </Grid>
         </Grid>
+    </Border>
     </Border>
 </Window>

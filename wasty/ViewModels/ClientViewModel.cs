@@ -1,11 +1,14 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using wasty.Services;
-using wasty.Views;
-using System.Collections.ObjectModel;
-using wasty.Models;
 using System.Text.Json;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using wasty.Models;
+using wasty.Services;
+using wasty.Utils;
+using wasty.Views;
 
 namespace wasty.ViewModels
 {
@@ -25,16 +28,9 @@ namespace wasty.ViewModels
             }
         }
 
-        private ObservableCollection<ClienteModel> _clientes;
-        public ObservableCollection<ClienteModel> Clientes
-        {
-            get => _clientes;
-            set
-            {
-                _clientes = value;
-                OnPropertyChanged(nameof(Clientes));
-            }
-        }
+        public Paginador<ClienteModel> PaginadorClientes { get; private set; }
+
+        public ICommand NavigateToClientPanelCommand { get; }
 
         public ClientViewModel(NavigationService navigationService, ApiService apiService)
         {
@@ -44,36 +40,30 @@ namespace wasty.ViewModels
             NavigateToClientPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ClientPanelView>());
             Init().GetAwaiter();
         }
-        public ICommand NavigateToClientPanelCommand { get; }
 
         private async Task Init()
         {
-            Clientes = await GetData();
+            var clientes = await GetData();
+            PaginadorClientes = new Paginador<ClienteModel>(clientes, 10); // 10 por página
+            OnPropertyChanged(nameof(PaginadorClientes));
         }
 
         private async Task<ObservableCollection<ClienteModel>> GetData()
         {
-            JsonElement itemsElement = default;
-            string items = "";
             try
             {
                 var result = await _apiService.RequestAsync("GET", "clientes", "");
-
                 var itemsList = JsonSerializer.Deserialize<ObservableCollection<ClienteModel>>(result.datos);
-
-                return itemsList;
+                return itemsList ?? new ObservableCollection<ClienteModel>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new ObservableCollection<ClienteModel>();
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
+        protected void OnPropertyChanged([CallerMemberName] string name = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
     }
 }
