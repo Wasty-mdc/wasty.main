@@ -24,6 +24,14 @@ namespace wasty.Views
     /// </summary>
     public partial class ResiduosView : UserControl
     {
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is ResiduosViewModel viewModel && viewModel.NavigateToResiduosPanelCommand.CanExecute(null))
+            {
+                viewModel.NavigateToResiduosPanelCommand.Execute(null);
+            }
+        }
+
         public ResiduosView()
         {
             InitializeComponent();

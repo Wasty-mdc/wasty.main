@@ -21,6 +21,14 @@ namespace wasty.Views
     /// </summary>
     public partial class ClientView : UserControl
     {
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is ClientViewModel viewModel && viewModel.NavigateToClientPanelCommand.CanExecute(null))
+            {
+                viewModel.NavigateToClientPanelCommand.Execute(null);
+            }
+        }
+
         public ClientView()
         {
             InitializeComponent();

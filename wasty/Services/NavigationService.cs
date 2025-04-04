@@ -24,7 +24,7 @@ namespace wasty.Services
 
             if (view is Window window)
             {
-                window.ShowDialog();
+                window.Show();
             }
             else if (view is UserControl userControl)
             {
