@@ -4,13 +4,22 @@
         xmlns:vm="clr-namespace:wasty.ViewModels"
         xmlns:views="clr-namespace:wasty.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         Title="Wasty"
         WindowState="Normal"
         Background="Transparent"
         WindowStyle="None"
         ResizeMode="CanResize"
-        AllowsTransparency="True">
+        AllowsTransparency="False">
 
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome 
+            CaptionHeight="40"
+            ResizeBorderThickness="8"
+            CornerRadius="8"
+            GlassFrameThickness="0"/>
+    </shell:WindowChrome.WindowChrome>
+    
     <!-- Recursos -->
     <Window.Resources>
         <ResourceDictionary>
@@ -29,7 +38,7 @@
             </Grid.RowDefinitions>
 
             <!-- Barra personalizada -->
-            <Border Background="#1C1C1C" Height="32" MouseLeftButtonDown="Barra_MouseLeftButtonDown">
+            <Border Background="#1C1C1C" Height="32" MouseLeftButtonDown="Barra_MouseLeftButtonDown" shell:WindowChrome.IsHitTestVisibleInChrome="True" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

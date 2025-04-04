@@ -31,6 +31,7 @@ namespace wasty
         private const int HTBOTTOM = 15;
         private const int HTBOTTOMLEFT = 16;
         private const int HTBOTTOMRIGHT = 17;
+        private const int DWMWA_BORDER_COLOR = 34;
 
         private HwndSource _hwndSource;
         private bool _maxButtonPressed = false;
@@ -67,8 +68,19 @@ namespace wasty
             {
                 if (WindowState == WindowState.Maximized)
                 {
+                    // Evitamos modo maximizado real para quitar borde
                     WindowState = WindowState.Normal;
                     MaximizarRestaurar_Click(BtnMaximize, new RoutedEventArgs());
+                }
+                else if (WindowState == WindowState.Normal)
+                {
+                    // Si venimos de minimizar, actualizamos visualmente el borde
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        MainBorder.InvalidateVisual();
+                        InvalidateVisual();
+                        UpdateLayout();
+                    }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
                 }
             };
         }
@@ -150,8 +162,8 @@ namespace wasty
                 Height = screen.Height;
 
                 MaxRestoreIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowRestore;
-                MainBorder.CornerRadius = new CornerRadius(0);
                 MainBorder.Margin = new Thickness(0);
+                MainBorder.CornerRadius = new CornerRadius(0);
                 MainBorder.Effect = null;
 
                 _isMaximized = true;

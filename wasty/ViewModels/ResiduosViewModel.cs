@@ -2,9 +2,11 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using wasty.Models;
 using wasty.Services;
+using wasty.Utils;
 using wasty.Views;
 
 namespace wasty.ViewModels
@@ -14,6 +16,8 @@ namespace wasty.ViewModels
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
 
+        public Paginador<ResiduoModel> PaginadorResiduos { get; private set; }
+
         private Residuo _residuoSeleccionado;
         public Residuo ResiduoSeleccionado
         {
@@ -22,17 +26,6 @@ namespace wasty.ViewModels
             {
                 _residuoSeleccionado = value;
                 OnPropertyChanged(nameof(ResiduoSeleccionado));
-            }
-        }
-
-        private ObservableCollection<ResiduoModel> _residuos;
-        public ObservableCollection<ResiduoModel> Residuos
-        {
-            get => _residuos;
-            set
-            {
-                _residuos = value;
-                OnPropertyChanged(nameof(Residuos));
             }
         }
 
@@ -46,31 +39,31 @@ namespace wasty.ViewModels
 
             NavigateToResiduosPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
             VolverAlMenuCommand = new RelayCommand(_ => VolverAlMenu());
+
             Init().GetAwaiter();
         }
 
         private async Task Init()
         {
-            Residuos = await GetData();
+            var residuos = await GetData();
+            PaginadorResiduos = new Paginador<ResiduoModel>(residuos, 10); // Puedes ajustar items por página
+            OnPropertyChanged(nameof(PaginadorResiduos));
         }
 
         private async Task<ObservableCollection<ResiduoModel>> GetData()
         {
-            JsonElement itemsElement = default;
-            string items = "";
             try
             {
                 var result = await _apiService.RequestAsync("GET", "residuos", "");
-
                 var itemsList = JsonSerializer.Deserialize<ObservableCollection<ResiduoModel>>(result.datos);
-
-                return itemsList;
+                return itemsList ?? new ObservableCollection<ResiduoModel>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new ObservableCollection<ResiduoModel>();
             }
         }
+
         private void VolverAlMenu()
         {
             _navigationService.NavigateTo<MainView>();
