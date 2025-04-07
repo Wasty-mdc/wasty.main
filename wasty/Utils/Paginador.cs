@@ -35,7 +35,7 @@ namespace wasty.Utils
         public ICommand SiguienteCommand { get; }
         public ICommand AnteriorCommand { get; }
 
-        public Paginador(IEnumerable<T> items, int itemsPorPagina = 10)
+        public Paginador(IEnumerable<T> items, int itemsPorPagina = 25)
         {
             _itemsPorPagina = itemsPorPagina;
             _todosLosItems = new ObservableCollection<T>(items);

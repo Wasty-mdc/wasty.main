@@ -22,7 +22,7 @@ public class MainViewModel : MainModel
         NavigateToResiduosCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosView>());
         NavigateToResiduosPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<ResiduosPanelView>());
         NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
-        ShowFicherosCommand = new RelayCommand(ShowFicheros);
+        NavigateToTraeatmentsCommand = new RelayCommand(_ => _navigationService.NavigateTo<TreatmentsView>());
         ShowGestionCommand = new RelayCommand(ShowGestion);
         ShowFacturacionCommand = new RelayCommand(ShowFacturacion);
     }
@@ -35,15 +35,11 @@ public class MainViewModel : MainModel
     public ICommand NavigateToResiduosPanelCommand { get; }
 
     public ICommand NavigateToStatisticsPanelCommand { get; }
-    public ICommand ShowFicherosCommand { get; }
+    public ICommand NavigateToTraeatmentsCommand { get; }
     public ICommand ShowGestionCommand { get; }
     public ICommand ShowFacturacionCommand { get; }
 
     // Métodos para mostrar mensajes de cuadro de diálogo
-    private void ShowFicheros(object parameter)
-    {
-        MessageBox.Show("Ficheros seleccionado");
-    }
 
     private void ShowGestion(object parameter)
     {
