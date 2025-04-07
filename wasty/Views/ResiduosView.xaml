@@ -63,13 +63,13 @@
                       IsReadOnly="True"
                       Margin="10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" />
-                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" />
+                    <DataGridTextColumn Header="Código" Binding="{Binding Referencia}" />
                     <DataGridTextColumn Header="Denominación" Binding="{Binding Denominacion}" />
                     <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
-                    <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
-                    <DataGridTextColumn Header="Operador" Binding="{Binding OperadorTraslado}" />
-                    <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
+                    <DataGridTextColumn Header="TratamientoR" Binding="{Binding TratamientoR}" />
+                    <DataGridTextColumn Header="TratamientoD" Binding="{Binding TratamientoD}" />
+                    <DataGridTextColumn Header="Peligrosidad" Binding="{Binding Peligrosidad}" />
+                    <DataGridTextColumn Header="ONU" Binding="{Binding NumeroONU}" />
                 </DataGrid.Columns>
             </DataGrid>
 
