@@ -1,14 +1,13 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Effects;
 using System.Windows.Media;
-using System.Windows.Controls.Primitives;
-using Microsoft.Win32;
 using wasty.ViewModels;
+using System.Windows.Shell;
+using System.Windows.Threading;
 
 namespace wasty
 {
@@ -25,13 +24,9 @@ namespace wasty
         private const int HTMAXBUTTON = 9;
         private const int HTLEFT = 10;
         private const int HTRIGHT = 11;
-        private const int HTTOP = 12;
-        private const int HTTOPLEFT = 13;
-        private const int HTTOPRIGHT = 14;
         private const int HTBOTTOM = 15;
         private const int HTBOTTOMLEFT = 16;
         private const int HTBOTTOMRIGHT = 17;
-        private const int DWMWA_BORDER_COLOR = 34;
 
         private HwndSource _hwndSource;
         private bool _maxButtonPressed = false;
@@ -82,25 +77,23 @@ namespace wasty
 
             // Configuraciones y eventos de ventana
             Loaded += MainWindow_Loaded;
-            SizeChanged += (_, __) => ActualizarBoundsBotonMaximize();
+            LocationChanged += (_, __) => ActualizarBoundsBotonMaximize();
+            SizeChanged += (_, __) =>
+            {
+                Dispatcher.BeginInvoke(() => ActualizarBoundsBotonMaximize(), DispatcherPriority.Render);
+            };
             BtnMaximize.Loaded += (_, __) => ActualizarBoundsBotonMaximize();
 
             // Lógica para desactivar estado maximizado forzado tras Snap Layout
             StateChanged += (s, e) =>
             {
-                if (WindowState == WindowState.Maximized)
+                Dispatcher.BeginInvoke(() =>
                 {
-                    // Evitamos modo maximizado real para quitar borde
-                    WindowState = WindowState.Normal;
-                    MaximizarRestaurar_Click(BtnMaximize, new RoutedEventArgs());
-                }
-                else if (WindowState == WindowState.Normal)
-                {
-                    // Truco definitivo: oculta y vuelve a mostrar la ventana para forzar repintado real del HWND
-                    Hide();
-                    Show();
-                }
+                    ActualizarBoundsBotonMaximize();
+                }, DispatcherPriority.Render);
             };
+
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -108,6 +101,7 @@ namespace wasty
             hwnd = new WindowInteropHelper(this).Handle;
             _hwndSource = HwndSource.FromHwnd(hwnd);
             _hwndSource.AddHook(WndProc);
+            BtnMaximize.LayoutUpdated += (_, __) => ActualizarBoundsBotonMaximize();
         }
 
         private void ActualizarBoundsBotonMaximize()
@@ -133,6 +127,34 @@ namespace wasty
             }
         }
 
+        private void ReaplicarWindowChrome()
+        {
+            WindowChrome.SetWindowChrome(this, null);
+            WindowChrome.SetWindowChrome(this, new WindowChrome
+            {
+                CaptionHeight = 40,
+                ResizeBorderThickness = new Thickness(8),
+                CornerRadius = new CornerRadius(12),
+                GlassFrameThickness = new Thickness(0),
+                UseAeroCaptionButtons = false
+            });
+            InvalidateVisual();
+        }
+
+        private void FSWindowChrome()
+        {
+            WindowChrome.SetWindowChrome(this, null);
+            WindowChrome.SetWindowChrome(this, new WindowChrome
+            {
+                CaptionHeight = 40,
+                ResizeBorderThickness = new Thickness(0),
+                CornerRadius = new CornerRadius(0),
+                GlassFrameThickness = new Thickness(0),
+                UseAeroCaptionButtons = false
+            });
+            InvalidateVisual();
+        }
+
         private void Minimizar_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -149,8 +171,6 @@ namespace wasty
                 Height = _restoreHeight;
 
                 MaxRestoreIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowMaximize;
-                MainBorder.CornerRadius = new CornerRadius(10);
-                MainBorder.Margin = new Thickness(10);
                 MainBorder.Effect = new DropShadowEffect
                 {
                     BlurRadius = 20,
@@ -160,15 +180,23 @@ namespace wasty
                 };
 
                 _isMaximized = false;
+                ReaplicarWindowChrome();
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    BtnMaximize.InvalidateVisual();
+                    BtnMaximize.UpdateLayout();
+                    ActualizarBoundsBotonMaximize(); // <-- REIMPORTANTE
+                }, DispatcherPriority.Render);
             }
             else
             {
                 if (!_restoreBoundsSet)
                 {
-                    _restoreLeft = Left;
-                    _restoreTop = Top;
-                    _restoreWidth = Width;
-                    _restoreHeight = Height;
+                    _restoreLeft = Left - 1;
+                    _restoreTop = Top - 1;
+                    _restoreWidth = Width - 1;
+                    _restoreHeight = Height - 1;
                     _restoreBoundsSet = true;
                 }
 
@@ -179,18 +207,17 @@ namespace wasty
                 GetMonitorInfo(monitor, ref monitorInfo);
                 RECT workArea = monitorInfo.rcWork;
 
-                // ⚠️ Aquí está la clave: restamos 1px al ancho/alto para evitar borde del sistema
                 Left = workArea.left;
                 Top = workArea.top;
-                Width = workArea.right - workArea.left - 1;
-                Height = workArea.bottom - workArea.top - 1;
+                Width = workArea.right - workArea.left;
+                Height = workArea.bottom - workArea.top;
 
                 MaxRestoreIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowRestore;
-                MainBorder.Margin = new Thickness(0);
-                MainBorder.CornerRadius = new CornerRadius(0);
                 MainBorder.Effect = null;
 
                 _isMaximized = true;
+                FSWindowChrome();
+                ActualizarBoundsBotonMaximize();
             }
         }
 

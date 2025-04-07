@@ -16,8 +16,9 @@
         <shell:WindowChrome 
             CaptionHeight="40"
             ResizeBorderThickness="8"
-            CornerRadius="8"
-            GlassFrameThickness="0"/>
+            CornerRadius="12"
+            GlassFrameThickness="0"
+            UseAeroCaptionButtons="True"/>
     </shell:WindowChrome.WindowChrome>
     
     <!-- Recursos -->
@@ -29,9 +30,7 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
         </ResourceDictionary>
     </Window.Resources>
-    <Border Background="Black" Padding="1">
-        <!-- este es el "tapa-borde" -->
-        <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}">
+    <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}" shell:WindowChrome.IsHitTestVisibleInChrome="True">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
@@ -132,6 +131,5 @@
                 </Grid>
             </Grid>
         </Grid>
-    </Border>
     </Border>
 </Window>
