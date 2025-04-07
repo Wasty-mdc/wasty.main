@@ -49,10 +49,10 @@
                 </Button>
 
                 <!-- Botón Ficheros -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" Command="{Binding ShowFicherosCommand}">
+            <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" Command="{Binding NavigateToTraeatmentsCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                     <md:PackIcon Kind="FileDocumentOutline" Width="140" Height="140" Foreground="#D6D6D6"/>
-                        <TextBlock Text="FICHEROS" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <TextBlock Text="TRATAMIENTOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>

@@ -60,7 +60,6 @@
 
             <DataGrid ItemsSource="{Binding PaginadorClientes.ItemsPaginados}"
                       SelectedItem="{Binding ClienteSeleccionado}"
-                      MouseDoubleClick="DataGrid_MouseDoubleClick"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       IsReadOnly="True"
@@ -78,19 +77,27 @@
 
             <!-- Controles de paginación -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Anterior" Command="{Binding PaginadorClientes.AnteriorCommand}" 
-            Margin="5" Style="{StaticResource CrudButtonStyle}" />
+                <Button Command="{Binding PaginadorClientes.AnteriorCommand}" 
+                        Margin="5" Style="{StaticResource CrudButtonStyle}" >
+                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20" 
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Center"/>
+                </Button>
 
                 <TextBlock Text="{Binding PaginadorClientes.PaginaActual}" 
-               VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="10,0" />
+               VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="10,0" />
 
-                <TextBlock Text=" / " VerticalAlignment="Center" FontSize="16"/>
+                <TextBlock Text=" / " VerticalAlignment="Center" FontSize="20"/>
 
                 <TextBlock Text="{Binding PaginadorClientes.TotalPaginas}" 
-               VerticalAlignment="Center" FontSize="16" Margin="5,0" />
+               VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5,0" />
 
-                <Button Content="Siguiente" Command="{Binding PaginadorClientes.SiguienteCommand}" 
-            Margin="5" Style="{StaticResource CrudButtonStyle}" />
+                <Button Command="{Binding PaginadorClientes.SiguienteCommand}" 
+                        Margin="5" Style="{StaticResource CrudButtonStyle}" >
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20" 
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Center"/>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

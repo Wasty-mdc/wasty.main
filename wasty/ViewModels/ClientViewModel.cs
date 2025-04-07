@@ -60,7 +60,7 @@ namespace wasty.ViewModels
         private async Task Init()
         {
             var clientes = await GetData();
-            PaginadorClientes = new Paginador<ClienteModel>(clientes, 10); // 10 por página
+            PaginadorClientes = new Paginador<ClienteModel>(clientes, 25); // 10 por página
             OnPropertyChanged(nameof(PaginadorClientes));
         }
 
