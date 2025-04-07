@@ -58,6 +58,8 @@ namespace wasty.Utils
                 ItemsPaginados.Add(item);
 
             OnPropertyChanged(nameof(TotalPaginas));
+            MostrarBotonAnterior = PaginaActual > 1;
+            MostrarBotonSiguiente = PaginaActual < TotalPaginas;
         }
 
         public void RefrescarDatos(IEnumerable<T> nuevosItems)
@@ -73,5 +75,33 @@ namespace wasty.Utils
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string nombre) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nombre));
+
+        private bool _mostrarBotonAnterior;
+        public bool MostrarBotonAnterior
+        {
+            get => _mostrarBotonAnterior;
+            set
+            {
+                if (_mostrarBotonAnterior != value)
+                {
+                    _mostrarBotonAnterior = value;
+                    OnPropertyChanged(nameof(MostrarBotonAnterior));
+                }
+            }
+        }
+
+        private bool _mostrarBotonSiguiente;
+        public bool MostrarBotonSiguiente
+        {
+            get => _mostrarBotonSiguiente;
+            set
+            {
+                if (_mostrarBotonSiguiente != value)
+                {
+                    _mostrarBotonSiguiente = value;
+                    OnPropertyChanged(nameof(MostrarBotonSiguiente));
+                }
+            }
+        }
     }
 }

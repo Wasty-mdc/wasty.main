@@ -23,9 +23,13 @@ namespace wasty.Views
     {
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (DataContext is ClientViewModel viewModel && viewModel.NavigateToClientPanelCommand.CanExecute(null))
+            if (DataContext is ClientViewModel vm)
             {
-                viewModel.NavigateToClientPanelCommand.Execute(null);
+                var selectedItem = vm.ClienteSeleccionado;
+                if (selectedItem != null && vm.NavigateToClientPanelCommand.CanExecute(selectedItem))
+                {
+                    vm.NavigateToClientPanelCommand.Execute(selectedItem);
+                }
             }
         }
 

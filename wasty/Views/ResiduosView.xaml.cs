@@ -26,9 +26,13 @@ namespace wasty.Views
     {
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (DataContext is ResiduosViewModel viewModel && viewModel.NavigateToResiduosPanelCommand.CanExecute(null))
+            if (DataContext is ResiduosViewModel vm)
             {
-                viewModel.NavigateToResiduosPanelCommand.Execute(null);
+                var selectedItem = vm.ResiduoSeleccionado;
+                if (selectedItem != null && vm.NavigateToResiduosPanelCommand.CanExecute(selectedItem))
+                {
+                    vm.NavigateToResiduosPanelCommand.Execute(selectedItem);
+                }
             }
         }
 

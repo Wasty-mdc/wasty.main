@@ -60,6 +60,7 @@
 
             <DataGrid ItemsSource="{Binding PaginadorClientes.ItemsPaginados}"
                       SelectedItem="{Binding ClienteSeleccionado}"
+                      MouseDoubleClick="DataGrid_MouseDoubleClick"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       IsReadOnly="True"
@@ -78,10 +79,10 @@
             <!-- Controles de paginación -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button Command="{Binding PaginadorClientes.AnteriorCommand}" 
-                        Margin="5" Style="{StaticResource CrudButtonStyle}" >
-                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20" 
-                                 HorizontalAlignment="Center" 
-                                 VerticalAlignment="Center"/>
+                        Margin="5"
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorClientes.MostrarBotonAnterior, Converter={StaticResource BoolToVisibility}}">
+                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20"/>
                 </Button>
 
                 <TextBlock Text="{Binding PaginadorClientes.PaginaActual}" 
@@ -93,10 +94,10 @@
                VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5,0" />
 
                 <Button Command="{Binding PaginadorClientes.SiguienteCommand}" 
-                        Margin="5" Style="{StaticResource CrudButtonStyle}" >
-                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20" 
-                                 HorizontalAlignment="Center" 
-                                 VerticalAlignment="Center"/>
+                        Margin="5"
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorClientes.MostrarBotonSiguiente, Converter={StaticResource BoolToVisibility}}">
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20"/>
                 </Button>
             </StackPanel>
         </StackPanel>

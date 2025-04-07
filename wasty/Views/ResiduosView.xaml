@@ -76,10 +76,10 @@
             <!-- Controles de paginación -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button Command="{Binding PaginadorResiduos.AnteriorCommand}" 
-             Margin="5" Style="{StaticResource CrudButtonStyle}" >
-                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20" 
-                      HorizontalAlignment="Center" 
-                      VerticalAlignment="Center"/>
+                        Margin="5"
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorResiduos.MostrarBotonAnterior, Converter={StaticResource BoolToVisibility}}">
+                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20"/>
                 </Button>
 
                 <TextBlock Text="{Binding PaginadorResiduos.PaginaActual}" 
@@ -91,10 +91,10 @@
                  VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5,0" />
 
                 <Button Command="{Binding PaginadorResiduos.SiguienteCommand}" 
-             Margin="5" Style="{StaticResource CrudButtonStyle}" >
-                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20" 
-                      HorizontalAlignment="Center" 
-                      VerticalAlignment="Center"/>
+                        Margin="5"
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorResiduos.MostrarBotonSiguiente, Converter={StaticResource BoolToVisibility}}">
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20"/>
                 </Button>
             </StackPanel>
 
