@@ -18,8 +18,8 @@ namespace wasty.ViewModels
 
         public Paginador<ResiduoModel> PaginadorResiduos { get; private set; }
 
-        private Residuo _residuoSeleccionado;
-        public Residuo ResiduoSeleccionado
+        private ResiduoModel _residuoSeleccionado;
+        public ResiduoModel ResiduoSeleccionado
         {
             get => _residuoSeleccionado;
             set
