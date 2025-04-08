@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Linq;
 using wasty.Models;
 using wasty.Services;
 using wasty.Utils;
@@ -28,6 +29,23 @@ namespace wasty.ViewModels
             }
         }
 
+        private string _textoBusqueda;
+        public string TextoBusqueda
+        {
+            get => _textoBusqueda;
+            set
+            {
+                if (_textoBusqueda != value)
+                {
+                    _textoBusqueda = value;
+                    OnPropertyChanged();
+
+                    FiltrarClientes(); // 🔍 Pero ahora solo actúa si hay texto real
+                }
+            }
+        }
+
+
         public Paginador<ClienteModel> PaginadorClientes { get; private set; }
 
         public ICommand NavigateToClientPanelCommand { get; }
@@ -39,7 +57,7 @@ namespace wasty.ViewModels
             set
             {
                 _clienteSeleccionado = value;
-                OnPropertyChanged(nameof(ClienteSeleccionado));
+                OnPropertyChanged();
             }
         }
 
@@ -60,9 +78,41 @@ namespace wasty.ViewModels
         private async Task Init()
         {
             var clientes = await GetData();
-            PaginadorClientes = new Paginador<ClienteModel>(clientes, 25); // 10 por página
+            PaginadorClientes = new Paginador<ClienteModel>(clientes, 25);
             OnPropertyChanged(nameof(PaginadorClientes));
+            OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados)); // 🔁 Refresca DataGrid al iniciar
         }
+
+        private void FiltrarClientes()
+        {
+            if (PaginadorClientes == null || PaginadorClientes.TodosLosItemsOriginales == null)
+                return;
+
+            var texto = TextoBusqueda?.Trim();
+
+            // 🚫 Si no hay texto real, no hacer absolutamente nada
+            if (string.IsNullOrEmpty(texto))
+                return;
+
+            texto = texto.ToLower();
+
+            var filtrados = PaginadorClientes.TodosLosItemsOriginales.Where(c =>
+                (!string.IsNullOrEmpty(c.NombreComercial) && c.NombreComercial.ToLower().Contains(texto)) ||
+                (!string.IsNullOrEmpty(c.NombreFiscal) && c.NombreFiscal.ToLower().Contains(texto)) ||
+                (!string.IsNullOrEmpty(c.NIF) && c.NIF.ToLower().Contains(texto)));
+
+            PaginadorClientes.RefrescarCon(filtrados);
+
+            OnPropertyChanged(nameof(PaginadorClientes));
+            OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+        }
+        public void ResetClientes()
+        {
+            PaginadorClientes.Reset();
+            OnPropertyChanged(nameof(PaginadorClientes));
+            OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+        }
+
 
         private async Task<ObservableCollection<ClienteModel>> GetData()
         {
