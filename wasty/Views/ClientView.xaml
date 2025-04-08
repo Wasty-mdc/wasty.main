@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:wasty.Views"
+             xmlns:utils="clr-namespace:wasty.Utils"
              mc:Ignorable="d"
              Height="Auto"
              Width="Auto"
@@ -43,10 +44,17 @@
                                 HorizontalAlignment="Right"
                                 >
                         <StackPanel Orientation="Vertical" Margin="5" >
-                            <Button Style="{StaticResource CrudButtonStyle}">
-                                <md:PackIcon Kind="Magnify" Style="{StaticResource CrudIconStyle}"/>
-                            </Button>
-                            <TextBlock Text="Buscar" Style="{StaticResource CrudTextStyle}"/>
+                            <TextBox Margin="10"
+                                     Height="35"
+                                     Width="300"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     FontSize="16"
+                                     Padding="10"
+                                     Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Buscar por nombre, NIF o razón social"
+                                     utils:PlaceholderService.Placeholder="Buscar cliente..."
+                                     LostFocus="Buscador_LostFocus" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="5" >
                             <Button Style="{StaticResource CrudButtonStyle}">

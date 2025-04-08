@@ -33,6 +33,19 @@ namespace wasty.Views
             }
         }
 
+        private void Buscador_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as ClientViewModel;
+            if (vm == null) return;
+
+            if (string.IsNullOrWhiteSpace(vm.TextoBusqueda))
+            {
+                vm.TextoBusqueda = string.Empty; // Por si hay espacios, los borra
+                vm.ResetClientes();
+            }
+        }
+
+
         public ClientView()
         {
             InitializeComponent();

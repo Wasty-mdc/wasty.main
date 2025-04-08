@@ -15,17 +15,21 @@ namespace wasty.Utils
 
         public ObservableCollection<T> ItemsPaginados { get; } = new();
 
+        public ObservableCollection<T> TodosLosItemsOriginales { get; private set; }
+        public ObservableCollection<T> ItemsOriginales { get; set; }
+
         public int PaginaActual
         {
             get => _paginaActual;
             set
             {
-                if (_paginaActual != value)
+                var nuevaPagina = Math.Max(1, Math.Min(value, TotalPaginas)); // Evita fuera de rango
+                if (_paginaActual != nuevaPagina)
                 {
-                    _paginaActual = value;
+                    _paginaActual = nuevaPagina;
                     OnPropertyChanged(nameof(PaginaActual));
                     ActualizarItemsPaginados();
-                    CommandManager.InvalidateRequerySuggested(); // Refresca CanExecute
+                    CommandManager.InvalidateRequerySuggested();
                 }
             }
         }
@@ -35,10 +39,22 @@ namespace wasty.Utils
         public ICommand SiguienteCommand { get; }
         public ICommand AnteriorCommand { get; }
 
+        public bool MostrarBotonAnterior
+        {
+            get => PaginaActual > 1;
+        }
+
+        public bool MostrarBotonSiguiente
+        {
+            get => PaginaActual < TotalPaginas;
+        }
+
         public Paginador(IEnumerable<T> items, int itemsPorPagina = 25)
         {
             _itemsPorPagina = itemsPorPagina;
             _todosLosItems = new ObservableCollection<T>(items);
+            TodosLosItemsOriginales = new ObservableCollection<T>(_todosLosItems);
+            ItemsOriginales = new ObservableCollection<T>(_todosLosItems);
 
             SiguienteCommand = new RelayCommand(_ => PaginaActual++, _ => PaginaActual < TotalPaginas);
             AnteriorCommand = new RelayCommand(_ => PaginaActual--, _ => PaginaActual > 1);
@@ -57,12 +73,14 @@ namespace wasty.Utils
             foreach (var item in items)
                 ItemsPaginados.Add(item);
 
+            // 🔁 Forzamos el refresco del DataGrid
+            OnPropertyChanged(nameof(ItemsPaginados));
             OnPropertyChanged(nameof(TotalPaginas));
-            MostrarBotonAnterior = PaginaActual > 1;
-            MostrarBotonSiguiente = PaginaActual < TotalPaginas;
+            OnPropertyChanged(nameof(MostrarBotonAnterior));
+            OnPropertyChanged(nameof(MostrarBotonSiguiente));
         }
 
-        public void RefrescarDatos(IEnumerable<T> nuevosItems)
+        public void RefrescarCon(IEnumerable<T> nuevosItems)
         {
             _todosLosItems.Clear();
             foreach (var item in nuevosItems)
@@ -72,36 +90,24 @@ namespace wasty.Utils
             ActualizarItemsPaginados();
         }
 
+        public void Reset()
+        {
+            _todosLosItems.Clear();
+            foreach (var item in TodosLosItemsOriginales)
+                _todosLosItems.Add(item);
+
+            // 🔁 Restauramos también la referencia original
+            ItemsOriginales = new ObservableCollection<T>(TodosLosItemsOriginales);
+
+            // 🔒 Reiniciamos página y actualizamos correctamente
+            PaginaActual = 1;
+            ActualizarItemsPaginados();
+        }
+
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string nombre) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nombre));
-
-        private bool _mostrarBotonAnterior;
-        public bool MostrarBotonAnterior
-        {
-            get => _mostrarBotonAnterior;
-            set
-            {
-                if (_mostrarBotonAnterior != value)
-                {
-                    _mostrarBotonAnterior = value;
-                    OnPropertyChanged(nameof(MostrarBotonAnterior));
-                }
-            }
-        }
-
-        private bool _mostrarBotonSiguiente;
-        public bool MostrarBotonSiguiente
-        {
-            get => _mostrarBotonSiguiente;
-            set
-            {
-                if (_mostrarBotonSiguiente != value)
-                {
-                    _mostrarBotonSiguiente = value;
-                    OnPropertyChanged(nameof(MostrarBotonSiguiente));
-                }
-            }
-        }
     }
 }
