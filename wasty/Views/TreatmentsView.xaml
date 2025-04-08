@@ -40,7 +40,22 @@
                     <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
                     <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
                     <DataGridTextColumn Header="Operador de Traslados" Binding="{Binding OperadorTraslados}" />
-                    <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
+                    <DataGridTemplateColumn Header="Activo">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Activo}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Notificar">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Notificar}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
 
