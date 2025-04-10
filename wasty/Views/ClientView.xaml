@@ -50,10 +50,10 @@
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center"
                                      FontSize="16"
-                                     Padding="10"
+                                     Padding="5"
                                      Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
-                                     ToolTip="Buscar por nombre, NIF o razón social"
-                                     utils:PlaceholderService.Placeholder="Buscar cliente..."
+                                     ToolTip="Buscar por NIF, Nombre Comercial o Nombre Fiscal"
+                                     utils:PlaceholderService.Placeholder="Buscar cliente ..."
                                      LostFocus="Buscador_LostFocus" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="5" >

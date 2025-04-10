@@ -48,32 +48,24 @@
                     </StackPanel>
                 </Button>
 
-                <!-- Botón Ficheros -->
-            <Button Style="{StaticResource CentralButton}" ToolTip="Ficheros" Command="{Binding NavigateToTraeatmentsCommand}">
+                <!-- Botón Tratamientos -->
+            <Button Style="{StaticResource CentralButton}" ToolTip="Tratamientos" Command="{Binding NavigateToTraeatmentsCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                    <md:PackIcon Kind="FileDocumentOutline" Width="140" Height="140" Foreground="#D6D6D6"/>
+                    <md:PackIcon Kind="FileCloudOutline" Width="140" Height="140" Foreground="#D6D6D6"/>
                         <TextBlock Text="TRATAMIENTOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
-                <!-- Botón Gestión -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Gestión" Command="{Binding ShowGestionCommand}">
+                <!-- Botón Logística -->
+            <Button Style="{StaticResource CentralButton}" ToolTip="Logística" Command="{Binding ShowGestionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="SafeSquareOutline" Width="140" Height="140" Foreground="#22333b"/>
-                        <TextBlock Text="GESTIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
+                    <md:PackIcon Kind="DumpTruck" Width="140" Height="140" Foreground="#262626"/>
+                        <TextBlock Text="LOGÍSTICA" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
-                <!-- Botón Facturación -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="WalletOutline" Width="140" Height="140" Foreground="#99582a" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="FACTURACIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
-								   HorizontalAlignment="Center" />
-                    </StackPanel>
-                </Button>
                 <!-- Botón Estadísticas -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas" Command="{Binding NavigateToStatisticsPanelCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
@@ -82,7 +74,16 @@
 								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
-            </WrapPanel>
+
+            <!-- Botón Facturación -->
+            <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+                    <md:PackIcon Kind="WalletOutline" Width="140" Height="140" Foreground="#99582a" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="FACTURACIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
+								   HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </WrapPanel>
             <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>
