@@ -112,7 +112,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- CLIENTE -->
-            <ScrollViewer Grid.Column="0">
+            <ScrollViewer Grid.Column="0" >
                 <UniformGrid Columns="2"  Background="#4CECEAE8">
                 <!-- Bloque de Datos Clientes -->
                 <GroupBox FontWeight="Bold"
@@ -186,8 +186,7 @@
                 </GroupBox>
 
                 <!-- Bloque de Datos Generales -->
-                <GroupBox FontWeight="Bold"
-                          BorderThickness="1"
+                <GroupBox BorderThickness="1"
                           Visibility="{Binding GroupBoxVisibility[DatosGenerales], Converter={StaticResource BoolToVisibility}}">
                     <GroupBox.Header>
                         <DockPanel>
@@ -201,7 +200,7 @@
                         </DockPanel>
                     </GroupBox.Header>
 
-                    <StackPanel Margin="2">
+                    <StackPanel Margin="2" >
                         <TextBlock Text="Fecha de Alta:"/>
                         <DatePicker FontSize="12" Cursor="Hand" Margin="2,6,2,6"/>
 
@@ -209,8 +208,7 @@
                         <DatePicker FontSize="12" Cursor="Hand" Margin="2,6,2,6"/>
 
                         <!-- Bloque de Horario -->
-                        <GroupBox FontWeight="Bold"
-                                  Margin="1"
+                        <GroupBox Margin="1"
                                   BorderThickness="0.5"
                                   Visibility="{Binding GroupBoxVisibility[Horario], Converter={StaticResource BoolToVisibility}}">
                             <GroupBox.Header>
@@ -236,11 +234,12 @@
                         </GroupBox>
 
                         <!-- Bloque de Checkbox -->
-                        <UniformGrid Columns="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <CheckBox Name="CbListaDeCorreo" Content="Lista de Correo" Margin="2" Foreground="White"/>
-                            <CheckBox Name="CbFevauto" Content="Fevauto" Margin="2" Foreground="White"/>
-                            <CheckBox Name="CbClienteGes" Content="Cliente Gestor" Margin="2" Foreground="White"/>
-                            <CheckBox Name="CbClienteEsp" Content="Cliente Esporádico" Margin="2" Foreground="White"/>
+                            <UniformGrid Columns="1" HorizontalAlignment="Stretch" 
+                                         Margin="20,15,10,5" >
+                                <CheckBox Name="CbListaDeCorreo" Content="Lista de Correo" Foreground="White" />
+                                <CheckBox Name="CbFevauto" Content="Fevauto" Foreground="White"  />
+                                <CheckBox Name="CbClienteGes" Content="Cliente Gestor" Foreground="White" />
+                                <CheckBox Name="CbClienteEsp" Content="Cliente Esporádico" Foreground="White"  />
                         </UniformGrid>
                     </StackPanel>
                 </GroupBox>
@@ -277,8 +276,7 @@
                     </GroupBox>
 
                     <!-- Bloque de Contacto -->
-                    <GroupBox FontWeight="Bold"
-                          BorderThickness="1"
+                    <GroupBox BorderThickness="1"
                           Visibility="{Binding GroupBoxVisibility[Contacto], Converter={StaticResource BoolToVisibility}}">
                         <GroupBox.Header>
                             <DockPanel>
@@ -318,7 +316,6 @@
                                     <TextBox/>
                                     <TextBlock Text="Cargo:"/>
                                     <TextBox/>
-
                                     <TextBlock Text="Comercial:"/>
                                     <ComboBox>
                                         <ComboBoxItem Content="Comercial 1"/>
@@ -329,7 +326,7 @@
                     </GroupBox>
 
                     <!-- Bloque de Observaciones -->
-                    <GroupBox MinWidth="280"
+                    <GroupBox MinWidth="260"
                           FontWeight="Bold"
                           Height="Auto"
                           BorderThickness="1"
@@ -347,7 +344,7 @@
                         </GroupBox.Header>
 
                         <StackPanel Margin="2">
-                            <TextBox Height="260" TextWrapping="Wrap" AcceptsReturn="True"/>
+                            <TextBox Height="300" TextWrapping="Wrap" AcceptsReturn="True"/>
                         </StackPanel>
                     </GroupBox>
                 </UniformGrid>
@@ -355,11 +352,10 @@
             
             <!-- CONTRATO -->
             <ScrollViewer Grid.Column="1">
-                <WrapPanel  Background="#4CECEAE8">
+                <StackPanel Background="#4CECEAE8">
 
                     <!-- Bloque de Datos de Pagos -->
-                    <GroupBox FontWeight="Bold"
-                              BorderThickness="1"
+                    <GroupBox BorderThickness="1"
                               Visibility="{Binding GroupBoxVisibility[DatosdePagos], Converter={StaticResource BoolToVisibility}}">
                         <GroupBox.Header>
                             <DockPanel>
@@ -443,31 +439,30 @@
                                 </Button>
                             </DockPanel>
                         </GroupBox.Header>
-
-                        <StackPanel>
-                            <TextBlock Text="Chatarra Mecánica:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
-                            <TextBlock Text="Chatarra Plancha:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
+                        <UniformGrid Columns="2" >
+                            <TextBlock Text="Chat. Mecánica:"/>
+                            <TextBox  MaxWidth="80"/>
+                            <TextBlock Text="Chat. Plancha:"/>
+                            <TextBox MaxWidth="80"/>
                             <TextBlock Text="Plástica:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
+                            <TextBox  MaxWidth="80"/>
                             <TextBlock Text="Papel Archivo:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
+                            <TextBox  MaxWidth="80"/>
                             <TextBlock Text="Aluminio:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
-                            <TextBlock Text="Baterías (Unidades):"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
-                            <TextBlock Text="Baterías (Kilos):"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
+                            <TextBox  MaxWidth="80"/>
+                            <TextBlock Text="Baterías (Uds):"/>
+                            <TextBox  MaxWidth="80"/>
+                            <TextBlock Text="Baterías (Kg):"/>
+                            <TextBox  MaxWidth="80"/>
                             <TextBlock Text="Aceite:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
+                            <TextBox  MaxWidth="80"/>
                             <TextBlock Text="Cartón:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
+                            <TextBox  MaxWidth="80"/>
                             <TextBlock Text="Taras:"/>
-                            <TextBox MinHeight="20" MaxWidth="80"/>
-                        </StackPanel>
+                            <TextBox  MaxWidth="80"/>
+                        </UniformGrid>
                     </GroupBox>
-                </WrapPanel>
+                </StackPanel>
             </ScrollViewer>
 
             <!-- CENTROS -->
@@ -475,89 +470,100 @@
                 <TabControl ItemsSource="{Binding Centros}"  Background="#4CECEAE8" >
                     <TabControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding NombreCentro}"/>
+                            <TextBlock Text="{Binding NombreCentro}" Cursor="Hand"/>
                         </DataTemplate>
                     </TabControl.ItemTemplate>
-                    <TabControl.ContentTemplate>
+                    <TabControl.ContentTemplate >
                         <DataTemplate>
-                            <ScrollViewer >
                                 <StackPanel>
                                     <!-- Bloque NIMA -->
-                                    <GroupBox FontWeight="Bold" BorderBrush="#A0C26C" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[NIMA], Converter={StaticResource BoolToVisibility}}">
-                                        <GroupBox.Header>
-                                            <DockPanel>
-                                                <TextBlock Text="  N I M A " FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="NIMA" Style="{StaticResource CrudButtonStyle}">
-                                                    <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
-                                                </Button>
-                                            </DockPanel>
-                                        </GroupBox.Header>
-                                        <WrapPanel Margin="2">
-                                            <GroupBox FontWeight="Bold" Margin="1" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[DatosNIMA], Converter={StaticResource BoolToVisibility}}">
-                                                <GroupBox.Header>
-                                                    <DockPanel>
-                                                        <TextBlock Text="  Datos NIMA" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                    </DockPanel>
-                                                </GroupBox.Header>
-                                                <UniformGrid Columns="2">
-                                                    <TextBlock Text="NIMA:"/>
-                                                    <TextBox Text="{Binding NIMA}" MaxHeight="20"/>
-                                                    <TextBlock Text="Inscripción (P01/P02):"/>
-                                                    <TextBox Text="{Binding InscripcionP01}" MaxHeight="20"/>
-                                                    <TextBlock Text="Inscripción (P03/P04):"/>
-                                                    <TextBox Text="{Binding InscripcionP03}" MaxHeight="20"/>
-                                                    <TextBlock Text="Actividad Económica:"/>
-                                                    <TextBox Text="{Binding ActividadEconomica}" MaxHeight="20"/>
-                                                    <TextBlock Text="Forma Jurídica:"/>
-                                                    <TextBox Text="{Binding FormaJuridica}" MaxHeight="20"/>
-                                                    <TextBlock Text="Código INE:"/>
-                                                    <TextBox Text="{Binding CodigoINE}" MaxHeight="20"/>
-                                                    <TextBlock Text="CNAE:"/>
-                                                    <TextBox Text="{Binding CNAE}" MaxHeight="20"/>
-                                                    <TextBlock Text="Gestor Habitual:"/>
-                                                    <TextBox Text="{Binding GestorHabitual}" MaxHeight="20"/>
-                                                    <TextBlock Text="Comunidad Autónoma:"/>
-                                                    <TextBox Text="{Binding ComunidadAutonoma}" MaxHeight="20"/>
-                                                </UniformGrid>
-                                            </GroupBox>
-                                            <GroupBox FontWeight="Bold" Margin="1" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[MedioAmbiente], Converter={StaticResource BoolToVisibility}}">
-                                                <GroupBox.Header>
-                                                    <DockPanel>
-                                                        <TextBlock Text="  Medio Ambiente" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                    </DockPanel>
-                                                </GroupBox.Header>
-                                                <StackPanel>
-                                                    <TextBlock Text="Responsable:"/>
-                                                    <TextBox Text="{Binding ResponsableMedioAmbiente}"/>
-                                                    <TextBlock Text="Cargo:"/>
-                                                    <TextBox Text="{Binding CargoMedioAmbiente}"/>
-                                                    <TextBlock Text="Teléfono:"/>
-                                                    <TextBox Text="{Binding TelefonoMedioAmbiente}"/>
-                                                    <TextBlock Text="NIF:"/>
-                                                    <TextBox Text="{Binding NifMedioAmbiente}"/>
-                                                </StackPanel>
-                                            </GroupBox>
-                                            <GroupBox FontWeight="Bold" Margin="1" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[Legalidad], Converter={StaticResource BoolToVisibility}}">
-                                                <GroupBox.Header>
-                                                    <DockPanel>
-                                                        <TextBlock Text="  Legalidad" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                    </DockPanel>
-                                                </GroupBox.Header>
-                                                <StackPanel>
-                                                    <TextBlock Text="Responsable Legal:"/>
-                                                    <TextBox Text="{Binding ResponsableLegal}"/>
-                                                    <TextBlock Text="Cargo:"/>
-                                                    <TextBox Text="{Binding CargoLegal}"/>
-                                                    <TextBlock Text="Teléfono:"/>
-                                                    <TextBox Text="{Binding TelefonoLegal}"/>
-                                                    <TextBlock Text="NIF:"/>
-                                                    <TextBox Text="{Binding NifLegal}"/>
-                                                </StackPanel>
-                                            </GroupBox>
-                                        </WrapPanel>
-                                    </GroupBox>
-                                    <!-- Bloque Recogidas -->
-                                    <GroupBox FontWeight="Bold" BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[Recogidas], Converter={StaticResource BoolToVisibility}}">
+                                <GroupBox Margin="10" BorderBrush="#A0C26C" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[NIMA], Converter={StaticResource BoolToVisibility}}">
+                                    <GroupBox.Header>
+                                        <DockPanel>
+                                            <TextBlock Text="  N I M A " FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="NIMA" Style="{StaticResource CrudButtonStyle}">
+                                                <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
+                                            </Button>
+                                        </DockPanel>
+                                    </GroupBox.Header>
+                                    <Grid Margin="2" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <GroupBox Grid.Column="0" Margin="5" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[DatosNIMA], Converter={StaticResource BoolToVisibility}}">
+                                            <GroupBox.Header>
+                                                <DockPanel>
+                                                    <TextBlock Text="  Datos NIMA" FontWeight="Bold" VerticalAlignment="Center"/>
+                                                </DockPanel>
+                                            </GroupBox.Header>
+                                            <UniformGrid Columns="2">
+                                                <TextBlock Text="NIMA:"/>
+                                                <TextBox Text="{Binding NIMA}" MaxHeight="20"/>
+                                                <TextBlock Text="Inscripción (P01/P02):"/>
+                                                <TextBox Text="{Binding InscripcionP01}" MaxHeight="20"/>
+                                                <TextBlock Text="Inscripción (P03/P04):"/>
+                                                <TextBox Text="{Binding InscripcionP03}" MaxHeight="20"/>
+                                                <TextBlock Text="Actividad Económica:"/>
+                                                <TextBox Text="{Binding ActividadEconomica}" MaxHeight="20"/>
+                                                <TextBlock Text="Forma Jurídica:"/>
+                                                <TextBox Text="{Binding FormaJuridica}" MaxHeight="20"/>
+                                                <TextBlock Text="Código INE:"/>
+                                                <TextBox Text="{Binding CodigoINE}" MaxHeight="20"/>
+                                                <TextBlock Text="CNAE:"/>
+                                                <TextBox Text="{Binding CNAE}" MaxHeight="20"/>
+                                                <TextBlock Text="Gestor Habitual:"/>
+                                                <TextBox Text="{Binding GestorHabitual}" MaxHeight="20"/>
+                                                <TextBlock Text="Comunidad Autónoma:"/>
+                                                <TextBox Text="{Binding ComunidadAutonoma}" MaxHeight="20"/>
+                                            </UniformGrid>
+                                        </GroupBox>
+
+                                        <GroupBox Grid.Column="1" Margin="5" BorderThickness="0.5" 
+                                                  Visibility="{Binding GroupBoxVisibility[MedioAmbiente], Converter={StaticResource BoolToVisibility}}">
+                                            <GroupBox.Header>
+                                                <DockPanel>
+                                                    <TextBlock Text=" Medio Ambiente " FontWeight="Bold" VerticalAlignment="Center"/>
+                                                </DockPanel>
+                                            </GroupBox.Header>
+                                            <StackPanel Margin="5">
+                                                <TextBlock Text="Responsable:"/>
+                                                <TextBox Text="{Binding ResponsableMedioAmbiente}"/>
+                                                <TextBlock Text="Cargo:"/>
+                                                <TextBox Text="{Binding CargoMedioAmbiente}"/>
+                                                <TextBlock Text="Teléfono:"/>
+                                                <TextBox Text="{Binding TelefonoMedioAmbiente}"/>
+                                                <TextBlock Text="NIF:"/>
+                                                <TextBox Text="{Binding NifMedioAmbiente}"/>
+                                            </StackPanel>
+                                        </GroupBox>
+
+                                        <GroupBox Grid.Column="2" Margin="5" BorderThickness="0.5" 
+                                                  Visibility="{Binding GroupBoxVisibility[Legalidad], Converter={StaticResource BoolToVisibility}}">
+                                            <GroupBox.Header>
+                                                <DockPanel>
+                                                    <TextBlock Text=" Legalidad " FontWeight="Bold" VerticalAlignment="Center"/>
+                                                </DockPanel>
+                                            </GroupBox.Header>
+                                            <StackPanel Margin="5">
+                                                <TextBlock Text="Responsable Legal:"/>
+                                                <TextBox Text="{Binding ResponsableLegal}"/>
+                                                <TextBlock Text="Cargo:"/>
+                                                <TextBox Text="{Binding CargoLegal}"/>
+                                                <TextBlock Text="Teléfono:"/>
+                                                <TextBox Text="{Binding TelefonoLegal}"/>
+                                                <TextBlock Text="NIF:"/>
+                                                <TextBox Text="{Binding NifLegal}"/>
+                                            </StackPanel>
+                                        </GroupBox>
+                                    </Grid>
+                                </GroupBox>
+
+                                <!-- Bloque Recogidas -->
+                                <UniformGrid Columns="3">
+                                <GroupBox BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[Recogidas], Converter={StaticResource BoolToVisibility}}">
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -566,7 +572,7 @@
                                                 </Button>
                                             </DockPanel>
                                         </GroupBox.Header>
-                                        <StackPanel Margin="2">
+                                        <StackPanel Margin="8">
                                             <TextBlock Text="Fecha última retirada:"/>
                                             <DatePicker SelectedDate="{Binding FechaUltimaRetirada}" FontSize="12" Cursor="Hand" Margin="2,6,2,6"/>
                                             <TextBlock Text="Días entre cada retirada:"/>
@@ -589,7 +595,7 @@
                                     </GroupBox>
 
                                     <!-- Bloque Datos de Recogidas -->
-                                    <GroupBox FontWeight="Bold" BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[DatosRecogidas], Converter={StaticResource BoolToVisibility}}">
+                                    <GroupBox BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[DatosRecogidas], Converter={StaticResource BoolToVisibility}}">
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Datos de Recogidas" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -598,11 +604,11 @@
                                                 </Button>
                                             </DockPanel>
                                         </GroupBox.Header>
-                                        <StackPanel Margin="2">
-                                            <GroupBox FontWeight="Bold" Margin="1" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[HorarioRecogidas], Converter={StaticResource BoolToVisibility}}">
+                                        <StackPanel Margin="8">
+                                            <GroupBox Margin="3" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[HorarioRecogidas], Converter={StaticResource BoolToVisibility}}">
                                                 <GroupBox.Header>
                                                     <DockPanel>
-                                                        <TextBlock Text="  Horario" FontWeight="Bold" VerticalAlignment="Center"/>
+                                                        <TextBlock Text=" Horario " FontWeight="Bold" VerticalAlignment="Center"/>
                                                     </DockPanel>
                                                 </GroupBox.Header>
                                                 <StackPanel>
@@ -630,8 +636,9 @@
                                             <TextBox Text="{Binding ObservacionesRecogida}"/>
                                         </StackPanel>
                                     </GroupBox>
+                                    
                                     <!-- Bloque de Recogidas No Peligrosas -->
-                                    <GroupBox FontWeight="Bold" BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[NoPeligrosas], Converter={StaticResource BoolToVisibility}}">
+                                    <GroupBox BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[NoPeligrosas], Converter={StaticResource BoolToVisibility}}">
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas No Peligrosas" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -640,7 +647,7 @@
                                                 </Button>
                                             </DockPanel>
                                         </GroupBox.Header>
-                                        <StackPanel Margin="2">
+                                        <StackPanel Margin="8">
                                             <TextBlock Text="Última retirada de no peligrosos:"/>
                                             <DatePicker SelectedDate="{Binding FechaUltimaRetiradaNoPeligrosos}" FontSize="12" Cursor="Hand" Margin="2,6,2,6"/>
                                             <TextBlock Text="Días próxima retirada:"/>
@@ -650,7 +657,7 @@
                                     </GroupBox>
 
                                     <!-- Bloque de Recogidas Peligrosas -->
-                                    <GroupBox FontWeight="Bold" BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[Peligrosas], Converter={StaticResource BoolToVisibility}}">
+                                    <GroupBox BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[Peligrosas], Converter={StaticResource BoolToVisibility}}">
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas Peligrosas" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -659,7 +666,7 @@
                                                 </Button>
                                             </DockPanel>
                                         </GroupBox.Header>
-                                        <StackPanel Margin="2">
+                                        <StackPanel Margin="8">
                                             <TextBlock Text="Última retirada de peligrosos:"/>
                                             <DatePicker SelectedDate="{Binding FechaUltimaRetiradaPeligrosos}" FontSize="12" Cursor="Hand" Margin="2,6,2,6"/>
                                             <TextBlock Text="Días próxima retirada:"/>
@@ -669,7 +676,8 @@
                                     </GroupBox>
 
                                     <!-- Bloque de Recogidas Aceite -->
-                                    <GroupBox FontWeight="Bold" BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[Aceite], Converter={StaticResource BoolToVisibility}}">
+                                    <GroupBox BorderBrush="#2c6e49" BorderThickness="2" 
+                                              Visibility="{Binding GroupBoxVisibility[Aceite], Converter={StaticResource BoolToVisibility}}">
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas Aceite" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -678,7 +686,7 @@
                                                 </Button>
                                             </DockPanel>
                                         </GroupBox.Header>
-                                        <StackPanel Margin="2">
+                                        <StackPanel Margin="8">
                                             <TextBlock Text="Última retirada de aceite:"/>
                                             <DatePicker SelectedDate="{Binding FechaUltimaRetiradaAceite}" FontSize="12" Cursor="Hand" Margin="2,6,2,6"/>
                                             <TextBlock Text="Días próxima retirada:"/>
@@ -708,8 +716,8 @@
                                             </ComboBox>
                                         </StackPanel>
                                     </GroupBox>
-                                </StackPanel>
-                            </ScrollViewer>
+                                </UniformGrid>
+                            </StackPanel>
                         </DataTemplate>
                     </TabControl.ContentTemplate>
                 </TabControl>

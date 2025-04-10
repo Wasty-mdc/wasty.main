@@ -102,7 +102,7 @@
                             <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
                         </Button>
                         <Button Style="{StaticResource NavButton}" ToolTip="Historial">
-                            <md:PackIcon Kind="History" Width="30" Height="30" Foreground="White"/>
+                            <md:PackIcon Kind="BellBadgeOutline" Width="30" Height="30" Foreground="White"/>
                         </Button>
                         <Button Style="{StaticResource NavButton}" ToolTip="Favoritos">
                             <md:PackIcon Kind="Star" Width="30" Height="30" Foreground="White"/>
@@ -110,9 +110,6 @@
                     </StackPanel>
 
                     <StackPanel Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Volver atrás">
-                            <md:PackIcon Kind="ArrowLeftBoldBoxOutline" Width="30" Height="30" Foreground="White"/>
-                        </Button>
                         <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
                             <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
                         </Button>
