@@ -1,135 +1,174 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Linq;
 using wasty.Models;
 using wasty.Services;
 using wasty.Utils;
+using wasty.ViewModels;
 using wasty.Views;
 
-namespace wasty.ViewModels
+public class ClientViewModel : INotifyPropertyChanged
 {
-    public class ClientViewModel : INotifyPropertyChanged
+    private readonly NavigationService _navigationService;
+    private readonly ApiService _apiService;
+
+    private string _clienteNombre = "METALLS DEL CAMP. SLU.";
+    public string ClienteNombre
     {
-        private readonly NavigationService _navigationService;
-        private readonly ApiService _apiService;
-
-        private string _clienteNombre = "METALLS DEL CAMP. SLU.";
-        public string ClienteNombre
+        get => _clienteNombre;
+        set
         {
-            get => _clienteNombre;
-            set
+            _clienteNombre = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _textoBusqueda;
+    public string TextoBusqueda
+    {
+        get => _textoBusqueda;
+        set
+        {
+            if (_textoBusqueda != value)
             {
-                _clienteNombre = value;
+                _textoBusqueda = value;
                 OnPropertyChanged();
+
+                FiltrarClientes(); // 🔍 Filtrar cuando el texto cambie
             }
         }
+    }
 
-        private string _textoBusqueda;
-        public string TextoBusqueda
+    public Paginador<ClienteModel> PaginadorClientes { get; private set; }
+
+    public ICommand NavigateToClientPanelCommand { get; }
+
+    private ClienteModel _clienteSeleccionado;
+    public ClienteModel ClienteSeleccionado
+    {
+        get => _clienteSeleccionado;
+        set
         {
-            get => _textoBusqueda;
-            set
-            {
-                if (_textoBusqueda != value)
-                {
-                    _textoBusqueda = value;
-                    OnPropertyChanged();
-
-                    FiltrarClientes(); // 🔍 Pero ahora solo actúa si hay texto real
-                }
-            }
+            _clienteSeleccionado = value;
+            OnPropertyChanged();
         }
+    }
 
-
-        public Paginador<ClienteModel> PaginadorClientes { get; private set; }
-
-        public ICommand NavigateToClientPanelCommand { get; }
-
-        private ClienteModel _clienteSeleccionado;
-        public ClienteModel ClienteSeleccionado
+    private bool _mostrarFiltros;
+    public bool MostrarFiltros
+    {
+        get => _mostrarFiltros;
+        set
         {
-            get => _clienteSeleccionado;
-            set
-            {
-                _clienteSeleccionado = value;
-                OnPropertyChanged();
-            }
+            _mostrarFiltros = value;
+            OnPropertyChanged();
         }
+    }
 
-        public ClientViewModel(NavigationService navigationService, ApiService apiService)
+    private bool _soloConNombreComercial;
+    public bool SoloConNombreComercial
+    {
+        get => _soloConNombreComercial;
+        set
         {
-            _navigationService = navigationService;
-            _apiService = apiService;
-
-            NavigateToClientPanelCommand = new RelayCommand<object>(NavigateToClientPanel);
-            Init().GetAwaiter();
+            _soloConNombreComercial = value;
+            OnPropertyChanged();
+            FiltrarClientes(); // 🌀 Aplicar el filtro cuando se cambia
         }
+    }
 
-        private void NavigateToClientPanel(object parameter)
+    public ICommand ToggleFiltrosCommand { get; }
+
+    public ClientViewModel(NavigationService navigationService, ApiService apiService)
+    {
+        _navigationService = navigationService;
+        _apiService = apiService;
+
+        NavigateToClientPanelCommand = new RelayCommand<object>(NavigateToClientPanel);
+        ToggleFiltrosCommand = new RelayCommand(_ => MostrarFiltros = !MostrarFiltros);
+        Init().GetAwaiter();
+    }
+
+    private void NavigateToClientPanel(object parameter)
+    {
+        _navigationService.NavigateTo<ClientPanelView>(parameter);
+    }
+
+    private async Task Init()
+    {
+        var clientes = await GetData();
+        PaginadorClientes = new Paginador<ClienteModel>(clientes, 25);
+        OnPropertyChanged(nameof(PaginadorClientes));
+        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados)); // 🔁 Refresca DataGrid al iniciar
+    }
+
+    private void FiltrarClientes()
+    {
+        if (PaginadorClientes == null || PaginadorClientes.TodosLosItemsOriginales == null)
+            return;
+
+        // Obtener el texto de búsqueda
+        var texto = TextoBusqueda?.Trim();
+
+        // Empezamos con todos los clientes
+        var filtrados = PaginadorClientes.TodosLosItemsOriginales.AsEnumerable();
+
+        // Si hay texto de búsqueda, filtramos por eso
+        if (!string.IsNullOrEmpty(texto))
         {
-            _navigationService.NavigateTo<ClientPanelView>(parameter);
-        }
-
-        private async Task Init()
-        {
-            var clientes = await GetData();
-            PaginadorClientes = new Paginador<ClienteModel>(clientes, 25);
-            OnPropertyChanged(nameof(PaginadorClientes));
-            OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados)); // 🔁 Refresca DataGrid al iniciar
-        }
-
-        private void FiltrarClientes()
-        {
-            if (PaginadorClientes == null || PaginadorClientes.TodosLosItemsOriginales == null)
-                return;
-
-            var texto = TextoBusqueda?.Trim();
-
-            // 🚫 Si no hay texto real, no hacer absolutamente nada
-            if (string.IsNullOrEmpty(texto))
-                return;
-
             texto = texto.ToLower();
-
-            var filtrados = PaginadorClientes.TodosLosItemsOriginales.Where(c =>
+            filtrados = filtrados.Where(c =>
                 (!string.IsNullOrEmpty(c.NombreComercial) && c.NombreComercial.ToLower().Contains(texto)) ||
                 (!string.IsNullOrEmpty(c.NombreFiscal) && c.NombreFiscal.ToLower().Contains(texto)) ||
-                (!string.IsNullOrEmpty(c.NIF) && c.NIF.ToLower().Contains(texto)));
-
-            PaginadorClientes.RefrescarCon(filtrados);
-
-            OnPropertyChanged(nameof(PaginadorClientes));
-            OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+                (!string.IsNullOrEmpty(c.NIF) && c.NIF.ToLower().Contains(texto))
+            );
         }
-        public void ResetClientes()
+
+        // Si el filtro "Solo con Nombre Comercial" está activado, solo mostrar aquellos clientes con nombre comercial
+        if (SoloConNombreComercial)
         {
-            PaginadorClientes.Reset();
-            OnPropertyChanged(nameof(PaginadorClientes));
-            OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+            filtrados = filtrados.Where(c => !string.IsNullOrEmpty(c.NombreComercial));
         }
 
-
-        private async Task<ObservableCollection<ClienteModel>> GetData()
+        // Si no hay texto ni filtros aplicados, restauramos la lista completa de clientes
+        if (string.IsNullOrEmpty(texto) && !SoloConNombreComercial)
         {
-            try
-            {
-                var result = await _apiService.RequestAsync("GET", "clientes", "");
-                var itemsList = JsonSerializer.Deserialize<ObservableCollection<ClienteModel>>(result.datos);
-                return itemsList ?? new ObservableCollection<ClienteModel>();
-            }
-            catch (Exception)
-            {
-                return new ObservableCollection<ClienteModel>();
-            }
+            ResetClientes(); // Restaurar todos los clientes si no hay texto ni filtro
+            return;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        // Aplicar los filtros al paginador
+        PaginadorClientes.RefrescarCon(filtrados);
+
+        OnPropertyChanged(nameof(PaginadorClientes));
+        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
     }
+
+
+    public void ResetClientes()
+    {
+        PaginadorClientes.Reset();
+        OnPropertyChanged(nameof(PaginadorClientes));
+        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+    }
+
+    private async Task<ObservableCollection<ClienteModel>> GetData()
+    {
+        try
+        {
+            var result = await _apiService.RequestAsync("GET", "clientes", "");
+            var itemsList = JsonSerializer.Deserialize<ObservableCollection<ClienteModel>>(result.datos);
+            return itemsList ?? new ObservableCollection<ClienteModel>();
+        }
+        catch (Exception)
+        {
+            return new ObservableCollection<ClienteModel>();
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string name = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

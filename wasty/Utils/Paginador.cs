@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,10 +12,9 @@ namespace wasty.Utils
     {
         private int _paginaActual = 1;
         private readonly int _itemsPorPagina;
-        private readonly ObservableCollection<T> _todosLosItems;
+        private List<T> _todosLosItems;
 
         public ObservableCollection<T> ItemsPaginados { get; } = new();
-
         public ObservableCollection<T> TodosLosItemsOriginales { get; private set; }
         public ObservableCollection<T> ItemsOriginales { get; set; }
 
@@ -39,20 +39,14 @@ namespace wasty.Utils
         public ICommand SiguienteCommand { get; }
         public ICommand AnteriorCommand { get; }
 
-        public bool MostrarBotonAnterior
-        {
-            get => PaginaActual > 1;
-        }
+        public bool MostrarBotonAnterior => PaginaActual > 1;
 
-        public bool MostrarBotonSiguiente
-        {
-            get => PaginaActual < TotalPaginas;
-        }
+        public bool MostrarBotonSiguiente => PaginaActual < TotalPaginas;
 
         public Paginador(IEnumerable<T> items, int itemsPorPagina = 25)
         {
             _itemsPorPagina = itemsPorPagina;
-            _todosLosItems = new ObservableCollection<T>(items);
+            _todosLosItems = items.ToList(); // Convertimos a lista para mayor control
             TodosLosItemsOriginales = new ObservableCollection<T>(_todosLosItems);
             ItemsOriginales = new ObservableCollection<T>(_todosLosItems);
 
@@ -68,7 +62,8 @@ namespace wasty.Utils
 
             var items = _todosLosItems
                 .Skip((_paginaActual - 1) * _itemsPorPagina)
-                .Take(_itemsPorPagina);
+                .Take(_itemsPorPagina)
+                .ToList();
 
             foreach (var item in items)
                 ItemsPaginados.Add(item);
@@ -80,31 +75,31 @@ namespace wasty.Utils
             OnPropertyChanged(nameof(MostrarBotonSiguiente));
         }
 
+        private void ActualizarTotalPaginas()
+        {
+            // Ahora recalculamos TotalPaginas correctamente al cambiar los elementos
+            OnPropertyChanged(nameof(TotalPaginas));
+        }
+
         public void RefrescarCon(IEnumerable<T> nuevosItems)
         {
-            _todosLosItems.Clear();
-            foreach (var item in nuevosItems)
-                _todosLosItems.Add(item);
-
-            PaginaActual = 1;
+            if (nuevosItems == null) throw new ArgumentNullException(nameof(nuevosItems));
+            _todosLosItems = nuevosItems.ToList();
+            ActualizarTotalPaginas();
+            PaginaActual = 1; // Si los elementos cambian, resetear la página
             ActualizarItemsPaginados();
         }
 
         public void Reset()
         {
-            _todosLosItems.Clear();
-            foreach (var item in TodosLosItemsOriginales)
-                _todosLosItems.Add(item);
-
-            // 🔁 Restauramos también la referencia original
+            // Restauramos la lista original de los elementos
+            _todosLosItems = TodosLosItemsOriginales.ToList();
             ItemsOriginales = new ObservableCollection<T>(TodosLosItemsOriginales);
 
-            // 🔒 Reiniciamos página y actualizamos correctamente
+            // Reiniciamos la página y actualizamos la vista
             PaginaActual = 1;
             ActualizarItemsPaginados();
         }
-
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string nombre) =>
