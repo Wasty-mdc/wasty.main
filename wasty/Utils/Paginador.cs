@@ -10,8 +10,22 @@ namespace wasty.Utils
     public class Paginador<T> : INotifyPropertyChanged
     {
         private int _paginaActual = 1;
-        private readonly int _itemsPorPagina;
+        private int _itemsPorPagina;
         private readonly ObservableCollection<T> _todosLosItems;
+        public int ItemsPorPagina
+        {
+            get => _itemsPorPagina;
+            set
+            {
+                if (value > 0 && value != _itemsPorPagina)
+                {
+                    _itemsPorPagina = value;
+                    PaginaActual = 1; // Opcional: volver a la primera página
+                    ActualizarItemsPaginados();
+                    OnPropertyChanged(nameof(ItemsPorPagina));
+                }
+            }
+        }
 
         public ObservableCollection<T> ItemsPaginados { get; } = new();
 

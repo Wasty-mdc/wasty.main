@@ -9,7 +9,9 @@
              mc:Ignorable="d"
              Height="Auto"
              Width="Auto"
-             Background="#4CECEAE8" >
+             Background="#4CECEAE8"
+             Loaded="ClientView_Loaded"
+             SizeChanged="ClientView_SizeChanged">
 
     <UserControl.Resources>
         <ResourceDictionary>

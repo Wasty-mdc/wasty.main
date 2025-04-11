@@ -33,6 +33,30 @@ namespace wasty.Views
             }
         }
 
+        private void ClientView_Loaded(object sender, RoutedEventArgs e)
+        {
+            AjustarFilasDataGrid();
+        }
+
+
+        private void AjustarFilasDataGrid()
+        {
+            if (DataContext is ClientViewModel vm)
+            {
+                double alturaDisponible = ActualHeight - 250; // Ajusta según tu layout
+                double altoFila = 35;
+                int filasCalculadas = Math.Max(1, (int)(alturaDisponible / altoFila));
+
+                if (vm.PaginadorClientes != null)
+                    vm.PaginadorClientes.ItemsPorPagina = filasCalculadas;
+            }
+        }
+        private void ClientView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            AjustarFilasDataGrid();
+        }
+
+
         private void Buscador_LostFocus(object sender, RoutedEventArgs e)
         {
             var vm = DataContext as ClientViewModel;
@@ -49,6 +73,7 @@ namespace wasty.Views
         public ClientView()
         {
             InitializeComponent();
+            SizeChanged += ClientView_SizeChanged;
             DataContext = ((App)Application.Current).Services.GetService(typeof(ClientViewModel));
         }
     }
