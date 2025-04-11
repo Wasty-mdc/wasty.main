@@ -27,6 +27,7 @@ namespace wasty.Views
         public ClientPanelView()
         {
             InitializeComponent();
+            Loaded += (s, e) => WindowThemeHelper.ApplyThemeToWindow(this);
             DataContext = ((App)Application.Current).Services.GetService(typeof(ClientPanelViewModel));
         }
 

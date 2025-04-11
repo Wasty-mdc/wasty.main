@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 using wasty.ViewModels;
 
 namespace wasty.Views
@@ -21,6 +12,12 @@ namespace wasty.Views
     /// </summary>
     public partial class ClientView : UserControl
     {
+        public ClientView()
+        {
+            InitializeComponent();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ClientViewModel));
+        }
+
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (DataContext is ClientViewModel vm)
