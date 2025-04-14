@@ -217,33 +217,32 @@
         </Setter>
     </Style>
 
-    <!--___________________________________________________*ICONOS*___________________________________________________-->
-    
-    <!-- Estilo para los botones de la barra de título -->
-    <Style x:Key="TitleBarButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <!--___________________________________________________*BOTONES*___________________________________________________-->
+    <Style TargetType="Button" x:Key="HoverDarkenButton">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    <Grid>
+                        <Border x:Name="Border"
+                            Background="Transparent"
+                            CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <!-- Capa de oscurecimiento -->
+                        <Border x:Name="HoverOverlay"
+                            Background="Black"
+                            Opacity="0"
+                            CornerRadius="8"
+                            IsHitTestVisible="False"/>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#555"/>
+                            <Setter TargetName="HoverOverlay" Property="Opacity" Value="0.1"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#777"/>
+                            <Setter TargetName="HoverOverlay" Property="Opacity" Value="0.2"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -251,10 +250,8 @@
         </Setter>
     </Style>
 
-    <!--___________________________________________________*BOTONES*___________________________________________________-->
-    
     <!-- Estilo para el RegisterButton -->
-    <Style x:Key="RegisterButton" TargetType="Button">
+    <Style x:Key="RegisterButton" TargetType="Button" >
         <Setter Property="Width" Value="250"/>
         <!-- Ahora igual a las cajas de texto -->
         <Setter Property="Height" Value="50"/>
