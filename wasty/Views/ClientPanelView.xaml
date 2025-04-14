@@ -32,42 +32,53 @@
         <DockPanel Grid.Row="0" Background="#0ead69">
             <!-- Panel de Botones-->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Cursor="Hand">
-                <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
+
+                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="5,2,0,2"/>
+
+                <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
                     <Button Style="{StaticResource CrudButtonStyle}">
+                        <StackPanel>
                         <md:PackIcon Kind="AccountBoxPlusOutline" Style="{StaticResource CrudIconStyle}"/>
+                        <TextBlock Text="Crear" Style="{StaticResource CrudTextStyle}"/>
+                        </StackPanel>
                     </Button>
-                    <TextBlock Text="Crear" Style="{StaticResource CrudTextStyle}"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
+                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2"/>
+                
+                <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
                     <Button Style="{StaticResource CrudButtonStyle}">
+                        <StackPanel>
                         <md:PackIcon Kind="AccountBoxEditOutline" Style="{StaticResource CrudIconStyle}"/>
+                        <TextBlock Text="Editar" Style="{StaticResource CrudTextStyle}"/>
+                        </StackPanel>
                     </Button>
-                    <TextBlock Text="Editar" Style="{StaticResource CrudTextStyle}"/>
                 </StackPanel>
+                
+                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2"/>
 
-                <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="4, 5" HorizontalAlignment="Center">
                     <Button Style="{StaticResource CrudButtonStyle}">
+                        <StackPanel>
                         <md:PackIcon Kind="AccountBoxMinusOutline" Style="{StaticResource CrudIconStyle}"/>
-                    </Button>
-                    <TextBlock Text="Desactivar" Style="{StaticResource CrudTextStyle}"/>
+                            <TextBlock Text="Desactivar" Style="{StaticResource CrudTextStyle}"/>
+                        </StackPanel>
+                        </Button>
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource CrudButtonStyle}">
-                        <md:PackIcon Kind="AccountBoxOutline" Style="{StaticResource CrudIconStyle}"/>
-                    </Button>
-                    <TextBlock Text="Detalles" Style="{StaticResource CrudTextStyle}"/>
-                </StackPanel>
+                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2"/>
 
                 <!-- Botón global "Mostrar Todo" -->
-                <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource CrudButtonStyle}"
-                            Command="{Binding ShowAllGroupBoxesCommand}">
+                <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
+                    <Button Style="{StaticResource CrudButtonStyle}" Command="{Binding ShowAllGroupBoxesCommand}">
+                        <StackPanel>
                         <md:PackIcon Kind="Eye" Style="{StaticResource CrudIconStyle}"/>
+                        <TextBlock Text="Mostrar" Style="{StaticResource CrudTextStyle}"/>
+                        </StackPanel>
                     </Button>
-                    <TextBlock Text="Mostrar Todo" Style="{StaticResource CrudTextStyle}"/>
                 </StackPanel>
+
+                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2"/>
             </StackPanel>
 
             <!-- Nombre del Cliente que se está mostrando -->
@@ -76,30 +87,6 @@
                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,0,0,0"/>
             </StackPanel>
 
-            <!-- Barra de búsqueda -->
-            <StackPanel Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Margin="10"
-                Height="40">
-                <Button Style="{StaticResource CrudButtonStyle}">
-                    <md:PackIcon Kind="AccountSearchOutline" 
-                             Style="{StaticResource CrudIconStyle}"
-                             VerticalAlignment="Center" 
-                             Width="30" Height="30"/>
-                </Button>
-                <StackPanel Orientation="Vertical">
-                    <TextBox Width="260" 
-                         Height="30" 
-                         FontSize="16"
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" 
-                         Margin="5"  Foreground="Black"
-                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-                    <ListView ItemsSource="{Binding ClientesFiltrados}"/>
-                </StackPanel>
-            </StackPanel>
         </DockPanel>
 
         <!-- Contenido Principal -->
@@ -126,8 +113,7 @@
                             <TextBlock Text="  Datos Clientes " FontWeight="Bold" VerticalAlignment="Center"/>
                             <Button DockPanel.Dock="Right"
                                     Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                    CommandParameter="DatosClientes"
-                                    Style="{StaticResource HoverDarkenButton}">
+                                    CommandParameter="DatosClientes">
                                 <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                             </Button>
                         </DockPanel>
@@ -171,8 +157,7 @@
                                     <TextBlock Text="  Online" FontWeight="{StaticResource FontW70}" VerticalAlignment="Center"/>
                                     <Button DockPanel.Dock="Right"
                                             Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                            CommandParameter="Online"
-                                            Style="{StaticResource CrudButtonStyle}">
+                                            CommandParameter="Online">
                                         <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                     </Button>
                                 </DockPanel>
@@ -195,8 +180,7 @@
                             <TextBlock Text="  Datos Generales" FontWeight="Bold" VerticalAlignment="Center"/>
                             <Button DockPanel.Dock="Right"
                                     Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                    CommandParameter="DatosGenerales"
-                                    Style="{StaticResource CrudButtonStyle}">
+                                    CommandParameter="DatosGenerales">
                                 <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                             </Button>
                         </DockPanel>
@@ -254,8 +238,7 @@
                                 <TextBlock Text="  Ubicación" FontWeight="Bold" VerticalAlignment="Center"/>
                                 <Button DockPanel.Dock="Right"
                                     Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                    CommandParameter="Ubicacion"
-                                    Style="{StaticResource CrudButtonStyle}">
+                                    CommandParameter="Ubicacion">
                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                 </Button>
                             </DockPanel>
@@ -285,8 +268,7 @@
                                 <TextBlock Text="  Contacto" FontWeight="Bold" VerticalAlignment="Center"/>
                                 <Button DockPanel.Dock="Right"
                                     Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                    CommandParameter="Contacto"
-                                    Style="{StaticResource CrudButtonStyle}">
+                                    CommandParameter="Contacto">
                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                 </Button>
                             </DockPanel>
@@ -338,8 +320,7 @@
                                 <TextBlock Text="  Observaciones " FontWeight="Bold" VerticalAlignment="Center"/>
                                 <Button DockPanel.Dock="Right"
                                     Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                    CommandParameter="Observaciones"
-                                    Style="{StaticResource CrudButtonStyle}">
+                                    CommandParameter="Observaciones">
                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                 </Button>
                             </DockPanel>
@@ -364,8 +345,7 @@
                                 <TextBlock Text="  Datos de Pagos" FontWeight="Bold" VerticalAlignment="Center"/>
                                 <Button DockPanel.Dock="Right"
                                         Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                        CommandParameter="DatosdePagos"
-                                        Style="{StaticResource CrudButtonStyle}">
+                                        CommandParameter="DatosdePagos">
                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                 </Button>
                             </DockPanel>
@@ -435,8 +415,7 @@
                                 <TextBlock Text="  Datos de Precios" FontWeight="Bold" VerticalAlignment="Center"/>
                                 <Button DockPanel.Dock="Right"
                                         Command="{Binding ToggleGroupBoxVisibilityCommand}"
-                                        CommandParameter="DatosdePrecios"
-                                        Style="{StaticResource CrudButtonStyle}">
+                                        CommandParameter="DatosdePrecios">
                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                 </Button>
                             </DockPanel>
@@ -483,7 +462,7 @@
                                     <GroupBox.Header>
                                         <DockPanel>
                                             <TextBlock Text="  N I M A " FontWeight="Bold" VerticalAlignment="Center"/>
-                                            <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="NIMA" Style="{StaticResource CrudButtonStyle}">
+                                            <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="NIMA">
                                                 <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                             </Button>
                                         </DockPanel>
@@ -569,7 +548,7 @@
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="Recogidas" Style="{StaticResource CrudButtonStyle}">
+                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="Recogidas">
                                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                                 </Button>
                                             </DockPanel>
@@ -601,7 +580,7 @@
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Datos de Recogidas" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="DatosRecogidas" Style="{StaticResource CrudButtonStyle}">
+                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="DatosRecogidas">
                                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                                 </Button>
                                             </DockPanel>
@@ -644,7 +623,7 @@
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas No Peligrosas" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="NoPeligrosas" Style="{StaticResource CrudButtonStyle}">
+                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="NoPeligrosas">
                                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                                 </Button>
                                             </DockPanel>
@@ -663,7 +642,7 @@
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas Peligrosas" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="Peligrosas" Style="{StaticResource CrudButtonStyle}">
+                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="Peligrosas">
                                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                                 </Button>
                                             </DockPanel>
@@ -683,7 +662,7 @@
                                         <GroupBox.Header>
                                             <DockPanel>
                                                 <TextBlock Text="  Recogidas Aceite" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="Aceite" Style="{StaticResource CrudButtonStyle}">
+                                                <Button DockPanel.Dock="Right" Command="{Binding ToggleGroupBoxVisibilityCommand}" CommandParameter="Aceite">
                                                     <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                                                 </Button>
                                             </DockPanel>

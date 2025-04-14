@@ -218,7 +218,8 @@
     </Style>
 
     <!--___________________________________________________*BOTONES*___________________________________________________-->
-    <Style TargetType="Button" x:Key="HoverDarkenButton">
+    <Style TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -234,7 +235,7 @@
                         <Border x:Name="HoverOverlay"
                             Background="Black"
                             Opacity="0"
-                            CornerRadius="8"
+                            CornerRadius="2"
                             IsHitTestVisible="False"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -249,6 +250,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 
     <!-- Estilo para el RegisterButton -->
     <Style x:Key="RegisterButton" TargetType="Button" >
@@ -297,12 +299,10 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-    <!-- Estilos para los botones centrales -->
+
+    <!-- Estilo de los Botones Centrales -->
     <Style x:Key="CentralButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -310,21 +310,26 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFFFFF"/>
+                            <Setter TargetName="border" Property="Background" Value="#33FFFFFF"/>
+                            <!-- blanco con opacidad -->
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#F0F0F0"/>
+                            <Setter TargetName="border" Property="Background" Value="#66FFFFFF"/>
+                            <!-- blanco más fuerte -->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 
     <!--___________________________________________________*TEXTBOX*___________________________________________________-->
     
