@@ -44,10 +44,16 @@
                                 HorizontalAlignment="Right"
                                 >
                         <StackPanel Orientation="Vertical" Margin="5" >
-                            <Button Style="{StaticResource CrudButtonStyle}">
-                                <md:PackIcon Kind="Magnify" Style="{StaticResource CrudIconStyle}"/>
-                            </Button>
-                            <TextBlock Text="Buscar" Style="{StaticResource CrudTextStyle}"/>
+                            <TextBox Margin="10"
+                                     Height="35"
+                                     Width="300"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     FontSize="16"
+                                     Padding="5"
+                                     Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Buscar por NIF, Nombre Comercial o Nombre Fiscal"
+                                     LostFocus="Buscador_LostFocus" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="5" >
                             <Button Style="{StaticResource CrudButtonStyle}">
