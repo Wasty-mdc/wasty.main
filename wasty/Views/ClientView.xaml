@@ -7,7 +7,11 @@
              xmlns:local="clr-namespace:wasty.Views"
              xmlns:utils="clr-namespace:wasty.Utils"
              mc:Ignorable="d"
-             Background="#4CECEAE8">
+             Height="Auto"
+             Width="Auto"
+             Background="#4CECEAE8"
+             Loaded="ClientView_Loaded"
+             SizeChanged="ClientView_SizeChanged">
 
     <UserControl.Resources>
         <ResourceDictionary>
