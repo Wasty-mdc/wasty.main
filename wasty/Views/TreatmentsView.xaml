@@ -30,9 +30,10 @@
                     </StackPanel>
             </DockPanel>
 
-            <DataGrid ItemsSource="{Binding PaginadorTratamientos.ItemsPaginados}"
+            <DataGrid ItemsSource="{Binding Tratamientos}"
                    SelectedItem="{Binding ClienteSeleccionado}"
-                   Margin="10">
+                   Margin="10"
+                   AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" />
                     <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" />

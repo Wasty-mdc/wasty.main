@@ -43,12 +43,12 @@ public class MainViewModel : MainModel
 
     private void ShowGestion(object parameter)
     {
-        MessageBox.Show("Gestión seleccionada");
+        MessageBox.Show("Logística todavía está en desarrollo...");
     }
 
     private void ShowFacturacion(object parameter)
     {
-        MessageBox.Show("Facturación seleccionada");
+        MessageBox.Show("Facturación todavía está en desarrollo...");
     }
 
     // Método para navegar a la vista principal
