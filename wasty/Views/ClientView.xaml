@@ -59,7 +59,6 @@
                                      Padding="5"
                                      Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
                                      ToolTip="Buscar por NIF, Nombre Comercial o Nombre Fiscal"
-                                     utils:PlaceholderService.Placeholder="Buscar cliente ..."
                                      LostFocus="Buscador_LostFocus" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="5">
