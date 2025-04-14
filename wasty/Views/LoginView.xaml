@@ -72,7 +72,7 @@
                         Width="50"
                         Height="50"
                         Margin="5"
-                        Cursor="Hand" 
+                        Cursor="Hand"
                         Command="{Binding SkipCommand}">
                     </Button>
                     <Button x:Name="SkipButtonG" Content="Skip G"

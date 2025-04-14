@@ -29,9 +29,14 @@
         </Grid.RowDefinitions>
 
         <!-- Barra superior con botones CRUD -->
-        <DockPanel Grid.Row="0" Background="#0ead69">
+        <Grid Grid.Row="0" Background="#0ead69">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <!-- Panel de Botones-->
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Cursor="Hand">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Cursor="Hand" Grid.Column="0">
 
                 <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="5,2,0,2"/>
 
@@ -82,12 +87,11 @@
             </StackPanel>
 
             <!-- Nombre del Cliente que se está mostrando -->
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
                 <TextBlock Text="{Binding Cliente.NombreFiscal}" Style="{StaticResource TextTitle}" Foreground="White"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,0,0,0"/>
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
-
-        </DockPanel>
+        </Grid>
 
         <!-- Contenido Principal -->
         <Grid Grid.Row="1" Margin="10">
