@@ -127,7 +127,7 @@
                             <Button DockPanel.Dock="Right"
                                     Command="{Binding ToggleGroupBoxVisibilityCommand}"
                                     CommandParameter="DatosClientes"
-                                    Style="{StaticResource CrudButtonStyle}">
+                                    Style="{StaticResource HoverDarkenButton}">
                                 <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
                             </Button>
                         </DockPanel>
