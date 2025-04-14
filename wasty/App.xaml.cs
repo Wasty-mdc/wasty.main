@@ -59,6 +59,7 @@ namespace wasty
             services.AddTransient<ClientPanelViewModel>();
             services.AddTransient<ResiduosViewModel>();
             services.AddTransient<ResiduosPanelViewModel>();
+            services.AddTransient<TreatmentsViewModel>();
 
             services.AddHttpClient<ApiService>(client =>
             {

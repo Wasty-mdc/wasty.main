@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="wasty.Styles.TitleBarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+             Height="32">
+
+    <Border Background="#1C1C1C" MouseLeftButtonDown="Barra_MouseLeftButtonDown"
+            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Logo + nombre -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Margin="10,0,0,0">
+                <TextBlock Text="Wasty" VerticalAlignment="Center" Foreground="White"
+                           FontSize="16" FontWeight="{StaticResource FontW60}" Margin="0,0,10,0"/>
+            </StackPanel>
+
+            <!-- Botones navegación -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
+                <Button Style="{StaticResource MaterialDesignToolButton}" Margin="0,0,4,0" VerticalAlignment="Center">
+                    <md:PackIcon Kind="ArrowLeft" Width="20" Height="20"/>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignToolButton}" VerticalAlignment="Center">
+                    <md:PackIcon Kind="ArrowRight" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
+
+            <!-- Botones de acciones -->
+            <Grid Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="36"/>
+                    <ColumnDefinition Width="36"/>
+                    <ColumnDefinition Width="36"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Minimizar -->
+                <Button x:Name="BtnMinimize" Style="{StaticResource AnimatedWindowButtonStyle}" Grid.Column="0" Click="Minimizar_Click">
+                    <md:PackIcon Kind="WindowMinimize" Width="16" Height="16" Foreground="White"/>
+                </Button>
+
+                <!-- Maximizar -->
+                <Button x:Name="BtnMaximize" Style="{StaticResource AnimatedWindowButtonStyle}" Grid.Column="1" Click="MaximizarRestaurar_Click">
+                    <md:PackIcon x:Name="MaxRestoreIcon" Kind="WindowMaximize" Width="16" Height="16" Foreground="White"/>
+                </Button>
+
+                <!-- Cerrar -->
+                <Button x:Name="BtnClose" Style="{StaticResource AnimatedCloseButtonStyle}" Grid.Column="2" Click="Cerrar_Click">
+                    <md:PackIcon Kind="Close" Width="18" Height="18" Foreground="White"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

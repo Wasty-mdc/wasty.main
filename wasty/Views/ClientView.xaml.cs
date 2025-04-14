@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 using wasty.ViewModels;
 
 namespace wasty.Views
@@ -25,6 +16,46 @@ namespace wasty.Views
         {
             InitializeComponent();
             DataContext = ((App)Application.Current).Services.GetService(typeof(ClientViewModel));
+        }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is ClientViewModel vm)
+            {
+                var selectedItem = vm.ClienteSeleccionado;
+                if (selectedItem != null && vm.NavigateToClientPanelCommand.CanExecute(selectedItem))
+                {
+                    vm.NavigateToClientPanelCommand.Execute(selectedItem);
+                }
+            }
+        }
+
+        private void Buscador_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as ClientViewModel;
+            if (vm == null) return;
+
+            if (string.IsNullOrWhiteSpace(vm.TextoBusqueda))
+            {
+                vm.TextoBusqueda = string.Empty; // Por si hay espacios, los borra
+                vm.ResetClientes();
+            }
+        }
+
+        private void ToggleFiltros_Click(object sender, RoutedEventArgs e)
+        {
+            if (PanelFiltros.Visibility != Visibility.Visible)
+            {
+                PanelFiltros.Visibility = Visibility.Visible;
+                var sb = (Storyboard)Resources["MostrarPanelAnimado"];
+                sb.Begin(PanelFiltros);
+            }
+            else
+            {
+                var sb = (Storyboard)Resources["OcultarPanelAnimado"];
+                sb.Completed += (s, _) => PanelFiltros.Visibility = Visibility.Collapsed;
+                sb.Begin(PanelFiltros);
+            }
         }
     }
 }

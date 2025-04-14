@@ -19,9 +19,13 @@ namespace wasty.Models
         public string LER { get; set; }
         [JsonPropertyName("numeroONU")]
         public string NumeroONU { get; set; }
+        [JsonPropertyName("descripcionADR")]
+        public string DescripcionADR { get; set; }
         [JsonPropertyName("codigoTratamientoR")]
         public string TratamientoR { get; set; }
         [JsonPropertyName("codigoTratamientoD")]
         public string TratamientoD { get; set; }
+        [JsonPropertyName("codigosPeligrosidad")]
+        public string Peligrosidad { get; set; }
     }
 }

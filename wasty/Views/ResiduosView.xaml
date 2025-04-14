@@ -8,52 +8,43 @@
              mc:Ignorable="d"
              Height="Auto"
              Width="Auto"
-             Background="#4CECEAE8" >
+             Background="#4CECEAE8">
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <!-- MergedDictionaries primero -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/tableStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <!-- Conversor -->
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
-
     <Grid Background="{StaticResource MainGradientBackground}">
         <StackPanel>
+
             <!-- Barra superior con botones CRUD -->
             <DockPanel Background="#0ead69">
-                <!-- Panel de Botones-->
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Cursor="Hand">
                     <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource CrudButtonStyle}" Command="{Binding NavigateToResiduosPanelCommand}">
+                        <Button Style="{StaticResource CrudButtonStyle}" Command="{Binding NavigateToResiduosPanelCommand}" CommandParameter="{Binding ResiduoSeleccionado}">
                             <md:PackIcon Kind="DeveloperBoard" Style="{StaticResource CrudIconStyle}"/>
                         </Button>
                         <TextBlock Text="Abrir Panel" Style="{StaticResource CrudTextStyle}"/>
                     </StackPanel>
 
-                    <!-- Nombre del Cliente que se está mostrando -->
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="CLIENTE : METALLS DEL CAMP. SLU." FontSize="30" FontWeight="Bold" Foreground="White"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,0,80,0"/>
+                        <TextBlock Text="RESIDUOS" FontSize="30" FontWeight="Bold" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,20,80,20"/>
                     </StackPanel>
-                    
-                    <!-- Panel de Botones 2 -->
-                    <StackPanel Orientation="Horizontal" Cursor="Hand" 
-                                DockPanel.Dock="Right"
-                                HorizontalAlignment="Right"
-                                >
-                        <StackPanel Orientation="Vertical" Margin="5" >
+
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Vertical" Margin="5">
                             <Button Style="{StaticResource CrudButtonStyle}">
                                 <md:PackIcon Kind="Magnify" Style="{StaticResource CrudIconStyle}"/>
                             </Button>
                             <TextBlock Text="Buscar" Style="{StaticResource CrudTextStyle}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Vertical" Margin="5" >
+                        <StackPanel Orientation="Vertical" Margin="5">
                             <Button Style="{StaticResource CrudButtonStyle}">
                                 <md:PackIcon Kind="FilterMultiple" Style="{StaticResource CrudIconStyle}"/>
                             </Button>
@@ -63,25 +54,50 @@
                 </StackPanel>
             </DockPanel>
 
-            <DataGrid ItemsSource="{Binding Residuos}"
-                            SelectedItem="{Binding ResiduoSeleccionado}"
-                            AutoGenerateColumns="False"
-                            CanUserAddRows="False"
-                            IsReadOnly="True"
-                           >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Código" Binding="{Binding Referencia}" />
-                        <DataGridTextColumn Header="Denominación" Binding="{Binding Denominacion}" />
-                        <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
-                        <DataGridTextColumn Header="TratamientoR" Binding="{Binding TratamientoR}" />
-                        <DataGridTextColumn Header="TratamientoD" Binding="{Binding TratamientoD}" />
-                        <DataGridTextColumn Header="Peligrosidad" Binding="{Binding Peligrosidad}" />
-                        <DataGridTextColumn Header="ONU" Binding="{Binding NumeroONU}" />
-                        <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" /> <!-- Booleano: true(Peligroso) false(No Peligroso)-->
-                        <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
-                        <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
-                    </DataGrid.Columns>
-                </DataGrid>
+            <!-- Tabla con paginación -->
+            <DataGrid ItemsSource="{Binding PaginadorResiduos.ItemsPaginados}"
+                      SelectedItem="{Binding ResiduoSeleccionado, Mode=TwoWay}"
+                      MouseDoubleClick="DataGrid_MouseDoubleClick"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Referencia}" />
+                    <DataGridTextColumn Header="Denominación" Binding="{Binding Denominacion}" />
+                    <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
+                    <DataGridTextColumn Header="TratamientoR" Binding="{Binding TratamientoR}" />
+                    <DataGridTextColumn Header="TratamientoD" Binding="{Binding TratamientoD}" />
+                    <DataGridTextColumn Header="Peligrosidad" Binding="{Binding Peligrosidad}" />
+                    <DataGridTextColumn Header="ONU" Binding="{Binding NumeroONU}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Controles de paginación -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Command="{Binding PaginadorResiduos.AnteriorCommand}" 
+                        Margin="5"
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorResiduos.MostrarBotonAnterior, Converter={StaticResource BoolToVisibility}}">
+                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20"/>
+                </Button>
+
+                <TextBlock Text="{Binding PaginadorResiduos.PaginaActual}" 
+                VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="10,0" />
+
+                <TextBlock Text=" / " VerticalAlignment="Center" FontSize="20"/>
+
+                <TextBlock Text="{Binding PaginadorResiduos.TotalPaginas}" 
+                 VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5,0" />
+
+                <Button Command="{Binding PaginadorResiduos.SiguienteCommand}" 
+                        Margin="5"
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorResiduos.MostrarBotonSiguiente, Converter={StaticResource BoolToVisibility}}">
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20"/>
+                </Button>
             </StackPanel>
-        </Grid>
+
+        </StackPanel>
+    </Grid>
 </UserControl>

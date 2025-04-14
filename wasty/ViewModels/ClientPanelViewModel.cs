@@ -11,14 +11,22 @@ using wasty.Models;
 
 namespace wasty.ViewModels
 {
+    public class Centro
+    {
+        public string NombreCentro { get; set; }
+        // Puedes añadir más propiedades mock si lo necesitas
+    }
     public class ClientPanelViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
         private readonly NavigationService _navigationService;
 
         private string _searchText;
+        private ClienteModel _cliente;
         private ObservableCollection<ClienteModel> _clientes;
         private ObservableCollection<ClienteModel> _clientesFiltrados = new ObservableCollection<ClienteModel>();
+        public ObservableCollection<Centro> Centros { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -28,6 +36,16 @@ namespace wasty.ViewModels
             set
             {
                 if (SetProperty(ref _searchText, value))
+                    FiltrarClientes();
+            }
+        }
+
+        public ClienteModel Cliente
+        {
+            get => _cliente;
+            set
+            {
+                if (SetProperty(ref _cliente, value))
                     FiltrarClientes();
             }
         }
@@ -85,6 +103,19 @@ namespace wasty.ViewModels
             ShowAllGroupBoxesCommand = new RelayCommand<string>(ShowAllGroupBoxes);
 
             InicializarVisibilidad();
+
+            // MOCKUP DE CENTROS
+            Centros = new ObservableCollection<Centro>
+    {
+        new Centro { NombreCentro = "Principal" },
+        new Centro { NombreCentro = "Centro Secundario 1" },
+        new Centro { NombreCentro = "Centro Secundario 2" }
+    };
+        }
+
+        public async Task Init(ClienteModel cliente)
+        {
+            Cliente = cliente;
         }
 
         private void InicializarVisibilidad()
@@ -158,6 +189,7 @@ namespace wasty.ViewModels
             }
         }
 
+
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (!Equals(storage, value))
@@ -169,7 +201,9 @@ namespace wasty.ViewModels
             return false;
         }
 
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
 }

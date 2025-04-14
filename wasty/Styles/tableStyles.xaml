@@ -22,12 +22,14 @@
         <Setter Property="AlternatingRowBackground" Value="#D9D9D9"/>
         <Setter Property="RowBackground" Value="White"/>
         <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="ColumnWidth" Value="*"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="EnableRowVirtualization" Value="True"/>
     </Style>
 
     <!-- Estilo para las filas -->
@@ -41,13 +43,26 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Style.Triggers>
+            <!-- Hover -->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#DCEFFF"/>
+                <Setter Property="Background" Value="#f0f0f0"/>
             </Trigger>
+
+            <!-- Selección -->
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#D7D7D7"/>
-                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="#dcdcdc"/>
+                <Setter Property="Foreground" Value="#111"/>
             </Trigger>
+
+            <!-- Fila impar -->
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}" Value="0">
+                <Setter Property="Background" Value="White"/>
+            </DataTrigger>
+
+            <!-- Fila par -->
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}" Value="1">
+                <Setter Property="Background" Value="#FAFAFA"/>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
     
