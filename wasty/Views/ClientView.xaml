@@ -7,11 +7,7 @@
              xmlns:local="clr-namespace:wasty.Views"
              xmlns:utils="clr-namespace:wasty.Utils"
              mc:Ignorable="d"
-             Height="Auto"
-             Width="Auto"
-             Background="#4CECEAE8"
-             Loaded="ClientView_Loaded"
-             SizeChanged="ClientView_SizeChanged">
+             Background="#4CECEAE8">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -60,7 +56,7 @@
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center"
                                      FontSize="16"
-                                     Padding="5"
+                                     Padding="10"
                                      Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
                                      ToolTip="Buscar por NIF, Nombre Comercial o Nombre Fiscal"
                                      LostFocus="Buscador_LostFocus" />
@@ -84,8 +80,8 @@
                       IsReadOnly="True"
                       Margin="10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
                     <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
+                    <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
                     <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}" />
                     <DataGridTextColumn Header="Identificador" Binding="{Binding Identificador}" />
                     <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" />
