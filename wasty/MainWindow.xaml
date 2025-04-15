@@ -29,6 +29,10 @@
                 <ResourceDictionary Source="Styles/mainStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+
+            <ObjectDataProvider x:Key="TitleBarControlProvider" 
+                    ObjectType="{x:Type style:TitleBarControlFactory}" 
+                    MethodName="Create" />
         </ResourceDictionary>
     </Window.Resources>
     <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}" shell:WindowChrome.IsHitTestVisibleInChrome="True">
@@ -38,7 +42,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <style:TitleBarControl Grid.Row="0"/>
+            <!--<style:TitleBarControl Grid.Row="0"/>-->
+            <ContentControl Content="{Binding Source={StaticResource TitleBarControlProvider}}" />
 
             <!-- Contenido de la app -->
             <Grid Grid.Row="1">

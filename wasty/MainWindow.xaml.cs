@@ -8,6 +8,8 @@ using System.Windows.Media;
 using wasty.ViewModels;
 using System.Windows.Shell;
 using System.Windows.Threading;
+using wasty.Styles;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace wasty
 {
