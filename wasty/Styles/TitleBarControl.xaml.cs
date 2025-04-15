@@ -6,11 +6,15 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using wasty;
+using wasty.Services;
+using wasty.Styles;
 
 namespace wasty.Styles
 {
     public partial class TitleBarControl : UserControl
     {
+        private readonly NavigationService _navigationService;
         private IntPtr _hwnd;
         private HwndSource _hwndSource;
         private Rect _btnMaximizeBoundsScreen = Rect.Empty;
@@ -42,8 +46,9 @@ namespace wasty.Styles
         [DllImport("user32.dll", SetLastError = true)] static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO lpmi);
         [DllImport("user32.dll")] static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-        public TitleBarControl()
+        public TitleBarControl(NavigationService navigationService)
         {
+            _navigationService = navigationService;
             InitializeComponent();
             Loaded += (s, e) =>
             {
@@ -109,6 +114,7 @@ namespace wasty.Styles
         }
 
         private void Cerrar_Click(object sender, RoutedEventArgs e) => Window.GetWindow(this).Close();
+        private void Back_Click(object sender, RoutedEventArgs e) => _navigationService.GoBack();
 
         private void Barra_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -162,6 +168,15 @@ namespace wasty.Styles
                 }
             }
             return IntPtr.Zero;
+        }
+    }
+
+    public static class TitleBarControlFactory
+    {
+        public static TitleBarControl Create()
+        {
+            var navigationService = ((App)Application.Current).Services.GetService(typeof(NavigationService)) as NavigationService;
+            return new TitleBarControl(navigationService);
         }
     }
 }
