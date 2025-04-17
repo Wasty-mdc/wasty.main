@@ -32,6 +32,8 @@
 
             <DataGrid ItemsSource="{Binding Tratamientos}"
                    SelectedItem="{Binding ClienteSeleccionado}"
+                   ScrollViewer.CanContentScroll="True"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                    Margin="10"
                    AutoGenerateColumns="False">
                 <DataGrid.Columns>
