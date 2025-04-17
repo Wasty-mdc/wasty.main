@@ -7,73 +7,111 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
 
-    <!-- Estilos para DataGrid-->
+
+    <!-- Estilo para DataGrid -->
     <Style TargetType="DataGrid">
         <Setter Property="AutoGenerateColumns" Value="True"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Poppins" />
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserDeleteRows" Value="False"/>
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="RowHeight" Value="24"/>
         <Setter Property="ColumnHeaderHeight" Value="40"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="GridLinesVisibility" Value="All"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="Black"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
         <Setter Property="AlternationCount" Value="2"/>
-        <Setter Property="AlternatingRowBackground" Value="#D9D9D9"/>
-        <Setter Property="RowBackground" Value="White"/>
-        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="ColumnWidth" Value="*"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="EnableRowVirtualization" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
     </Style>
 
     <!-- Estilo para las filas -->
     <Style TargetType="DataGridRow">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Style.Triggers>
-            <!-- Hover -->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#f0f0f0"/>
-            </Trigger>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridRow">
+                    <Border x:Name="RowBorder"
+                            CornerRadius="4"
+                            Margin="4,2"
+                            SnapsToDevicePixels="True">
+                        <DataGridCellsPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Fila seleccionada -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="RowBorder" Property="Background" Value="#FFE0E0E0"/>
+                            <Setter Property="Foreground" Value="#111"/>
+                        </Trigger>
 
-            <!-- Selección -->
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#dcdcdc"/>
-                <Setter Property="Foreground" Value="#111"/>
-            </Trigger>
+                        <!-- Hover -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="RowBorder" Property="Background" Value="#FFF0F0F0"/>
+                        </Trigger>
 
-            <!-- Fila impar -->
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}" Value="0">
-                <Setter Property="Background" Value="White"/>
-            </DataTrigger>
-
-            <!-- Fila par -->
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}" Value="1">
-                <Setter Property="Background" Value="#FAFAFA"/>
-            </DataTrigger>
-        </Style.Triggers>
+                        <!-- Alternancia manual -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}" Value="0">
+                            <Setter TargetName="RowBorder" Property="Background" Value="#FFFFFF"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}" Value="1">
+                            <Setter TargetName="RowBorder" Property="Background" Value="#EBEBEB"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    
+
     <!-- Estilo para encabezados -->
     <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="#0EAD69"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="BorderBrush" Value="#DCEFFF"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
     </Style>
+
+    <!-- ScrollBar moderno -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid Background="Transparent">
+                        <Track Name="PART_Track">
+                            <Track.Thumb>
+                                <Thumb Background="Transparent">
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Border Background="#efefef" CornerRadius="2" Margin="0,2,0,2"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
