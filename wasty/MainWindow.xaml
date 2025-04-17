@@ -53,7 +53,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Navegación lateral -->
-                <Grid Grid.Column="0" Background="{StaticResource NavColor}" Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
+                <Grid Grid.Column="0" Background="{StaticResource NavColor}" 
+                      Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
                     <StackPanel Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left">
                         <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
                             <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
@@ -66,19 +67,15 @@
                         </Button>
                     </StackPanel>
 
-                    <StackPanel Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
-                            <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
-                        </Button>
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Perfil">
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
                             <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
+                        <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}" Margin="0,0,0,20">
                             <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White"/>
                         </Button>
                     </StackPanel>
                 </Grid>
-
                 <!-- Vista dinámica -->
                 <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}">
                     <ContentControl Content="{Binding CurrentView}" Name="CurrentView" Background="Transparent"/>

@@ -105,7 +105,8 @@
                         <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}"  />
                         <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
                         <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
-                        <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" />
+                        <DataGridTextColumn Header="Teléfono 1" Binding="{Binding Telefono1}" />
+                        <DataGridTextColumn Header="Teléfono 2" Binding="{Binding Telefono2}" />
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                         <DataGridTemplateColumn Header="Activo">
                             <DataGridTemplateColumn.CellTemplate>
