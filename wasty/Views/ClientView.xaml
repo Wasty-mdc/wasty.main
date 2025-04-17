@@ -97,18 +97,25 @@
                       MouseDoubleClick="DataGrid_MouseDoubleClick"
                       ScrollViewer.CanContentScroll="True"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       IsReadOnly="True"
                       Margin="4">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}" />
+                        <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" />
+                        <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}"  />
                         <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
                         <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
-                        <DataGridTextColumn Header="Identificador" Binding="{Binding Identificador}" />
                         <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" />
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                        <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
+                        <DataGridTemplateColumn Header="Activo">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>
+                                        <md:PackIcon Kind="CheckboxBlankCircle" Foreground="#29bf12"></md:PackIcon>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
