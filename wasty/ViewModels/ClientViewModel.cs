@@ -99,7 +99,7 @@ public class ClientViewModel : INotifyPropertyChanged
     private async Task Init()
     {
         var clientes = await GetData();
-        PaginadorClientes = new Paginador<ClienteModel>(clientes, 28);
+        PaginadorClientes = new Paginador<ClienteModel>(clientes, 23);
         OnPropertyChanged(nameof(PaginadorClientes));
         OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
     }

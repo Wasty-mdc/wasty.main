@@ -48,7 +48,9 @@
                     <DataGridTemplateColumn Header="Activo">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding Activo}" />
+                                <Button>
+                                    <md:PackIcon Kind="CheckboxBlankCircle" Foreground="#29bf12"></md:PackIcon>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
