@@ -75,11 +75,23 @@ public class ClientViewModel : INotifyPropertyChanged
         {
             _soloConNombreComercial = value;
             OnPropertyChanged();
-            FiltrarClientes(); // 🌀 Aplicar el filtro cuando se cambia
+            FiltrarClientes(); 
         }
     }
 
     public ICommand ToggleFiltrosCommand { get; }
+
+    private bool _isLoadingClientes;
+    public bool IsLoadingClientes
+    {
+        get => _isLoadingClientes;
+        set
+        {
+            _isLoadingClientes = value;
+            OnPropertyChanged();
+        }
+    }
+
 
     public ClientViewModel(NavigationService navigationService, ApiService apiService)
     {
@@ -98,11 +110,17 @@ public class ClientViewModel : INotifyPropertyChanged
 
     private async Task Init()
     {
+        IsLoadingClientes = true;
+
         var clientes = await GetData();
         PaginadorClientes = new Paginador<ClienteModel>(clientes, 23);
+
         OnPropertyChanged(nameof(PaginadorClientes));
         OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+
+        IsLoadingClientes = false;
     }
+
 
     private void FiltrarClientes()
     {
