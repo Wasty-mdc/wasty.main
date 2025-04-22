@@ -66,6 +66,16 @@
 
                 <!-- Panel derecho -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2" Cursor="Hand">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Button Style="{StaticResource CrudButtonStyle}"
+                                Click="ToggleFiltros_Click"
+                                Height="60" Width="60">
+                            <StackPanel>
+                                <md:PackIcon Kind="FilterMultiple" Style="{StaticResource CrudIconStyle}" />
+                                <TextBlock Text="Filtros" Style="{StaticResource CrudTextStyle}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="5" VerticalAlignment="Center">
                         <TextBox Margin="10"
                                  Height="35"
@@ -77,16 +87,6 @@
                                  Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
                                  ToolTip="Buscar por NIF, Nombre Comercial o Nombre Fiscal"
                                  LostFocus="Buscador_LostFocus" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="5">
-                        <Button Style="{StaticResource CrudButtonStyle}"
-                                Click="ToggleFiltros_Click"
-                                Height="60" Width="60">
-                            <StackPanel>
-                                <md:PackIcon Kind="FilterMultiple" Style="{StaticResource CrudIconStyle}" />
-                                <TextBlock Text="Filtros" Style="{StaticResource CrudTextStyle}" />
-                            </StackPanel>
-                        </Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>
