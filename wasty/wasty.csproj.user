@@ -19,6 +19,9 @@
     <Compile Update="Views\ClientPanelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\RentingView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ResiduosPanelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
