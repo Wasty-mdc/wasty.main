@@ -80,6 +80,8 @@
             <!-- Tabla con paginación -->
             <DataGrid ItemsSource="{Binding PaginadorResiduos.ItemsPaginados}"
                       SelectedItem="{Binding ResiduoSeleccionado, Mode=TwoWay}"
+                      ScrollViewer.CanContentScroll="True"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"    
                       MouseDoubleClick="DataGrid_MouseDoubleClick"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"

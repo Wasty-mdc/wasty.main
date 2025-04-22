@@ -99,9 +99,9 @@ public class ClientViewModel : INotifyPropertyChanged
     private async Task Init()
     {
         var clientes = await GetData();
-        PaginadorClientes = new Paginador<ClienteModel>(clientes, 25);
+        PaginadorClientes = new Paginador<ClienteModel>(clientes, 23);
         OnPropertyChanged(nameof(PaginadorClientes));
-        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados)); // 🔁 Refresca DataGrid al iniciar
+        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
     }
 
     private void FiltrarClientes()

@@ -92,23 +92,34 @@
             </Grid>
 
             <!-- Tabla de clientes -->
-            <DataGrid ItemsSource="{Binding PaginadorClientes.ItemsPaginados}"
+                <DataGrid ItemsSource="{Binding PaginadorClientes.ItemsPaginados}"
                       SelectedItem="{Binding ClienteSeleccionado}"
                       MouseDoubleClick="DataGrid_MouseDoubleClick"
-                      AutoGenerateColumns="False"
+                      ScrollViewer.CanContentScroll="True"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                       CanUserAddRows="False"
                       IsReadOnly="True"
-                      Margin="10">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
-                    <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
-                    <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}" />
-                    <DataGridTextColumn Header="Identificador" Binding="{Binding Identificador}" />
-                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                    <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Activo}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                      Margin="4">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" />
+                        <DataGridTextColumn Header="Nombre Fiscal" Binding="{Binding NombreFiscal}"  />
+                        <DataGridTextColumn Header="Nombre Comercial" Binding="{Binding NombreComercial}" />
+                        <DataGridTextColumn Header="NIF" Binding="{Binding NIF}" />
+                        <DataGridTextColumn Header="Teléfono 1" Binding="{Binding Telefono1}" />
+                        <DataGridTextColumn Header="Teléfono 2" Binding="{Binding Telefono2}" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                        <DataGridTemplateColumn Header="Activo">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>
+                                        <md:PackIcon Kind="CheckboxBlankCircle" Foreground="#29bf12"></md:PackIcon>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
 
             <!-- Controles de paginación -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
