@@ -166,5 +166,7 @@
                 <!-- Más filtros aquí -->
             </StackPanel>
         </Border>
+        <!-- ⏳ Loading overlay -->
+        <utils:LoadingOverlay IsLoading="{Binding IsLoadingClientes}" />
     </Grid>
 </UserControl>

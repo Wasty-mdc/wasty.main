@@ -10,6 +10,9 @@
     <Compile Update="Styles\TitleBarControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Utils\LoadingOverlay.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ClientView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
