@@ -12,8 +12,12 @@ namespace wasty.Models
         public string NombreFiscal { get; set; }
         [JsonPropertyName("nif")]
         public string NIF { get; set; }
-        [JsonPropertyName("telefono")]
-        public string Telefono { get; set; }
+        [JsonPropertyName("telefonoPrincipal")]
+        public string Telefono1 { get; set; }
+        [JsonPropertyName("telefonoSecundario")]
+        public string Telefono2 { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
         [JsonPropertyName("nima")]
         public string Nima { get; set; }
         public string Estado { get; set; } = "Activo";
