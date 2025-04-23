@@ -51,7 +51,7 @@ namespace wasty.ViewModels
         private async Task Init()
         {
             var residuos = await GetData();
-            PaginadorResiduos = new Paginador<ResiduoModel>(residuos, 25); // Puedes ajustar items por página
+            PaginadorResiduos = new Paginador<ResiduoModel>(residuos, 23); // Puedes ajustar items por página
             OnPropertyChanged(nameof(PaginadorResiduos));
         }
 

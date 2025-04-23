@@ -280,11 +280,11 @@
 
                         <StackPanel Margin="2">
                             <TextBlock Text="Teléfono:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Cliente.Telefono1}"/>
                             <TextBlock Text="Teléfono Móvil:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Cliente.Telefono2}"/>
                             <TextBlock Text="Email:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Cliente.Email}"/>
 
                             <!-- Subgrupo Comercial -->
                             <GroupBox FontWeight="Bold"
