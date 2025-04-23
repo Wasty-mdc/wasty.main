@@ -452,7 +452,7 @@
 
             <!-- CENTROS -->
             <ScrollViewer Grid.Column="2"  Background="#4CECEAE8">
-                <TabControl ItemsSource="{Binding Centros}"  Background="#4CECEAE8" >
+                <TabControl ItemsSource="{Binding Cliente.Centros}"  Background="#4CECEAE8" >
                     <TabControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NombreCentro}" Cursor="Hand"/>
