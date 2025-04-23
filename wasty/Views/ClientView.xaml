@@ -83,7 +83,7 @@
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Center"
                                  FontSize="16"
-                                 Padding="10"
+                                 Padding="5"
                                  Text="{Binding TextoBusqueda, UpdateSourceTrigger=PropertyChanged}"
                                  ToolTip="Buscar por NIF, Nombre Comercial o Nombre Fiscal"
                                  LostFocus="Buscador_LostFocus" />
