@@ -18,8 +18,8 @@ namespace wasty.Models
         public string Telefono2 { get; set; }
         [JsonPropertyName("email")]
         public string Email { get; set; }
-        [JsonPropertyName("nima")]
-        public string Nima { get; set; }
         public string Estado { get; set; } = "Activo";
+        [JsonPropertyName("centros")]
+        public List<CentroModel> Centros { get; set; }
     }
 }

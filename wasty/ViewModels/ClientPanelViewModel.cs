@@ -8,6 +8,7 @@ using System.Windows.Input;
 using wasty.Services;
 using wasty.Views;
 using wasty.Models;
+using System.Text.Json;
 
 namespace wasty.ViewModels
 {
@@ -103,19 +104,26 @@ namespace wasty.ViewModels
             ShowAllGroupBoxesCommand = new RelayCommand<string>(ShowAllGroupBoxes);
 
             InicializarVisibilidad();
-
-            // MOCKUP DE CENTROS
-            Centros = new ObservableCollection<Centro>
-    {
-        new Centro { NombreCentro = "Principal" },
-        new Centro { NombreCentro = "Centro Secundario 1" },
-        new Centro { NombreCentro = "Centro Secundario 2" }
-    };
         }
 
-        public async Task Init(ClienteModel cliente)
+        public async Task Init(int idCliente)
         {
-            Cliente = cliente;
+            Cliente = await GetData(idCliente);
+            //Cliente = cliente;
+        }
+
+        private async Task<ClienteModel> GetData(int idCliente)
+        {
+            try
+            {
+                var result = await _apiService.RequestAsync("GET", $"clientes/{idCliente}", "");
+                var itemsList = JsonSerializer.Deserialize<ClienteModel>(result.datos);
+                return itemsList ?? new ObservableCollection<ClienteModel>();
+            }
+            catch (Exception)
+            {
+                return new ClienteModel();
+            }
         }
 
         private void InicializarVisibilidad()
