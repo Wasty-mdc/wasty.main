@@ -41,16 +41,34 @@
 
                 <!-- Botón de panel izquierdo -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource CrudButtonStyle}" 
+                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                        
+                        <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="5,2,2,2"/>
+
+                        <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource CrudButtonStyle}" 
                                 Command="{Binding NavigateToClientPanelCommand}" 
                                 CommandParameter="{Binding ClienteSeleccionado}"
                                 Height="60" Width="60">
-                            <StackPanel>
-                                <md:PackIcon Kind="DeveloperBoard" Style="{StaticResource CrudIconStyle}"/>
-                                <TextBlock Text="Abrir Panel" Style="{StaticResource CrudTextStyle}" />
-                            </StackPanel>
-                        </Button>
+                                <StackPanel>
+                                    <md:PackIcon Kind="DeveloperBoard" Style="{StaticResource CrudIconStyle}"/>
+                                    <TextBlock Text="Abrir Panel" Style="{StaticResource CrudTextStyle}" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2,2,2,2"/>
+
+                        <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource CrudButtonStyle}" Height="60" Width="60">
+                                <StackPanel>
+                                    <md:PackIcon Kind="AccountBoxPlusOutline" Style="{StaticResource CrudIconStyle}"/>
+                                    <TextBlock Text="Crear" Style="{StaticResource CrudTextStyle}"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2,2,2,2"/>
                     </StackPanel>
                 </StackPanel>
 

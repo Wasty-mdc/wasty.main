@@ -38,17 +38,6 @@
             <!-- Panel de Botones-->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Cursor="Hand" Grid.Column="0">
 
-                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="5,2,0,2"/>
-
-                <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource CrudButtonStyle}">
-                        <StackPanel>
-                        <md:PackIcon Kind="AccountBoxPlusOutline" Style="{StaticResource CrudIconStyle}"/>
-                        <TextBlock Text="Crear" Style="{StaticResource CrudTextStyle}"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-
                 <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2"/>
                 
                 <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
@@ -452,7 +441,7 @@
 
             <!-- CENTROS -->
             <ScrollViewer Grid.Column="2"  Background="#4CECEAE8">
-                <TabControl ItemsSource="{Binding Cliente.Centros}"  Background="#4CECEAE8" >
+                <TabControl SelectedIndex="0" ItemsSource="{Binding Cliente.Centros}"  Background="#4CECEAE8" >
                     <TabControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NombreCentro}" Cursor="Hand"/>
