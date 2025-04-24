@@ -27,22 +27,6 @@
                        Foreground="{StaticResource Neutral200}"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                <!-- Campo Nombre con Icono -->
-                <Border Style="{StaticResource RegisterTextBoxBorder}">
-                    <DockPanel>
-                        <md:PackIcon Kind="Account" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryIcon}" 
-                                 Margin="5,0" Cursor="Help"
-                                 HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <md:PackIcon.ToolTip>
-                                <ToolTip Content="Introduce tu Nombre" />
-                            </md:PackIcon.ToolTip>
-                        </md:PackIcon>
-                        <TextBox x:Name="SignupNameTextBox" Style="{StaticResource RegisterTextBox}"
-                             md:HintAssist.Hint="Nombre" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}"/>
-                    </DockPanel>
-                </Border>
-
                 <!-- Campo Usuario con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">
                     <DockPanel>
