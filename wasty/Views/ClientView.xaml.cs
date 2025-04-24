@@ -22,7 +22,7 @@ namespace wasty.Views
         {
             if (DataContext is ClientViewModel vm)
             {
-                var selectedItem = vm.ClienteSeleccionado.Codigo;
+                var selectedItem = vm.ClienteSeleccionado;
                 if (selectedItem != null && vm.NavigateToClientPanelCommand.CanExecute(selectedItem))
                 {
                     vm.NavigateToClientPanelCommand.Execute(selectedItem);
