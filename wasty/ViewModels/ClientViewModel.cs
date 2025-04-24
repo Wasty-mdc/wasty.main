@@ -105,7 +105,8 @@ public class ClientViewModel : INotifyPropertyChanged
 
     private void NavigateToClientPanel(object parameter)
     {
-        _navigationService.NavigateTo<ClientPanelView>(parameter);
+        var selected = (ClienteModel)parameter;
+        _navigationService.NavigateTo<ClientPanelView>(selected.Codigo);
     }
 
     private async Task Init()
