@@ -126,7 +126,7 @@
                         <DataGridTextColumn Header="Teléfono 1" Binding="{Binding Telefono1}" />
                         <DataGridTextColumn Header="Teléfono 2" Binding="{Binding Telefono2}" />
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                        <DataGridTemplateColumn Header="Activo">
+                        <DataGridTemplateColumn Header="Activo" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button>

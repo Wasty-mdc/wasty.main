@@ -58,24 +58,32 @@
                                  PasswordChanged="PasswordBox_PasswordChanged"/>
                     </DockPanel>
                 </Border>
+                <!-- Botones Ingresar y Nuevo Registro -->
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Botón Iniciar Sesión -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Botón Ingresar -->
                     <Button x:Name="RegisterButton" Content="Ingresar"
                             Style="{StaticResource RegisterButton}" 
-                            Command="{Binding LoginCommand}" />
+                            Command="{Binding LoginCommand}" 
+                            Grid.Column="0" />
 
+                    <!-- Botón Nuevo Registro con Icono -->
                     <Button x:Name="NewRegisterButton" 
                             Style="{StaticResource RegisterButton}" 
-                            Command="{Binding RegisterCommand}" Cursor="Hand" Width="32" Height="32" Margin="0,0,0,0" >
+                            Command="{Binding RegisterCommand}" 
+                            Cursor="Hand" Width="32" Height="32"
+                            Grid.Column="1" Margin="0,25,0,0">
                         <md:PackIcon Kind="AccountPlus" Width="24" 
-                                Foreground="{StaticResource PrimaryIcon}" DockPanel.Dock="Left" 
-                                         Height="40" Panel.ZIndex="1" 
-                                         VerticalAlignment="Center" />
-
+                     Foreground="{StaticResource PrimaryIcon}" 
+                     Height="24" VerticalAlignment="Center" />
                     </Button>
-                </StackPanel>
-                
+                </Grid>
+
+
                 <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
                     <Button x:Name="SkipButton" Content="Skip"
                         Width="40"
