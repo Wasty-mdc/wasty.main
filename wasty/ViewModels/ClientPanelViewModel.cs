@@ -12,11 +12,6 @@ using System.Text.Json;
 
 namespace wasty.ViewModels
 {
-    public class Centro
-    {
-        public string NombreCentro { get; set; }
-        // Puedes añadir más propiedades mock si lo necesitas
-    }
     public class ClientPanelViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
@@ -26,10 +21,53 @@ namespace wasty.ViewModels
         private ClienteModel _cliente;
         private ObservableCollection<ClienteModel> _clientes;
         private ObservableCollection<ClienteModel> _clientesFiltrados = new ObservableCollection<ClienteModel>();
-        public ObservableCollection<Centro> Centros { get; set; }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool _isDropdownVisible;
+        public bool IsDropdownVisible
+        {
+            get { return _isDropdownVisible; }
+            set { _isDropdownVisible = value; OnPropertyChanged(); }
+        }
+
+        private string _searchAddress;
+        public string SearchAddress
+        {
+            get { return _searchAddress; }
+            set
+            {
+                _searchAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<LocationModel> _searchAddressResults = new ObservableCollection<LocationModel>();
+        public ObservableCollection<LocationModel> SearchAddressResults
+        {
+            get { return _searchAddressResults; }
+            set
+            {
+                _searchAddressResults = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private LocationModel _selectedAddressResult;
+        public LocationModel SelectedAddressResult
+        {
+            get { return _selectedAddressResult; }
+            set
+            {
+                if (value is not null)
+                {
+                    _selectedAddressResult = value;
+                    SearchAddress = _selectedAddressResult.Address;
+                    IsDropdownVisible = false;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public string SearchText
         {
@@ -89,6 +127,7 @@ namespace wasty.ViewModels
         public ICommand UpdateCommand { get; }
         public ICommand DisableCommand { get; }
         public ICommand LoadClientCommand { get; }
+        public ICommand StartSearchCommand { get; }
 
         public ClientPanelViewModel(ApiService apiService, NavigationService navigationService)
         {
@@ -99,6 +138,7 @@ namespace wasty.ViewModels
             UpdateCommand = new RelayCommand(UpdateClient);
             DisableCommand = new RelayCommand(DisableClient);
             LoadClientCommand = new RelayCommand(LoadClient);
+            StartSearchCommand = new RelayCommand(HandleSearchInputWithDelay);
 
             ToggleGroupBoxVisibilityCommand = new RelayCommand<string>(ToggleGroupBoxVisibility);
             ShowAllGroupBoxesCommand = new RelayCommand<string>(ShowAllGroupBoxes);
@@ -171,6 +211,25 @@ namespace wasty.ViewModels
             };
 
             FiltrarClientes();
+        }
+
+        private async void HandleSearchInputWithDelay(object obj)
+        {
+            SearchAddressResults.Clear();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(SearchAddress))
+                {
+                    var result = await _apiService.RequestAsync("GET", $"geo/location/{SearchAddress}", "");
+                    SearchAddressResults = JsonSerializer.Deserialize<ObservableCollection<LocationModel>>(result.datos);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            if (SearchAddressResults.Count > 0)
+                IsDropdownVisible = true;
         }
 
         private void FiltrarClientes()
