@@ -18,13 +18,13 @@
     Background="Transparent">
 
     <Grid>
-        <Border CornerRadius="15" Background="Transparent" Padding="20" Width="460" Height="680"
+        <Border CornerRadius="15" Background="White" Padding="20,20,20,20" Width="480" Height="600"
             HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center">
                 <!-- Título -->
                 <TextBlock Text="Crear Cuenta" Style="{StaticResource TextTitle}"
-                       Foreground="{StaticResource Neutral200}"
+                       Foreground="#000000"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
                 <!-- Campo Usuario con Icono -->
