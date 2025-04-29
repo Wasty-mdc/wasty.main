@@ -93,6 +93,7 @@
                     </StackPanel>
                 </Button>
         </WrapPanel>
+            
             <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>
