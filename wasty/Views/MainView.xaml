@@ -49,7 +49,7 @@
                 </Button>
 
                 <!-- Botón Tratamientos -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Tratamientos" Command="{Binding NavigateToTraeatmentsCommand}">
+            <Button Style="{StaticResource CentralButton}" ToolTip="Tratamientos" Command="{Binding NavigateToTraeatmentsCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                     <md:PackIcon Kind="FileCloudOutline" Width="140" Height="140" Foreground="#D6D6D6"/>
                         <TextBlock Text="TRATAMIENTOS" FontSize="16" FontWeight="Bold" Foreground="Black"
@@ -57,21 +57,12 @@
                     </StackPanel>
                 </Button>
 
-                <!-- Botón Renting -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Renting" Command="{Binding NavigateToRentingCommand}">
+                <!-- Botón Logística -->
+            <Button Style="{StaticResource CentralButton}" ToolTip="Logística" Command="{Binding ShowGestionCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                    <md:PackIcon Kind="TrainCarCenterbeamFull" Width="140" Height="140" Foreground="#58355E"/>
-                        <TextBlock Text="RENTING" FontSize="16" FontWeight="Bold" Foreground="Black"
-								            HorizontalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-
-                 <!-- Botón Logística -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Logística" Command="{Binding ShowGestionCommand}">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="DumpTruck" Width="140" Height="140" Foreground="#262626"/>
+                    <md:PackIcon Kind="DumpTruck" Width="140" Height="140" Foreground="#262626"/>
                         <TextBlock Text="LOGÍSTICA" FontSize="16" FontWeight="Bold" Foreground="Black"
-								       HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -80,18 +71,18 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="ChartBox" Width="140" Height="140" Foreground="#E9D985" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="ESTADÍSTICAS" FontSize="16" FontWeight="Bold" Foreground="Black"
-								       HorizontalAlignment="Center" />
+								   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
-                <!-- Botón Facturación -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="WalletOutline" Width="140" Height="140" Foreground="#99582a" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="FACTURACIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
-								       HorizontalAlignment="Center" />
-                    </StackPanel>
-                </Button>
+            <!-- Botón Facturación -->
+            <Button Style="{StaticResource CentralButton}" ToolTip="Facturación" Command="{Binding ShowFacturacionCommand}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+                    <md:PackIcon Kind="WalletOutline" Width="140" Height="140" Foreground="#99582a" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="FACTURACIÓN" FontSize="16" FontWeight="Bold" Foreground="Black"
+								   HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
         </WrapPanel>
             <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 

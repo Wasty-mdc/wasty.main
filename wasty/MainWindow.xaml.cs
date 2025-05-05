@@ -10,11 +10,11 @@ using System.Windows.Shell;
 using System.Windows.Threading;
 using wasty.Styles;
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Media.Animation;
+using MahApps.Metro.Controls;
 
 namespace wasty
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private MainWindowViewModel _viewModel => DataContext as MainWindowViewModel;
 

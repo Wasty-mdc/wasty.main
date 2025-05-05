@@ -1,4 +1,5 @@
-﻿<Window x:Class="wasty.MainWindow"
+﻿<mah:MetroWindow  
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="wasty.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:wasty.ViewModels"
@@ -9,21 +10,16 @@
         Title="Wasty"
         WindowState="Normal"
         Background="Transparent"
-        WindowStyle="None"
-        ResizeMode="CanResize"
-        AllowsTransparency="False">
-
-    <shell:WindowChrome.WindowChrome>
-        <shell:WindowChrome 
-            CaptionHeight="40"
-            ResizeBorderThickness="8"
-            CornerRadius="12"
-            GlassFrameThickness="0"
-            UseAeroCaptionButtons="True"/>
-    </shell:WindowChrome.WindowChrome>
+        WindowTitleBrush="#1C1C1C"
+        BorderBrush="#1C1C1C"
+        ResizeMode="CanResizeWithGrip"
+        TitleCharacterCasing="Normal"
+        BorderThickness="0"
+        GlowBrush="Black"
+        >
 
     <!-- Recursos -->
-    <Window.Resources>
+    <mah:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/mainStyles.xaml"/>
@@ -48,22 +44,18 @@
                                  From="0" To="320" Duration="0:0:0.25" />
             </Storyboard>
         </ResourceDictionary>
-    </Window.Resources>
-
-    <Border x:Name="MainBorder"
-            Background="{StaticResource MainGradientBackground}"
-            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+    </mah:MetroWindow.Resources>
+    <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}" shell:WindowChrome.IsHitTestVisibleInChrome="True">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Barra superior -->
-            <ContentControl Content="{Binding Source={StaticResource TitleBarControlProvider}}" />
+            
 
-            <!-- Contenido principal -->
-            <Grid Grid.Row="1">
+            <!-- Contenido de la app -->
+            <Grid Grid.Row="1"> 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="*"/>
@@ -76,10 +68,7 @@
                         <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
                             <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button x:Name="NotificationsButton"
-                                Style="{StaticResource NavButton}" 
-                                ToolTip="Notificaciones"
-                                Command="{Binding ToggleNotificationPanelCommand}">
+                        <Button Style="{StaticResource NavButton}" ToolTip="Historial">
                             <md:PackIcon Kind="BellBadgeOutline" Width="30" Height="30" Foreground="White"/>
                         </Button>
                         <Button Style="{StaticResource NavButton}" ToolTip="Favoritos">
@@ -87,8 +76,11 @@
                         </Button>
                     </StackPanel>
 
-                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
+                    <StackPanel Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
+                            <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
+                        </Button>
+                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Perfil">
                             <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
                         </Button>
                         <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}" Margin="0,0,0,20">
@@ -142,4 +134,4 @@
             </Grid>
         </Grid>
     </Border>
-</Window>
+</mah:MetroWindow>

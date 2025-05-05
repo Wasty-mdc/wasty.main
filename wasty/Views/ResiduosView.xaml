@@ -57,14 +57,6 @@
                 <!-- Panel derecho -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2">
                     <StackPanel Orientation="Vertical" Margin="5">
-                        <Button Style="{StaticResource CrudButtonStyle}" Height="60" Width="60">
-                            <StackPanel>
-                                <md:PackIcon Kind="FilterMultiple" Style="{StaticResource CrudIconStyle}" />
-                                <TextBlock Text="Filtros" Style="{StaticResource CrudTextStyle}" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="5">
                         <TextBox Margin="10"
                                  Height="35"
                                  Width="300"
@@ -73,6 +65,14 @@
                                  FontSize="16"
                                  Padding="10"
                                  ToolTip="Buscar por..."/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Button Style="{StaticResource CrudButtonStyle}" Height="60" Width="60">
+                            <StackPanel>
+                                <md:PackIcon Kind="FilterMultiple" Style="{StaticResource CrudIconStyle}" />
+                                <TextBlock Text="Filtros" Style="{StaticResource CrudTextStyle}" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>
