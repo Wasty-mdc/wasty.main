@@ -5,11 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:wasty.Views"
              mc:Ignorable="d"
              Title="Panel de Cliente" Height="800" Width="1200"
              WindowStartupLocation="CenterScreen"
              Background="{StaticResource MainGradientBackground}"
+             WindowState="Maximized"
              WindowStyle="SingleBorderWindow"
              AllowsTransparency="False">
 
@@ -37,17 +39,6 @@
             </Grid.ColumnDefinitions>
             <!-- Panel de Botones-->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Cursor="Hand" Grid.Column="0">
-
-                <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="5,2,0,2"/>
-
-                <StackPanel Orientation="Vertical" Margin="2, 5" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource CrudButtonStyle}">
-                        <StackPanel>
-                        <md:PackIcon Kind="AccountBoxPlusOutline" Style="{StaticResource CrudIconStyle}"/>
-                        <TextBlock Text="Crear" Style="{StaticResource CrudTextStyle}"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
 
                 <Border Width="2" Background="White" VerticalAlignment="Stretch" Height="50" CornerRadius="5" Margin="2"/>
                 
@@ -247,20 +238,50 @@
                                 </Button>
                             </DockPanel>
                         </GroupBox.Header>
-
                         <StackPanel Margin="2">
                             <TextBlock Text="Dirección Fiscal:"/>
-                            <TextBox/>
+                            <TextBox x:Name="SearchTextBox"
+                             Text="{Binding SearchAddress, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="KeyUp">
+                                        <i:InvokeCommandAction Command="{Binding StartSearchCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+                            <Canvas Panel.ZIndex="999999">
+                                <ListBox x:Name="ResultsListBox"
+                                 Visibility="{Binding IsDropdownVisible, Converter={StaticResource BoolToVisibility}}"
+                                 MaxHeight="150"
+                                 ItemsSource="{Binding SearchAddressResults}"
+                                 SelectedItem="{Binding SelectedAddressResult}">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <!--<Setter Property="Command" Value="{Binding DataContext.ItemSelectedCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                                        <Setter Property="CommandParameter" Value="{Binding}"/>-->
+                                            <Style.Triggers>
+                                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                                    <Setter Property="IsSelected" Value="True"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Address}" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Canvas>
                             <TextBlock Text="Dirección de Recogida:"/>
                             <TextBox/>
                             <TextBlock Text="Código Postal:"/>
-                            <TextBox/>
+                            <TextBox  Text="{Binding SelectedAddressResult.PostalCode}"/>
                             <TextBlock Text="Población:"/>
-                            <TextBox/>
+                            <TextBox  Text="{Binding SelectedAddressResult.Town}"/>
                             <TextBlock Text="Provincia:"/>
-                            <TextBox/>
+                            <TextBox  Text="{Binding SelectedAddressResult.Province}"/>
                             <TextBlock Text="País:"/>
-                            <TextBox/>
+                            <TextBox  Text="{Binding SelectedAddressResult.Country}"/>
                         </StackPanel>
                     </GroupBox>
 
@@ -280,11 +301,11 @@
 
                         <StackPanel Margin="2">
                             <TextBlock Text="Teléfono:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Cliente.Telefono1}"/>
                             <TextBlock Text="Teléfono Móvil:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Cliente.Telefono2}"/>
                             <TextBlock Text="Email:"/>
-                            <TextBox/>
+                            <TextBox Text="{Binding Cliente.Email}"/>
 
                             <!-- Subgrupo Comercial -->
                             <GroupBox FontWeight="Bold"
@@ -452,7 +473,7 @@
 
             <!-- CENTROS -->
             <ScrollViewer Grid.Column="2"  Background="#4CECEAE8">
-                <TabControl ItemsSource="{Binding Centros}"  Background="#4CECEAE8" >
+                <TabControl SelectedIndex="0" ItemsSource="{Binding Cliente.Centros}"  Background="#4CECEAE8" >
                     <TabControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NombreCentro}" Cursor="Hand"/>

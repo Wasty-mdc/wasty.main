@@ -10,6 +10,12 @@
     <Compile Update="Styles\TitleBarControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Utils\ImportDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Utils\LoadingOverlay.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ClientView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +23,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ClientPanelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RentingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ResiduosPanelView.xaml.cs">
@@ -32,6 +41,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\TableViews\RecycTableView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TreatmentsPanelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\TreatmentsView.xaml.cs">

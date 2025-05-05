@@ -81,7 +81,7 @@ namespace wasty.Views
         public void ReceiveParameter(object parameter)
         {
             var viewModel = (ClientPanelViewModel)DataContext;
-            viewModel.Init((ClienteModel)parameter);
+            viewModel.Init((int)parameter);
         }
     }
 }

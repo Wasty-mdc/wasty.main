@@ -18,30 +18,14 @@
     Background="Transparent">
 
     <Grid>
-        <Border CornerRadius="15" Background="Transparent" Padding="20" Width="460" Height="680"
+        <Border CornerRadius="15" Background="White" Padding="20,20,20,20" Width="480" Height="600"
             HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center">
                 <!-- Título -->
                 <TextBlock Text="Crear Cuenta" Style="{StaticResource TextTitle}"
-                       Foreground="{StaticResource Neutral200}"
+                       Foreground="#000000"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
-
-                <!-- Campo Nombre con Icono -->
-                <Border Style="{StaticResource RegisterTextBoxBorder}">
-                    <DockPanel>
-                        <md:PackIcon Kind="Account" Width="24" Height="24" 
-                                 Foreground="{StaticResource PrimaryIcon}" 
-                                 Margin="5,0" Cursor="Help"
-                                 HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <md:PackIcon.ToolTip>
-                                <ToolTip Content="Introduce tu Nombre" />
-                            </md:PackIcon.ToolTip>
-                        </md:PackIcon>
-                        <TextBox x:Name="SignupNameTextBox" Style="{StaticResource RegisterTextBox}"
-                             md:HintAssist.Hint="Nombre" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}"/>
-                    </DockPanel>
-                </Border>
 
                 <!-- Campo Usuario con Icono -->
                 <Border Style="{StaticResource RegisterTextBoxBorder}">

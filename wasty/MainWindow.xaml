@@ -10,13 +10,18 @@
         Title="Wasty"
         WindowState="Normal"
         Background="Transparent"
-        WindowTitleBrush="#1C1C1C"
-        BorderBrush="#1C1C1C"
-        ResizeMode="CanResizeWithGrip"
-        TitleCharacterCasing="Normal"
-        BorderThickness="0"
-        GlowBrush="Black"
-        >
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        AllowsTransparency="False">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome 
+            CaptionHeight="40"
+            ResizeBorderThickness="8"
+            CornerRadius="12"
+            GlassFrameThickness="0"
+            UseAeroCaptionButtons="True"/>
+    </shell:WindowChrome.WindowChrome>
 
     <!-- Recursos -->
     <mah:MetroWindow.Resources>
@@ -24,32 +29,58 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/mainStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+
+            <ObjectDataProvider x:Key="TitleBarControlProvider" 
+                                ObjectType="{x:Type style:TitleBarControlFactory}" 
+                                MethodName="Create" />
+
+            <!-- Animaciones -->
+            <Storyboard x:Key="SlideInStoryboard">
+                <DoubleAnimation Storyboard.TargetName="NotificationsPanelTransform"
+                                 Storyboard.TargetProperty="X"
+                                 From="320" To="0" Duration="0:0:0.25" />
+            </Storyboard>
+
+            <Storyboard x:Key="SlideOutStoryboard">
+                <DoubleAnimation Storyboard.TargetName="NotificationsPanelTransform"
+                                 Storyboard.TargetProperty="X"
+                                 From="0" To="320" Duration="0:0:0.25" />
+            </Storyboard>
         </ResourceDictionary>
-    </mah:MetroWindow.Resources>
-    <Border x:Name="MainBorder" Background="{StaticResource MainGradientBackground}" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+    </Window.Resources>
+
+    <Border x:Name="MainBorder"
+            Background="{StaticResource MainGradientBackground}"
+            shell:WindowChrome.IsHitTestVisibleInChrome="True">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            
+            <!-- Barra superior -->
+            <ContentControl Content="{Binding Source={StaticResource TitleBarControlProvider}}" />
 
-            <!-- Contenido de la app -->
-            <Grid Grid.Row="1"> 
+            <!-- Contenido principal -->
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Navegación lateral -->
-                <Grid Grid.Column="0" Background="{StaticResource NavColor}" Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
+                <Grid Grid.Column="0" Background="{StaticResource NavColor}" 
+                      Visibility="{Binding IsAuthenticated, Converter={StaticResource BoolToVisConverter}}">
                     <StackPanel Width="70" VerticalAlignment="Stretch" HorizontalAlignment="Left">
                         <Button Style="{StaticResource NavButton}" ToolTip="Inicio" Command="{Binding ShowMainViewCommand}">
                             <md:PackIcon Kind="Home" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButton}" ToolTip="Historial">
+                        <Button x:Name="NotificationsButton"
+                                Style="{StaticResource NavButton}" 
+                                ToolTip="Notificaciones"
+                                Command="{Binding ToggleNotificationPanelCommand}">
                             <md:PackIcon Kind="BellBadgeOutline" Width="30" Height="30" Foreground="White"/>
                         </Button>
                         <Button Style="{StaticResource NavButton}" ToolTip="Favoritos">
@@ -57,22 +88,57 @@
                         </Button>
                     </StackPanel>
 
-                    <StackPanel Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Configuración">
-                            <md:PackIcon Kind="Cog" Width="30" Height="30" Foreground="White"/>
-                        </Button>
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Perfil">
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource NavButton}" ToolTip="Perfil">
                             <md:PackIcon Kind="Account" Width="30" Height="30" Foreground="White"/>
                         </Button>
-                        <Button Style="{StaticResource NavButtonDown}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}">
+                        <Button Style="{StaticResource NavButton}" ToolTip="Salir" Command="{Binding ShowLoginViewCommand}" Margin="0,0,0,20">
                             <md:PackIcon Kind="Logout" Width="30" Height="30" Foreground="White"/>
                         </Button>
                     </StackPanel>
                 </Grid>
 
-                <!-- Vista dinámica -->
+                <!-- Contenido dinámico + overlay -->
                 <Grid Grid.Column="1" Background="{StaticResource MainGradientBackground}">
                     <ContentControl Content="{Binding CurrentView}" Name="CurrentView" Background="Transparent"/>
+
+                    <!-- Overlay oscuro para cerrar -->
+                    <Rectangle x:Name="Overlay"
+                               Fill="Black" Opacity="0.3"
+                               Visibility="{Binding IsNotificationPanelOpen, Converter={StaticResource BoolToVisConverter}}"
+                               Panel.ZIndex="99"
+                               MouseDown="Overlay_MouseDown"/>
+
+                    <!-- Panel de notificaciones alineado a la derecha -->
+                    <Border x:Name="NotificationsPanel"
+                            Width="300"
+                            Background="#ffffffff"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Right"
+                            Panel.ZIndex="100"
+                            RenderTransformOrigin="0,0"
+                            Effect="{DynamicResource MaterialDesignElevation5}">
+                        <Border.RenderTransform>
+                            <TranslateTransform x:Name="NotificationsPanelTransform" X="320"/>
+                        </Border.RenderTransform>
+                        <DockPanel>
+                            <Button Content="✕" DockPanel.Dock="Top" HorizontalAlignment="Right" 
+                                    Command="{Binding ToggleNotificationPanelCommand}" 
+                                    Background="Transparent" BorderThickness="0" FontSize="16" Margin="0,10,10,0"/>
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Notificaciones" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                                <ItemsControl ItemsSource="{Binding Notifications}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="0,4" Background="#FFEFEFEF" Padding="8" CornerRadius="6">
+                                                <TextBlock Text="{Binding Mensaje}"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
                 </Grid>
             </Grid>
         </Grid>

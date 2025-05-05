@@ -23,7 +23,7 @@
 
             <!-- Botones navegación -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1">
-                <Button Style="{StaticResource MaterialDesignToolButton}" Margin="0,0,4,0" VerticalAlignment="Center">
+                <Button Style="{StaticResource MaterialDesignToolButton}" Margin="0,0,4,0" VerticalAlignment="Center" Click="Back_Click">
                     <md:PackIcon Kind="ArrowLeft" Width="20" Height="20"/>
                 </Button>
                 <Button Style="{StaticResource MaterialDesignToolButton}" VerticalAlignment="Center">
