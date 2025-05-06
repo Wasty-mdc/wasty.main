@@ -427,7 +427,8 @@
                         <DataTemplate>
                                 <WrapPanel>
                                     <!-- Bloque NIMA -->
-                                <GroupBox Margin="10" BorderBrush="#A0C26C" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[NIMA], Converter={StaticResource BoolToVisibility}}">
+                                <GroupBox Margin="10" BorderBrush="#A0C26C" BorderThickness="2" 
+                                          Visibility="{Binding GroupBoxVisibility[NIMA], Converter={StaticResource BoolToVisibility}}">
                                     <GroupBox.Header>
                                         <DockPanel>
                                             <TextBlock Text="  N I M A " FontWeight="Bold" VerticalAlignment="Center"/>
@@ -443,7 +444,8 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <GroupBox Grid.Column="0" Margin="5" BorderThickness="0.5" Visibility="{Binding GroupBoxVisibility[DatosNIMA], Converter={StaticResource BoolToVisibility}}">
+                                        <GroupBox Grid.Column="0" Margin="5" BorderThickness="0.5" MinWidth="350"
+                                                  Visibility="{Binding GroupBoxVisibility[DatosNIMA], Converter={StaticResource BoolToVisibility}}">
                                             <GroupBox.Header>
                                                 <DockPanel>
                                                     <TextBlock Text="  Datos NIMA" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -475,7 +477,7 @@
                                             </UniformGrid>
                                         </GroupBox>
 
-                                        <GroupBox Grid.Column="1" Margin="5" BorderThickness="0.5" 
+                                        <GroupBox Grid.Column="1" Margin="5" BorderThickness="0.5" MinWidth="200"
                                                   Visibility="{Binding GroupBoxVisibility[MedioAmbiente], Converter={StaticResource BoolToVisibility}}">
                                             <GroupBox.Header>
                                                 <DockPanel>
@@ -494,7 +496,7 @@
                                             </StackPanel>
                                         </GroupBox>
 
-                                        <GroupBox Grid.Column="2" Margin="5" BorderThickness="0.5" 
+                                        <GroupBox Grid.Column="2" Margin="5" BorderThickness="0.5" MinWidth="200"
                                                   Visibility="{Binding GroupBoxVisibility[Legalidad], Converter={StaticResource BoolToVisibility}}">
                                             <GroupBox.Header>
                                                 <DockPanel>
