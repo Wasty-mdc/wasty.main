@@ -53,6 +53,7 @@ namespace wasty.ViewModels
             var residuos = await GetData();
             //PaginadorResiduos = new Paginador<ResiduoModel>(residuos, 23); // Puedes ajustar items por página
             OnPropertyChanged(nameof(PaginadorResiduos));
+            OnPropertyChanged(nameof(PaginadorResiduos.ItemsPaginados));
         }
 
         private async Task<ObservableCollection<ResiduoModel>> GetData()
@@ -61,9 +62,10 @@ namespace wasty.ViewModels
             {
                 var result = await _apiService.RequestAsync("GET", "residuos", "");
                 var itemsList = JsonSerializer.Deserialize<ObservableCollection<ResiduoModel>>(result.datos);
+                PaginadorResiduos = new Paginador<ResiduoModel>(_apiService, "residuos", itemsList, result.pagination.pageSize, result.pagination.pageNumber, result.pagination.totalPages);
                 return itemsList ?? new ObservableCollection<ResiduoModel>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new ObservableCollection<ResiduoModel>();
             }
