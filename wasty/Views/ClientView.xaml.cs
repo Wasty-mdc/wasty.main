@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using wasty.Utils;
 using wasty.ViewModels;
 
 namespace wasty.Views
@@ -40,6 +41,14 @@ namespace wasty.Views
                 vm.TextoBusqueda = string.Empty; // Por si hay espacios, los borra
                 vm.ResetClientes();
             }
+        }
+        private void Importar_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ImportDialog
+            {
+                Owner = Window.GetWindow(this)
+            };
+            dialog.ShowDialog();
         }
 
         private void ToggleFiltros_Click(object sender, RoutedEventArgs e)
