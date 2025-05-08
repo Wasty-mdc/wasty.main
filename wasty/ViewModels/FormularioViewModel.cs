@@ -189,10 +189,9 @@ namespace wasty.ViewModels
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Prioridad del Cliente", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" },
-                        new CampoFormulario { Nombre = "Nombre Fiscal", Tipo = "Texto", Valor = "", TipoValidacion="Vacio"},
                         new CampoFormulario { Nombre = "NIF", Tipo = "Texto", Valor = "" , TipoValidacion = "NIF"},
+                        new CampoFormulario { Nombre = "Nombre Fiscal", Tipo = "Texto", Valor = "", TipoValidacion="Vacio"},
                         new CampoFormulario { Nombre = "Nombre Comercial", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio" },
-                        new CampoFormulario { Nombre = "Email:", Tipo="Texto", Valor="", TipoValidacion="Email"}
                     },
                     IsFirst = true,
                     ColorBase = "Yellow",
@@ -206,6 +205,31 @@ namespace wasty.ViewModels
                     {
                         new CampoFormulario { Nombre = "Contraseña Online", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Acceso Online", Tipo = "Checkbox", EstaSeleccionado = false },
+                    },
+                    NumeroPagina = 1
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Contacto",
+                    ColorBase = "Yellow",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario{Nombre="Teléfono", Tipo="Texto", Valor = ""},
+                        new CampoFormulario{Nombre="Teléfono Móvil", Tipo="Texto", Valor=""},
+                        new CampoFormulario{Nombre="Email", Tipo="Texto", Valor="", TipoValidacion="Email"}
+                    },
+                    NumeroPagina = 1
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Comercial",
+                    ColorBase = "Blue",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Persona de Contacto:", Tipo = "Texto", Valor = ""},
+                        new CampoFormulario { Nombre = "DNI:", Tipo = "Texto", Opciones = OpcionesGrupoPrincipal, Valor = "", TipoValidacion = "DNI" },
+                        new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Comercial:", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" }
                     },
                     NumeroPagina = 1
                 },
@@ -246,19 +270,6 @@ namespace wasty.ViewModels
                         new CampoFormulario { Nombre = "Población:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "Provincia:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "País:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"}
-                    },
-                    NumeroPagina = 1
-                },
-                new BloqueFormulario
-                {
-                    Nombre = "Comercial",
-                    ColorBase = "Blue",
-                    Campos = new ObservableCollection<CampoFormulario>
-                    {
-                        new CampoFormulario { Nombre = "Persona de Contacto:", Tipo = "Texto", Valor = ""},
-                        new CampoFormulario { Nombre = "DNI:", Tipo = "Texto", Opciones = OpcionesGrupoPrincipal, Valor = "", TipoValidacion = "DNI" },
-                        new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Comercial:", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" }
                     },
                     NumeroPagina = 1
                 },
