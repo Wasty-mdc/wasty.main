@@ -6,63 +6,182 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using wasty.Models;
+using wasty.Utils;
+using wasty.Services;
+using System.Text.Json;
+using System.IO;
 
 
-    namespace wasty.ViewModels
+namespace wasty.ViewModels
     {
-        public class FormularioViewModel : INotifyPropertyChanged
+    public class FormularioViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _grupoPrincipalSeleccionado;
+        private bool _grupoSecundarioHabilitado;
+        private ObservableCollection<string> _opcionesGrupoSecundario;
+
+        public ObservableCollection<BloqueFormulario> Bloques { get; set; }
+        public ObservableCollection<BloqueFormulario> BloquesPaginaActual { get; set; }
+
+        public ICommand AgregarPaginaCommand { get; }
+        public ICommand ExportarJsonCommand { get; }
+        public ICommand SiguientePaginaCommand { get; }
+        public ICommand AnteriorPaginaCommand { get; }
+
+        private int _paginaActual = 1;
+        public int PaginaActual
         {
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private string _grupoPrincipalSeleccionado;
-            private bool _grupoSecundarioHabilitado;
-            private ObservableCollection<string> _opcionesGrupoSecundario;
-
-            public ObservableCollection<BloqueFormulario> Bloques { get; set; }
-
-            public List<string> OpcionesGrupoPrincipal { get; } = new()
+            get => _paginaActual;
+            set { _paginaActual = value; OnPropertyChanged(); ActualizarVistaPagina(); }
+        }
+        public int TotalPaginas => Bloques.Max(b => b.NumeroPagina);
+        public List<string> OpcionesGrupoPrincipal { get; } = new()
         {
             "Talleres", "Planchas", "Gestores", "Industrias", "Talleres Aceite", "Sin asignar"
         };
 
-            public ObservableCollection<string> OpcionesGrupoSecundario
-            {
-                get => _opcionesGrupoSecundario;
-                set
-                {
-                    _opcionesGrupoSecundario = value;
-                    OnPropertyChanged();
-                }
-            }
+        public ObservableCollection<string> OpcionesGrupoSecundario
+        {
+            get => _opcionesGrupoSecundario;
+            set { _opcionesGrupoSecundario = value; OnPropertyChanged(); }
+        }
 
-            public string GrupoPrincipalSeleccionado
-            {
-                get => _grupoPrincipalSeleccionado;
-                set
-                {
-                    _grupoPrincipalSeleccionado = value;
-                    OnPropertyChanged();
-                    ActualizarOpcionesGrupoSecundario();
-                }
-            }
+        public string GrupoPrincipalSeleccionado
+        {
+            get => _grupoPrincipalSeleccionado;
+            set { _grupoPrincipalSeleccionado = value; OnPropertyChanged(); ActualizarOpcionesGrupoSecundario(); }
+        }
 
-            public bool GrupoSecundarioHabilitado
-            {
-                get => _grupoSecundarioHabilitado;
-                set
-                {
-                    _grupoSecundarioHabilitado = value;
-                    OnPropertyChanged();
-                }
-            }
+        public bool GrupoSecundarioHabilitado
+        {
+            get => _grupoSecundarioHabilitado;
+            set { _grupoSecundarioHabilitado = value; OnPropertyChanged(); }
+        }
 
-            public ICommand SeleccionarGrupoCommand { get; }
-
-        public ICommand GuardarCommand { get; }
+        public ICommand SeleccionarGrupoCommand { get; }
 
         public FormularioViewModel()
+        {
+            Bloques = new ObservableCollection<BloqueFormulario>(ObtenerBloquesIniciales());
+            BloquesPaginaActual = new ObservableCollection<BloqueFormulario>();
+
+            AgregarPaginaCommand = new RelayCommand(_ => DuplicarUltimaPagina());
+            ExportarJsonCommand = new RelayCommand(async _ => await ExportarFormularioAsync());
+            SiguientePaginaCommand = new RelayCommand(_ => { if (PaginaActual < TotalPaginas) PaginaActual++; });
+            AnteriorPaginaCommand = new RelayCommand(_ => { if (PaginaActual > 1) PaginaActual--; });
+
+            OpcionesGrupoSecundario = new ObservableCollection<string>();
+            SeleccionarGrupoCommand = new RelayCommand(_ => ActualizarOpcionesGrupoSecundario());
+
+            ActualizarVistaPagina();
+        }
+
+        private void ActualizarVistaPagina()
+        {
+            var visibles = Bloques.Where(b => b.NumeroPagina == PaginaActual).ToList();
+            BloquesPaginaActual.Clear();
+            foreach (var b in visibles)
+                BloquesPaginaActual.Add(b);
+            OnPropertyChanged(nameof(BloquesPaginaActual));
+            OnPropertyChanged(nameof(PaginaActual));
+            OnPropertyChanged(nameof(TotalPaginas));
+        }
+
+        private void DuplicarUltimaPagina()
+        {
+            int nuevaPagina = TotalPaginas + 1;
+            var ultimos = Bloques.Where(b => b.NumeroPagina == TotalPaginas).ToList();
+
+            foreach (var original in ultimos)
             {
-                Bloques = new ObservableCollection<BloqueFormulario>
+                var copia = new BloqueFormulario
+                {
+                    Nombre = original.Nombre + " (Copia)",
+                    ColorBase = original.ColorBase,
+                    NumeroPagina = nuevaPagina,
+                    Campos = new ObservableCollection<CampoFormulario>(original.Campos.Select(c => new CampoFormulario
+                    {
+                        Nombre = c.Nombre,
+                        Tipo = c.Tipo,
+                        Valor = "",
+                        EstaSeleccionado = false,
+                        Opciones = c.Opciones?.ToList(),
+                        TipoValidacion = c.TipoValidacion
+                    }))
+                };
+                Bloques.Add(copia);
+            }
+
+            PaginaActual = nuevaPagina;
+        }
+
+        private async Task ExportarFormularioAsync()
+        {
+            try
+            {
+                var json = JsonSerializer.Serialize(Bloques, new JsonSerializerOptions { WriteIndented = true });
+                var rutaArchivo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "FormularioExportado.json");
+                await File.WriteAllTextAsync(rutaArchivo, json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al guardar el archivo JSON: {ex.Message}");
+            }
+        }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            CommandManager.InvalidateRequerySuggested();
+        }
+
+        private void ActualizarOpcionesGrupoSecundario()
+        {
+            OpcionesGrupoSecundario.Clear();
+
+            switch (GrupoPrincipalSeleccionado)
+            {
+                case "Talleres":
+                    OpcionesGrupoSecundario = new ObservableCollection<string>
+                    {
+                        "Mecánico", "Aceite", "Camiones", "Lavadero", "Mecánico y Planchas",
+                        "Motos", "Plancha y Pintura", "Plancha, Pintura y Mecánico", "Transportes"
+                    };
+                    GrupoSecundarioHabilitado = true;
+                    break;
+                case "Planchas":
+                    GrupoSecundarioHabilitado = false;
+                    break;
+                case "Gestores":
+                    OpcionesGrupoSecundario = new ObservableCollection<string>
+                    {
+                        "Aceite Gestor", "Cartón", "Lodos", "Metales", "Palets", "Plástico",
+                        "Residuos Peligrosos", "Residuos Voluminosos", "Vidrio"
+                    };
+                    GrupoSecundarioHabilitado = true;
+                    break;
+                case "Industrias":
+                    OpcionesGrupoSecundario = new ObservableCollection<string>
+                    {
+                        "Aceite Industrial", "Cartón", "Contenedores", "Curtido Pieles",
+                        "Material Quirúrgico", "Metales", "Plástico", "Otros"
+                    };
+                    GrupoSecundarioHabilitado = true;
+                    break;
+                case "Talleres Aceite":
+                    GrupoSecundarioHabilitado = false;
+                    break;
+                case "Sin asignar":
+                    OpcionesGrupoSecundario = new ObservableCollection<string> { "Sin asignar" };
+                    GrupoSecundarioHabilitado = true;
+                    break;
+            }
+        }
+
+        private List<BloqueFormulario> ObtenerBloquesIniciales()
+        {
+            return new List<BloqueFormulario>
             {
                 new BloqueFormulario
                 {
@@ -76,7 +195,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Email:", Tipo="Texto", Valor="", TipoValidacion="Email"}
                     },
                     IsFirst = true,
-                    ColorBase = "Yellow"
+                    ColorBase = "Yellow",
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
@@ -86,7 +206,8 @@ using wasty.Models;
                     {
                         new CampoFormulario { Nombre = "Contraseña Online", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Acceso Online", Tipo = "Checkbox", EstaSeleccionado = false },
-                    }
+                    },
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
@@ -100,7 +221,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Cliente Gestor", Tipo = "Checkbox", EstaSeleccionado = false },
                         new CampoFormulario { Nombre = "Fevauto", Tipo = "Checkbox", EstaSeleccionado = false },
                         new CampoFormulario { Nombre = "Cliente Esporádico", Tipo = "Checkbox", EstaSeleccionado = false }
-                    }
+                    },
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
@@ -110,7 +232,8 @@ using wasty.Models;
                     {
                         new CampoFormulario { Nombre = "Horario de Mañana (Desde - Hasta)", Tipo = "Número", Valor = ""},
                         new CampoFormulario { Nombre = "Horario de Tarde (Desde - Hasta)", Tipo = "Número", Valor = "" },
-                    }
+                    },
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
@@ -123,10 +246,11 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Población:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "Provincia:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "País:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"}
-                    }
+                    },
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
-                { 
+                {
                     Nombre = "Comercial",
                     ColorBase = "Blue",
                     Campos = new ObservableCollection<CampoFormulario>
@@ -135,7 +259,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "DNI:", Tipo = "Texto", Opciones = OpcionesGrupoPrincipal, Valor = "", TipoValidacion = "DNI" },
                         new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Comercial:", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" }
-                    }
+                    },
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
@@ -144,7 +269,8 @@ using wasty.Models;
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Observaciones:", Tipo = "Texto", Valor = "" }
-                    }
+                    },
+                    NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
@@ -162,7 +288,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Periodicidad:", Tipo = "Picker", Opciones = new List<string> { "Mensual", "Bimensual", "Trimestral", "Semestral", "Anual"}, Valor = "" },
                         new CampoFormulario { Nombre = "Cobro a Fin Periodo", Tipo = "Checkbox",  EstaSeleccionado = false},
                         new CampoFormulario { Nombre = "No Cobrar (Marca de Rojo)", Tipo = "Checkbox", EstaSeleccionado = false },
-                    }
+                    },
+                    NumeroPagina = 2
                 },
                 new BloqueFormulario
                 {
@@ -180,7 +307,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Aceite:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Cartón:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Taras:", Tipo = "Número", Valor = "" },
-                    }
+                    },
+                    NumeroPagina = 2
                 },
                 new BloqueFormulario
                 {
@@ -194,7 +322,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Código Postal de Recogida:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Población de Recogida:", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Observaciones para las Recogidas:", Tipo = "Texto", Valor = "" },
-                    }
+                    },
+                    NumeroPagina = 2
                 },
                 new BloqueFormulario
                 {
@@ -205,7 +334,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
                         new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
-                    }
+                    },
+                    NumeroPagina = 2
                 },
                 new BloqueFormulario
                 {
@@ -216,7 +346,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
                         new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
-                    }
+                    },
+                    NumeroPagina = 2
                 },
                 new BloqueFormulario
                 {
@@ -231,7 +362,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Forma de Retirada:", Tipo = "Picker", Opciones = new List<string> { "Cambio", "---", "---", "---"},Valor = "" },
                         new CampoFormulario { Nombre = "Número de Contenedores:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Tamaño del Vehículo:", Tipo = "Picker", Opciones = new List<string> { "Furgoneta", "Camión Ligero", "Camión Pesado"}, Valor = "" },
-                    }
+                    },
+                    NumeroPagina = 2
                 },
                 new BloqueFormulario
                 {
@@ -248,7 +380,8 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "CNAE:", Tipo = "Texto", Valor = "", TipoValidacion = "CNAE" },
                         new CampoFormulario { Nombre = "Gestor Habitual:", Tipo = "Texto", Valor = "Vacio" },
                         new CampoFormulario { Nombre = "Comunidad Autónoma:", Tipo = "Texto", Valor = "Vacio" },
-                    }
+                    },
+                    NumeroPagina = 3
                 },
                 new BloqueFormulario
                 {
@@ -260,9 +393,10 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio" },
                         new CampoFormulario { Nombre = "Telefono:", Tipo = "Numero", Valor = "", TipoValidacion = "Telefono" },
                         new CampoFormulario { Nombre = "NIF:", Tipo = "Texto", Valor = "", TipoValidacion="NIF" }
-                    }
+                    },
+                    NumeroPagina = 3
                 },
-                                new BloqueFormulario
+                new BloqueFormulario
                 {
                     Nombre = "Legalidad",
                     ColorBase = "Green",
@@ -272,74 +406,10 @@ using wasty.Models;
                         new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio" },
                         new CampoFormulario { Nombre = "Telefono:", Tipo = "Numero", Valor = "", TipoValidacion = "Telefono" },
                         new CampoFormulario { Nombre = "NIF:", Tipo = "Texto", Valor = "", TipoValidacion = "NIF" }
-                    }
+                    },
+                    NumeroPagina = 3
                 },
             };
-
-                OpcionesGrupoSecundario = new ObservableCollection<string>();
-                SeleccionarGrupoCommand = new RelayCommand(_ => ActualizarOpcionesGrupoSecundario());
-            }
-
-            private void ActualizarOpcionesGrupoSecundario()
-            {
-                OpcionesGrupoSecundario.Clear();
-
-                switch (GrupoPrincipalSeleccionado)
-                {
-                    case "Talleres":
-                        OpcionesGrupoSecundario.Add("Mecánico");
-                        OpcionesGrupoSecundario.Add("Aceite");
-                        OpcionesGrupoSecundario.Add("Camiones");
-                        OpcionesGrupoSecundario.Add("Lavadero");
-                        OpcionesGrupoSecundario.Add("Mecánico y Planchas");
-                        OpcionesGrupoSecundario.Add("Motos");
-                        OpcionesGrupoSecundario.Add("Plancha y Pintura");
-                        OpcionesGrupoSecundario.Add("Plancha, Pintura y Mecánico");
-                        OpcionesGrupoSecundario.Add("Transportes");
-                        GrupoSecundarioHabilitado = true;
-                        break;
-                    case "Planchas":
-                        GrupoSecundarioHabilitado = false;
-                        break;
-                    case "Gestores":
-                        OpcionesGrupoSecundario.Add("Aceite Gestor");
-                        OpcionesGrupoSecundario.Add("Cartón");
-                        OpcionesGrupoSecundario.Add("Lodos");
-                        OpcionesGrupoSecundario.Add("Metales");
-                        OpcionesGrupoSecundario.Add("Palets");
-                        OpcionesGrupoSecundario.Add("Plástico");
-                        OpcionesGrupoSecundario.Add("Residuos Peligrosos");
-                        OpcionesGrupoSecundario.Add("Residuos Voluminosos");
-                        OpcionesGrupoSecundario.Add("Vidrio");
-                        GrupoSecundarioHabilitado = true;
-                        break;
-                    case "Industrias":
-                        OpcionesGrupoSecundario.Add("Aceite Industrial");
-                        OpcionesGrupoSecundario.Add("Cartón");
-                        OpcionesGrupoSecundario.Add("Contenedores");
-                        OpcionesGrupoSecundario.Add("Curtido Pieles");
-                        OpcionesGrupoSecundario.Add("Material Quirúrgico");
-                        OpcionesGrupoSecundario.Add("Metales");
-                        OpcionesGrupoSecundario.Add("Plástico");
-                        OpcionesGrupoSecundario.Add("Otros");
-                        GrupoSecundarioHabilitado = true;
-                        break;
-                    case "Talleres Aceite":
-                        GrupoSecundarioHabilitado = false;
-                        break;
-                    case "Sin asignar":
-                        OpcionesGrupoSecundario.Add("Sin asignar");
-                        GrupoSecundarioHabilitado = true;
-                        break;
-                }
-            }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-            // Notificar que el botón "Guardar" debe actualizarse
-            CommandManager.InvalidateRequerySuggested();
         }
     }
 

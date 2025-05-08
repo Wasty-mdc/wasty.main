@@ -75,11 +75,23 @@ public class ClientViewModel : INotifyPropertyChanged
         {
             _soloConNombreComercial = value;
             OnPropertyChanged();
-            FiltrarClientes(); // 🌀 Aplicar el filtro cuando se cambia
+            FiltrarClientes(); 
         }
     }
 
     public ICommand ToggleFiltrosCommand { get; }
+
+    private bool _isLoadingClientes;
+    public bool IsLoadingClientes
+    {
+        get => _isLoadingClientes;
+        set
+        {
+            _isLoadingClientes = value;
+            OnPropertyChanged();
+        }
+    }
+
 
     public ClientViewModel(NavigationService navigationService, ApiService apiService)
     {
@@ -93,16 +105,23 @@ public class ClientViewModel : INotifyPropertyChanged
 
     private void NavigateToClientPanel(object parameter)
     {
-        _navigationService.NavigateTo<ClientPanelView>(parameter);
+        var selected = (ClienteModel)parameter;
+        _navigationService.NavigateTo<ClientPanelView>(selected.Codigo);
     }
 
     private async Task Init()
     {
+        IsLoadingClientes = true;
+
         var clientes = await GetData();
-        PaginadorClientes = new Paginador<ClienteModel>(clientes, 25);
+        //PaginadorClientes = new Paginador<ClienteModel>(clientes, 23);
+
         OnPropertyChanged(nameof(PaginadorClientes));
-        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados)); // 🔁 Refresca DataGrid al iniciar
+        OnPropertyChanged(nameof(PaginadorClientes.ItemsPaginados));
+
+        IsLoadingClientes = false;
     }
+
 
     private void FiltrarClientes()
     {
@@ -160,6 +179,7 @@ public class ClientViewModel : INotifyPropertyChanged
         {
             var result = await _apiService.RequestAsync("GET", "clientes", "");
             var itemsList = JsonSerializer.Deserialize<ObservableCollection<ClienteModel>>(result.datos);
+            PaginadorClientes = new Paginador<ClienteModel>(_apiService, "clientes", itemsList, result.pagination.pageSize, result.pagination.pageNumber, result.pagination.totalPages);
             return itemsList ?? new ObservableCollection<ClienteModel>();
         }
         catch (Exception)

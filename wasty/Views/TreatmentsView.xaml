@@ -32,19 +32,25 @@
 
             <DataGrid ItemsSource="{Binding Tratamientos}"
                    SelectedItem="{Binding ClienteSeleccionado}"
+                   ScrollViewer.CanContentScroll="True"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                    Margin="10"
                    AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" />
                     <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" />
-                    <DataGridTextColumn Header="Denominación" Binding="{Binding Denominacion}" />
-                    <DataGridTextColumn Header="LER" Binding="{Binding LER}" />
-                    <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
-                    <DataGridTextColumn Header="Operador de Traslados" Binding="{Binding OperadorTraslados}" />
+                    <DataGridTextColumn Header="Nombre Cliente" Binding="{Binding NombreCliente}" />
+                    <DataGridTextColumn Header="NIF Cliente" Binding="{Binding NIFCliente}" />
+                    <!--<DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />-->
+                    <DataGridTextColumn Header="Operador de Traslados" Binding="{Binding OperadorTraslados}" /> <!-- Siempre sera el mismo operador para el mismo tipo de residuo-->
+                    <DataGridTextColumn Header="Inicio de Acuerdo" Binding="{Binding InicioAcuerdo}" />
+                    <DataGridTextColumn Header="Final del Acuerdo" Binding="{Binding FinalAcuerdo}" />
                     <DataGridTemplateColumn Header="Activo">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding Activo}" />
+                                <Button>
+                                    <md:PackIcon Kind="CheckboxBlankCircle" Foreground="#29bf12"></md:PackIcon>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -56,7 +62,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
                 </DataGrid.Columns>
             </DataGrid>
 

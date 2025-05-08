@@ -45,7 +45,7 @@ namespace wasty.Utils
                 "CNAE" => Regex.IsMatch(valor, @"^\d{4}$"),
                 "INE" => Regex.IsMatch(valor, @"^\d{1,5}$"),
                 "Telefono" => Regex.IsMatch(valor, @"^\d{9}$"),
-                "Correo" => Regex.IsMatch(valor, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"),
+                "Email" => Regex.IsMatch(valor, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"),
                 _ => true
             };
 

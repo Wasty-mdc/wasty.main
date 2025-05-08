@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using wasty.Helpers;
 using wasty.Models;
 using Wasty.ViewModels;
+using wasty.Styles;
 
 
 namespace wasty
@@ -41,11 +42,13 @@ namespace wasty
             {
                 client.BaseAddress = new Uri("http://localhost:5276/");
             });
-            services.AddTransient<NavigationService>(provider =>
+            services.AddSingleton<NavigationService>(provider =>
                 new NavigationService(viewType => (object)Activator.CreateInstance(viewType))
             );
+            services.AddSingleton<TitleBarControl>();
             services.AddSingleton<AuthService>();
             services.AddSingleton<SessionService>();
+            services.AddSingleton<ExcelDataService>();
 
             services.AddSingleton<AuthModel>();
 
@@ -60,6 +63,8 @@ namespace wasty
             services.AddTransient<ResiduosViewModel>();
             services.AddTransient<ResiduosPanelViewModel>();
             services.AddTransient<TreatmentsViewModel>();
+            services.AddTransient<RentingViewModel>();
+            services.AddTransient<ImportDialogViewModel>();
 
             services.AddHttpClient<ApiService>(client =>
             {
