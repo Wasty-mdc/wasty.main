@@ -4,6 +4,8 @@ namespace wasty.Models
 {
     public class ClienteModel
     {
+        // =================== DATOS DEL CLIENTE ===================
+
         [JsonPropertyName("id")]
         public int Codigo { get; set; }
 
@@ -61,32 +63,14 @@ namespace wasty.Models
         [JsonPropertyName("fechaBaja")]
         public DateTime? FechaBaja { get; set; }
 
-        [JsonPropertyName("horarioMananaDesde")]
-        public string HorarioMananaDesde { get; set; }
-
-        [JsonPropertyName("horarioMananaHasta")]
-        public string HorarioMananaHasta { get; set; }
-
-        [JsonPropertyName("horarioTardeDesde")]
-        public string HorarioTardeDesde { get; set; }
-
-        [JsonPropertyName("horarioTardeHasta")]
-        public string HorarioTardeHasta { get; set; }
-
-        [JsonPropertyName("listaCorreo")]
-        public bool ListaCorreo { get; set; }
-
-        [JsonPropertyName("fevauto")]
-        public bool Fevauto { get; set; }
-
-        [JsonPropertyName("clienteGestor")]
-        public bool ClienteGestor { get; set; }
-
-        [JsonPropertyName("clienteEsporadico")]
-        public bool ClienteEsporadico { get; set; }
-
         [JsonPropertyName("observaciones")]
         public string Observaciones { get; set; }
+
+        [JsonPropertyName("estado")]
+        public string Estado { get; set; } = "Activo";
+
+
+        // =================== DATOS DEL CONTRATO ===================
 
         [JsonPropertyName("banco")]
         public string Banco { get; set; }
@@ -151,9 +135,73 @@ namespace wasty.Models
         [JsonPropertyName("precioTaras")]
         public decimal? PrecioTaras { get; set; }
 
+
+        // =================== DATOS DEL CENTRO ===================
+
+        [JsonPropertyName("horarioMananaDesde")]
+        public string HorarioMananaDesde { get; set; }
+
+        [JsonPropertyName("horarioMananaHasta")]
+        public string HorarioMananaHasta { get; set; }
+
+        [JsonPropertyName("horarioTardeDesde")]
+        public string HorarioTardeDesde { get; set; }
+
+        [JsonPropertyName("horarioTardeHasta")]
+        public string HorarioTardeHasta { get; set; }
+
+        [JsonPropertyName("horarioRecogidaDesde")]
+        public string HorarioRecogidaDesde { get; set; }
+
+        [JsonPropertyName("horarioRecogidaHasta")]
+        public string HorarioRecogidaHasta { get; set; }
+
+        [JsonPropertyName("horarioSabadoDesde")]
+        public string HorarioSabadoDesde { get; set; }
+
+        [JsonPropertyName("horarioSabadoHasta")]
+        public string HorarioSabadoHasta { get; set; }
+
+        [JsonPropertyName("horarioFestivoDesde")]
+        public string HorarioFestivoDesde { get; set; }
+
+        [JsonPropertyName("horarioFestivoHasta")]
+        public string HorarioFestivoHasta { get; set; }
+
+        [JsonPropertyName("personaRecogida")]
+        public string PersonaRecogida { get; set; }
+
+        [JsonPropertyName("dniRecogida")]
+        public string DNIRecogida { get; set; }
+
+        [JsonPropertyName("cargoRecogida")]
+        public string CargoRecogida { get; set; }
+
+        [JsonPropertyName("emailRecogida")]
+        public string EmailRecogida { get; set; }
+
+        [JsonPropertyName("telefonoRecogida")]
+        public string TelefonoRecogida { get; set; }
+
+        [JsonPropertyName("observacionesHorarios")]
+        public string ObservacionesHorarios { get; set; }
+
+        [JsonPropertyName("listaCorreo")]
+        public bool ListaCorreo { get; set; }
+
+        [JsonPropertyName("fevauto")]
+        public bool Fevauto { get; set; }
+
+        [JsonPropertyName("clienteGestor")]
+        public bool ClienteGestor { get; set; }
+
+        [JsonPropertyName("clienteEsporadico")]
+        public bool ClienteEsporadico { get; set; }
+
         [JsonPropertyName("centros")]
         public List<CentroModel> Centros { get; set; }
 
-        public string Estado { get; set; } = "Activo";
+        [JsonPropertyName("observacionesRecogidas")]
+        public string ObservacionesRecogidas { get; set; }
     }
 }

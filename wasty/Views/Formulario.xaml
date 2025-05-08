@@ -11,6 +11,7 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/formularioStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/formularioTemplate.xaml"/>
@@ -32,7 +33,7 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <!-- Generación de los bloques -->
-                <ItemsControl ItemsSource="{Binding Bloques}">
+                <ItemsControl ItemsSource="{Binding BloquesPaginaActual}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <!-- Frame separador de cada bloque con color y color de borde -->
@@ -43,7 +44,7 @@
 
                                     <!-- Bloque de Grupo Principal y Grupo Secundario -->
                                     <StackPanel Orientation="Vertical"
-                                                Visibility="{Binding IsFirst, Converter={x:Static local:Formulario.BooleanToVisibility}}">
+                                                Visibility="{Binding IsFirst, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                                         <!-- Grupo Principal -->
                                         <StackPanel Orientation="Vertical">
@@ -85,9 +86,21 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                
-                <!-- Botón guardar -->
-                <!-- <Button Content="Guardar" Command="{Binding GuardarCommand}" IsEnabled="{Binding Path=GuardarCommand.CanExecute, RelativeSource={RelativeSource Self}}" Margin="25" Width="140" Height="Auto" FontSize="16"/> -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <Button Content="Anterior"
+                        Command="{Binding AnteriorPaginaCommand}"
+                        Visibility="{Binding PaginadorBloques.MostrarBotonAnterior, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <Button Content="Siguiente"
+                        Command="{Binding SiguientePaginaCommand}"
+                        Visibility="{Binding PaginadorBloques.MostrarBotonSiguiente, Converter={StaticResource BooleanToVisibilityConverter}}"/> 
+
+                    <Button Content="Añadir Página"
+                        Command="{Binding AgregarPaginaCommand}"/>
+
+                    <Button Content="Exportar JSON"
+                        Command="{Binding ExportarJsonCommand}"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

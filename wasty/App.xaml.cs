@@ -48,6 +48,7 @@ namespace wasty
             services.AddSingleton<TitleBarControl>();
             services.AddSingleton<AuthService>();
             services.AddSingleton<SessionService>();
+            services.AddSingleton<ExcelDataService>();
 
             services.AddSingleton<AuthModel>();
 
@@ -63,6 +64,7 @@ namespace wasty
             services.AddTransient<ResiduosPanelViewModel>();
             services.AddTransient<TreatmentsViewModel>();
             services.AddTransient<RentingViewModel>();
+            services.AddTransient<ImportDialogViewModel>();
 
             services.AddHttpClient<ApiService>(client =>
             {

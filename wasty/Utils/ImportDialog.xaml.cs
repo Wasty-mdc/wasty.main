@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wasty.ViewModels;
 
 namespace wasty.Utils
 {
@@ -22,6 +23,7 @@ namespace wasty.Utils
         public ImportDialog()
         {
             InitializeComponent();
+            DataContext = ((App)Application.Current).Services.GetService(typeof(ImportDialogViewModel));
         }
     }
 }
