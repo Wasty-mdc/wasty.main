@@ -11,6 +11,8 @@ namespace wasty.Models
         public bool IsFirst { get; set; } //Booleano necesario para formulario clientes
 
         private string _colorBase;
+        public int NumeroPagina { get; set; }
+
 
         public string ColorBase //Campo para seleccionar el color que se utilizara
         {

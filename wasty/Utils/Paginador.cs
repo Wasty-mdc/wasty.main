@@ -53,6 +53,33 @@ namespace wasty.Utils
             ActualizarItemsPaginados();
         }
 
+        public Paginador(IEnumerable<T> items, int itemsPorPagina)
+        {
+            _itemsPorPagina = itemsPorPagina;
+            _todosLosItems = items.ToList();
+            _paginaActual = 1;
+            _totalPaginas = (_todosLosItems.Count + itemsPorPagina - 1) / itemsPorPagina;
+            TodosLosItemsOriginales = new ObservableCollection<T>(_todosLosItems);
+            ItemsOriginales = new ObservableCollection<T>(_todosLosItems);
+
+            SiguienteCommand = new RelayCommand(_ => ChangePageWithoutAPI("next"));
+            AnteriorCommand = new RelayCommand(_ => ChangePageWithoutAPI("previous"));
+
+            ActualizarItemsPaginados();
+        }
+
+        private Task ChangePageWithoutAPI(string action)
+        {
+            if (action is "next" && PaginaActual < TotalPaginas)
+                _paginaActual++;
+            else if (action is "previous" && PaginaActual > 1)
+                _paginaActual--;
+
+            ActualizarItemsPaginados();
+            return Task.CompletedTask;
+        }
+
+
         private async Task ChangePage(string action)
         {
             if (action is "next" && PaginaActual < TotalPaginas)
