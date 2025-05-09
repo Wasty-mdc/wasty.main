@@ -24,8 +24,8 @@ public class MainViewModel : MainModel
         NavigateToStatisticsPanelCommand = new RelayCommand(_ => _navigationService.NavigateTo<StatisticsPanelView>());
         NavigateToTraeatmentsCommand = new RelayCommand(_ => _navigationService.NavigateTo<TreatmentsView>());
         NavigateToRentingCommand = new RelayCommand(_ => _navigationService.NavigateTo<RentingView>());
+        NavigateToTrasladosCommand = new RelayCommand(_ => _navigationService.NavigateTo<TrasladosView>());
 
-        ShowGestionCommand = new RelayCommand(ShowGestion);
         ShowFacturacionCommand = new RelayCommand(ShowFacturacion);
     }
 
@@ -38,16 +38,13 @@ public class MainViewModel : MainModel
     public ICommand NavigateToStatisticsPanelCommand { get; }
     public ICommand NavigateToTraeatmentsCommand { get; }
     public ICommand NavigateToRentingCommand { get; }
+    public ICommand NavigateToTrasladosCommand { get; }
+
 
     public ICommand ShowGestionCommand { get; }
     public ICommand ShowFacturacionCommand { get; }
 
     // Métodos para mostrar mensajes de cuadro de diálogo
-
-    private void ShowGestion(object parameter)
-    {
-        MessageBox.Show("Logística todavía está en desarrollo...");
-    }
 
     private void ShowFacturacion(object parameter)
     {

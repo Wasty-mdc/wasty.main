@@ -43,6 +43,9 @@
     <Compile Update="Views\TableViews\RecycTableView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\TrasladosView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\TreatmentsPanelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
