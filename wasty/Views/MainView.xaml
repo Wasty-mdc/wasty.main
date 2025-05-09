@@ -33,7 +33,7 @@
                 <!-- Botón Clientes -->
                 <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding NavigateToClientesCommand}" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="AccountMultiple" Width="140" Height="140" Foreground="#266DD3"/>
+                        <md:PackIcon Kind="AccountMultiple" Width="140" Height="140" Foreground="{StaticResource ClientColor}"/>
                         <TextBlock Text="CLIENTES" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
@@ -42,7 +42,7 @@
                 <!-- Botón Residuos -->
                 <Button x:Name="residuosButton" Style="{StaticResource CentralButton}" ToolTip="Residuos" Command="{Binding NavigateToResiduosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="Recycle" Width="140" Height="140" Foreground="#A0C26C"/>
+                    <md:PackIcon Kind="Recycle" Width="140" Height="140" Foreground="{StaticResource ResiduoColor}"/>
                         <TextBlock Text="RESIDUOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 							   HorizontalAlignment="Center" />
                     </StackPanel>
@@ -51,7 +51,7 @@
                 <!-- Botón Tratamientos -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Tratamientos" Command="{Binding NavigateToTraeatmentsCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                    <md:PackIcon Kind="FileCloudOutline" Width="140" Height="140" Foreground="#D6D6D6"/>
+                    <md:PackIcon Kind="FileCloudOutline" Width="140" Height="140" Foreground="{StaticResource TratamientosColor}"/>
                         <TextBlock Text="TRATAMIENTOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								   HorizontalAlignment="Center" />
                     </StackPanel>
@@ -60,7 +60,7 @@
                 <!-- Botón Renting -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Renting" Command="{Binding NavigateToRentingCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                    <md:PackIcon Kind="TrainCarCenterbeamFull" Width="140" Height="140" Foreground="#58355E"/>
+                    <md:PackIcon Kind="TrainCarCenterbeamFull" Width="140" Height="140" Foreground="{StaticResource RentingColor}"/>
                         <TextBlock Text="RENTING" FontSize="16" FontWeight="Bold" Foreground="Black"
 								            HorizontalAlignment="Center" />
                     </StackPanel>
@@ -69,7 +69,7 @@
                  <!-- Botón Traslados -->
             <Button Style="{StaticResource CentralButton}" ToolTip="Traslados" Command="{Binding NavigateToTrasladosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="DumpTruck" Width="140" Height="140" Foreground="#262626"/>
+                        <md:PackIcon Kind="DumpTruck" Width="140" Height="140" Foreground="{StaticResource TrasladosColor}"/>
                         <TextBlock Text="TRASLADOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								       HorizontalAlignment="Center" />
                     </StackPanel>
@@ -78,7 +78,7 @@
                 <!-- Botón Estadísticas -->
                 <Button Style="{StaticResource CentralButton}" ToolTip="Estadísticas" Command="{Binding NavigateToStatisticsPanelCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-                        <md:PackIcon Kind="ChartBox" Width="140" Height="140" Foreground="#E9D985" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <md:PackIcon Kind="ChartBox" Width="140" Height="140" Foreground="{StaticResource StatisticsColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="ESTADÍSTICAS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								       HorizontalAlignment="Center" />
                     </StackPanel>
