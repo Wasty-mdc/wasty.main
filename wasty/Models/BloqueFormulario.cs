@@ -10,11 +10,11 @@ namespace wasty.Models
         public ObservableCollection<CampoFormulario> Campos { get; set; } //Campo pra introducir varios campos (Texto, Número, Picker, Fecha, Checkbox)
         public bool IsFirst { get; set; } //Booleano necesario para formulario clientes
 
-        private string _colorBase;
+        private SolidColorBrush _colorBase;
         public int NumeroPagina { get; set; }
 
 
-        public string ColorBase //Campo para seleccionar el color que se utilizara
+        public SolidColorBrush ColorBase //Campo para seleccionar el color que se utilizara
         {
             get => _colorBase;
             set
@@ -28,11 +28,11 @@ namespace wasty.Models
         public SolidColorBrush ColorBorde { get; private set; } = new SolidColorBrush(Colors.Gray); //Color mas oscuro para los bordes
 
         //Función para seleccionar colores a partir del color (Introduces "Green" sale "LightGreen" y "DarkGreen")
-        private void SetColorsFromBase(string colorName)
+        private void SetColorsFromBase(SolidColorBrush colorName)
         {
             try
             {
-                Color baseColor = (Color)ColorConverter.ConvertFromString(colorName);
+                Color baseColor = colorName.Color;
                 ColorFondo = new SolidColorBrush(LightenColor(baseColor, 0.5));
                 ColorBorde = new SolidColorBrush(DarkenColor(baseColor, 0.7));
             }
