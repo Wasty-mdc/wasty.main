@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="wasty.Views.TrasladosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:wasty.Views"
+             mc:Ignorable="d"
+             Height="Auto"
+             Width="Auto"
+             Background="#4CECEAE8" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/tableStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource MainGradientBackground}">
+        <StackPanel>
+            <!-- Barra superior con botones CRUD -->
+            <DockPanel Background="#0ead69">
+
+                <!-- Panel de Botones-->
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="  TRASLADOS  " FontSize="36" FontWeight="Bold" Foreground="White"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,20,80,20"/>
+                </StackPanel>
+            </DockPanel>
+
+            <DataGrid ItemsSource="{Binding Traslados}"
+                   SelectedItem="{Binding ClienteSeleccionado}"
+                   ScrollViewer.CanContentScroll="True"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto"
+                   Margin="10"
+                   AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" />
+                    <DataGridTextColumn Header="FechaInicio" Binding="{Binding FechaInicio}" />
+                    <DataGridTextColumn Header="FechaFin" Binding="{Binding FechaFin}" />
+                    <DataGridTextColumn Header="Origen / Destino" Binding="{Binding OrigenDestino}" />
+                    <DataGridTextColumn Header="Transportista" Binding="{Binding Transportista}" />
+                    <DataGridTextColumn Header="Chófer" Binding="{Binding Chofer}" />
+                    <DataGridTextColumn Header="Matrícula" Binding="{Binding Matricula}" />
+
+                    <DataGridTemplateColumn Header="Albaranes">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button>
+                                    <md:PackIcon Kind="CheckboxBlankCircle" Foreground="{StaticResource Error600}"></md:PackIcon>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Estado">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding StatusTrasla}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Controles de paginación -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Command="{Binding PaginadorTraslados.AnteriorCommand}" 
+                     Margin="5" Style="{StaticResource CrudButtonStyle}" >
+                    <md:PackIcon Kind="ArrowLeftBoldCircle" Width="20" Height="20" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center"/>
+                </Button>
+
+                <TextBlock Text="{Binding PaginadorTraslados.PaginaActual}" 
+            VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="10,0" />
+
+                <TextBlock Text=" / " VerticalAlignment="Center" FontSize="20"/>
+
+                <TextBlock Text="{Binding PaginadorTraslados.TotalPaginas}" 
+            VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5,0" />
+
+                <Button Command="{Binding PaginadorTraslados.SiguienteCommand}" 
+                     Margin="5" Style="{StaticResource CrudButtonStyle}" >
+                    <md:PackIcon Kind="ArrowRightBoldCircle" Width="20" Height="20" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
