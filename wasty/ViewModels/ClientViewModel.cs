@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
 using wasty.Models;
 using wasty.Services;
 using wasty.Utils;
@@ -44,6 +45,15 @@ public class ClientViewModel : INotifyPropertyChanged
     public Paginador<ClienteModel> PaginadorClientes { get; private set; }
 
     public ICommand NavigateToClientPanelCommand { get; }
+
+    private void AbrirFormulario()
+    {
+        var formularioWindow = new Formulario(); // Usa el namespace correcto si no te lo reconoce
+        formularioWindow.ShowDialog();
+    }
+
+    public ICommand AbrirFormularioCommand { get; }
+
 
     private ClienteModel _clienteSeleccionado;
     public ClienteModel ClienteSeleccionado
@@ -100,6 +110,8 @@ public class ClientViewModel : INotifyPropertyChanged
 
         NavigateToClientPanelCommand = new RelayCommand<object>(NavigateToClientPanel);
         ToggleFiltrosCommand = new RelayCommand(_ => MostrarFiltros = !MostrarFiltros);
+        AbrirFormularioCommand = new RelayCommand(_ => AbrirFormulario());
+
         Init().GetAwaiter();
     }
 
