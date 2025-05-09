@@ -24,6 +24,20 @@ namespace wasty.Models
             }
         }
 
+        private int _opacidad = 100;
+        public int Opacidad
+        {
+            get => _opacidad;
+            set
+            {
+                if (_opacidad != value)
+                {
+                    _opacidad = Math.Max(0, Math.Min(100, value)); // Limita entre 0 y 100
+                    UpdateColors();
+                }
+            }
+        }
+
         public SolidColorBrush ColorFondo { get; private set; } = new SolidColorBrush(Colors.White); //Color mas clarito para el fondo
         public SolidColorBrush ColorBorde { get; private set; } = new SolidColorBrush(Colors.Gray); //Color mas oscuro para los bordes
 
@@ -35,6 +49,22 @@ namespace wasty.Models
                 Color baseColor = colorName.Color;
                 ColorFondo = new SolidColorBrush(LightenColor(baseColor, 0.5));
                 ColorBorde = new SolidColorBrush(DarkenColor(baseColor, 0.7));
+            }
+            catch
+            {
+                ColorFondo = new SolidColorBrush(Colors.White);
+                ColorBorde = new SolidColorBrush(Colors.Gray);
+            }
+        }
+        private void UpdateColors()
+        {
+            try
+            {
+                var baseColor = ColorBase?.Color ?? Colors.Transparent;
+                byte alpha = (byte)(Opacidad * 2.55); // Convierte de 0-100 a 0-255
+
+                ColorFondo = new SolidColorBrush(Color.FromArgb(alpha, LightenColor(baseColor, 0.5).R, LightenColor(baseColor, 0.5).G, LightenColor(baseColor, 0.5).B));
+                ColorBorde = new SolidColorBrush(Color.FromArgb(alpha, DarkenColor(baseColor, 0.7).R, DarkenColor(baseColor, 0.7).G, DarkenColor(baseColor, 0.7).B));
             }
             catch
             {
