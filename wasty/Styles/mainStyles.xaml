@@ -151,6 +151,16 @@
     <SolidColorBrush x:Key="Warning700" Color="#a08235"/>
     <SolidColorBrush x:Key="Warning800" Color="#7c6529"/>
     <SolidColorBrush x:Key="Warning900" Color="#5f4d1f"/>
+    
+    <!-- Colores Main-->
+    <SolidColorBrush x:Key="ClientColor" Color="#266DD3"/>
+    <SolidColorBrush x:Key="ResiduoColor" Color="#A0C26C"/>
+    <SolidColorBrush x:Key="TratamientosColor" Color="#D6D6D6"/>
+    <SolidColorBrush x:Key="RentingColor" Color="#58355E"/>
+    <SolidColorBrush x:Key="TrasladosColor" Color="#262626"/>
+    <SolidColorBrush x:Key="StatisticsColor" Color="#E9D985"/>
+    <SolidColorBrush x:Key="FacturaColor" Color="#99582a"/>
+    <SolidColorBrush x:Key="BancoColor" Color="#C1292E"/>
 
     <!-- Gradiente para el Fondo Principal -->
     <LinearGradientBrush x:Key="MainGradientBackground" StartPoint="0,1" EndPoint="1,0">
