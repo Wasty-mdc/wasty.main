@@ -49,7 +49,7 @@ public class ClientViewModel : INotifyPropertyChanged
     private void AbrirFormulario()
     {
         var formularioWindow = new Formulario(); // Usa el namespace correcto si no te lo reconoce
-        formularioWindow.ShowDialog();
+        formularioWindow.Show();
     }
 
     public ICommand AbrirFormularioCommand { get; }

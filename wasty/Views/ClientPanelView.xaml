@@ -683,7 +683,7 @@
                                            Visibility="{Binding GroupBoxVisibility[ObservacionesRecogidas], Converter={StaticResource BoolToVisibility}}">
                                     <GroupBox.Header>
                                         <DockPanel>
-                                            <TextBlock Text="  Observaciones " FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <TextBlock Text="  Observaciones de Recogidas " FontWeight="Bold" VerticalAlignment="Center"/>
                                             <Button DockPanel.Dock="Right"
                                  Command="{Binding ToggleGroupBoxVisibilityCommand}"
                                  CommandParameter="Observaciones">
