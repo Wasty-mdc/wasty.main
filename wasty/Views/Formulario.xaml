@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UserControl x:Class="wasty.Views.Formulario"
+<Window x:Class="wasty.Views.Formulario"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -9,7 +9,7 @@
              xmlns:models="clr-namespace:wasty.Models"
              Height="Auto" Width="Auto">
 
-    <UserControl.Resources>
+    <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/formularioTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </Window.Resources>
 
 
 
@@ -104,4 +104,4 @@
             </StackPanel>
         </ScrollViewer>
     </Grid>
-</UserControl>
+</Window>

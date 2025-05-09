@@ -66,11 +66,11 @@
                     </StackPanel>
                 </Button>
 
-                 <!-- Botón Logística -->
-                <Button Style="{StaticResource CentralButton}" ToolTip="Logística" Command="{Binding ShowGestionCommand}">
+                 <!-- Botón Traslados -->
+            <Button Style="{StaticResource CentralButton}" ToolTip="Traslados" Command="{Binding NavigateToTrasladosCommand}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="DumpTruck" Width="140" Height="140" Foreground="#262626"/>
-                        <TextBlock Text="LOGÍSTICA" FontSize="16" FontWeight="Bold" Foreground="Black"
+                        <TextBlock Text="TRASLADOS" FontSize="16" FontWeight="Bold" Foreground="Black"
 								       HorizontalAlignment="Center" />
                     </StackPanel>
                 </Button>

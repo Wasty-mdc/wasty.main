@@ -189,10 +189,9 @@ namespace wasty.ViewModels
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Prioridad del Cliente", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" },
-                        new CampoFormulario { Nombre = "Nombre Fiscal", Tipo = "Texto", Valor = "", TipoValidacion="Vacio"},
                         new CampoFormulario { Nombre = "NIF", Tipo = "Texto", Valor = "" , TipoValidacion = "NIF"},
+                        new CampoFormulario { Nombre = "Nombre Fiscal", Tipo = "Texto", Valor = "", TipoValidacion="Vacio"},
                         new CampoFormulario { Nombre = "Nombre Comercial", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio" },
-                        new CampoFormulario { Nombre = "Email:", Tipo="Texto", Valor="", TipoValidacion="Email"}
                     },
                     IsFirst = true,
                     ColorBase = "Yellow",
@@ -211,27 +210,26 @@ namespace wasty.ViewModels
                 },
                 new BloqueFormulario
                 {
-                    Nombre = "Datos Generales",
+                    Nombre = "Contacto",
                     ColorBase = "Yellow",
                     Campos = new ObservableCollection<CampoFormulario>
                     {
-                        new CampoFormulario { Nombre = "Fecha de Alta:", Tipo = "Fecha", Valor = "", TipoValidacion = "Vacio" },
-                        new CampoFormulario { Nombre = "Fecha de Baja:", Tipo = "Fecha", Valor = "" },
-                        new CampoFormulario { Nombre = "Lista de Correo", Tipo = "Checkbox", EstaSeleccionado = false },
-                        new CampoFormulario { Nombre = "Cliente Gestor", Tipo = "Checkbox", EstaSeleccionado = false },
-                        new CampoFormulario { Nombre = "Fevauto", Tipo = "Checkbox", EstaSeleccionado = false },
-                        new CampoFormulario { Nombre = "Cliente Esporádico", Tipo = "Checkbox", EstaSeleccionado = false }
+                        new CampoFormulario{Nombre="Teléfono", Tipo="Texto", Valor = ""},
+                        new CampoFormulario{Nombre="Teléfono Móvil", Tipo="Texto", Valor=""},
+                        new CampoFormulario{Nombre="Email", Tipo="Texto", Valor="", TipoValidacion="Email"}
                     },
                     NumeroPagina = 1
                 },
                 new BloqueFormulario
                 {
-                    Nombre = "Horario",
+                    Nombre = "Comercial",
                     ColorBase = "Yellow",
                     Campos = new ObservableCollection<CampoFormulario>
                     {
-                        new CampoFormulario { Nombre = "Horario de Mañana (Desde - Hasta)", Tipo = "Número", Valor = ""},
-                        new CampoFormulario { Nombre = "Horario de Tarde (Desde - Hasta)", Tipo = "Número", Valor = "" },
+                        new CampoFormulario { Nombre = "Persona de Contacto:", Tipo = "Texto", Valor = ""},
+                        new CampoFormulario { Nombre = "DNI:", Tipo = "Texto", Opciones = OpcionesGrupoPrincipal, Valor = "", TipoValidacion = "DNI" },
+                        new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Comercial:", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" }
                     },
                     NumeroPagina = 1
                 },
@@ -242,23 +240,11 @@ namespace wasty.ViewModels
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Dirección Fiscal:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
+                        new CampoFormulario { Nombre = "Dirección de Recogida:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "Código Postal:", Tipo = "Número", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "Población:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "Provincia:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
                         new CampoFormulario { Nombre = "País:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"}
-                    },
-                    NumeroPagina = 1
-                },
-                new BloqueFormulario
-                {
-                    Nombre = "Comercial",
-                    ColorBase = "Blue",
-                    Campos = new ObservableCollection<CampoFormulario>
-                    {
-                        new CampoFormulario { Nombre = "Persona de Contacto:", Tipo = "Texto", Valor = ""},
-                        new CampoFormulario { Nombre = "DNI:", Tipo = "Texto", Opciones = OpcionesGrupoPrincipal, Valor = "", TipoValidacion = "DNI" },
-                        new CampoFormulario { Nombre = "Cargo:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Comercial:", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" }
                     },
                     NumeroPagina = 1
                 },
@@ -283,6 +269,7 @@ namespace wasty.ViewModels
                         new CampoFormulario { Nombre = "Forma de Cobro:", Tipo = "Picker", Opciones = new List<string> { "Al Contado", "Giro Bancario", "Cheque", "Compensación", "Transferencia", "Otros" }, Valor = "" },
                         new CampoFormulario { Nombre = "Forma de Pago:", Tipo = "Picker", Opciones = new List<string> {"Al Contado", "Pendiente de Pago", "Cheque", "Compensación", "Compensación + Efectivo", "Compensación + Tarjeta", "Tarjeta"},Valor = "",},
                         new CampoFormulario { Nombre = "Dia de Cobro:", Tipo = "Fecha", Valor = "" },
+                        new CampoFormulario { Nombre = "Importe:", Tipo = "Número", Valor = "", TipoValidacion="Vacio" },
                         new CampoFormulario { Nombre = "IVA:", Tipo = "Picker", Opciones = new List<string> { "0%", "4%", "8%", "10%", "18%", "21%" }, Valor = "" },
                         new CampoFormulario { Nombre = "Fecha de Primer Cobro:", Tipo = "Fecha", Valor = "" },
                         new CampoFormulario { Nombre = "Periodicidad:", Tipo = "Picker", Opciones = new List<string> { "Mensual", "Bimensual", "Trimestral", "Semestral", "Anual"}, Valor = "" },
@@ -312,72 +299,18 @@ namespace wasty.ViewModels
                 },
                 new BloqueFormulario
                 {
-                    Nombre = "Datos de Recogidas",
-                    ColorBase = "Pink",
-                    Campos = new ObservableCollection<CampoFormulario>
-                    {
-                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
-                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
-                        new CampoFormulario { Nombre = "Dirección de Recogida:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Código Postal de Recogida:", Tipo = "Número", Valor = "" },
-                        new CampoFormulario { Nombre = "Población de Recogida:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Observaciones para las Recogidas:", Tipo = "Texto", Valor = "" },
-                    },
-                    NumeroPagina = 2
-                },
-                new BloqueFormulario
-                {
-                    Nombre = "Recogidas No Peligrosas",
-                    ColorBase = "Pink",
-                    Campos = new ObservableCollection<CampoFormulario>
-                    {
-                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
-                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
-                        new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
-                    },
-                    NumeroPagina = 2
-                },
-                new BloqueFormulario
-                {
-                    Nombre = "Recogidas Peligrosas",
-                    ColorBase = "Pink",
-                    Campos = new ObservableCollection<CampoFormulario>
-                    {
-                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
-                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
-                        new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
-                    },
-                    NumeroPagina = 2
-                },
-                new BloqueFormulario
-                {
-                    Nombre = "Recogidas Aceite",
-                    ColorBase = "Pink",
-                    Campos = new ObservableCollection<CampoFormulario>
-                    {
-                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
-                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
-                        new CampoFormulario { Nombre = "Contenido del Aceite:", Tipo = "Picker", Opciones = new List<string> { "Bidón", "Cisterna", "Sin Aceite", "Fosa"},Valor = "" },
-                        new CampoFormulario { Nombre = "Forma de Retirada:", Tipo = "Picker", Opciones = new List<string> { "Cambio", "---", "---", "---"},Valor = "" },
-                        new CampoFormulario { Nombre = "Número de Contenedores:", Tipo = "Número", Valor = "" },
-                        new CampoFormulario { Nombre = "Tamaño del Vehículo:", Tipo = "Picker", Opciones = new List<string> { "Furgoneta", "Camión Ligero", "Camión Pesado"}, Valor = "" },
-                    },
-                    NumeroPagina = 2
-                },
-                new BloqueFormulario
-                {
                     Nombre = "NIMA",
                     ColorBase = "Green",
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "NIMA:", Tipo = "Texto", Valor = "", TipoValidacion = "NIMA" },
-                        new CampoFormulario { Nombre = "Inscripción (P01/P02):", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Inscripción (P03/P04):", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Actividad Economica:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Froma Jurídica:", Tipo = "Picker", Opciones = new List<string> { "Unipersonal", "Sociedad Colectiva", "Cooperativa", "Sociedad Comanditaria", "Sociedad Limitada", "Sociedad Anónima"}, Valor = "" },
-                        new CampoFormulario { Nombre = "Codigo INE:", Tipo = "Texto", Valor = "", TipoValidacion = "INE" },
-                        new CampoFormulario { Nombre = "CNAE:", Tipo = "Texto", Valor = "", TipoValidacion = "CNAE" },
+                        new CampoFormulario { Nombre = "Cod. Peligrosos:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Nom. Peligrosos:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Cod. No Peligrosos:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Nom. No Peligrosos:", Tipo = "Picker", Opciones = new List<string> { "Unipersonal", "Sociedad Colectiva", "Cooperativa", "Sociedad Comanditaria", "Sociedad Limitada", "Sociedad Anónima"}, Valor = "" },
+                        new CampoFormulario { Nombre = "Actividad Económica:", Tipo = "Texto", Valor = "", TipoValidacion = "INE" },
+                        new CampoFormulario { Nombre = "Forma Jurídica:", Tipo = "Texto", Valor = "", TipoValidacion = "CNAE" },
+                        new CampoFormulario { Nombre = "Código INE:", Tipo = "Texto", Valor = "Vacio" },
                         new CampoFormulario { Nombre = "Gestor Habitual:", Tipo = "Texto", Valor = "Vacio" },
                         new CampoFormulario { Nombre = "Comunidad Autónoma:", Tipo = "Texto", Valor = "Vacio" },
                     },
@@ -409,6 +342,113 @@ namespace wasty.ViewModels
                     },
                     NumeroPagina = 3
                 },
+                new BloqueFormulario
+                {
+                    Nombre = "Datos Centro",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Fecha de Alta:", Tipo = "Fecha", Valor = "", TipoValidacion = "Vacio" },
+                        new CampoFormulario { Nombre = "Fecha de Baja:", Tipo = "Fecha", Valor = "" },
+                        new CampoFormulario { Nombre = "Lista de Correo", Tipo = "Checkbox", EstaSeleccionado = false },
+                        new CampoFormulario { Nombre = "Cliente Gestor", Tipo = "Checkbox", EstaSeleccionado = false },
+                        new CampoFormulario { Nombre = "Fevauto", Tipo = "Checkbox", EstaSeleccionado = false },
+                        new CampoFormulario { Nombre = "Cliente Esporádico", Tipo = "Checkbox", EstaSeleccionado = false }
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Horario del Centro",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Horario de Mañana (Desde - Hasta)", Tipo = "Número", Valor = ""},
+                        new CampoFormulario { Nombre = "Horario de Tarde (Desde - Hasta)", Tipo = "Número", Valor = "" },
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Contacto del Centro",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Nombre del Centro:", Tipo = "Texto", Valor = ""},
+                        new CampoFormulario { Nombre = "Direccion del Centro:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Código Postal:", Tipo = "Texto", Valor = ""},
+                        new CampoFormulario { Nombre = "Población:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Provincia:", Tipo = "Texto", Valor = ""},
+                        new CampoFormulario { Nombre = "Teléfono:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Email:", Tipo = "Texto", Valor = "Email"}
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Datos de Recogidas",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
+                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
+                        new CampoFormulario { Nombre = "Dirección de Recogida:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Código Postal de Recogida:", Tipo = "Número", Valor = "" },
+                        new CampoFormulario { Nombre = "Población de Recogida:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Observaciones para las Recogidas:", Tipo = "Texto", Valor = "" },
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Horario de Recogida",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Horario de Recogida (Desde - Hasta)", Tipo = "Número", Valor = ""}
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Recogidas No Peligrosas",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
+                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
+                        new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Recogidas Peligrosas",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
+                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
+                        new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
+                    },
+                    NumeroPagina = 3
+                },
+                new BloqueFormulario
+                {
+                    Nombre = "Recogidas Especiales",
+                    ColorBase = "Green",
+                    Campos = new ObservableCollection<CampoFormulario>
+                    {
+                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
+                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Alarma:", Tipo = "Checkbox", EstaSeleccionado = false },
+                        new CampoFormulario { Nombre = "Contedro Especial:", Tipo = "Picker", Opciones = new List<string> { "Bidón", "Cisterna", "Sin Aceite", "Fosa"},Valor = "" },
+                        new CampoFormulario { Nombre = "Forma de Retirada:", Tipo = "Picker", Opciones = new List<string> { "Cambio", "---", "---", "---"},Valor = "" },
+                        new CampoFormulario { Nombre = "Número de Contenedores:", Tipo = "Número", Valor = "" },
+                        new CampoFormulario { Nombre = "Tamaño del Vehículo:", Tipo = "Picker", Opciones = new List<string> { "Furgoneta", "Camión Ligero", "Camión Pesado"}, Valor = "" },
+                    },
+                    NumeroPagina = 3
+                }
             };
         }
     }
