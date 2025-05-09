@@ -657,18 +657,13 @@
                                                     </DockPanel>
                                                 </GroupBox.Header>
                                                 <StackPanel>
-                                                    <TextBlock Text="Horario de Mañana (Desde - Hasta):"/>
+                                                    <TextBlock Text="Horario de Recogida (Desde - Hasta):"/>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                        <TextBox Text="{Binding HorarioMananaDesde}" Width="80"/>
+                                                        <TextBox Text="{Binding HorarioRecogidaDesde}" Width="80"/>
                                                         <TextBlock Text=" - " Margin="5"/>
-                                                        <TextBox Text="{Binding HorarioMananaHasta}" Width="80"/>
+                                                        <TextBox Text="{Binding HorarioRecogidaHasta}" Width="80"/>
                                                     </StackPanel>
-                                                    <TextBlock Text="Horario de Tarde (Desde - Hasta):"/>
-                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                        <TextBox Text="{Binding HorarioTardeDesde}" Width="80"/>
-                                                        <TextBlock Text=" - " Margin="5"/>
-                                                        <TextBox Text="{Binding HorarioTardeHasta}" Width="80"/>
-                                                    </StackPanel>
+
                                                 </StackPanel>
                                             </GroupBox>
                                             <TextBlock Text="Dirección de Recogida:"/>
@@ -676,13 +671,33 @@
                                             <TextBlock Text="Código Postal de Recogida:"/>
                                             <TextBox Text="{Binding CodigoPostalRecogida}"/>
                                             <TextBlock Text="Población de Recogida:"/>
-                                            <TextBox Text="{Binding PoblacionRecogida}"/>
-                                            <TextBlock Text="Observaciones para las recogidas:"/>
-                                            <TextBox Text="{Binding ObservacionesRecogida}" TextWrapping="Wrap" />
-                                        </StackPanel>
+                                        <TextBox Text="{Binding PoblacionRecogida}"/>
+                                    </StackPanel>
                                     </GroupBox>
-                                    
-                                    <!-- Bloque de Recogidas No Peligrosas -->
+
+                                <!-- Bloque de Observaciones -->
+                                <GroupBox MinWidth="260"
+                                           FontWeight="Bold"
+                                           Height="Auto"
+                                           BorderThickness="1"
+                                           Visibility="{Binding GroupBoxVisibility[ObservacionesRecogidas], Converter={StaticResource BoolToVisibility}}">
+                                    <GroupBox.Header>
+                                        <DockPanel>
+                                            <TextBlock Text="  Observaciones " FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Button DockPanel.Dock="Right"
+                                 Command="{Binding ToggleGroupBoxVisibilityCommand}"
+                                 CommandParameter="Observaciones">
+                                                <md:PackIcon Kind="EyeOff" Width="16" Height="16" Foreground="White" Margin="2"/>
+                                            </Button>
+                                        </DockPanel>
+                                    </GroupBox.Header>
+
+                                    <StackPanel Margin="2">
+                                        <TextBox Height="300" TextWrapping="Wrap" AcceptsReturn="True"/>
+                                    </StackPanel>
+                                </GroupBox>
+
+                                <!-- Bloque de Recogidas No Peligrosas -->
                                     <GroupBox BorderBrush="#2c6e49" BorderThickness="2" Visibility="{Binding GroupBoxVisibility[NoPeligrosas], Converter={StaticResource BoolToVisibility}}">
                                         <GroupBox.Header>
                                             <DockPanel>
