@@ -195,6 +195,7 @@ namespace wasty.ViewModels
                 new BloqueFormulario
                 {
                     Nombre = "Datos Clientes",
+                    
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Prioridad del Cliente", Tipo = "Picker", Opciones = new List<string> { "1", "2", "3", "4", "5" }, Valor = "" },
@@ -204,6 +205,7 @@ namespace wasty.ViewModels
                     },
                     IsFirst = true,
                     ColorBase = ClientColor,
+                    Opacidad = 70,
                     NumeroPagina = 1
                 },
                 /*new BloqueFormulario
@@ -221,6 +223,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Contacto",
                     ColorBase = ClientColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario{Nombre="Teléfono", Tipo="Texto", Valor = ""},
@@ -233,6 +237,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Comercial",
                     ColorBase = ClientColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Persona de Contacto:", Tipo = "Texto", Valor = ""},
@@ -246,6 +252,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Ubicación",
                     ColorBase = ClientColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Dirección Fiscal:", Tipo = "Texto", Valor = "" , TipoValidacion = "Vacio"},
@@ -261,6 +269,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Observaciones",
                     ColorBase = TratamientosColor,
+                    Opacidad = 90,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Observaciones:", Tipo = "Texto", Valor = "" }
@@ -271,6 +281,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Datos de Pagos",
                     ColorBase = BancoColor,
+                    Opacidad = 90,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Banco:", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio"},
@@ -291,6 +303,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Datos de Pagos",
                     ColorBase = BancoColor,
+                    Opacidad = 90,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Chatarra Mecánica:", Tipo = "Número", Valor = "" },
@@ -310,6 +324,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "NIMA",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "NIMA:", Tipo = "Texto", Valor = "", TipoValidacion = "NIMA" },
@@ -329,6 +345,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Medio Ambiente",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Responsable:", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio" },
@@ -342,6 +360,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Legalidad",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Responsable:", Tipo = "Texto", Valor = "", TipoValidacion = "Vacio" },
@@ -355,6 +375,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Datos Centro",
                     ColorBase = ClientColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Fecha de Alta:", Tipo = "Fecha", Valor = "", TipoValidacion = "Vacio" },
@@ -370,6 +392,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Horario del Centro",
                     ColorBase = ClientColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Horario de Mañana (Desde - Hasta)", Tipo = "Número", Valor = ""},
@@ -381,6 +405,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Contacto del Centro",
                     ColorBase = ClientColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Nombre del Centro:", Tipo = "Texto", Valor = ""},
@@ -397,6 +423,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Datos de Recogidas",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Dirección de Recogida:", Tipo = "Texto", Valor = "" },
@@ -409,6 +437,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Horario de Recogida",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Horario de Recogida (Desde - Hasta)", Tipo = "Número", Valor = ""}
@@ -419,6 +449,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Recogidas No Peligrosas",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
@@ -431,6 +463,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Recogidas Peligrosas",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
@@ -443,6 +477,8 @@ namespace wasty.ViewModels
                 {
                     Nombre = "Recogidas Especiales",
                     ColorBase = ResiduoColor,
+                    Opacidad = 70,
+
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },

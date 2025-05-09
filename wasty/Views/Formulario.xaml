@@ -4,22 +4,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:wasty.Views"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:viewModels="clr-namespace:wasty.ViewModels" 
              xmlns:utils="clr-namespace:wasty.Utils"
              xmlns:models="clr-namespace:wasty.Models"
              Height="Auto" Width="Auto"
+             Title="Formulario de Cliente"
              Background="{StaticResource MainGradientBackground}">
 
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/iconoStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/formularioStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/wasty;component/Styles/formularioTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
 
 
     <Grid>
@@ -80,20 +82,34 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                    <Button Content="Anterior"
-                        Command="{Binding AnteriorPaginaCommand}"
-                        Visibility="{Binding PaginadorBloques.MostrarBotonAnterior, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10" Cursor="Hand">
+                    <Button 
+                        Command="{Binding AnteriorPaginaCommand}" 
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorBloques.MostrarBotonAnterior, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <md:PackIcon Kind="ArrowLeftBoldCircle" Width="40" Height="40" Foreground="White"/>
+                    </Button>
 
-                    <Button Content="Siguiente"
-                        Command="{Binding SiguientePaginaCommand}"
-                        Visibility="{Binding PaginadorBloques.MostrarBotonSiguiente, Converter={StaticResource BooleanToVisibilityConverter}}"/> 
+                    <Button 
+                        Command="{Binding SiguientePaginaCommand}" 
+                        Style="{StaticResource CrudButtonStyle}"
+                        Visibility="{Binding PaginadorBloques.MostrarBotonSiguiente, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <md:PackIcon Kind="ArrowRightBoldCircle" Width="40" Height="40" Foreground="White"/>
+                    </Button>
 
-                    <Button Content="Añadir Página"
-                        Command="{Binding AgregarPaginaCommand}"/>
+                    <Button 
+                            Style="{StaticResource CrudButtonStyle}"
+                        Command="{Binding AgregarPaginaCommand}">
+                        <md:PackIcon Kind="NotePlus" Width="40" Height="40" Foreground="White"/>
 
-                    <Button Content="Exportar JSON"
-                        Command="{Binding ExportarJsonCommand}"/>
+                    </Button>
+
+                    <Button 
+                            Style="{StaticResource CrudButtonStyle}"
+                        Command="{Binding ExportarJsonCommand}">
+                        <md:PackIcon Kind="CodeBlockBraces" Width="40" Height="40" Foreground="White"/>
+
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
