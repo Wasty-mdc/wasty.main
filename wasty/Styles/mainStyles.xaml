@@ -161,6 +161,8 @@
     <SolidColorBrush x:Key="StatisticsColor" Color="#E9D985"/>
     <SolidColorBrush x:Key="FacturaColor" Color="#99582a"/>
     <SolidColorBrush x:Key="BancoColor" Color="#C1292E"/>
+    <SolidColorBrush x:Key="EmpresaColor" Color="#3D0814"/>
+
 
     <!-- Gradiente para el Fondo Principal -->
     <LinearGradientBrush x:Key="MainGradientBackground" StartPoint="0,1" EndPoint="1,0">

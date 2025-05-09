@@ -28,9 +28,20 @@
             <!-- Botones centrales -->
             <WrapPanel 
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" Grid.RowSpan="2">
+                       VerticalAlignment="Center" 
+                       Grid.RowSpan="3"
+                       MaxWidth="800">
 
-                <!-- Botón Clientes -->
+            <!-- Botón Datos de la Empresa -->
+            <Button x:Name="empresaButton" Style="{StaticResource CentralButton}" ToolTip="Datos de la Empresa" Command="{Binding NavigateToClientesCommand}" >
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+                    <md:PackIcon Kind="Domain" Width="140" Height="140" Foreground="{StaticResource EmpresaColor}"/>
+                    <TextBlock Text="DATOS EMPRESA" FontSize="16" FontWeight="Bold" Foreground="Black"
+								   HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <!-- Botón Clientes -->
                 <Button x:Name="clientesButton" Style="{StaticResource CentralButton}" ToolTip="Clientes" Command="{Binding NavigateToClientesCommand}" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
                         <md:PackIcon Kind="AccountMultiple" Width="140" Height="140" Foreground="{StaticResource ClientColor}"/>
