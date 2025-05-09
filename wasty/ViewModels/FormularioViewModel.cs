@@ -197,7 +197,7 @@ namespace wasty.ViewModels
                     ColorBase = "Yellow",
                     NumeroPagina = 1
                 },
-                new BloqueFormulario
+                /*new BloqueFormulario
                 {
                     Nombre = "Online",
                     ColorBase = "Yellow",
@@ -207,7 +207,7 @@ namespace wasty.ViewModels
                         new CampoFormulario { Nombre = "Acceso Online", Tipo = "Checkbox", EstaSeleccionado = false },
                     },
                     NumeroPagina = 1
-                },
+                },*/
                 new BloqueFormulario
                 {
                     Nombre = "Contacto",
@@ -251,7 +251,7 @@ namespace wasty.ViewModels
                 new BloqueFormulario
                 {
                     Nombre = "Observaciones",
-                    ColorBase = "Orange",
+                    ColorBase = "#9A94BC",
                     Campos = new ObservableCollection<CampoFormulario>
                     {
                         new CampoFormulario { Nombre = "Observaciones:", Tipo = "Texto", Valor = "" }
@@ -307,12 +307,12 @@ namespace wasty.ViewModels
                         new CampoFormulario { Nombre = "Cod. Peligrosos:", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Nom. Peligrosos:", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Cod. No Peligrosos:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Nom. No Peligrosos:", Tipo = "Picker", Opciones = new List<string> { "Unipersonal", "Sociedad Colectiva", "Cooperativa", "Sociedad Comanditaria", "Sociedad Limitada", "Sociedad Anónima"}, Valor = "" },
+                        new CampoFormulario { Nombre = "Nom. No Peligrosos:",  Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Actividad Económica:", Tipo = "Texto", Valor = "", TipoValidacion = "INE" },
                         new CampoFormulario { Nombre = "Forma Jurídica:", Tipo = "Texto", Valor = "", TipoValidacion = "CNAE" },
-                        new CampoFormulario { Nombre = "Código INE:", Tipo = "Texto", Valor = "Vacio" },
-                        new CampoFormulario { Nombre = "Gestor Habitual:", Tipo = "Texto", Valor = "Vacio" },
-                        new CampoFormulario { Nombre = "Comunidad Autónoma:", Tipo = "Texto", Valor = "Vacio" },
+                        new CampoFormulario { Nombre = "Código INE:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Gestor Habitual:", Tipo = "Texto", Valor = "" },
+                        new CampoFormulario { Nombre = "Comunidad Autónoma:", Tipo = "Texto", Valor = "" },
                     },
                     NumeroPagina = 3
                 },
@@ -380,7 +380,7 @@ namespace wasty.ViewModels
                         new CampoFormulario { Nombre = "Población:", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Provincia:", Tipo = "Texto", Valor = ""},
                         new CampoFormulario { Nombre = "Teléfono:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Email:", Tipo = "Texto", Valor = "Email"}
+                        new CampoFormulario { Nombre = "Email:", Tipo = "Texto", Valor = "", TipoValidacion="Email"}
                     },
                     NumeroPagina = 3
                 },
@@ -390,12 +390,9 @@ namespace wasty.ViewModels
                     ColorBase = "Green",
                     Campos = new ObservableCollection<CampoFormulario>
                     {
-                        new CampoFormulario { Nombre = "Fecha Última Retirada:", Tipo = "Fecha", Valor = "" },
-                        new CampoFormulario { Nombre = "Dias Entre Cada Retirada:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Dirección de Recogida:", Tipo = "Texto", Valor = "" },
                         new CampoFormulario { Nombre = "Código Postal de Recogida:", Tipo = "Número", Valor = "" },
                         new CampoFormulario { Nombre = "Población de Recogida:", Tipo = "Texto", Valor = "" },
-                        new CampoFormulario { Nombre = "Observaciones para las Recogidas:", Tipo = "Texto", Valor = "" },
                     },
                     NumeroPagina = 3
                 },

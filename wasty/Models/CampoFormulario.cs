@@ -20,5 +20,7 @@ namespace wasty.Models
         public List<String> Opciones { get; set; } //Opciones para el Picker
         public bool EstaSeleccionado { get; set; } //Booleano para CheckBox
         public string TipoValidacion { get; set; } //String para saber que tipo de validacion hay que hacer (DNI, Telefono, Correo, etc..)
+
+        public string Pholder { get; set; } //String para poner placeholders personalizados
     }
 }

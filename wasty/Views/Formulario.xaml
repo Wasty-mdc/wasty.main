@@ -7,7 +7,8 @@
              xmlns:viewModels="clr-namespace:wasty.ViewModels" 
              xmlns:utils="clr-namespace:wasty.Utils"
              xmlns:models="clr-namespace:wasty.Models"
-             Height="Auto" Width="Auto">
+             Height="Auto" Width="Auto"
+             Background="{StaticResource MainGradientBackground}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -22,13 +23,6 @@
 
 
     <Grid>
-        <!-- Fondo -->
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="White" Offset="0"/>
-                <GradientStop Color="LightGreen" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
